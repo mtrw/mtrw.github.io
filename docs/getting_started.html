@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Getting Started with High Performance Computing For Bioinformatics</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CCG Bioinformatics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="./getting_started.html">Getting Started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    University Computing Resources
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux)</a>
+    </li>
+    <li>
+      <a href="https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new">UoM OnDemand Dashboard (R)</a>
+    </li>
+    <li>
+      <a href="https://rcp.research.unimelb.edu.au/home/">UoM Research Computing Portal Dashboard (VM)</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software Downloads
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://www.putty.org/">PuTTy (SSH connection to Spartan)</a>
+    </li>
+    <li>
+      <a href="https://www.nsoftware.com/sftp/drive/download.aspx">SFTP Drive (Access project storage from your desktop or a VM (Windows))</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="./tutorials.html">Tutorials</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Useful Links
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Format Specifications</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://samtools.github.io/hts-specs/VCFv4.3.pdf">VCF/BCF</a>
+        </li>
+        <li>
+          <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a>
+        </li>
+        <li>
+          <a href="https://asia.ensembl.org/info/website/upload/gff3.html">GFF3</a>
+        </li>
+        <li>
+          <a href="https://asia.ensembl.org/info/website/upload/bed.html">BED</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cheatsheets</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://remram44.github.io/regex-cheatsheet/regex.html">REGEX</a>
+        </li>
+        <li>
+          <a href="https://www.metagenomics.wiki/tools/blast/blastn-output-format-6">BLASTn output formatting</a>
+        </li>
+        <li>
+          <a href="https://aperiodic.net/screen/quick_reference">GNU screen</a>
+        </li>
+        <li>
+          <a href="https://devhints.io/vim">Vim</a>
+        </li>
+        <li>
+          <a href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">Zsh</a>
+        </li>
+        <li>
+          <a href="https://www.samformat.info/sam-format-flag">SAM format flag widget</a>
+        </li>
+        <li>
+          <a href="https://ss64.com/bash/chmod.html">chmod flag widget</a>
+        </li>
+        <li>
+          <a href="https://devhints.io/makefile">make</a>
+        </li>
+        <li>
+          <a href="https://marklodato.github.io/visual-git-guide/index-en.html">git</a>
+        </li>
+        <li>
+          <a href="https://www.samformat.info/sam-format-flag">SAM format flag widget</a>
+        </li>
+        <li class="dropdown-submenu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">R</a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf">data.table</a>
+            </li>
+            <li>
+              <a href="https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf">ggplot2 (not cool)</a>
+            </li>
+            <li>
+              <a href="https://r-graph-gallery.com/134-general-plot-parameters-reminder">base::plot (cool) plot parameters</a>
+            </li>
+            <li>
+              <a href="https://r-graph-gallery.com/6-graph-parameters-reminder.html">base::plot (cool) point parameters</a>
+            </li>
+            <li>
+              <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">Rmarkdown</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manuals</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf">BLAST</a>
+        </li>
+        <li>
+          <a href="https://www.gnu.org/software/gawk/manual/gawk.html">AWK</a>
+        </li>
+        <li>
+          <a href="https://www.bx.psu.edu/~rsharris/lastz/">Lastz</a>
+        </li>
+        <li>
+          <a href="https://evolution.genetics.washington.edu/phylip/phylip.html">PHYLIP</a>
+        </li>
+        <li>
+          <a href="https://adv-r.hadley.nz/">Advanced R</a>
+        </li>
+        <li>
+          <a href="https://bedtools.readthedocs.io/en/latest/index.html">Bedtools</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/mtrw">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Getting Started with High Performance
+Computing For Bioinformatics</h1>
+
+</div>
+
+
+<div id="a-little-background" class="section level1">
+<h1>A little background …</h1>
+<div id="hpc" class="section level4">
+<h4>HPC</h4>
+<p><em>Spartan</em> is the UoM’s high-performance computing (HPC)
+cluster, and the main place to do primary data processing for
+bioinformatic tasks. Things like read mapping, homology searches (say,
+BLAST), phylogenetic inference, genome assembly etc. all need a lot of
+processors, memory (RAM), and storage (space for saving files). The
+Spartan HPC cluster provides hundreds of processors, gigabytes of RAM,
+and Terrabytes of storage.</p>
+</div>
+<div id="operating-systems-and-shells" class="section level4">
+<h4>Operating systems and shells</h4>
+<p>The server runs an <strong>operating system</strong> called
+<em>Linux</em>. An operating system does a lot of stuff. It needs to
+manage ways to create and access files and directories, run programs,
+keep track of users, interface with hard disks, communicate with other
+computers … etc. It also has to provide you with a way to communicate
+with it, for example by using text on a screen. The text input and
+output functionality of the operating system is called a
+<strong>shell</strong>, because it the “outside” part that the user
+sees.</p>
+<p>The default Linux shell is not very easy to use, so many people have
+come up with alternative shells to make life easier and generally more
+fun and colourful. You will use the Z-shell, or <em>Zsh</em>, pronounced
+“Zeesh”! Zsh is great.</p>
+</div>
+<div id="tty" class="section level4">
+<h4>TTY</h4>
+<p>A <strong>teletypewriter</strong> (or TTY) interface is a device that
+provides a screen and a keyboard so you can use this text interface.</p>
+<div class="figure">
+<img src="images/TTY.jpg" alt="" />
+<p class="caption">Once upon a time they looked like this …</p>
+</div>
+<p>… but nowadays, a TTY is just a program. You will use a TTY program
+called <em>PuTTy</em>.</p>
+<p>So far, we have this:</p>
+<blockquote>
+<p>Linux kernel –&gt; Linux shell –&gt; TTY –&gt; User</p>
+</blockquote>
+</div>
+<div id="servers-and-protocols" class="section level4">
+<h4>Servers and protocols</h4>
+<p>Spartan is a kind of virtual computer, made by networking a cluster
+of different computers together. These are not all in the same place.
+But the Spartan system links them all together so that when we use them,
+it works just like it really is one really-really-really-powerful
+computer. That is the service it offers. And a computer that provides a
+service, whether it be to run a cluster, to provide storage, or to run a
+printer, is called a <strong>server</strong>.</p>
+<p>Your computer will communicate with the HPC server using a
+<strong>protocol</strong> (a kind of shared set of rules and
+conventions, like a common language) called <strong>Secure
+SHell</strong>, or SSH.</p>
+<p>So, to tie it all together so far:</p>
+<p><em>PuTTy</em> uses the <em>SSH</em> <em>protocol</em> to connect to
+a server and provide a <em>TTY</em> interface to a <em>shell</em> around
+the server’s <em>operating system</em>, which is <em>Linux</em>.</p>
+<p>Other protocols you may have heard of are SCP (ways of transferring
+files), HTTP (how browsers talk to servers) and TCP/IP (how information
+is transferred over networks). We will need to use a protocol called
+<strong>Secure File Transfer Protocol</strong> (or SFTP) to work with
+your files on the HPC cluster from your regular desktop environment (and
+to transfer files between them). The protocol is provided in the program
+<em>STFP Drive</em>.</p>
+</div>
+</div>
+<div id="setup-steps" class="section level1">
+<h1>Setup Steps</h1>
+<div id="download-the-software" class="section level2">
+<h2>Download the software</h2>
+<ol style="list-style-type: decimal">
+<li><p>Get PuTTy from <a href="https://www.putty.org/">here</a> and
+install it.</p></li>
+<li><p>Get SFTP Drive from <a
+href="https://www.nsoftware.com/sftp/drive/download.aspx">here</a> and
+install it.</p></li>
+</ol>
+</div>
+<div id="joining-the-ccg-hpc-project-and-getting-a-username"
+class="section level2">
+<h2>Joining the CCG HPC project and getting a username</h2>
+<p>To get access to the Spartan server, you need to join the CCG’s
+<em>project</em>. Ask Tim to send you a request, and you’ll get an email
+at your unimelb address. Another email will arrive to confirm you are a
+member, and give you a username similar to your UoM login. The CCG
+project is called “punim1869”.</p>
+</div>
+<div id="connecting-with-putty" class="section level2">
+<h2>Connecting with PuTTy</h2>
+<ol style="list-style-type: decimal">
+<li><p>Open PuTTy</p></li>
+<li><p>In the Host Name box, type
+<YOUR_USERNAME>@spartan.hpc.unimelb.edu.au</p></li>
+</ol>
+<p><img src="images/putty_login.png" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>[Optionally] Set the font you want to use in the
+<code>Appearance</code> menu.</li>
+</ol>
+<p><img src="images/putty_font.png" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>[Optionally] Set the background and foreground colours you want to
+use in the <code>Colours</code> menu.</li>
+</ol>
+<p><img src="images/putty_cols.png" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Back in the <code>Session</code> menu, type a nickname for the
+server into the Saved Sessions box, and click Save. In future, you can
+connect by double clicking the saved session from the list …</li>
+</ol>
+<p><img src="images/putty_save.png" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Click Open. You may get a prompt asking about a new connection or
+a network key. Click yes/ok to either.</p></li>
+<li><p>You have a terminal! It should look a bit like this (but with
+your choice of colours/fonts) …</p></li>
+</ol>
+<p><img src="images/shell_firstlogin.png" /></p>
+<ol start="8" style="list-style-type: decimal">
+<li>Install Zsh and oh-my-zsh, using the command `` HERE HERE HERE
+<ul>
+<li>HINT: In PuTTy, you copy text just by highlighting it, and paste it
+with a right-click.</li>
+<li>You will get a prompt asking whether you want default options
+prompts asking you to change your shell.</li>
+<li>Zsh offers a LOT of great features that make your command line
+experience easier, some of which feature in the Linux <a
+href="./tutorials.html">tutorial</a>. But you can browse the <a
+href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">cheatsheet</a>
+for some quick inspiration.</li>
+</ul></li>
+<li>Import some customised profile files for Zsh and screen by running
+these commands:
+<ul>
+<li>Screen is a Linux program you will use later</li>
+<li>Profile files contain settings for programs in order to customise
+them. For example, the .zshrc file will change your command prompt to a
+custom one I designed, and add a few helpful shortcut commands to (e.g.)
+take you straight to your storage directory.</li>
+<li>You are encouraged to explore and customise your profile files, for
+Zsh, screen, vim, or any program that uses them. Just as you set up your
+Windows machine’s Desktop background and screensaver and things to make
+it your own, profiles are how you make your Linux environment into your
+digital home!</li>
+</ul></li>
+</ol>
+<pre><code>HERE HERE HERE
+</code></pre>
+<ul>
+<li><ul>
+<li>dots after</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+oh-my-zsh
+
+.bash_profile
+.bashrc
+.zshrc like mine with shortcuts to project dirs etc
+.screenrc
+
+private workspace
+
+r packages dir
+r via open
+
+transfer dir
+scp
+
+
+submit jobs

@@ -1,0 +1,18 @@
+---
+title: "&nbsp;"
+output: 
+  html_document:
+    toc: false
+---
+
+**Welcome to the bioinformatics info portal for the Cereal Crop Genetics workgroup at FVAS!**
+
+Here you will find resources to help you get started with bioinformatics at CCG, useful links, resources, and tutorials.
+
+***
+
+![](images/barleyfield.jpg)
+
+*This page is under construction. For help, contact [Tim](mailto: tim.rabanuswallace@unimelb.edu.au)*
+
+***

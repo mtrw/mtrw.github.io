@@ -1,0 +1,85 @@
+name: "CCG Bioinformatics"
+title: "CCG Bioinformatics"
+type: inverse
+left:
+  - text: "Getting Started"
+    href: ./getting_started.html
+  - text: "University Computing Resources"
+    menu:
+      - text: "UoM Spartan Dashboard (Linux)"
+        href: https://dashboard.hpc.unimelb.edu.au/started/
+      - text: "UoM OnDemand Dashboard (R)"
+        href: https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new
+      - text: "UoM Research Computing Portal Dashboard (VM)"
+        href: https://rcp.research.unimelb.edu.au/home/
+  - text: "Software Downloads"
+    menu:
+     - text: "PuTTy (SSH connection to Spartan)"
+       href: https://www.putty.org/
+     - text: "SFTP Drive (Access project storage from your desktop or a VM (Windows))"
+       href: https://www.nsoftware.com/sftp/drive/download.aspx
+  - text: "Tutorials"
+    href: ./tutorials.html
+  - text: "Useful Links"
+    menu:
+     - text: "Format Specifications"
+       menu:
+        - text: "VCF/BCF"
+          href: https://samtools.github.io/hts-specs/VCFv4.3.pdf
+        - text: "SAM/BAM"
+          href: https://samtools.github.io/hts-specs/SAMv1.pdf
+        - text: "GFF3"
+          href: https://asia.ensembl.org/info/website/upload/gff3.html
+        - text: "BED"
+          href: https://asia.ensembl.org/info/website/upload/bed.html
+     - text: "Cheatsheets"
+       menu:
+        - text: "REGEX"
+          href: https://remram44.github.io/regex-cheatsheet/regex.html
+        - text: "BLASTn output formatting"
+          href: https://www.metagenomics.wiki/tools/blast/blastn-output-format-6
+        - text: "GNU screen"
+          href: https://aperiodic.net/screen/quick_reference
+        - text: "Vim"
+          href: https://devhints.io/vim
+        - text: "Zsh"
+          href: https://www.bash2zsh.com/zsh_refcard/refcard.pdf
+        - text: "SAM format flag widget"
+          href: https://www.samformat.info/sam-format-flag
+        - text: "chmod flag widget"
+          href: https://ss64.com/bash/chmod.html
+        - text: "make"
+          href: https://devhints.io/makefile
+        - text: "git"
+          href: https://marklodato.github.io/visual-git-guide/index-en.html
+        - text: "SAM format flag widget"
+          href: https://www.samformat.info/sam-format-flag
+        - text: "R"
+          menu :
+           - text : "data.table"
+             href: https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf
+           - text : "ggplot2 (not cool)"
+             href: https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf
+           - text : "base::plot (cool) plot parameters"
+             href: https://r-graph-gallery.com/134-general-plot-parameters-reminder
+           - text : "base::plot (cool) point parameters"
+             href: https://r-graph-gallery.com/6-graph-parameters-reminder.html
+           - text : "Rmarkdown"
+             href: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+     - text: "Manuals"
+       menu:
+        - text: "BLAST"
+          href: https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf
+        - text: "AWK"
+          href: https://www.gnu.org/software/gawk/manual/gawk.html
+        - text: "Lastz"
+          href: https://www.bx.psu.edu/~rsharris/lastz/
+        - text: "PHYLIP"
+          href: https://evolution.genetics.washington.edu/phylip/phylip.html
+        - text: "Advanced R"
+          href: https://adv-r.hadley.nz/
+        - text: "Bedtools"
+          href: https://bedtools.readthedocs.io/en/latest/index.html
+right:
+  - icon: fa-github
+    href: https://github.com/mtrw
