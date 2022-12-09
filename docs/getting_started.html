@@ -11,7 +11,7 @@
 
 
 
-<title>Getting Started with High Performance Computing For Bioinformatics</title>
+<title>Getting set up to use the High Performance Computing resources</title>
 
 <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -468,14 +468,18 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Getting Started with High Performance
-Computing For Bioinformatics</h1>
+<h1 class="title toc-ignore">Getting set up to use the High Performance
+Computing resources</h1>
 
 </div>
 
 
-<div id="a-little-background" class="section level1">
-<h1>A little background …</h1>
+<div id="linux-on-the-spartan-cluster" class="section level1">
+<h1>Linux on the Spartan Cluster</h1>
+<hr />
+<div id="a-little-background" class="section level2">
+<h2>A little background …</h2>
+<hr />
 <div id="hpc" class="section level4">
 <h4>HPC</h4>
 <p><em>Spartan</em> is the UoM’s high-performance computing (HPC)
@@ -497,6 +501,8 @@ with it, for example by using text on a screen. The text input and
 output functionality of the operating system is called a
 <strong>shell</strong>, because it the “outside” part that the user
 sees.</p>
+<p>You don’t need to know how to use Linux yet. During setup, just
+copy-and-paste the commands given.</p>
 <p>The default Linux shell is not very easy to use, so many people have
 come up with alternative shells to make life easier and generally more
 fun and colourful. You will use the Z-shell, or <em>Zsh</em>, pronounced
@@ -541,12 +547,14 @@ is transferred over networks). We will need to use a protocol called
 your files on the HPC cluster from your regular desktop environment (and
 to transfer files between them). The protocol is provided in the program
 <em>STFP Drive</em>.</p>
+<hr />
 </div>
 </div>
-<div id="setup-steps" class="section level1">
-<h1>Setup Steps</h1>
-<div id="download-the-software" class="section level2">
-<h2>Download the software</h2>
+<div id="setup-steps" class="section level2">
+<h2>Setup Steps</h2>
+<hr />
+<div id="download-the-software" class="section level3">
+<h3>Download the software</h3>
 <ol style="list-style-type: decimal">
 <li><p>Get PuTTy from <a href="https://www.putty.org/">here</a> and
 install it.</p></li>
@@ -556,16 +564,16 @@ install it.</p></li>
 </ol>
 </div>
 <div id="joining-the-ccg-hpc-project-and-getting-a-username"
-class="section level2">
-<h2>Joining the CCG HPC project and getting a username</h2>
+class="section level3">
+<h3>Joining the CCG HPC project and getting a username</h3>
 <p>To get access to the Spartan server, you need to join the CCG’s
 <em>project</em>. Ask Tim to send you a request, and you’ll get an email
 at your unimelb address. Another email will arrive to confirm you are a
 member, and give you a username similar to your UoM login. The CCG
 project is called “punim1869”.</p>
 </div>
-<div id="connecting-with-putty" class="section level2">
-<h2>Connecting with PuTTy</h2>
+<div id="connecting-with-putty" class="section level3">
+<h3>Connecting with PuTTy</h3>
 <ol style="list-style-type: decimal">
 <li><p>Open PuTTy</p></li>
 <li><p>In the Host Name box, type
@@ -596,40 +604,126 @@ your choice of colours/fonts) …</p></li>
 </ol>
 <p><img src="images/shell_firstlogin.png" /></p>
 <ol start="8" style="list-style-type: decimal">
-<li>Install Zsh and oh-my-zsh, using the command `` HERE HERE HERE
+<li><p>Install Zsh and oh-my-zsh, using the command:</p>
+<pre><code> cd /home/$USER
+ sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></pre>
 <ul>
 <li>HINT: In PuTTy, you copy text just by highlighting it, and paste it
 with a right-click.</li>
-<li>You will get a prompt asking whether you want default options
-prompts asking you to change your shell.</li>
+<li>You may get prompst asking you if you want to adopt the default
+options (YES) and/or change your shell (also YES)</li>
 <li>Zsh offers a LOT of great features that make your command line
 experience easier, some of which feature in the Linux <a
 href="./tutorials.html">tutorial</a>. But you can browse the <a
 href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">cheatsheet</a>
 for some quick inspiration.</li>
 </ul></li>
-<li>Import some customised profile files for Zsh and screen by running
-these commands:
+<li><p>Import some customised profile files for Zsh and screen by
+running these commands (<strong>including</strong> the dot
+<code>.</code> at the end of some commands)</p>
+<pre><code> cd /home/$USER
+ [[ -e .bash_profile ]] &amp;&amp; mv .bash_profile .bash_profile_old
+ cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
+ [[ -e .bashrc ]] &amp;&amp; mv .bashrc .bashrc_old
+ cp /data/gpfs/projects/punim1869/.admin/assets/.bashrc .
+ [[ -e .zshrc ]] &amp;&amp; mv .zshrc .zshrc_old
+ cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
+ [[ -e .screenrc ]] &amp;&amp; mv .screenrc .screenrc_old
+ cp /data/gpfs/projects/punim1869/.admin/assets/.screenrc .
+ source /home/$USER/.zshrc</code></pre>
 <ul>
 <li>Screen is a Linux program you will use later</li>
 <li>Profile files contain settings for programs in order to customise
 them. For example, the .zshrc file will change your command prompt to a
 custom one I designed, and add a few helpful shortcut commands to (e.g.)
 take you straight to your storage directory.</li>
-<li>You are encouraged to explore and customise your profile files, for
+</ul></li>
+</ol>
+<blockquote>
+<p>You are encouraged to explore and customise your profile files, for
 Zsh, screen, vim, or any program that uses them. Just as you set up your
 Windows machine’s Desktop background and screensaver and things to make
 it your own, profiles are how you make your Linux environment into your
-digital home!</li>
+digital home!</p>
+</blockquote>
+</div>
+<div id="getting-familiar-with-your-new-environment"
+class="section level3">
+<h3>Getting familiar with your new environment</h3>
+<ol style="list-style-type: decimal">
+<li>To look inside the .zsh profile
+<ul>
+<li>Type <code>less ~/.zshrc</code> to read the .zsh profile file.
+Scroll down with the arrows until you find some lines that begin with
+<code>alias</code>. Have a look and then press <code>q</code> to leave
+the reader.</li>
+<li>These lines create shortcut commands. For example, the command
+<code>samtools view</code> is what you would use to look at the mapped
+reads in a .bam file. But it’s a lot to type. The line
+<code>alias sv='samtools view'</code> means we can now just type
+<code>sv</code> instead. Here are some others now available:
+<ul>
+<li><code>lincmd</code> — Print a list of common Linux commands and
+command line editing shortcuts</li>
+<li><code>ll</code> — List all files with extra data</li>
+<li><code>lll</code> — As above, including hidden files</li>
+<li><code>hme</code> — Display tasks you are running and the resources
+they are using (with htop)</li>
+<li>… and more, that will come up in other tutorials.</li>
+</ul></li>
+</ul></li>
+<li>Storage and your workspace
+<ul>
+<li>The directory you land in is called your <em>home directory</em>. It
+is basically meant for things like profile files. It does not have much
+disk space. You should do your work somewhere with more storage space.
+We have a lot of allocated storage space, and you even have a working
+directory within it. It is located at
+<code>/data/gpfs/projects/punim1869/</code>.
+<ul>
+<li>You can get there using the command
+<code>cd /data/gpfs/projects/punim1869/</code>, and list the contents
+using <code>tree -L 4</code></li>
+<li>Alternatively, there is an alias set up, <code>gs</code> (“[g]o to
+[s]torage”) will take you there.</li>
+<li><em>Alternatively</em> alternatively, there is a variable set up
+containing the address, so you can also use
+(e.g. <code>cd $STO</code>).</li>
+</ul></li>
+<li>A workspace has been set up for you here. It is in
+<code>users/YOUR_USERNAME</code>. By default, no one else can access it.
+Use it for … everything.
+<ul>
+<li>You can get there with the alias <code>gw</code> (“[g]o to
+[w]orkplace”).</li>
+<li>The address is also automatically stored in the variable $WS.</li>
+</ul></li>
+</ul></li>
+<li>Shared resources
+<ul>
+<li>Things like reference genomes, that take up a lot of space and which
+everyone uses, are kept in a shared storage area, located at [project
+storage dir]/shared_storage. If you need a large file like that, talk to
+<a href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to get it
+added to the shared storage.</li>
 </ul></li>
 </ol>
-<pre><code>HERE HERE HERE
-</code></pre>
+<div class="figure">
+<img src="images/storage_structure.png" alt="" />
+<p class="caption">Structure of storage on Spartan</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Resource management with Slurm</p></li>
+<li><p>What now?</p>
 <ul>
-<li><ul>
-<li>dots after</li>
+<li>If you don’t already, it’s time to learning some Linux! Head over to
+the <a href="tute_linux.html">tutorial</a>.</li>
+<li>Once you’re comfortable with that, either learn to run jobs on the
+Spartan, or …</li>
+<li></li>
 </ul></li>
-</ul>
+</ol>
+</div>
 </div>
 </div>
 

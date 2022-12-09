@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with High Performance Computing For Bioinformatics"
+title: "Getting set up to use the High Performance Computing resources"
 output: 
   html_document:
     toc: true
@@ -7,7 +7,13 @@ output:
     toc_depth: 2
 ---
 
-# A little background ...
+# Linux on the Spartan Cluster
+
+***
+
+## A little background ...
+
+***
 
 #### HPC
 
@@ -16,6 +22,8 @@ output:
 #### Operating systems and shells
 
 The server runs an **operating system** called *Linux*. An operating system does a lot of stuff. It needs to manage ways to create and access files and directories, run programs, keep track of users, interface with hard disks, communicate with other computers ... etc. It also has to provide you with a way to communicate with it, for example by using text on a screen. The text input and output functionality of the operating system is called a **shell**, because it the "outside" part that the user sees.
+
+You don't need to know how to use Linux yet. During setup, just copy-and-paste the commands given.
 
 The default Linux shell is not very easy to use, so many people have come up with alternative shells to make life easier and generally more fun and colourful. You will use the Z-shell, or *Zsh*, pronounced "Zeesh"! Zsh is great.
 
@@ -43,19 +51,23 @@ So, to tie it all together so far:
 
 Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). We will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*.
 
-# Setup Steps
+***
 
-## Download the software
+## Setup Steps
+
+***
+
+### Download the software
 
 1. Get PuTTy from [here](https://www.putty.org/) and install it.
 
 2. Get SFTP Drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx) and install it.
 
-## Joining the CCG HPC project and getting a username
+### Joining the CCG HPC project and getting a username
 
 To get access to the Spartan server, you need to join the CCG's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CCG project is called "punim1869".
 
-## Connecting with PuTTy
+### Connecting with PuTTy
 
 1. Open PuTTy
 
@@ -81,33 +93,61 @@ To get access to the Spartan server, you need to join the CCG's *project*. Ask T
 
 ![](images/shell_firstlogin.png)
 
-8. Install Zsh and oh-my-zsh, using the command `` HERE HERE HERE
-    + HINT: In PuTTy, you copy text just by highlighting it, and paste it with a right-click.
-    + You will get a prompt asking whether you want default options prompts asking you to change your shell.
-    + Zsh offers a LOT of great features that make your command line experience easier, some of which feature in the Linux [tutorial](./tutorials.html). But you can browse the [cheatsheet](https://www.bash2zsh.com/zsh_refcard/refcard.pdf) for some quick inspiration.
+8. Install Zsh and oh-my-zsh, using the command:
 
-9. Import some customised profile files for Zsh and screen by running these commands:
-    + Screen is a Linux program you will use later
-    + Profile files contain settings for programs in order to customise them. For example, the .zshrc file will change your command prompt to a custom one I designed, and add a few helpful shortcut commands to (e.g.) take you straight to your storage directory.
-    + You are encouraged to explore and customise your profile files, for Zsh, screen, vim, or any program that uses them. Just as you set up your Windows machine's Desktop background and screensaver and things to make it your own, profiles are how you make your Linux environment into your digital home!
+        cd /home/$USER
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    - HINT: In PuTTy, you copy text just by highlighting it, and paste it with a right-click.
+    - You may get prompst asking you if you want to adopt the default options (YES) and/or change your shell (also YES)
+    - Zsh offers a LOT of great features that make your command line experience easier, some of which feature in the Linux [tutorial](./tutorials.html). But you can browse the [cheatsheet](https://www.bash2zsh.com/zsh_refcard/refcard.pdf) for some quick inspiration.
+
+9. Import some customised profile files for Zsh and screen by running these commands (**including** the dot `.` at the end of some commands)
+
+        cd /home/$USER
+        [[ -e .bash_profile ]] && mv .bash_profile .bash_profile_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
+        [[ -e .bashrc ]] && mv .bashrc .bashrc_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.bashrc .
+        [[ -e .zshrc ]] && mv .zshrc .zshrc_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
+        [[ -e .screenrc ]] && mv .screenrc .screenrc_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.screenrc .
+        source /home/$USER/.zshrc
+
+    - Screen is a Linux program you will use later
+    - Profile files contain settings for programs in order to customise them. For example, the .zshrc file will change your command prompt to a custom one I designed, and add a few helpful shortcut commands to (e.g.) take you straight to your storage directory.
+
+> You are encouraged to explore and customise your profile files, for Zsh, screen, vim, or any program that uses them. Just as you set up your Windows machine's Desktop background and screensaver and things to make it your own, profiles are how you make your Linux environment into your digital home!
+
+### Getting familiar with your new environment
+
+1. To look inside the .zsh profile
+    - Type `less ~/.zshrc` to read the .zsh profile file. Scroll down with the arrows until you find some lines that begin with `alias`. Have a look and then press `q` to leave the reader.
+    - These lines create shortcut commands. For example, the command `samtools view` is what you would use to look at the mapped reads in a .bam file. But it's a lot to type. The line `alias sv='samtools view'` means we can now just type `sv` instead. Here are some others now available:
+        - `lincmd` --- Print a list of common Linux commands and command line editing shortcuts
+        - `ll` --- List all files with extra data
+        - `lll` --- As above, including hidden files
+        - `hme` --- Display tasks you are running and the resources they are using (with htop)
+        - ... and more, that will come up in other tutorials.
+        
+2. Storage and your workspace
+    - The directory you land in is called your *home directory*. It is basically meant for things like profile files. It does not have much disk space. You should do your work somewhere with more storage space. We have a lot of allocated storage space, and you even have a working directory within it. It is located at `/data/gpfs/projects/punim1869/`.
+        - You can get there using the command `cd /data/gpfs/projects/punim1869/`, and list the contents using `tree -L 4`
+        - Alternatively, there is an alias set up, `gs` ("[g]o to [s]torage") will take you there.
+        - *Alternatively* alternatively, there is a variable set up containing the address, so you can also use (e.g. `cd $STO`).
+    - A workspace has been set up for you here. It is in `users/YOUR_USERNAME`. By default, no one else can access it. Use it for ... everything.
+        - You can get there with the alias `gw` ("[g]o to [w]orkplace").
+        - The address is also automatically stored in the variable $WS.
+
+3. Shared resources
+    - Things like reference genomes, that take up a lot of space and which everyone uses, are kept in a shared storage area, located at [project storage dir]/shared_storage. If you need a large file like that, talk to [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to get it added to the shared storage.
     
-```
-HERE HERE HERE
+![Structure of storage on Spartan](images/storage_structure.png)
 
-```
+4. Resource management with Slurm
 
-+    + dots
-after
-
-
-
-
-
-
-
-
-
-
-
-
-
+5. What now?
+    - If you don't already, it's time to learning some Linux! Head over to the [tutorial](tute_linux.html).
+    - Once you're comfortable with that, either learn to [run jobs on the Spartan], or read on to get set up with R.
+    
