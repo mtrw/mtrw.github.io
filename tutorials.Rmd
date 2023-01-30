@@ -6,9 +6,12 @@ output:
 
 Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to write a tutorial on it here!
 
-TO DO Tutorials
 
-+   Running Jobs on the server: Slurm and shell scripts
++   [Running Jobs on the server: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
++   [Interactive sessions with slurm](./tutorial_slurm_interactive.html)
+
+*TO DO*
+
 +   Working in screen + interactive sessions
 +   Working in R: OnDemand Servers
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal
@@ -16,3 +19,4 @@ TO DO Tutorials
 +   Basic Bioinformatics: Mapping and Variant Calling
 +   Basic Bioinformatics: Homology searches and BLAST
 +   Basic Bioinformatics R::data.table
++   SCP

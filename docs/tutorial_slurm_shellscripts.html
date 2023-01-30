@@ -11,7 +11,7 @@
 
 
 
-<title>Getting set up to use the High Performance Computing resources</title>
+<title>Running Jobs on the server: Slurm and shell scripts</title>
 
 <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -271,6 +271,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -474,267 +480,195 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Getting set up to use the High Performance
-Computing resources</h1>
+<h1 class="title toc-ignore">Running Jobs on the server: Slurm and shell
+scripts</h1>
 
 </div>
 
 
-<div id="linux-on-the-spartan-cluster" class="section level1">
-<h1>Linux on the Spartan Cluster</h1>
-<hr />
-<div id="a-little-background" class="section level2">
-<h2>A little background …</h2>
-<hr />
-<div id="hpc" class="section level4">
-<h4>HPC</h4>
-<p><em>Spartan</em> is the UoM’s high-performance computing (HPC)
-cluster, and the main place to do primary data processing for
-bioinformatic tasks. Things like read mapping, homology searches (say,
-BLAST), phylogenetic inference, genome assembly etc. all need a lot of
-processors, memory (RAM), and storage (space for saving files). The
-Spartan HPC cluster provides hundreds of processors, gigabytes of RAM,
-and Terrabytes of storage.</p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>The HPC cluster is a shared resource. The memory and CPUs it has need
+to be shared. To make this happen, a program called <em>slurm</em> runs
+on the cluster and acts as the central resource access coordinator. To
+run some job on the cluster, you submit a request to slurm, that
+contains the command(s) you want to run, along with a request for a
+certain amount of resources.</p>
 </div>
-<div id="operating-systems-and-shells" class="section level4">
-<h4>Operating systems and shells</h4>
-<p>The server runs an <strong>operating system</strong> called
-<em>Linux</em>. An operating system does a lot of stuff. It needs to
-manage ways to create and access files and directories, run programs,
-keep track of users, interface with hard disks, communicate with other
-computers … etc. It also has to provide you with a way to communicate
-with it, for example by using text on a screen. The text input and
-output functionality of the operating system is called a
-<strong>shell</strong>, because it the “outside” part that the user
-sees.</p>
-<p>You don’t need to know how to use Linux yet. During setup, just
-copy-and-paste the commands given.</p>
-<p>The default Linux shell is not very easy to use, so many people have
-come up with alternative shells to make life easier and generally more
-fun and colourful. You will use the Z-shell, or <em>Zsh</em>, pronounced
-“Zeesh”! Zsh is great.</p>
+<div id="slurm-batch-files" class="section level2">
+<h2>Slurm batch files</h2>
+<p>This request is in the form of a text file called a <em>slurm batch
+file</em>. Let’s say I wanted to map <code>reads.fastq</code> to
+<code>genome.fasta</code> using the aligner <code>minimap2</code>. A
+command to do this might be:</p>
+<pre><code>            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<p>To do this quickly, it would be useful to have quite a lot of
+capacity for parallel computing (say, 25 CPU cores), and and also a lot
+of memory (say, 10Gb RAM). A slurm batch file to request this task would
+contain this text:</p>
+<pre><code>            #!/bin/bash
+            #SBATCH --job-name=mapping_task_1
+            #SBATCH --partition=physical
+            #SBATCH --ntasks=1
+            #SBATCH --cpus-per-task=25
+            #SBATCH --mem=10G
+            #SBATCH --nodes=1
+            #SBATCH --time=1-0
+            #SBATCH --output=job_mapping_task_1_%j.out
+            #SBATCH --error=job_mapping_task_1_%j.err
+            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<p>As you can see, it’s just a bash script (more on them later if you
+don’t understand yet). It begins with the interpreter directive
+(<code>#!/bin/bash</code>) marking it as a bash script, and ends with
+the command(s) we want to run. In between, the instructions to slurm are
+marked with the prefix <code>#SBATCH</code>, followed by
+<code>--&lt;argument-name&gt;=&lt;argument&gt;</code>.</p>
+<p>The most important are:</p>
+<ul>
+<li>job-name: A handy name to refer to your job, useful to identify it
+in a list of jobs</li>
+<li>cpus-per-task: The number of CPUs you want</li>
+<li>mem: The amount of RAM you want</li>
+<li>time: The maximum time required. Two common formats are
+<days>-<hours> and <hours>:<minutes>:<seconds>.</li>
+</ul>
+<p>After the <code>time</code> has elapsed, the job can be stopped and
+the resources freed for other users, so be sure to request more than you
+need. It is possible to request extended time for a running job in cases
+where your estimate was too little.</p>
 </div>
-<div id="tty" class="section level4">
-<h4>TTY</h4>
-<p>A <strong>teletypewriter</strong> (or TTY) interface is a device that
-provides a screen and a keyboard so you can use this text interface.</p>
-<div class="figure">
-<img src="images/TTY.jpg" alt="" />
-<p class="caption">Once upon a time they looked like this …</p>
+<div id="output-and-slurm-vs.-stdoutstderr" class="section level2">
+<h2>Output, and slurm vs. stdout/stderr</h2>
+<p>Typically your scripts will produce some file and that’s all you
+want. Job done, hit the showers.</p>
+<p>However, in Linux programs will often output things to either
+<em>stdout</em> (which generally prints to the screen if not redirected
+to a file; it is designed for program output) or <em>stderr</em> (which
+prints on a different “channel”, and hence can be redirected separately
+to stdout; it is designed for error messages). Once your job is
+complete, any output to these will be given in two files
+<code>job_&lt;job-name&gt;.out</code> and
+<code>job_&lt;job-name&gt;.err</code>.</p>
 </div>
-<p>… but nowadays, a TTY is just a program. You will use a TTY program
-called <em>PuTTy</em>.</p>
-<p>So far, we have this:</p>
-<blockquote>
-<p>Linux kernel –&gt; Linux shell –&gt; TTY –&gt; User</p>
-</blockquote>
+<div
+id="writing-slurm-batch-files-made-easy-with-the-msh-function-and-shell-scripts."
+class="section level2">
+<h2>Writing slurm batch files made easy with the <code>msh()</code>
+function and shell scripts.</h2>
+<p>You could use a text editor (like <code>vim</code>) to type out
+everything every time you want to make a slurm batch file and run a job.
+But that is a bit time consuming. I have provided a simple shell
+function <code>msh</code> ([m]ake [s]lurm [h]eader). You use it with the
+following syntax:</p>
+<pre><code>            msh &lt;job_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt; &lt;the commands you want to run&gt;</code></pre>
+<p>It will create a slurm batch file named
+<code>sb_&lt;job_name&gt;</code> automatically.</p>
+<p>See the example below in the section <em>A simple workflow
+example</em>.</p>
 </div>
-<div id="servers-and-protocols" class="section level4">
-<h4>Servers and protocols</h4>
-<p>Spartan is a kind of virtual computer, made by networking a cluster
-of different computers together. These are not all in the same place.
-But the Spartan system links them all together so that when we use them,
-it works just like it really is one really-really-really-powerful
-computer. That is the service it offers. And a computer that provides a
-service, whether it be to run a cluster, to provide storage, or to run a
-printer, is called a <strong>server</strong>.</p>
-<p>Your computer will communicate with the HPC server using a
-<strong>protocol</strong> (a kind of shared set of rules and
-conventions, like a common language) called <strong>Secure
-SHell</strong>, or SSH.</p>
-<p>So, to tie it all together so far:</p>
-<p><em>PuTTy</em> uses the <em>SSH</em> <em>protocol</em> to connect to
-a server and provide a <em>TTY</em> interface to a <em>shell</em> around
-the server’s <em>operating system</em>, which is <em>Linux</em>.</p>
-<p>Other protocols you may have heard of are SCP (ways of transferring
-files), HTTP (how browsers talk to servers) and TCP/IP (how information
-is transferred over networks). We will need to use a protocol called
-<strong>Secure File Transfer Protocol</strong> (or SFTP) to work with
-your files on the HPC cluster from your regular desktop environment (and
-to transfer files between them). The protocol is provided in the program
-<em>STFP Drive</em>.</p>
-<hr />
+<div id="submitting-the-request" class="section level2">
+<h2>Submitting the request</h2>
+<p>Let’s say the above slurm batch file was saved as sb_mapping_task_1.
+To submit it, simply use the command
+<code>sbatch &lt;filename&gt;</code> (so,
+<code>sbatch sb_mapping_task_1</code>).</p>
+<p>Slurm will put your request in a queue and allocate resources based
+on how large your request was, when it was submitted, etc. It tries to
+be intuitively fair according to parameters controlled by the admins,
+making them the cosmic arbiters of morality in HPC computing.</p>
+<p>See the example below in the section <em>A simple workflow
+example</em>.</p>
 </div>
+<div id="checking-your-requestjob-progress" class="section level2">
+<h2>Checking your request/job progress</h2>
+<p>The command <code>squeue</code> will display a list of all running or
+pending jobs.</p>
+<p><code>squeue -u &lt;your_username&gt;</code> will show only your
+jobs.</p>
+<p>I have provided a shortcut <code>squ</code> ([s]lurm [q]ueue [u]ser)
+which quickly prints the information for the user’s requests, formatted
+nicely:</p>
+<p><img src="images/squ.png" /></p>
+<p>Here, you can see which jobs are in the queue (NAME), whether they
+are pending or running (STATE), how long they have been running for
+(TIME), and how long they have been given (TIME_LIMIT).</p>
+<p>Time for an example.</p>
 </div>
-<div id="setup-steps" class="section level2">
-<h2>Setup Steps</h2>
-<hr />
-<div id="download-the-software" class="section level3">
-<h3>Download the software</h3>
+<div id="a-simple-workflow-example" class="section level2">
+<h2>A simple workflow example</h2>
+<p>So, here is the process for writing, submitting, and monitoring, a
+job called “say_helloworld” that simply prints “Hello world!” to
+stdout:</p>
+<p><img src="images/slurmdemo_mshmakerun.png" /></p>
+<p>Once the job has run, the output to stdout will be in
+job_say_helloworld.out.</p>
+<p><img src="images/slurmdemo_seeoutput.png" /></p>
+</div>
+<div id="deleting-requests" class="section level2">
+<h2>Deleting requests</h2>
+<p>If you want to delete requests, <code>scancel &lt;job-id&gt;</code>
+can be used. I have provided a shell alias to cancel all your jobs:
+<code>sqk</code> ([s]lurm [q]ueue [k]ill). To see what it actually does,
+explore your ~/.zshrc, or type <code>alias sqk</code>.</p>
+</div>
+<div id="use-shell-scripts" class="section level2">
+<h2>Use shell scripts</h2>
+<p>You will quickly realise it is hard to use <code>msh</code> when your
+command is complex, especially if it contains lots of quotes or
+redirections or pipes, or multiple lines.</p>
+<p>Moreover, you will find developing pipelines really hard if EVERY
+time you run it you need to make and submit a batch file. Part of this
+problem is overcome by running <a
+href="./tutorial_slurm_interactive.html">interactive sessions</a>. The
+other part is packaging your commands into shell scripts.</p>
+<p>A script is just a list of commands for the shell to run. You can
+make them with any text editor. Notepad is ok. Vim (which can be used
+from the command line, just type <code>vim</code>) is excellent, but
+harder to learn. Komodo Edit is an excellent compromise.</p>
+<p>There are only two things you need to know to put your commands into
+a script.</p>
 <ol style="list-style-type: decimal">
-<li><p>Get PuTTy from <a href="https://www.putty.org/">here</a> and
-install it.</p></li>
-<li><p>Get SFTP Drive from <a
-href="https://www.nsoftware.com/sftp/drive/download.aspx">here</a> and
-install it.</p></li>
+<li>The first line of a Linux script is traditionally where you put the
+<em>interpreter directive</em>, and it states essentially what language
+the script contains, and hence how it should be interpreted. It is
+identified by a <em>shebang</em> (“ha[sh]+[bang]”) symbol:
+<code>#!</code> followed by a path to the appropriate interpreter. You
+will frequently see for example <code>#!/bin/bash</code>,
+<code>#!/usr/bin/zsh</code>, <code>#!/usr/bin/awk</code>,
+<code>#!/bin/perl</code>, etc.
+<ul>
+<li>NOTE: Scripts are traditionally given an extension to reflect their
+interpreter, e.g., my_script.zsh or map_reads.pl (for a perl
+script).</li>
+</ul></li>
+<li>Linux needs to be told the file is a script, by
+<strong>ch</strong>anging the <strong>mod</strong>e using the
+<code>chmod</code> command. Simply type
+<code>chmod +x &lt;file_name&gt;</code> to make your file into an
+executable script.</li>
 </ol>
+<p>The following pipeline shows how I can examine, and then run, a
+simple hello world zsh script.</p>
+<p>First, I write the script, here I have used vim, and saved it as
+<code>helloworld.zsh</code></p>
+<p><img src="images/slurmdemo_zshprogwrite.png" /></p>
+<p>Then we make it executable and run it:</p>
+<p><img src="images/slurmdemo_execzsh.png" /></p>
+<p>That’s all you need to know to get started. To write advanced shell
+scripts requires learning more of the bash/zsh language. But you’re now
+in a position to use slurm to run shell scripts rather than sending your
+commands directly.</p>
+<p><img src="images/slurmdemo_mshscript.png" /></p>
 </div>
-<div id="joining-the-ccg-hpc-project-and-getting-a-username"
-class="section level3">
-<h3>Joining the CCG HPC project and getting a username</h3>
-<p>To get access to the Spartan server, you need to join the CCG’s
-<em>project</em>. Ask Tim to send you a request, and you’ll get an email
-at your unimelb address. Another email will arrive to confirm you are a
-member, and give you a username similar to your UoM login. The CCG
-project is called “punim1869”.</p>
-</div>
-<div id="connecting-with-putty" class="section level3">
-<h3>Connecting with PuTTy</h3>
-<ol style="list-style-type: decimal">
-<li><p>Open PuTTy</p></li>
-<li><p>In the Host Name box, type
-<YOUR_USERNAME>@spartan.hpc.unimelb.edu.au</p></li>
-</ol>
-<p><img src="images/putty_login.png" /></p>
-<ol start="3" style="list-style-type: decimal">
-<li>[Optionally] Set the font you want to use in the
-<code>Appearance</code> menu.</li>
-</ol>
-<p><img src="images/putty_font.png" /></p>
-<ol start="4" style="list-style-type: decimal">
-<li>[Optionally] Set the background and foreground colours you want to
-use in the <code>Colours</code> menu.</li>
-</ol>
-<p><img src="images/putty_cols.png" /></p>
-<ol start="5" style="list-style-type: decimal">
-<li>Back in the <code>Session</code> menu, type a nickname for the
-server into the Saved Sessions box, and click Save. In future, you can
-connect by double clicking the saved session from the list …</li>
-</ol>
-<p><img src="images/putty_save.png" /></p>
-<ol start="6" style="list-style-type: decimal">
-<li><p>Click Open. You may get a prompt asking about a new connection or
-a network key. Click yes/ok to either.</p></li>
-<li><p>You have a terminal! It should look a bit like this (but with
-your choice of colours/fonts) …</p></li>
-</ol>
-<p><img src="images/shell_firstlogin.png" /></p>
-<ol start="8" style="list-style-type: decimal">
-<li><p>Install Zsh and oh-my-zsh, using the command:</p>
-<pre><code> cd /home/$USER
- sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></pre>
-<ul>
-<li>HINT: In PuTTy, you copy text just by highlighting it, and paste it
-with a right-click.</li>
-<li>You may get prompts asking you if you want to adopt the default
-options (YES) and/or change your shell (also YES)</li>
-<li>Zsh offers a LOT of great features that make your command line
-experience easier, some of which feature in the Linux <a
-href="./tutorials.html">tutorial</a>. But you can browse the <a
-href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">cheatsheet</a>
-for some quick inspiration.</li>
-</ul></li>
-<li><p>Import some customised profile files for Zsh and screen by
-running these commands (<strong>including</strong> the dot
-<code>.</code> at the end of some commands)</p>
-<pre><code> cd /home/$USER
- [[ -e .bash_profile ]] &amp;&amp; mv .bash_profile .bash_profile_old
- cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
- [[ -e .bashrc ]] &amp;&amp; mv .bashrc .bashrc_old
- cp /data/gpfs/projects/punim1869/.admin/assets/.bashrc .
- [[ -e .zshrc ]] &amp;&amp; mv .zshrc .zshrc_old
- cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
- [[ -e .screenrc ]] &amp;&amp; mv .screenrc .screenrc_old
- cp /data/gpfs/projects/punim1869/.admin/assets/.screenrc .
- source /home/$USER/.zshrc</code></pre>
-<ul>
-<li>Screen is a Linux program you will use later</li>
-<li>Profile files contain settings for programs in order to customise
-them. For example, the .zshrc file will change your command prompt to a
-custom one I designed, and add a few helpful shortcut commands to (e.g.)
-take you straight to your storage directory.</li>
-</ul></li>
-</ol>
-<blockquote>
-<p>You are encouraged to explore and customise your profile files, for
-Zsh, screen, vim, or any program that uses them. Just as you set up your
-Windows machine’s Desktop background and screensaver and things to make
-it your own, profiles are how you make your Linux environment into your
-digital home!</p>
-</blockquote>
-<ol start="10" style="list-style-type: decimal">
-<li><p>Set up a working directory</p>
-<pre><code>mkdir -p $WS
-cd $WS</code></pre></li>
-</ol>
-</div>
-<div id="getting-familiar-with-your-new-environment"
-class="section level3">
-<h3>Getting familiar with your new environment</h3>
-<ol style="list-style-type: decimal">
-<li>To look inside the .zsh profile
-<ul>
-<li>Type <code>less ~/.zshrc</code> to read the .zsh profile file.
-Scroll down with the arrows until you find some lines that begin with
-<code>alias</code>. Have a look and then press <code>q</code> to leave
-the reader.</li>
-<li>These lines create shortcut commands. For example, the command
-<code>samtools view</code> is what you would use to look at the mapped
-reads in a .bam file. But it’s a lot to type. The line
-<code>alias sv='samtools view'</code> means we can now just type
-<code>sv</code> instead. Here are some others now available:
-<ul>
-<li><code>lincmd</code> — Print a list of common Linux commands and
-command line editing shortcuts</li>
-<li><code>ll</code> — List all files with extra data</li>
-<li><code>lll</code> — As above, including hidden files</li>
-<li><code>hme</code> — Display tasks you are running and the resources
-they are using (with htop)</li>
-<li>… and more, that will come up in other tutorials.</li>
-</ul></li>
-</ul></li>
-<li>Storage and your workspace
-<ul>
-<li>The directory you land in is called your <em>home directory</em>. It
-is basically meant for things like profile files. It does not have much
-disk space. You should do your work somewhere with more storage space.
-We have a lot of allocated storage space, and you even have a working
-directory within it. It is located at
-<code>/data/gpfs/projects/punim1869/</code>.
-<ul>
-<li>You can get there using the command
-<code>cd /data/gpfs/projects/punim1869/</code>, and list the contents
-using <code>tree -L 4</code></li>
-<li>Alternatively, there is an alias set up, <code>gs</code> (“[g]o to
-[s]torage”) will take you there.</li>
-<li><em>Alternatively</em> alternatively, there is a variable set up
-containing the address, so you can also use
-(e.g. <code>cd $STO</code>).</li>
-</ul></li>
-<li>A workspace has been set up for you here. It is in
-<code>users/YOUR_USERNAME</code>. By default, no one else can access it.
-Use it for … everything.
-<ul>
-<li>You can get there with the alias <code>gw</code> (“[g]o to
-[w]orkplace”).</li>
-<li>The address is also automatically stored in the variable $WS.</li>
-</ul></li>
-</ul></li>
-<li>Shared resources
-<ul>
-<li>Things like reference genomes, that take up a lot of space and which
-everyone uses, are kept in a shared storage area, located at [project
-storage dir]/shared_storage. If you need a large file like that, talk to
-<a href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to get it
-added to the shared storage.</li>
-</ul></li>
-</ol>
-<div class="figure">
-<img src="images/storage_structure.png" alt="" />
-<p class="caption">Structure of storage on Spartan</p>
-</div>
-<ol start="4" style="list-style-type: decimal">
-<li><p>Resource management with Slurm</p></li>
-<li><p>What now?</p>
-<ul>
-<li>If you don’t already, it’s time to learning some Linux! Head over to
-the <a href="tute_linux.html">tutorial</a>.</li>
-<li>Once you’re comfortable with that, either learn to [run jobs on the
-Spartan], or read on to get set up with R.</li>
-</ul></li>
-</ol>
-</div>
-</div>
+<div id="automating-request-submission" class="section level2">
+<h2>Automating request submission</h2>
+<p>Frequently we want to request a lot of jobs, say, when we want to map
+<code>reads.fastq</code> to <code>ref_1.fasta</code>, and
+<code>ref_2.fasta</code> and <code>ref_3.fasta</code> and … etc. up to
+<code>ref_100.fasta</code>.</p>
+<p>To do it, use loops to create and submit jobs (or use GNU parallel if
+you want to be super hip). For now I will leave this as a challenge for
+you, but will expand this tutorial on request.</p>
 </div>
 
 
@@ -795,7 +729,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify

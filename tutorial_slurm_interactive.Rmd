@@ -1,0 +1,15 @@
+---
+title: "Interactive sessions with slurm"
+output:
+  html_document
+---
+
+## Under construction sorry!
+
+For now, run:
+
+                si10
+                #wait ...
+                source ~/.zshrc
+                
+You are now working in an environment allocated 10 CPUs and 10 Gb of RAM, and it will last for one day.

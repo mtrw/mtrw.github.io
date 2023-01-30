@@ -70,6 +70,8 @@ left:
              href: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
      - text: "Manuals"
        menu:
+        - text : "Slurm Sbatch"
+          href: https://slurm.schedmd.com/sbatch.html
         - text: "BLAST"
           href: https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf
         - text: "AWK"

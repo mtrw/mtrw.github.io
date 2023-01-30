@@ -99,7 +99,7 @@ To get access to the Spartan server, you need to join the CCG's *project*. Ask T
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     - HINT: In PuTTy, you copy text just by highlighting it, and paste it with a right-click.
-    - You may get prompst asking you if you want to adopt the default options (YES) and/or change your shell (also YES)
+    - You may get prompts asking you if you want to adopt the default options (YES) and/or change your shell (also YES)
     - Zsh offers a LOT of great features that make your command line experience easier, some of which feature in the Linux [tutorial](./tutorials.html). But you can browse the [cheatsheet](https://www.bash2zsh.com/zsh_refcard/refcard.pdf) for some quick inspiration.
 
 9. Import some customised profile files for Zsh and screen by running these commands (**including** the dot `.` at the end of some commands)
