@@ -120,6 +120,11 @@ To get access to the Spartan server, you need to join the CCG's *project*. Ask T
 
 > You are encouraged to explore and customise your profile files, for Zsh, screen, vim, or any program that uses them. Just as you set up your Windows machine's Desktop background and screensaver and things to make it your own, profiles are how you make your Linux environment into your digital home!
 
+10. Set up a working directory
+
+        mkdir -p $WS
+        cd $WS
+
 ### Getting familiar with your new environment
 
 1. To look inside the .zsh profile

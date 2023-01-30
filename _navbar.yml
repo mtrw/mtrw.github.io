@@ -34,6 +34,8 @@ left:
           href: https://asia.ensembl.org/info/website/upload/bed.html
      - text: "Cheatsheets"
        menu:
+        - text: "PuTTy"
+          href: https://defkey.com/putty-shortcuts
         - text: "REGEX"
           href: https://remram44.github.io/regex-cheatsheet/regex.html
         - text: "BLASTn output formatting"
