@@ -530,7 +530,8 @@ in a list of jobs</li>
 <li>cpus-per-task: The number of CPUs you want</li>
 <li>mem: The amount of RAM you want</li>
 <li>time: The maximum time required. Two common formats are
-<days>-<hours> and <hours>:<minutes>:<seconds>.</li>
+<code>&lt;days&gt;-&lt;hours&gt;</code> and
+<code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>.</li>
 </ul>
 <p>After the <code>time</code> has elapsed, the job can be stopped and
 the resources freed for other users, so be sure to request more than you
@@ -541,12 +542,9 @@ where your estimate was too little.</p>
 <h2>Output, and slurm vs. stdout/stderr</h2>
 <p>Typically your scripts will produce some file and that’s all you
 want. Job done, hit the showers.</p>
-<p>However, in Linux programs will often output things to either
-<em>stdout</em> (which generally prints to the screen if not redirected
-to a file; it is designed for program output) or <em>stderr</em> (which
-prints on a different “channel”, and hence can be redirected separately
-to stdout; it is designed for error messages). Once your job is
-complete, any output to these will be given in two files
+<p>However, Linux programs will often output things to either
+<em>stdout</em> or <em>stderr</em>. Once your job is complete, any
+output to these will be given in two files
 <code>job_&lt;job-name&gt;.out</code> and
 <code>job_&lt;job-name&gt;.err</code>.</p>
 </div>

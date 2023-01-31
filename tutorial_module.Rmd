@@ -35,7 +35,7 @@ The most important are:
   +   job-name: A handy name to refer to your job, useful to identify it in a list of jobs
   +   cpus-per-task: The number of CPUs you want
   +   mem: The amount of RAM you want
-  +   time: The maximum time required. Two common formats are `<days>-<hours>` and `<hours>:<minutes>:<seconds>`.
+  +   time: The maximum time required. Two common formats are <days>-<hours> and <hours>:<minutes>:<seconds>.
 
 After the `time` has elapsed, the job can be stopped and the resources freed for other users, so be sure to request more than you need. It is possible to request extended time for a running job in cases where your estimate was too little.
 
@@ -43,7 +43,7 @@ After the `time` has elapsed, the job can be stopped and the resources freed for
 
 Typically your scripts will produce some file and that's all you want. Job done, hit the showers.
 
-However, Linux programs will often output things to either *stdout* or *stderr*. Once your job is complete, any output to these will be given in two files `job_<job-name>.out` and `job_<job-name>.err`.
+However, in Linux programs will often output things to either *stdout* (which generally prints to the screen if not redirected to a file; it is designed for program output) or *stderr* (which prints on a different "channel", and hence can be redirected separately to stdout; it is designed for error messages). Once your job is complete, any output to these will be given in two files `job_<job-name>.out` and `job_<job-name>.err`.
 
 ## Writing slurm batch files made easy with the `msh()` function and shell scripts.
 

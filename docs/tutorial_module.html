@@ -11,7 +11,7 @@
 
 
 
-<title>Tutorials</title>
+<title>Running Jobs on the server: Slurm and shell scripts</title>
 
 <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -480,33 +480,196 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Tutorials</h1>
+<h1 class="title toc-ignore">Running Jobs on the server: Slurm and shell
+scripts</h1>
 
 </div>
 
 
-<p>Wondering how to achieve some task? Ask <a
-href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to write a
-tutorial on it here!</p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>The HPC cluster is a shared resource. The memory and CPUs it has need
+to be shared. To make this happen, a program called <em>slurm</em> runs
+on the cluster and acts as the central resource access coordinator. To
+run some job on the cluster, you submit a request to slurm, that
+contains the command(s) you want to run, along with a request for a
+certain amount of resources.</p>
+</div>
+<div id="slurm-batch-files" class="section level2">
+<h2>Slurm batch files</h2>
+<p>This request is in the form of a text file called a <em>slurm batch
+file</em>. Let’s say I wanted to map <code>reads.fastq</code> to
+<code>genome.fasta</code> using the aligner <code>minimap2</code>. A
+command to do this might be:</p>
+<pre><code>            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<p>To do this quickly, it would be useful to have quite a lot of
+capacity for parallel computing (say, 25 CPU cores), and and also a lot
+of memory (say, 10Gb RAM). A slurm batch file to request this task would
+contain this text:</p>
+<pre><code>            #!/bin/bash
+            #SBATCH --job-name=mapping_task_1
+            #SBATCH --partition=physical
+            #SBATCH --ntasks=1
+            #SBATCH --cpus-per-task=25
+            #SBATCH --mem=10G
+            #SBATCH --nodes=1
+            #SBATCH --time=1-0
+            #SBATCH --output=job_mapping_task_1_%j.out
+            #SBATCH --error=job_mapping_task_1_%j.err
+            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<p>As you can see, it’s just a bash script (more on them later if you
+don’t understand yet). It begins with the interpreter directive
+(<code>#!/bin/bash</code>) marking it as a bash script, and ends with
+the command(s) we want to run. In between, the instructions to slurm are
+marked with the prefix <code>#SBATCH</code>, followed by
+<code>--&lt;argument-name&gt;=&lt;argument&gt;</code>.</p>
+<p>The most important are:</p>
 <ul>
-<li><a href="./tutorial_slurm_shellscripts.html">Running Jobs on the
-server: Slurm and shell scripts</a></li>
-<li><a href="./tutorial_slurm_interactive.html">Interactive sessions
-with slurm</a></li>
+<li>job-name: A handy name to refer to your job, useful to identify it
+in a list of jobs</li>
+<li>cpus-per-task: The number of CPUs you want</li>
+<li>mem: The amount of RAM you want</li>
+<li>time: The maximum time required. Two common formats are
+<days>-<hours> and <hours>:<minutes>:<seconds>.</li>
 </ul>
-<p><em>TO DO</em></p>
+<p>After the <code>time</code> has elapsed, the job can be stopped and
+the resources freed for other users, so be sure to request more than you
+need. It is possible to request extended time for a running job in cases
+where your estimate was too little.</p>
+</div>
+<div id="output-and-slurm-vs.-stdoutstderr" class="section level2">
+<h2>Output, and slurm vs. stdout/stderr</h2>
+<p>Typically your scripts will produce some file and that’s all you
+want. Job done, hit the showers.</p>
+<p>However, in Linux programs will often output things to either
+<em>stdout</em> (which generally prints to the screen if not redirected
+to a file; it is designed for program output) or <em>stderr</em> (which
+prints on a different “channel”, and hence can be redirected separately
+to stdout; it is designed for error messages). Once your job is
+complete, any output to these will be given in two files
+<code>job_&lt;job-name&gt;.out</code> and
+<code>job_&lt;job-name&gt;.err</code>.</p>
+</div>
+<div
+id="writing-slurm-batch-files-made-easy-with-the-msh-function-and-shell-scripts."
+class="section level2">
+<h2>Writing slurm batch files made easy with the <code>msh()</code>
+function and shell scripts.</h2>
+<p>You could use a text editor (like <code>vim</code>) to type out
+everything every time you want to make a slurm batch file and run a job.
+But that is a bit time consuming. I have provided a simple shell
+function <code>msh</code> ([m]ake [s]lurm [h]eader). You use it with the
+following syntax:</p>
+<pre><code>            msh &lt;job_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt; &lt;the commands you want to run&gt;</code></pre>
+<p>It will create a slurm batch file named
+<code>sb_&lt;job_name&gt;</code> automatically.</p>
+<p>See the example below in the section <em>A simple workflow
+example</em>.</p>
+</div>
+<div id="submitting-the-request" class="section level2">
+<h2>Submitting the request</h2>
+<p>Let’s say the above slurm batch file was saved as sb_mapping_task_1.
+To submit it, simply use the command
+<code>sbatch &lt;filename&gt;</code> (so,
+<code>sbatch sb_mapping_task_1</code>).</p>
+<p>Slurm will put your request in a queue and allocate resources based
+on how large your request was, when it was submitted, etc. It tries to
+be intuitively fair according to parameters controlled by the admins,
+making them the cosmic arbiters of morality in HPC computing.</p>
+<p>See the example below in the section <em>A simple workflow
+example</em>.</p>
+</div>
+<div id="checking-your-requestjob-progress" class="section level2">
+<h2>Checking your request/job progress</h2>
+<p>The command <code>squeue</code> will display a list of all running or
+pending jobs.</p>
+<p><code>squeue -u &lt;your_username&gt;</code> will show only your
+jobs.</p>
+<p>I have provided a shortcut <code>squ</code> ([s]lurm [q]ueue [u]ser)
+which quickly prints the information for the user’s requests, formatted
+nicely:</p>
+<p><img src="images/squ.png" /></p>
+<p>Here, you can see which jobs are in the queue (NAME), whether they
+are pending or running (STATE), how long they have been running for
+(TIME), and how long they have been given (TIME_LIMIT).</p>
+<p>Time for an example.</p>
+</div>
+<div id="a-simple-workflow-example" class="section level2">
+<h2>A simple workflow example</h2>
+<p>So, here is the process for writing, submitting, and monitoring, a
+job called “say_helloworld” that simply prints “Hello world!” to
+stdout:</p>
+<p><img src="images/slurmdemo_mshmakerun.png" /></p>
+<p>Once the job has run, the output to stdout will be in
+job_say_helloworld.out.</p>
+<p><img src="images/slurmdemo_seeoutput.png" /></p>
+</div>
+<div id="deleting-requests" class="section level2">
+<h2>Deleting requests</h2>
+<p>If you want to delete requests, <code>scancel &lt;job-id&gt;</code>
+can be used. I have provided a shell alias to cancel all your jobs:
+<code>sqk</code> ([s]lurm [q]ueue [k]ill). To see what it actually does,
+explore your ~/.zshrc, or type <code>alias sqk</code>.</p>
+</div>
+<div id="use-shell-scripts" class="section level2">
+<h2>Use shell scripts</h2>
+<p>You will quickly realise it is hard to use <code>msh</code> when your
+command is complex, especially if it contains lots of quotes or
+redirections or pipes, or multiple lines.</p>
+<p>Moreover, you will find developing pipelines really hard if EVERY
+time you run it you need to make and submit a batch file. Part of this
+problem is overcome by running <a
+href="./tutorial_slurm_interactive.html">interactive sessions</a>. The
+other part is packaging your commands into shell scripts.</p>
+<p>A script is just a list of commands for the shell to run. You can
+make them with any text editor. Notepad is ok. Vim (which can be used
+from the command line, just type <code>vim</code>) is excellent, but
+harder to learn. Komodo Edit is an excellent compromise.</p>
+<p>There are only two things you need to know to put your commands into
+a script.</p>
+<ol style="list-style-type: decimal">
+<li>The first line of a Linux script is traditionally where you put the
+<em>interpreter directive</em>, and it states essentially what language
+the script contains, and hence how it should be interpreted. It is
+identified by a <em>shebang</em> (“ha[sh]+[bang]”) symbol:
+<code>#!</code> followed by a path to the appropriate interpreter. You
+will frequently see for example <code>#!/bin/bash</code>,
+<code>#!/usr/bin/zsh</code>, <code>#!/usr/bin/awk</code>,
+<code>#!/bin/perl</code>, etc.
 <ul>
-<li>Loading modules</li>
-<li>Working in screen + interactive sessions</li>
-<li>Working in R: OnDemand Servers</li>
-<li>Getting a HPC windows desktop: Starting a Virtual Machine with the
-Research Computing Portal</li>
-<li>Basic Bionformatics: Awk and the SAM format</li>
-<li>Basic Bioinformatics: Mapping and Variant Calling</li>
-<li>Basic Bioinformatics: Homology searches and BLAST</li>
-<li>Basic Bioinformatics R::data.table</li>
-<li>SCP</li>
-</ul>
+<li>NOTE: Scripts are traditionally given an extension to reflect their
+interpreter, e.g., my_script.zsh or map_reads.pl (for a perl
+script).</li>
+</ul></li>
+<li>Linux needs to be told the file is a script, by
+<strong>ch</strong>anging the <strong>mod</strong>e using the
+<code>chmod</code> command. Simply type
+<code>chmod +x &lt;file_name&gt;</code> to make your file into an
+executable script.</li>
+</ol>
+<p>The following pipeline shows how I can examine, and then run, a
+simple hello world zsh script.</p>
+<p>First, I write the script, here I have used vim, and saved it as
+<code>helloworld.zsh</code></p>
+<p><img src="images/slurmdemo_zshprogwrite.png" /></p>
+<p>Then we make it executable and run it:</p>
+<p><img src="images/slurmdemo_execzsh.png" /></p>
+<p>That’s all you need to know to get started. To write advanced shell
+scripts requires learning more of the bash/zsh language. But you’re now
+in a position to use slurm to run shell scripts rather than sending your
+commands directly.</p>
+<p><img src="images/slurmdemo_mshscript.png" /></p>
+</div>
+<div id="automating-request-submission" class="section level2">
+<h2>Automating request submission</h2>
+<p>Frequently we want to request a lot of jobs, say, when we want to map
+<code>reads.fastq</code> to <code>ref_1.fasta</code>, and
+<code>ref_2.fasta</code> and <code>ref_3.fasta</code> and … etc. up to
+<code>ref_100.fasta</code>.</p>
+<p>To do it, use loops to create and submit jobs (or use GNU parallel if
+you want to be super hip). For now I will leave this as a challenge for
+you, but will expand this tutorial on request.</p>
+</div>
 
 
 
