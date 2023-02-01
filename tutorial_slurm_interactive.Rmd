@@ -6,7 +6,7 @@ output:
 
 ## Under construction sorry!
 
-For now, run:
+For now, run these commands in spartan:
 
                 si10
                 #wait ...
