@@ -84,6 +84,10 @@ left:
           href: https://adv-r.hadley.nz/
         - text: "Bedtools"
           href: https://bedtools.readthedocs.io/en/latest/index.html
+        - text: "Zsh"
+          href: https://zsh-manual.netlify.app/the-z-shell-manual
+        - text: "Zsh -- introductory manual"
+          href: https://zsh.sourceforge.io/Intro/intro_1.html
 right:
   - icon: fa-github
     href: https://github.com/mtrw

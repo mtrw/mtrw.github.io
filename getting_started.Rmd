@@ -153,6 +153,9 @@ To get access to the Spartan server, you need to join the CCG's *project*. Ask T
 4. Resource management with Slurm
 
 5. What now?
-    - If you don't already, it's time to learning some Linux! Head over to the [tutorial](tute_linux.html).
-    - Once you're comfortable with that, either learn to [run jobs on the Spartan], or read on to get set up with R.
+    - If you haven't already, it's time to learn some Linux!
+        - [Basics](https://www.youtube.com/watch?v=oxuRxtrO2Ag)
+        - [More advanced features and shell scripting](https://www.youtube.com/watch?v=emhouufDnB4), or (a bit more gently) [here](https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w)
+        - [Zsh](https://zsh.sourceforge.io/Intro/intro_1.html)
+    - Once you're comfortable with that, either learn to [run jobs on the Spartan](./tutorial_slurm_shellscripts.html), or read on to get set up with R.
     
