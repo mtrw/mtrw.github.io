@@ -67,6 +67,20 @@ Other protocols you may have heard of are SCP (ways of transferring files), HTTP
 
 To get access to the Spartan server, you need to join the CCG's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CCG project is called "punim1869".
 
+### Setting your default login shell to zsh
+
+Head over to [Karaage](https://dashboard.hpc.unimelb.edu.au/karaage/), where you can view and manage your accounts on the university's HPC cluster. Log in with your cluster account password, selecting **unimelb** as your institution.
+
+Click **Accounts** an then your **username**, and on the next screen, **Edit Account**:
+
+![](images/karaage_acct.png)
+
+![](images/karaage_edit.png)
+
+... then select zsh from the dropdown menu and click **save**:
+
+![](images/karaage_zsh.png)
+
 ### Connecting with PuTTy
 
 1. Open PuTTy
@@ -120,10 +134,13 @@ To get access to the Spartan server, you need to join the CCG's *project*. Ask T
 
 > You are encouraged to explore and customise your profile files, for Zsh, screen, vim, or any program that uses them. Just as you set up your Windows machine's Desktop background and screensaver and things to make it your own, profiles are how you make your Linux environment into your digital home!
 
-10. Set up a working directory
+10. Set up some common directories
 
-        mkdir -p $WS
-        cd $WS
+        mkdir -p /data/gpfs/projects/punim1869/users/$USER/workspace
+        mkdir -p /data/gpfs/projects/punim1869/users/$USER/.R_PACKAGES
+
+    - A workspace is a good place to put projects in
+    - If you use R, it's good to have somewhere to store all your packages. Note the dot at the beginning -- this makes the directory hidden.
 
 ### Getting familiar with your new environment
 

@@ -6,8 +6,10 @@ left:
     href: ./getting_started.html
   - text: "University Computing Resources"
     menu:
-      - text: "UoM Spartan Dashboard (Linux)"
+      - text: "UoM Spartan Dashboard (Linux cluster for bioinformatics)"
         href: https://dashboard.hpc.unimelb.edu.au/started/
+      - text: "UoM Karaage (cluster account management)"
+        href: https://dashboard.hpc.unimelb.edu.au/karaage/
       - text: "UoM OnDemand Dashboard (R)"
         href: https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new
       - text: "UoM Research Computing Portal Dashboard (VM)"

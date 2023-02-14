@@ -325,7 +325,10 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux)</a>
+      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux cluster for bioinformatics)</a>
+    </li>
+    <li>
+      <a href="https://dashboard.hpc.unimelb.edu.au/karaage/">UoM Karaage (cluster account management)</a>
     </li>
     <li>
       <a href="https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new">UoM OnDemand Dashboard (R)</a>
@@ -501,6 +504,17 @@ run some job on the cluster, you submit a request to slurm, that
 contains the command(s) you want to run, along with a request for a
 certain amount of resources.</p>
 </div>
+<div id="setup" class="section level2">
+<h2>Setup</h2>
+<p>Make sure you have the most recent version of the .zsh profile file.
+Note: <strong>This will overwrite your existing zsh profile
+file</strong>, so if you’ve made changes, be sure to save and integrate
+them properly.</p>
+<pre><code>    cd /home/$USER
+    [[ -e .zshrc ]] &amp;&amp; mv .zshrc .zshrc_old
+    cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
+    source ./.zshrc</code></pre>
+</div>
 <div id="slurm-batch-files" class="section level2">
 <h2>Slurm batch files</h2>
 <p>This request is in the form of a text file called a <em>slurm batch
@@ -512,17 +526,17 @@ command to do this might be:</p>
 capacity for parallel computing (say, 25 CPU cores), and and also a lot
 of memory (say, 10Gb RAM). A slurm batch file to request this task would
 contain this text:</p>
-<pre><code>            #!/bin/bash
-            #SBATCH --job-name=mapping_task_1
-            #SBATCH --partition=physical
-            #SBATCH --ntasks=1
-            #SBATCH --cpus-per-task=25
-            #SBATCH --mem=10G
-            #SBATCH --nodes=1
-            #SBATCH --time=1-0
-            #SBATCH --output=job_mapping_task_1_%j.out
-            #SBATCH --error=job_mapping_task_1_%j.err
-            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<pre><code>    #!/bin/bash
+    #SBATCH --job-name=mapping_task_1
+    #SBATCH --partition=physical
+    #SBATCH --ntasks=1
+    #SBATCH --cpus-per-task=25
+    #SBATCH --mem=10G
+    #SBATCH --nodes=1
+    #SBATCH --time=1-0
+    #SBATCH --output=job_mapping_task_1_%j.out
+    #SBATCH --error=job_mapping_task_1_%j.err
+    minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
 <p>As you can see, it’s just a bash script (more on them later if you
 don’t understand yet). It begins with the interpreter directive
 (<code>#!/bin/bash</code>) marking it as a bash script, and ends with
@@ -564,7 +578,7 @@ everything every time you want to make a slurm batch file and run a job.
 But that is a bit time consuming. I have provided a simple shell
 function <code>msh</code> ([m]ake [s]lurm [h]eader). You use it with the
 following syntax:</p>
-<pre><code>            msh &lt;job_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt; &lt;the commands you want to run&gt;</code></pre>
+<pre><code>    msh &lt;job_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt; &lt;the commands you want to run&gt;</code></pre>
 <p>It will create a slurm batch file named
 <code>sb_&lt;job_name&gt;</code> automatically.</p>
 <p>See the example below in the section <em>A simple workflow

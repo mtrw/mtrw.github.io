@@ -4,12 +4,45 @@ output:
   html_document
 ---
 
-## Under construction sorry!
+## Background
 
-For now, run these commands in spartan:
+If you aren't yet familiar with the resource manager Slurm and how to submit jobs to it, then check out [that tutorial](tutorial_slurm_shellscripts.html) first.
 
-                si10
-                #wait ...
-                source ~/.zshrc
+The login node of Slurm (i.e., the interactive environment you land in when you first log in) is designed for requesting jobs only, and you will shortly run out of resources or get a nasty email from admin if you run significant tasks there. But when you're developing pipelines using the standard run-edit-run-edit-run procedure, you don't want to write, submit, and wait for the output of a job request every time you run.
+
+You can solve this by requesting an *interactive* environment to work in. It will give you some resources to use for a limited amount of time.
+
+## Setup
+
+Make sure you have the most recent version of the .zsh profile file. Note: **This will overwrite your existing zsh profile file**, so if you've made changes, be sure to save and integrate them properly.
+
+        cd /home/$USER
+        [[ -e .zshrc ]] && mv .zshrc .zshrc_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
+        source ./.zshrc
+
+## Requesting an interactive session
+
+I've built a shortcut `si` ([s]tart [i]nteractive) to make these requests, the syntax is:
+
+        si <CPUs> <RAM_in_Gb> <time_formatted_for_slurm>
                 
-You are now working in an environment allocated 10 CPUs and 10 Gb of RAM, and it will last for one day.
+Two common time formats are `<days>-<hours>` and `<hours>:<minutes>:<seconds>`.
+
+An example, to request 10 CPU cores and 50 Gb RAM for two days might be:
+
+        si 10 50 48:00:00
+
+For convenience if you just enter `si` by itself, it will automatically make a request for 4 cores and 16 Gb RAM for one day.
+
+## Am I in an interactive session?
+
+A shortcut function `csi` ([c]heck [s]lurm [i]nteractives) will show you the details of the interactive you are currently running in, including the time allocated and the time elapsed. If the list is empty, you are not in an interactive session.
+
+## Are interactive sessions all I need to get jobs done?
+
+NO!
+
+They are still resource-limited and jobs in then will occasionally be killed when resources are scarce---and you will still need to run some jobs that go for a longer time than you want to risk keeping an interactive session connected for. Run any significant tasks using slurm batch files. Tutorial [here](tutorial_slurm_shellscripts.html).
+
+![A little demo. `csi` reveals I am not in an interactive session. I request 1 core and 1Gb RAM for 15 minutes. Once granted, a new shell opens (revealing the message of the day). `csi` now shows I am in an interactive session, in which 9 seconds of 15 minutes has elapsed.](images/csi.png)

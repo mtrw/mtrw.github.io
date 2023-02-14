@@ -319,7 +319,10 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux)</a>
+      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux cluster for bioinformatics)</a>
+    </li>
+    <li>
+      <a href="https://dashboard.hpc.unimelb.edu.au/karaage/">UoM Karaage (cluster account management)</a>
     </li>
     <li>
       <a href="https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new">UoM OnDemand Dashboard (R)</a>
@@ -584,6 +587,23 @@ at your unimelb address. Another email will arrive to confirm you are a
 member, and give you a username similar to your UoM login. The CCG
 project is called “punim1869”.</p>
 </div>
+<div id="setting-your-default-login-shell-to-zsh"
+class="section level3">
+<h3>Setting your default login shell to zsh</h3>
+<p>Head over to <a
+href="https://dashboard.hpc.unimelb.edu.au/karaage/">Karaage</a>, where
+you can view and manage your accounts on the university’s HPC cluster.
+Log in with your cluster account password, selecting
+<strong>unimelb</strong> as your institution.</p>
+<p>Click <strong>Accounts</strong> an then your
+<strong>username</strong>, and on the next screen, <strong>Edit
+Account</strong>:</p>
+<p><img src="images/karaage_acct.png" /></p>
+<p><img src="images/karaage_edit.png" /></p>
+<p>… then select zsh from the dropdown menu and click
+<strong>save</strong>:</p>
+<p><img src="images/karaage_zsh.png" /></p>
+</div>
 <div id="connecting-with-putty" class="section level3">
 <h3>Connecting with PuTTy</h3>
 <ol style="list-style-type: decimal">
@@ -659,9 +679,15 @@ it your own, profiles are how you make your Linux environment into your
 digital home!</p>
 </blockquote>
 <ol start="10" style="list-style-type: decimal">
-<li><p>Set up a working directory</p>
-<pre><code>mkdir -p $WS
-cd $WS</code></pre></li>
+<li><p>Set up some common directories</p>
+<pre><code>mkdir -p /data/gpfs/projects/punim1869/users/$USER/workspace
+mkdir -p /data/gpfs/projects/punim1869/users/$USER/.R_PACKAGES</code></pre>
+<ul>
+<li>A workspace is a good place to put projects in</li>
+<li>If you use R, it’s good to have somewhere to store all your
+packages. Note the dot at the beginning – this makes the directory
+hidden.</li>
+</ul></li>
 </ol>
 </div>
 <div id="getting-familiar-with-your-new-environment"

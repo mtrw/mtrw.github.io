@@ -8,6 +8,15 @@ output:
 
 The HPC cluster is a shared resource. The memory and CPUs it has need to be shared. To make this happen, a program called *slurm* runs on the cluster and acts as the central resource access coordinator. To run some job on the cluster, you submit a request to slurm, that contains the command(s) you want to run, along with a request for a certain amount of resources.
 
+## Setup
+
+Make sure you have the most recent version of the .zsh profile file. Note: **This will overwrite your existing zsh profile file**, so if you've made changes, be sure to save and integrate them properly.
+
+        cd /home/$USER
+        [[ -e .zshrc ]] && mv .zshrc .zshrc_old
+        cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
+        source ./.zshrc
+
 ## Slurm batch files
 
 This request is in the form of a text file called a *slurm batch file*. Let's say I wanted to map `reads.fastq` to `genome.fasta` using the aligner `minimap2`. A command to do this might be:
@@ -16,17 +25,17 @@ This request is in the form of a text file called a *slurm batch file*. Let's sa
 
 To do this quickly, it would be useful to have quite a lot of capacity for parallel computing (say, 25 CPU cores), and and also a lot of memory (say, 10Gb RAM). A slurm batch file to request this task would contain this text:
 
-                #!/bin/bash
-                #SBATCH --job-name=mapping_task_1
-                #SBATCH --partition=physical
-                #SBATCH --ntasks=1
-                #SBATCH --cpus-per-task=25
-                #SBATCH --mem=10G
-                #SBATCH --nodes=1
-                #SBATCH --time=1-0
-                #SBATCH --output=job_mapping_task_1_%j.out
-                #SBATCH --error=job_mapping_task_1_%j.err
-                minimap -a -x sr reads.fastq genome.fasta > reads_to_genome.sam
+        #!/bin/bash
+        #SBATCH --job-name=mapping_task_1
+        #SBATCH --partition=physical
+        #SBATCH --ntasks=1
+        #SBATCH --cpus-per-task=25
+        #SBATCH --mem=10G
+        #SBATCH --nodes=1
+        #SBATCH --time=1-0
+        #SBATCH --output=job_mapping_task_1_%j.out
+        #SBATCH --error=job_mapping_task_1_%j.err
+        minimap -a -x sr reads.fastq genome.fasta > reads_to_genome.sam
 
 As you can see, it's just a bash script (more on them later if you don't understand yet). It begins with the interpreter directive (`#!/bin/bash`) marking it as a bash script, and ends with the command(s) we want to run. In between, the instructions to slurm are marked with the prefix `#SBATCH`, followed by `--<argument-name>=<argument>`.
 
@@ -49,7 +58,7 @@ However, Linux programs will often output things to either *stdout* or *stderr*.
 
 You could use a text editor (like `vim`) to type out everything every time you want to make a slurm batch file and run a job. But that is a bit time consuming. I have provided a simple shell function `msh` ([m]ake [s]lurm [h]eader). You use it with the following syntax:
 
-                msh <job_name> <CPUs> <RAM_in_Gb> <time_formatted_for_slurm> <the commands you want to run>
+        msh <job_name> <CPUs> <RAM_in_Gb> <time_formatted_for_slurm> <the commands you want to run>
 
 It will create a slurm batch file named `sb_<job_name>` automatically.
 
