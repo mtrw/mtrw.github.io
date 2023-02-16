@@ -70,9 +70,11 @@ left:
              href: https://r-graph-gallery.com/6-graph-parameters-reminder.html
            - text : "Rmarkdown"
              href: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
-     - text: "Manuals"
+     - text: "Manuals/Documentation"
        menu:
-        - text : "Slurm Sbatch"
+        - text: "Spartan HPC Documentation"
+          href: https://dashboard.hpc.unimelb.edu.au/started/
+        - text: "Slurm Sbatch"
           href: https://slurm.schedmd.com/sbatch.html
         - text: "BLAST"
           href: https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf
