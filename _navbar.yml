@@ -60,6 +60,10 @@ left:
           href: https://www.samformat.info/sam-format-flag
         - text: "R"
           menu :
+           - text : "Tim's functions (github)"
+             href: https://github.com/mtrw/tim_r_functions
+           - text : "Tim's functions (raw code to `source()`)"
+             href: https://raw.githubusercontent.com/mtrw/tim_r_functions/master/tim_functions.R
            - text : "data.table"
              href: https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf
            - text : "ggplot2 (not cool)"

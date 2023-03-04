@@ -11,7 +11,7 @@
 
 
 
-<title>Tutorials</title>
+<title>Working in Rstudio on Spartan</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -498,35 +498,78 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Tutorials</h1>
+<h1 class="title toc-ignore">Working in Rstudio on Spartan</h1>
 
 </div>
 
 
-<p>Wondering how to achieve some task? Ask <a
-href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to write a
-tutorial on it here!</p>
+<div id="the-dashboard" class="section level2">
+<h2>The Dashboard</h2>
+<p>To work in an R studio IDE in the HPC environment, head over to the
+spartan <a
+href="https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sessions">Open
+OnDemand Dashboard</a>, and select Rstudio-server from the list.</p>
+<p><img src="images/ondemandR.png" /></p>
+</div>
+<div id="settings" class="section level2">
+<h2>Settings</h2>
+<p>This will take you to a settings screen. Here’s what to enter:</p>
 <ul>
-<li><a href="./tutorial_Rstart.html">Working in R on Spartan</a></li>
-<li><a href="./tutorial_slurm_shellscripts.html">Running Jobs on the
-server: Slurm and shell scripts</a></li>
-<li><a href="./tutorial_slurm_interactive.html">Interactive sessions
-with slurm</a></li>
-<li><a href="./tutorial_sftp.html">Transferring data and opening files
-on your desktop with SFTP</a></li>
-<li><a href="./tutorial_module.html">Where are all the programs I want?
-Loading modules</a></li>
+<li><p><em>Account</em> — punim1869</p></li>
+<li><p><em>R_LIBS_USER directory</em> — This is where your R packages
+are installed to by default. If you followed the <a
+href="./getting_started.html">suggested set up</a>, you will have a
+directory set up for this purpose at
+<code>/data/gpfs/projects/punim1869/users/&lt;YOUR_USERNAME&gt;/.R_PACKAGES</code>.</p></li>
+<li><p><em>RStudio Version</em> — Use the latest version (top of the
+list). This also loads a recent <a href="tutorial_module.html">foss
+toolchain</a>.</p></li>
+<li><p><em>Load extra module</em> — If you call shell programs from the
+R session (or using the terminal built in to Rstudio), you will need the
+relevant modules loaded. Type the module identifiers here. For example I
+normally set it to
+<code>last+/2.12.0 bedtools/2.30.0 bcftools/1.15 vcftools/0.1.16 samtools/1.16.1 lastz/1.04.03</code>.</p></li>
+<li><p><em>Number of hours</em> — If you request a short time, your
+session will be approved faster. I tend to use 12 hour sessions, they
+get accepted within a few minutes.</p></li>
+<li><p><em>Number of CPU cores</em> — Use more if the
+functions/packages/scripts you use request multiple cores. The package
+<code>mcparallel</code> makes it super easy to write “loops” that run
+code in parallel and can really speed up your work. I use 4 cores by
+default and up to 50 if I am making heavy use of multi-core
+functions.</p></li>
+<li><p><em>Partition</em> — “Physical” tends to provide resources
+faster.</p></li>
+<li><p><em>QoS</em> — Leave blank</p></li>
+<li><p><em>Number of GPUs</em> — Use more if the
+functions/packages/scripts you use are specifically written to make use
+of GPUs.</p></li>
+<li><p><em>Amount of RAM allocated to job</em> — The RAM has to fit all
+the combined objects you are working on, including any plots. If you
+have beg tables with millions of rows or very complex plots, this will
+easily exceed 50 Gb. But for normal usage 8 to 16 is fine. You can see
+the memory usage of a session in the <environment> tab of the upper
+right window:</p></li>
 </ul>
-<p><em>TO DO</em></p>
+<p><a href="images/RRam.png"></a></p>
 <ul>
-<li>Working in screen</li>
-<li>Getting a HPC windows desktop: Starting a Virtual Machine with the
-Research Computing Portal</li>
-<li>Basic Bionformatics: Awk and the SAM format</li>
-<li>Basic Bioinformatics: Mapping and Variant Calling</li>
-<li>Basic Bioinformatics: Homology searches and BLAST</li>
-<li>Basic Bioinformatics R::data.table</li>
+<li><em>Email address</em> — If you want.</li>
 </ul>
+<p>Click “Launch”!</p>
+</div>
+<div id="connecting-a-session" class="section level2">
+<h2>Connecting a session</h2>
+<p>You’ll be sent back to the dashboard. Once the session has started,
+just click Connect to open an Rstudio server session in your
+browser.</p>
+<p><img src="images/Rinteractives.png" /></p>
+</div>
+<div id="other-notes" class="section level2">
+<h2>Other notes</h2>
+<ol style="list-style-type: decimal">
+<li>The package data.table will change your life.</li>
+</ol>
+</div>
 
 
 

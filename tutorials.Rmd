@@ -6,17 +6,15 @@ output:
 
 Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to write a tutorial on it here!
 
-
++   [Working in R on Spartan](./tutorial_Rstart.html)
 +   [Running Jobs on the server: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
 +   [Interactive sessions with slurm](./tutorial_slurm_interactive.html)
 +   [Transferring data and opening files on your desktop with SFTP](./tutorial_sftp.html)
 +   [Where are all the programs I want? Loading modules](./tutorial_module.html)
 
-
 *TO DO*
 
-+   Working in screen + interactive sessions
-+   Working in R: OnDemand Servers
++   Working in screen
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal
 +   Basic Bionformatics: Awk and the SAM format
 +   Basic Bioinformatics: Mapping and Variant Calling

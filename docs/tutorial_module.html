@@ -13,7 +13,7 @@
 
 <title>Where are all the programs I want? Loading modules</title>
 
-<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -420,6 +420,12 @@ div.tocify {
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">R</a>
           <ul class="dropdown-menu" role="menu">
             <li>
+              <a href="https://github.com/mtrw/tim_r_functions">Tim's functions (github)</a>
+            </li>
+            <li>
+              <a href="https://raw.githubusercontent.com/mtrw/tim_r_functions/master/tim_functions.R">Tim's functions (raw code to `source()`)</a>
+            </li>
+            <li>
               <a href="https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf">data.table</a>
             </li>
             <li>
@@ -509,18 +515,22 @@ things in, and it finds it by setting a variable called ZSH_CACHE_DIR to
 the address in your environment. You can even see what is stored in it
 under your particular configuration:</p>
 <p><img src="images/module_zshcachevar.png" /></p>
-<p>Other times it might be useful for a command to link to a particular
-version of a program, for example, what if your default BLASTn is
-v2.9.0, but you want to replicate the exact result you got from an
-analysis you ran with BLASTn v1.2.3?</p>
+<p>One important shell variable that will normally need to be set
+correctly is the variable <code>$PATH</code>, which contains a list of
+all the places executable programs are stored. To run a program, its
+location must be in this list. You can have a look at your path list any
+time with <code>echo $PATH</code>, and even edit it manually! It might
+also be useful for a command to link to a particular <em>version</em> of
+a program, for example, what if your default <code>BLASTn</code> command
+invokes BLASTn v2.9.0, but you want to replicate the exact result you
+got from an analysis you ran with BLASTn v1.2.3?</p>
 <p>Environment Modules are a way of setting up your shell so it’s ready
-to run a program. They also do other useful things like reset the shell
-once you’re done, checking for conflicts between different the
-environment requirements of different programs, and so on. These
-conflicts can be a real problem when you consider that one thing
-programs often need in their environment is … other programs. So when
-you request a module loaded, it will likely result in a whole tree of
-dependent modules being loaded with it.</p>
+to run a program. They also do other useful things like checking for
+conflicts between different the environment requirements of different
+programs, and so on. These conflicts can be a real problem when you
+consider that one thing programs often need in their environment is …
+other programs. So when you request a module loaded, it will likely
+result in a whole tree of dependent modules being loaded with it.</p>
 <p>Now—what happens if one of these needs to use BLASTn v2.9.0, and
 another needs BLASTn v1.2.3? When one of these program calls BLASTn … it
 may get a version different to what it expected. Or one version of
@@ -533,11 +543,75 @@ wrong. This is a conflict.</p>
 module groups them together into common <em>toolchains</em>.
 Conventionally, admins try to set up toolchains such that every program
 in it will run with every other program without conflicts.</p>
-<p>An example might be more clear. The toolchain foss/2021b.lua (foss
-for “Free Open Source Software”) on Spartan can be loaded with
-<code>module load foss/2021b.lua</code>. Following this, we can see what
-modules it loads.</p>
 </div>
+<div id="module-files" class="section level3">
+<h3>Module files</h3>
+<p>Behind each module is just a file containing a set of instructions
+describing the module. and what to do when the module is loaded. To see
+one, use the command <code>module show &lt;module_name&gt;</code>. Here
+is the module file for bcftools.</p>
+<p><img src="images/moduleShow.png" /></p>
+<p>Browsing it, we see some descriptions, some links to more
+information, and—no surprises here—the loading of some other modules
+(<code>load(...)</code>), the setting of some environment variables
+(<code>setenv(...)</code>) including the path
+(<code>prepend_path(...)</code>), that allow the program bcftools to
+run.</p>
+</div>
+</div>
+<div id="using-modules" class="section level2">
+<h2>Using Modules</h2>
+<p>Let’s run a typical example of getting the modules loaded to run a
+program, bwa, an alignment program normally used to map short read
+sequence data.</p>
+<p>Here are the commands you need to know:</p>
+<ol style="list-style-type: decimal">
+<li><code>module keyword &lt;search&gt;</code> : Perform a search for
+modules whose names contain a match to <code>&lt;string&gt;</code></li>
+</ol>
+<p><img src="images/moduleKw.png" /></p>
+<p>We have found a module we want — it’s the first one. As you can see,
+module identifiers follow a [name]/[version] syntax.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><code>module spider &lt;module_name&gt;</code> : Get information
+about how to load a specific module, including what other keychains /
+modules will be needed.</li>
+</ol>
+<p><img src="images/moduleSpider.png" /></p>
+<p>As we can see, three other modules are required. Before bcftools will
+become available. In this case (for anyone who cares), they provide
+access to libraries of code associated with the foss (“Free and Open
+Source Software”) and gcc (GNU C compiler) toolchains.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><code>module load &lt;module_name_1&gt; &lt;module_name_2&gt;</code>
+: Load the modules.</li>
+</ol>
+<p><img src="images/moduleLoad.png" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li><code>module avail &lt;module_name&gt;</code> : List module versions
+available for loading. Only modules that have the required prerequisites
+will be listed. This is basically a check to make sure step 3)
+worked.</li>
+</ol>
+<p><img src="images/moduleAv.png" /> 5)
+<code>module load &lt;module_identifier&gt;</code> : Load the module you
+want.</p>
+<p><img src="images/moduleLoad2.png" /></p>
+<p>It works!</p>
+</div>
+<div id="tips" class="section level2">
+<h2>Tips</h2>
+<ol style="list-style-type: decimal">
+<li><p>You can load up all your prerequisite toolchains and the module
+in one command. Just write <code>module load</code>, followed by any
+prerequisites, followed by the modules you want.</p></li>
+<li><p>If you use the same modules a lot, put your module loading
+commands in a script. <strong>IMPORTANT:</strong> To use the script, you
+cannot just run it. Scripts by default start their own environments, but
+you probably want the modules loaded in your current, interactive
+environment. To execute a script in the current environment, use
+<code>source &lt;script_name&gt;</code>.</p></li>
+</ol>
 </div>
 
 

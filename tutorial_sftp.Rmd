@@ -41,6 +41,7 @@ This is where we use the program [SFTP Drive 2022](https://www.nsoftware.com/sft
 
 Then set up a connection to spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any name you want, and use your spartan username and password.
 
+![](images/drive2.png)
 Click Ok. The system may ask permission to access the registry -- click yes.
 
 Right click the drive and click enable if it is disabled. Then right click again and click connect.
