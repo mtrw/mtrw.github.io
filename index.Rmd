@@ -9,10 +9,11 @@ output:
 
 Here you will find resources to help you get started with bioinformatics at CCG, useful links, resources, and tutorials.
 
-------------------------------------------------------------------------
+---
 
 ![](images/barleyfield.jpg)
 
+---
+
 *This page is permanently under construction. For help, contact [Tim](mailto:%20tim.rabanuswallace@unimelb.edu.au)*
 
-------------------------------------------------------------------------
