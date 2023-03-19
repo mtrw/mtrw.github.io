@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>The glorious R::data.table</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CCG Bioinformatics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="./getting_started.html">Getting Started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    University Computing Resources
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://dashboard.hpc.unimelb.edu.au/started/">UoM Spartan Dashboard (Linux cluster for bioinformatics)</a>
+    </li>
+    <li>
+      <a href="https://dashboard.hpc.unimelb.edu.au/karaage/">UoM Karaage (cluster account management)</a>
+    </li>
+    <li>
+      <a href="https://spartan-ood.hpc.unimelb.edu.au/pun/sys/dashboard/batch_connect/sys/RStudio/session_contexts/new">UoM OnDemand Dashboard (R)</a>
+    </li>
+    <li>
+      <a href="https://rcp.research.unimelb.edu.au/home/">UoM Research Computing Portal Dashboard (VM)</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Software Downloads
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://www.putty.org/">PuTTy (SSH connection to Spartan)</a>
+    </li>
+    <li>
+      <a href="https://www.nsoftware.com/sftp/drive/download.aspx">SFTP Drive (Access project storage from your desktop or a VM (Windows))</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="./tutorials.html">Tutorials</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Useful Links
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Format Specifications</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://samtools.github.io/hts-specs/VCFv4.3.pdf">VCF/BCF</a>
+        </li>
+        <li>
+          <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a>
+        </li>
+        <li>
+          <a href="https://asia.ensembl.org/info/website/upload/gff3.html">GFF3</a>
+        </li>
+        <li>
+          <a href="https://asia.ensembl.org/info/website/upload/bed.html">BED</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cheatsheets</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://defkey.com/putty-shortcuts">PuTTy</a>
+        </li>
+        <li>
+          <a href="https://remram44.github.io/regex-cheatsheet/regex.html">REGEX</a>
+        </li>
+        <li>
+          <a href="https://www.metagenomics.wiki/tools/blast/blastn-output-format-6">BLASTn output formatting</a>
+        </li>
+        <li>
+          <a href="https://aperiodic.net/screen/quick_reference">GNU screen</a>
+        </li>
+        <li>
+          <a href="https://devhints.io/vim">Vim</a>
+        </li>
+        <li>
+          <a href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">Zsh</a>
+        </li>
+        <li>
+          <a href="https://www.samformat.info/sam-format-flag">SAM format flag widget</a>
+        </li>
+        <li>
+          <a href="https://ss64.com/bash/chmod.html">chmod flag widget</a>
+        </li>
+        <li>
+          <a href="https://devhints.io/makefile">make</a>
+        </li>
+        <li>
+          <a href="https://marklodato.github.io/visual-git-guide/index-en.html">git</a>
+        </li>
+        <li>
+          <a href="https://www.samformat.info/sam-format-flag">SAM format flag widget</a>
+        </li>
+        <li class="dropdown-submenu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">R</a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="https://github.com/mtrw/tim_r_functions">Tim's functions (github)</a>
+            </li>
+            <li>
+              <a href="https://raw.githubusercontent.com/mtrw/tim_r_functions/master/tim_functions.R">Tim's functions (raw code to `source()`)</a>
+            </li>
+            <li>
+              <a href="https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf">data.table</a>
+            </li>
+            <li>
+              <a href="https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf">ggplot2 (not cool)</a>
+            </li>
+            <li>
+              <a href="https://r-graph-gallery.com/134-general-plot-parameters-reminder">base::plot (cool) plot parameters</a>
+            </li>
+            <li>
+              <a href="https://r-graph-gallery.com/6-graph-parameters-reminder.html">base::plot (cool) point parameters</a>
+            </li>
+            <li>
+              <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">Rmarkdown</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manuals/Documentation</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="https://dashboard.hpc.unimelb.edu.au/started/">Spartan HPC Documentation</a>
+        </li>
+        <li>
+          <a href="https://slurm.schedmd.com/sbatch.html">Slurm Sbatch</a>
+        </li>
+        <li>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf">BLAST</a>
+        </li>
+        <li>
+          <a href="https://www.gnu.org/software/gawk/manual/gawk.html">AWK</a>
+        </li>
+        <li>
+          <a href="https://www.bx.psu.edu/~rsharris/lastz/">Lastz</a>
+        </li>
+        <li>
+          <a href="https://evolution.genetics.washington.edu/phylip/phylip.html">PHYLIP</a>
+        </li>
+        <li>
+          <a href="https://adv-r.hadley.nz/">Advanced R</a>
+        </li>
+        <li>
+          <a href="https://bedtools.readthedocs.io/en/latest/index.html">Bedtools</a>
+        </li>
+        <li>
+          <a href="https://zsh-manual.netlify.app/the-z-shell-manual">Zsh</a>
+        </li>
+        <li>
+          <a href="https://zsh.sourceforge.io/Intro/intro_1.html">Zsh -- introductory manual</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/mtrw">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">The glorious R::data.table</h1>
+
+</div>
+
+
+<hr />
+<div id="what-is-data.table" class="section level1">
+<h1>What is data.table?</h1>
+<p><code>data.table</code> is an R package designed to make working with data as easy and efficient as it can possibly be. At a first glance it appears to update the standard R object <code>data.frame</code>. In case you haven’t used them, you can still follow this tutorial. Basically <code>data.frame</code>s are R’s most flexible and broadly used way to store data with a ‘spreadsheet’ structure, i.e., rows and columns.</p>
+<p>But <code>data.table</code> adds a lot of functionality besides just making data handling infinitely better. And it takes (and perfects) ideas from all the best data handling tools:</p>
+<ul>
+<li>You can print tables on screen elegantly better than <code>tibble</code>.</li>
+<li>You can manipulate rows and columns and apply functions over them (grouping by factors etc.) better than <code>dplyr</code>.</li>
+<li>You can effectively run loops better than the various <code>*ply</code> functions.</li>
+<li>You can chain commands like <code>magrittr</code> (though … <code>magrittr</code> and <a href="https://ivelasq.rbind.io/blog/understanding-the-r-pipe/">native pipes</a> are still great and work excellently in tandem with <code>data.table</code>)</li>
+<li>You can query tables with all the power of <code>SQL</code>.</li>
+<li>You can merge and join tables with the best of them, including very useful features like <a href="https://www.r-bloggers.com/2016/06/understanding-data-table-rolling-joins/">rolling joins</a>.</li>
+<li>You can cast and melt tables better than <code>reshape2</code>.</li>
+<li>You can find “overlaps” between regions e.g. of genomic intervals, like with <code>GRanges</code> …</li>
+</ul>
+<p>And because it does all this so elegantly, it is <strong>super easy to learn</strong>. To learn the most important stuff, let’s run an analysis on some Formula 1 racing data, because, of course.</p>
+<p>Follow along in an <a href="./tutorial_Rstart.Rmd">Rstudio session</a>.</p>
+<figure>
+<img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning data.table is a flawless race strategy for life." style="width:60%">
+<figcaption>
+By the time you’ve finished this tutorial you will be wrangling data faster than Charles Leclerc can drive this Ferrari.
+</figcaption>
+</figure>
+<hr />
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;data.table&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(data.table)</span></code></pre></div>
+<hr />
+</div>
+<div id="reading-and-writing-data" class="section level1">
+<h1>Reading and writing data</h1>
+<p>The data we’ll work with are from <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020">here</a>. You can also it on the Spartan storage server at /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.</p>
+<div id="text-based-table-formats" class="section level2">
+<h2>Text-based table formats</h2>
+<p>Most text-based ways of storing data consist of lines of text (one per row), and a separation character delimiting the column entries of each row. For example, in the <strong>csv</strong> ([c]omma-[s]eparated [v]alue) format, <code>"a","row","with",7,"columns","would","look","like","this"</code>. Note that in X-separated formats, quote marks are often used to indicate when a column contains text (c.f., say, numbers) because, to a computer, numbers and the strings of text characters that represent them are very different things.</p>
+<p>The alternative to text-based data storage is binary files, which is a topic for another day.</p>
+</div>
+<div id="fread" class="section level2">
+<h2>fread()</h2>
+<p><code>data.table</code> has its own table parsing function, <code>fread()</code> ([f]ast [read]). It assumes you are giving it some X-separated table and investigates the top of a the file (10,000 lines by default) and tries to work out what the separator is and what the kind of data in each column is, then reads it. Use it to read in the data about drivers and lap times, something like the following:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dr <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/drivers.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/lapTimes.csv&quot;</span>)</span></code></pre></div>
+<p>The variables <code>dr</code> and <code>lt</code> now contain <code>data.table</code> objects. Since these are enhanced <code>data.frame</code>s, we can do data.frame type things with them, such as printing the contents by running the variable name alone:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lt</span></code></pre></div>
+<pre><code>##         raceId driverId lap position     time milliseconds
+##      1:    841       20   1        1 1:38.109        98109
+##      2:    841       20   2        1 1:33.006        93006
+##      3:    841       20   3        1 1:32.713        92713
+##      4:    841       20   4        1 1:32.803        92803
+##      5:    841       20   5        1 1:32.342        92342
+##     ---                                                   
+## 426629:    988      825  50       13 1:43.928       103928
+## 426630:    988      825  51       13 1:44.138       104138
+## 426631:    988      825  52       13 1:43.934       103934
+## 426632:    988      825  53       13 1:44.164       104164
+## 426633:    988      825  54       13 1:44.285       104285</code></pre>
+<p>Notice it prints in a useful format showing the top and bottom five rows.</p>
+<p>There are some useful arguments you can give to <code>fread()</code> as necessary:</p>
+<ul>
+<li><code>fread(header=F)</code>
+<ul>
+<li>Often your tables won’t have a top row containing names. In this case, tell <code>fread()</code> not to assume the top row is column labels. It will call the columns <em>“V1”</em>, <em>“V2”</em>, … <em>“Vn”</em> by default, unless …</li>
+</ul></li>
+<li><code>fread(col.names=c("names","for","columns","go","in","this","vector"))</code>
+<ul>
+<li>Obviously, for this to work the vector of column names must equal the number of columns.</li>
+</ul></li>
+<li><code>fread(select=1:3)</code>
+<ul>
+<li>This would read only the first three columns. With <code>select=c(6,3,5)</code> we would get those columns in that order.</li>
+</ul></li>
+</ul>
+</div>
+<div id="writing-data" class="section level2">
+<h2>Writing data</h2>
+<p>Is done with the normal R functions like <code>write.csv</code> and <code>saveRDS</code>.</p>
+<hr />
+</div>
+</div>
+<div id="accessing-and-setting-input" class="section level1">
+<h1>Accessing and setting input</h1>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

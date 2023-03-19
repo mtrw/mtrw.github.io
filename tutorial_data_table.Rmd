@@ -1,0 +1,95 @@
+---
+title: "The glorious R::data.table"
+output:
+  html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r,label=setup,include=F}
+require(data.table)
+```
+---
+
+# What is data.table?
+
+`data.table` is an R package designed to make working with data as easy and efficient as it can possibly be. At a first glance it appears to update the standard R object `data.frame`. In case you haven't used them, you can still follow this tutorial. Basically `data.frame`s are R's most flexible and broadly used way to store data with a 'spreadsheet' structure, i.e., rows and columns.
+
+But `data.table` adds a lot of functionality besides just making data handling infinitely better. And it takes (and perfects) ideas from all the best data handling tools:
+
+- You can print tables on screen elegantly better than `tibble`.
+- You can manipulate rows and columns and apply functions over them (grouping by factors etc.) better than `dplyr`.
+- You can effectively run loops better than the various `*ply` functions.
+- You can chain commands like `magrittr` (though ... `magrittr` and [native pipes](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/) are still great and work excellently in tandem with `data.table`)
+- You can query tables with all the power of `SQL`.
+- You can merge and join tables with the best of them, including very useful features like [rolling joins](https://www.r-bloggers.com/2016/06/understanding-data-table-rolling-joins/).
+- You can cast and melt tables better than `reshape2`.
+- You can find "overlaps" between regions e.g. of genomic intervals, like with `GRanges` ...
+
+And because it does all this so elegantly, it is **super easy to learn**. To learn the most important stuff, let's run an analysis on some Formula 1 racing data, because, of course.
+
+Follow along in an [Rstudio session](./tutorial_Rstart.Rmd).
+
+<figure>
+  <img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning data.table is a flawless race strategy for life." style="width:60%">
+  <figcaption>By the time you've finished this tutorial you will be wrangling data faster than Charles Leclerc can drive this Ferrari.</figcaption>
+</figure>
+
+---
+
+# Installation
+
+```{r,eval=F}
+install.packages("data.table")
+require(data.table)
+```
+
+---
+
+# Reading and writing data
+
+The data we'll work with are from [here](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020). You can also it on the Spartan storage server at /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.
+
+## Text-based table formats
+
+Most text-based ways of storing data consist of lines of text (one per row), and a separation character delimiting the column entries of each row. For example, in the **csv** ([c]omma-[s]eparated [v]alue) format, `"a","row","with",7,"columns","would","look","like","this"`. Note that in X-separated formats, quote marks are often used to indicate when a column contains text (c.f., say, numbers) because, to a computer, numbers and the strings of text characters that represent them are very different things.
+
+The alternative to text-based data storage is binary files, which is a topic for another day.
+
+## fread()
+
+`data.table` has its own table parsing function, `fread()` ([f]ast [read]). It assumes you are giving it some X-separated table and investigates the top of a the file (10,000 lines by default) and tries to work out what the separator is and what the kind of data in each column is, then reads it. Use it to read in the data about drivers and lap times, something like the following:
+
+```{r}
+dr <- fread("data/drivers.csv")
+lt <- fread("data/lapTimes.csv")
+```
+
+The variables `dr` and `lt` now contain `data.table` objects. Since these are enhanced `data.frame`s, we can do data.frame type things with them, such as printing the contents by running the variable name alone:
+
+```{r}
+lt
+```
+
+Notice it prints in a useful format showing the top and bottom five rows.
+
+There are some useful arguments you can give to `fread()` as necessary:
+
+- `fread(header=F)`
+  - Often your tables won't have a top row containing names. In this case, tell `fread()` not to assume the top row is column labels. It will call the columns *"V1"*, *"V2"*, ... *"Vn"* by default, unless ...
+- `fread(col.names=c("names","for","columns","go","in","this","vector"))`
+  - Obviously, for this to work the vector of column names must equal the number of columns.
+- `fread(select=1:3)`
+  - This would read only the first three columns. With `select=c(6,3,5)` we would get those columns in that order.
+
+## Writing data
+
+Is done with the normal R functions like `write.csv` and `saveRDS`.
+
+---
+
+# Accessing and setting input
+
+
+
+

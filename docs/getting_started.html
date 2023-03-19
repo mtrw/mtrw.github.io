@@ -13,7 +13,7 @@
 
 <title>Getting set up to use the High Performance Computing resources</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -134,11 +134,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -167,8 +171,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -176,16 +180,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -495,8 +492,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Getting set up to use the High Performance
-Computing resources</h1>
+<h1 class="title toc-ignore">Getting set up to use the High Performance Computing resources</h1>
 
 </div>
 
@@ -509,42 +505,22 @@ Computing resources</h1>
 <hr />
 <div id="hpc" class="section level4">
 <h4>HPC</h4>
-<p><em>Spartan</em> is the UoM’s high-performance computing (HPC)
-cluster, and the main place to do primary data processing for
-bioinformatic tasks. Things like read mapping, homology searches (say,
-BLAST), phylogenetic inference, genome assembly etc. all need a lot of
-processors, memory (RAM), and storage (space for saving files). The
-Spartan HPC cluster provides hundreds of processors, gigabytes of RAM,
-and Terrabytes of storage.</p>
+<p><em>Spartan</em> is the UoM’s high-performance computing (HPC) cluster, and the main place to do primary data processing for bioinformatic tasks. Things like read mapping, homology searches (say, BLAST), phylogenetic inference, genome assembly etc. all need a lot of processors, memory (RAM), and storage (space for saving files). The Spartan HPC cluster provides hundreds of processors, gigabytes of RAM, and Terrabytes of storage.</p>
 </div>
 <div id="operating-systems-and-shells" class="section level4">
 <h4>Operating systems and shells</h4>
-<p>The server runs an <strong>operating system</strong> called
-<em>Linux</em>. An operating system does a lot of stuff. It needs to
-manage ways to create and access files and directories, run programs,
-keep track of users, interface with hard disks, communicate with other
-computers … etc. It also has to provide you with a way to communicate
-with it, for example by using text on a screen. The text input and
-output functionality of the operating system is called a
-<strong>shell</strong>, because it the “outside” part that the user
-sees.</p>
-<p>You don’t need to know how to use Linux yet. During setup, just
-copy-and-paste the commands given.</p>
-<p>The default Linux shell is not very easy to use, so many people have
-come up with alternative shells to make life easier and generally more
-fun and colourful. You will use the Z-shell, or <em>Zsh</em>, pronounced
-“Zeesh”! Zsh is great.</p>
+<p>The server runs an <strong>operating system</strong> called <em>Linux</em>. An operating system does a lot of stuff. It needs to manage ways to create and access files and directories, run programs, keep track of users, interface with hard disks, communicate with other computers … etc. It also has to provide you with a way to communicate with it, for example by using text on a screen. The text input and output functionality of the operating system is called a <strong>shell</strong>, because it the “outside” part that the user sees.</p>
+<p>You don’t need to know how to use Linux yet. During setup, just copy-and-paste the commands given.</p>
+<p>The default Linux shell is not very easy to use, so many people have come up with alternative shells to make life easier and generally more fun and colourful. You will use the Z-shell, or <em>Zsh</em>, pronounced “Zeesh”! Zsh is great.</p>
 </div>
 <div id="tty" class="section level4">
 <h4>TTY</h4>
-<p>A <strong>teletypewriter</strong> (or TTY) interface is a device that
-provides a screen and a keyboard so you can use this text interface.</p>
+<p>A <strong>teletypewriter</strong> (or TTY) interface is a device that provides a screen and a keyboard so you can use this text interface.</p>
 <div class="figure">
 <img src="images/TTY.jpg" alt="" />
 <p class="caption">Once upon a time they looked like this …</p>
 </div>
-<p>… but nowadays, a TTY is just a program. You will use a TTY program
-called <em>PuTTy</em>.</p>
+<p>… but nowadays, a TTY is just a program. You will use a TTY program called <em>PuTTy</em>.</p>
 <p>So far, we have this:</p>
 <blockquote>
 <p>Linux kernel –&gt; Linux shell –&gt; TTY –&gt; User</p>
@@ -552,28 +528,11 @@ called <em>PuTTy</em>.</p>
 </div>
 <div id="servers-and-protocols" class="section level4">
 <h4>Servers and protocols</h4>
-<p>Spartan is a kind of virtual computer, made by networking a cluster
-of different computers together. These are not all in the same place.
-But the Spartan system links them all together so that when we use them,
-it works just like it really is one really-really-really-powerful
-computer. That is the service it offers. And a computer that provides a
-service, whether it be to run a cluster, to provide storage, or to run a
-printer, is called a <strong>server</strong>.</p>
-<p>Your computer will communicate with the HPC server using a
-<strong>protocol</strong> (a kind of shared set of rules and
-conventions, like a common language) called <strong>Secure
-SHell</strong>, or SSH.</p>
+<p>Spartan is a kind of virtual computer, made by networking a cluster of different computers together. These are not all in the same place. But the Spartan system links them all together so that when we use them, it works just like it really is one really-really-really-powerful computer. That is the service it offers. And a computer that provides a service, whether it be to run a cluster, to provide storage, or to run a printer, is called a <strong>server</strong>.</p>
+<p>Your computer will communicate with the HPC server using a <strong>protocol</strong> (a kind of shared set of rules and conventions, like a common language) called <strong>Secure SHell</strong>, or SSH.</p>
 <p>So, to tie it all together so far:</p>
-<p><em>PuTTy</em> uses the <em>SSH</em> <em>protocol</em> to connect to
-a server and provide a <em>TTY</em> interface to a <em>shell</em> around
-the server’s <em>operating system</em>, which is <em>Linux</em>.</p>
-<p>Other protocols you may have heard of are SCP (ways of transferring
-files), HTTP (how browsers talk to servers) and TCP/IP (how information
-is transferred over networks). We will need to use a protocol called
-<strong>Secure File Transfer Protocol</strong> (or SFTP) to work with
-your files on the HPC cluster from your regular desktop environment (and
-to transfer files between them). The protocol is provided in the program
-<em>STFP Drive</em>.</p>
+<p><em>PuTTy</em> uses the <em>SSH</em> <em>protocol</em> to connect to a server and provide a <em>TTY</em> interface to a <em>shell</em> around the server’s <em>operating system</em>, which is <em>Linux</em>.</p>
+<p>Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). We will need to use a protocol called <strong>Secure File Transfer Protocol</strong> (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program <em>STFP Drive</em>.</p>
 <hr />
 </div>
 </div>
@@ -583,68 +542,45 @@ to transfer files between them). The protocol is provided in the program
 <div id="download-the-software" class="section level3">
 <h3>Download the software</h3>
 <ol style="list-style-type: decimal">
-<li><p>Get PuTTy from <a href="https://www.putty.org/">here</a> and
-install it.</p></li>
-<li><p>Get SFTP Drive from <a
-href="https://www.nsoftware.com/sftp/drive/download.aspx">here</a> and
-install it.</p></li>
+<li><p>Get PuTTy from <a href="https://www.putty.org/">here</a> and install it.</p></li>
+<li><p>Get SFTP Drive from <a href="https://www.nsoftware.com/sftp/drive/download.aspx">here</a> and install it.</p></li>
 </ol>
 </div>
-<div id="joining-the-ccg-hpc-project-and-getting-a-username"
-class="section level3">
+<div id="joining-the-ccg-hpc-project-and-getting-a-username" class="section level3">
 <h3>Joining the CCG HPC project and getting a username</h3>
-<p>To get access to the Spartan server, you need to join the CCG’s
-<em>project</em>. Ask Tim to send you a request, and you’ll get an email
-at your unimelb address. Another email will arrive to confirm you are a
-member, and give you a username similar to your UoM login. The CCG
-project is called “punim1869”.</p>
+<p>To get access to the Spartan server, you need to join the CCG’s <em>project</em>. Ask Tim to send you a request, and you’ll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CCG project is called “punim1869”.</p>
 </div>
-<div id="setting-your-default-login-shell-to-zsh"
-class="section level3">
+<div id="setting-your-default-login-shell-to-zsh" class="section level3">
 <h3>Setting your default login shell to zsh</h3>
-<p>Head over to <a
-href="https://dashboard.hpc.unimelb.edu.au/karaage/">Karaage</a>, where
-you can view and manage your accounts on the university’s HPC cluster.
-Log in with your cluster account password, selecting
-<strong>unimelb</strong> as your institution.</p>
-<p>Click <strong>Accounts</strong> an then your
-<strong>username</strong>, and on the next screen, <strong>Edit
-Account</strong>:</p>
+<p>Head over to <a href="https://dashboard.hpc.unimelb.edu.au/karaage/">Karaage</a>, where you can view and manage your accounts on the university’s HPC cluster. Log in with your cluster account password, selecting <strong>unimelb</strong> as your institution.</p>
+<p>Click <strong>Accounts</strong> an then your <strong>username</strong>, and on the next screen, <strong>Edit Account</strong>:</p>
 <p><img src="images/karaage_acct.png" /></p>
 <p><img src="images/karaage_edit.png" /></p>
-<p>… then select zsh from the dropdown menu and click
-<strong>save</strong>:</p>
+<p>… then select zsh from the dropdown menu and click <strong>save</strong>:</p>
 <p><img src="images/karaage_zsh.png" /></p>
 </div>
 <div id="connecting-with-putty" class="section level3">
 <h3>Connecting with PuTTy</h3>
 <ol style="list-style-type: decimal">
 <li><p>Open PuTTy</p></li>
-<li><p>In the Host Name box, type
-<YOUR_USERNAME>@spartan.hpc.unimelb.edu.au</p></li>
+<li><p>In the Host Name box, type <YOUR_USERNAME>@spartan.hpc.unimelb.edu.au</p></li>
 </ol>
 <p><img src="images/putty_login.png" /></p>
 <ol start="3" style="list-style-type: decimal">
-<li>[Optionally] Set the font you want to use in the
-<code>Appearance</code> menu.</li>
+<li>[Optionally] Set the font you want to use in the <code>Appearance</code> menu.</li>
 </ol>
 <p><img src="images/putty_font.png" /></p>
 <ol start="4" style="list-style-type: decimal">
-<li>[Optionally] Set the background and foreground colours you want to
-use in the <code>Colours</code> menu.</li>
+<li>[Optionally] Set the background and foreground colours you want to use in the <code>Colours</code> menu.</li>
 </ol>
 <p><img src="images/putty_cols.png" /></p>
 <ol start="5" style="list-style-type: decimal">
-<li>Back in the <code>Session</code> menu, type a nickname for the
-server into the Saved Sessions box, and click Save. In future, you can
-connect by double clicking the saved session from the list …</li>
+<li>Back in the <code>Session</code> menu, type a nickname for the server into the Saved Sessions box, and click Save. In future, you can connect by double clicking the saved session from the list …</li>
 </ol>
 <p><img src="images/putty_save.png" /></p>
 <ol start="6" style="list-style-type: decimal">
-<li><p>Click Open. You may get a prompt asking about a new connection or
-a network key. Click yes/ok to either.</p></li>
-<li><p>You have a terminal! It should look a bit like this (but with
-your choice of colours/fonts) …</p></li>
+<li><p>Click Open. You may get a prompt asking about a new connection or a network key. Click yes/ok to either.</p></li>
+<li><p>You have a terminal! It should look a bit like this (but with your choice of colours/fonts) …</p></li>
 </ol>
 <p><img src="images/shell_firstlogin.png" /></p>
 <ol start="8" style="list-style-type: decimal">
@@ -652,19 +588,11 @@ your choice of colours/fonts) …</p></li>
 <pre><code> cd /home/$USER
  sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code></pre>
 <ul>
-<li>HINT: In PuTTy, you copy text just by highlighting it, and paste it
-with a right-click.</li>
-<li>You may get prompts asking you if you want to adopt the default
-options (YES) and/or change your shell (also YES)</li>
-<li>Zsh offers a LOT of great features that make your command line
-experience easier, some of which feature in the Linux <a
-href="./tutorials.html">tutorial</a>. But you can browse the <a
-href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">cheatsheet</a>
-for some quick inspiration.</li>
+<li>HINT: In PuTTy, you copy text just by highlighting it, and paste it with a right-click.</li>
+<li>You may get prompts asking you if you want to adopt the default options (YES) and/or change your shell (also YES)</li>
+<li>Zsh offers a LOT of great features that make your command line experience easier, some of which feature in the Linux <a href="./tutorials.html">tutorial</a>. But you can browse the <a href="https://www.bash2zsh.com/zsh_refcard/refcard.pdf">cheatsheet</a> for some quick inspiration.</li>
 </ul></li>
-<li><p>Import some customised profile files for Zsh and screen by
-running these commands (<strong>including</strong> the dot
-<code>.</code> at the end of some commands)</p>
+<li><p>Import some customised profile files for Zsh and screen by running these commands (<strong>including</strong> the dot <code>.</code> at the end of some commands)</p>
 <pre><code> cd /home/$USER
  [[ -e .bash_profile ]] &amp;&amp; mv .bash_profile .bash_profile_old
  cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
@@ -677,18 +605,11 @@ running these commands (<strong>including</strong> the dot
  source /home/$USER/.zshrc</code></pre>
 <ul>
 <li>Screen is a Linux program you will use later</li>
-<li>Profile files contain settings for programs in order to customise
-them. For example, the .zshrc file will change your command prompt to a
-custom one I designed, and add a few helpful shortcut commands to (e.g.)
-take you straight to your storage directory.</li>
+<li>Profile files contain settings for programs in order to customise them. For example, the .zshrc file will change your command prompt to a custom one I designed, and add a few helpful shortcut commands to (e.g.) take you straight to your storage directory.</li>
 </ul></li>
 </ol>
 <blockquote>
-<p>You are encouraged to explore and customise your profile files, for
-Zsh, screen, vim, or any program that uses them. Just as you set up your
-Windows machine’s Desktop background and screensaver and things to make
-it your own, profiles are how you make your Linux environment into your
-digital home!</p>
+<p>You are encouraged to explore and customise your profile files, for Zsh, screen, vim, or any program that uses them. Just as you set up your Windows machine’s Desktop background and screensaver and things to make it your own, profiles are how you make your Linux environment into your digital home!</p>
 </blockquote>
 <ol start="10" style="list-style-type: decimal">
 <li><p>Set up some common directories</p>
@@ -696,71 +617,42 @@ digital home!</p>
 mkdir -p /data/gpfs/projects/punim1869/users/$USER/.R_PACKAGES</code></pre>
 <ul>
 <li>A workspace is a good place to put projects in</li>
-<li>If you use R, it’s good to have somewhere to store all your
-packages. Note the dot at the beginning – this makes the directory
-hidden.</li>
+<li>If you use R, it’s good to have somewhere to store all your packages. Note the dot at the beginning – this makes the directory hidden.</li>
 </ul></li>
 </ol>
 </div>
-<div id="getting-familiar-with-your-new-environment"
-class="section level3">
+<div id="getting-familiar-with-your-new-environment" class="section level3">
 <h3>Getting familiar with your new environment</h3>
 <ol style="list-style-type: decimal">
 <li>To look inside the .zsh profile
 <ul>
-<li>Type <code>less ~/.zshrc</code> to read the .zsh profile file.
-Scroll down with the arrows until you find some lines that begin with
-<code>alias</code>. Have a look and then press <code>q</code> to leave
-the reader.</li>
-<li>These lines create shortcut commands. For example, the command
-<code>samtools view</code> is what you would use to look at the mapped
-reads in a .bam file. But it’s a lot to type. The line
-<code>alias sv='samtools view'</code> means we can now just type
-<code>sv</code> instead. Here are some others now available:
+<li>Type <code>less ~/.zshrc</code> to read the .zsh profile file. Scroll down with the arrows until you find some lines that begin with <code>alias</code>. Have a look and then press <code>q</code> to leave the reader.</li>
+<li>These lines create shortcut commands. For example, the command <code>samtools view</code> is what you would use to look at the mapped reads in a .bam file. But it’s a lot to type. The line <code>alias sv='samtools view'</code> means we can now just type <code>sv</code> instead. Here are some others now available:
 <ul>
-<li><code>lincmd</code> — Print a list of common Linux commands and
-command line editing shortcuts</li>
+<li><code>lincmd</code> — Print a list of common Linux commands and command line editing shortcuts</li>
 <li><code>ll</code> — List all files with extra data</li>
 <li><code>lll</code> — As above, including hidden files</li>
-<li><code>hme</code> — Display tasks you are running and the resources
-they are using (with htop)</li>
+<li><code>hme</code> — Display tasks you are running and the resources they are using (with htop)</li>
 <li>… and more, that will come up in other tutorials.</li>
 </ul></li>
 </ul></li>
 <li>Storage and your workspace
 <ul>
-<li>The directory you land in is called your <em>home directory</em>. It
-is basically meant for things like profile files. It does not have much
-disk space. You should do your work somewhere with more storage space.
-We have a lot of allocated storage space, and you even have a working
-directory within it. It is located at
-<code>/data/gpfs/projects/punim1869/</code>.
+<li>The directory you land in is called your <em>home directory</em>. It is basically meant for things like profile files. It does not have much disk space. You should do your work somewhere with more storage space. We have a lot of allocated storage space, and you even have a working directory within it. It is located at <code>/data/gpfs/projects/punim1869/</code>.
 <ul>
-<li>You can get there using the command
-<code>cd /data/gpfs/projects/punim1869/</code>, and list the contents
-using <code>tree -L 4</code></li>
-<li>Alternatively, there is an alias set up, <code>gs</code> (“[g]o to
-[s]torage”) will take you there.</li>
-<li><em>Alternatively</em> alternatively, there is a variable set up
-containing the address, so you can also use
-(e.g. <code>cd $STO</code>).</li>
+<li>You can get there using the command <code>cd /data/gpfs/projects/punim1869/</code>, and list the contents using <code>tree -L 4</code></li>
+<li>Alternatively, there is an alias set up, <code>gs</code> (“[g]o to [s]torage”) will take you there.</li>
+<li><em>Alternatively</em> alternatively, there is a variable set up containing the address, so you can also use (e.g. <code>cd $STO</code>).</li>
 </ul></li>
-<li>A workspace has been set up for you here. It is in
-<code>users/YOUR_USERNAME</code>. By default, no one else can access it.
-Use it for … everything.
+<li>A workspace has been set up for you here. It is in <code>users/YOUR_USERNAME</code>. By default, no one else can access it. Use it for … everything.
 <ul>
-<li>You can get there with the alias <code>gw</code> (“[g]o to
-[w]orkplace”).</li>
+<li>You can get there with the alias <code>gw</code> (“[g]o to [w]orkplace”).</li>
 <li>The address is also automatically stored in the variable $WS.</li>
 </ul></li>
 </ul></li>
 <li>Shared resources
 <ul>
-<li>Things like reference genomes, that take up a lot of space and which
-everyone uses, are kept in a shared storage area, located at [project
-storage dir]/shared_storage. If you need a large file like that, talk to
-<a href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to get it
-added to the shared storage.</li>
+<li>Things like reference genomes, that take up a lot of space and which everyone uses, are kept in a shared storage area, located at [project storage dir]/shared_storage. If you need a large file like that, talk to <a href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to get it added to the shared storage.</li>
 </ul></li>
 </ol>
 <div class="figure">
@@ -773,16 +665,11 @@ added to the shared storage.</li>
 <ul>
 <li>If you haven’t already, it’s time to learn some Linux!
 <ul>
-<li><a
-href="https://www.youtube.com/watch?v=oxuRxtrO2Ag">Basics</a></li>
-<li><a href="https://www.youtube.com/watch?v=emhouufDnB4">More advanced
-features and shell scripting</a>, or (a bit more gently) <a
-href="https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w">here</a></li>
+<li><a href="https://www.youtube.com/watch?v=oxuRxtrO2Ag">Basics</a></li>
+<li><a href="https://www.youtube.com/watch?v=emhouufDnB4">More advanced features and shell scripting</a>, or (a bit more gently) <a href="https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w">here</a></li>
 <li><a href="https://zsh.sourceforge.io/Intro/intro_1.html">Zsh</a></li>
 </ul></li>
-<li>Once you’re comfortable with that, either learn to <a
-href="./tutorial_slurm_shellscripts.html">run jobs on the Spartan</a>,
-or read on to get set up with R.</li>
+<li>Once you’re comfortable with that, either learn to <a href="./tutorial_slurm_shellscripts.html">run jobs on the Spartan</a>, or read on to get set up with R.</li>
 </ul></li>
 </ol>
 </div>

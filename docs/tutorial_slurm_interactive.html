@@ -13,7 +13,7 @@
 
 <title>Interactive sessions with slurm</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -134,11 +134,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -167,8 +171,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -176,16 +180,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -508,25 +505,13 @@ div.tocify {
 
 <div id="background" class="section level2">
 <h2>Background</h2>
-<p>If you aren’t yet familiar with the resource manager Slurm and how to
-submit jobs to it, then check out <a
-href="tutorial_slurm_shellscripts.html">that tutorial</a> first.</p>
-<p>The login node of Slurm (i.e., the interactive environment you land
-in when you first log in) is designed for requesting jobs only, and you
-will shortly run out of resources or get a nasty email from admin if you
-run significant tasks there. But when you’re developing pipelines using
-the standard run-edit-run-edit-run procedure, you don’t want to write,
-submit, and wait for the output of a job request every time you run.</p>
-<p>You can solve this by requesting an <em>interactive</em> environment
-to work in. It will give you some resources to use for a limited amount
-of time.</p>
+<p>If you aren’t yet familiar with the resource manager Slurm and how to submit jobs to it, then check out <a href="tutorial_slurm_shellscripts.html">that tutorial</a> first.</p>
+<p>The login node of Slurm (i.e., the interactive environment you land in when you first log in) is designed for requesting jobs only, and you will shortly run out of resources or get a nasty email from admin if you run significant tasks there. But when you’re developing pipelines using the standard run-edit-run-edit-run procedure, you don’t want to write, submit, and wait for the output of a job request every time you run.</p>
+<p>You can solve this by requesting an <em>interactive</em> environment to work in. It will give you some resources to use for a limited amount of time.</p>
 </div>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
-<p>Make sure you have the most recent version of the .zsh profile file.
-Note: <strong>This will overwrite your existing zsh profile
-file</strong>, so if you’ve made changes, be sure to save and integrate
-them properly.</p>
+<p>Make sure you have the most recent version of the .zsh profile file. Note: <strong>This will overwrite your existing zsh profile file</strong>, so if you’ve made changes, be sure to save and integrate them properly.</p>
 <pre><code>    cd /home/$USER
     [[ -e .zshrc ]] &amp;&amp; mv .zshrc .zshrc_old
     cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
@@ -534,42 +519,25 @@ them properly.</p>
 </div>
 <div id="requesting-an-interactive-session" class="section level2">
 <h2>Requesting an interactive session</h2>
-<p>I’ve built a shortcut <code>si</code> ([s]tart [i]nteractive) to make
-these requests, the syntax is:</p>
+<p>I’ve built a shortcut <code>si</code> ([s]tart [i]nteractive) to make these requests, the syntax is:</p>
 <pre><code>    si &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt;
             </code></pre>
-<p>Two common time formats are <code>&lt;days&gt;-&lt;hours&gt;</code>
-and <code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>.</p>
-<p>An example, to request 10 CPU cores and 50 Gb RAM for two days might
-be:</p>
+<p>Two common time formats are <code>&lt;days&gt;-&lt;hours&gt;</code> and <code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>.</p>
+<p>An example, to request 10 CPU cores and 50 Gb RAM for two days might be:</p>
 <pre><code>    si 10 50 48:00:00</code></pre>
-<p>For convenience if you just enter <code>si</code> by itself, it will
-automatically make a request for 4 cores and 16 Gb RAM for one day.</p>
+<p>For convenience if you just enter <code>si</code> by itself, it will automatically make a request for 4 cores and 16 Gb RAM for one day.</p>
 </div>
 <div id="am-i-in-an-interactive-session" class="section level2">
 <h2>Am I in an interactive session?</h2>
-<p>A shortcut function <code>csi</code> ([c]heck [s]lurm [i]nteractives)
-will show you the details of the interactive you are currently running
-in, including the time allocated and the time elapsed. If the list is
-empty, you are not in an interactive session.</p>
+<p>A shortcut function <code>csi</code> ([c]heck [s]lurm [i]nteractives) will show you the details of the interactive you are currently running in, including the time allocated and the time elapsed. If the list is empty, you are not in an interactive session.</p>
 </div>
-<div id="are-interactive-sessions-all-i-need-to-get-jobs-done"
-class="section level2">
+<div id="are-interactive-sessions-all-i-need-to-get-jobs-done" class="section level2">
 <h2>Are interactive sessions all I need to get jobs done?</h2>
 <p>NO!</p>
-<p>They are still resource-limited and jobs in then will occasionally be
-killed when resources are scarce—and you will still need to run some
-jobs that go for a longer time than you want to risk keeping an
-interactive session connected for. Run any significant tasks using slurm
-batch files. Tutorial <a
-href="tutorial_slurm_shellscripts.html">here</a>.</p>
+<p>They are still resource-limited and jobs in then will occasionally be killed when resources are scarce—and you will still need to run some jobs that go for a longer time than you want to risk keeping an interactive session connected for. Run any significant tasks using slurm batch files. Tutorial <a href="tutorial_slurm_shellscripts.html">here</a>.</p>
 <div class="figure">
 <img src="images/csi.png" alt="" />
-<p class="caption">A little demo. <code>csi</code> reveals I am not in
-an interactive session. I request 1 core and 1Gb RAM for 15 minutes.
-Once granted, a new shell opens (revealing the message of the day).
-<code>csi</code> now shows I am in an interactive session, in which 9
-seconds of 15 minutes has elapsed.</p>
+<p class="caption">A little demo. <code>csi</code> reveals I am not in an interactive session. I request 1 core and 1Gb RAM for 15 minutes. Once granted, a new shell opens (revealing the message of the day). <code>csi</code> now shows I am in an interactive session, in which 9 seconds of 15 minutes has elapsed.</p>
 </div>
 </div>
 
