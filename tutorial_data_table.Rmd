@@ -9,9 +9,10 @@ editor_options:
 ```{r,label=setup,include=F}
 require(data.table)
 ```
+
 ---
 
-# What is data.table?
+# What is `data.table`?
 
 `data.table` is an R package designed to make working with data as easy and efficient as it can possibly be. At a first glance it appears to update the standard R object `data.frame`. In case you haven't used them, you can still follow this tutorial. Basically `data.frame`s are R's most flexible and broadly used way to store data with a 'spreadsheet' structure, i.e., rows and columns.
 
@@ -28,10 +29,10 @@ But `data.table` adds a lot of functionality besides just making data handling i
 
 And because it does all this so elegantly, it is **super easy to learn**. To learn the most important stuff, let's run an analysis on some Formula 1 racing data, because, of course.
 
-Follow along in an [Rstudio session](./tutorial_Rstart.Rmd).
+Follow along in an [Rstudio session](./tutorial_Rstart.Rmd). Make sure you run the commands, and most importantly, *experiment with them*.
 
 <figure>
-  <img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning data.table is a flawless race strategy for life." style="width:60%">
+  <img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning `data.table` is a flawless race strategy for life." style="width:60%">
   <figcaption>By the time you've finished this tutorial you will be wrangling data faster than Charles Leclerc can drive this Ferrari.</figcaption>
 </figure>
 
@@ -58,11 +59,12 @@ The alternative to text-based data storage is binary files, which is a topic for
 
 ## fread()
 
-`data.table` has its own table parsing function, `fread()` ([f]ast [read]). It assumes you are giving it some X-separated table and investigates the top of a the file (10,000 lines by default) and tries to work out what the separator is and what the kind of data in each column is, then reads it. Use it to read in the data about drivers and lap times, something like the following:
+`data.table` has its own table parsing function, `fread()` ([f]ast [read]). It assumes you are giving it some X-separated table and investigates the top of a the file (10,000 lines by default) and tries to work out what the separator is and what the kind of data in each column is, then reads it. Use it to read in the data about lap times, drivers, and races---something like the following:
 
 ```{r}
-dr <- fread("data/drivers.csv")
 lt <- fread("data/lapTimes.csv")
+dr <- fread("data/drivers.csv")
+ra <- fread("data/races.csv")
 ```
 
 The variables `dr` and `lt` now contain `data.table` objects. Since these are enhanced `data.frame`s, we can do data.frame type things with them, such as printing the contents by running the variable name alone:
@@ -86,10 +88,332 @@ There are some useful arguments you can give to `fread()` as necessary:
 
 Is done with the normal R functions like `write.csv` and `saveRDS`.
 
----
+# The central concept: Three indexing fields
 
-# Accessing and setting input
+A `data.table` is primarily manipulated using a square-bracket syntax similar to `data.frame`s. So you can, for example, provide indices for rows and columns in the first two arguments to select them, just like regular `data.frame`s:
+
+```{r}
+lt[5,]
+lt[1:5]
+lt[,1]
+lt[,"lap"]
+lt[,c("lap","time")]
+```
+
+And you can always use the dollar sign operator `$` to extract a column as a vector ...
+
+```{r}
+dr$forename[1:10]
+# or perhaps you prefer ...
+dr[1:10]$forename
+```
+
+If you want to select specific rows based on some property, you *could* use logical vectors (vectors of TRUEs and FALSEs that indicate whether a row should be selected):
+
+```{r}
+selectMe <- lt$lap < 3
+selectMe[1:10]
+lt[selectMe,]
+rm(selectMe)
+# Four steps ... really?
+```
+
+... In reality, these operations are rarely used. `data.table`'s natural method of doing things is almost always better. Instead, we think of the indexing operator as having three fields, that we use for different purposes. We will learn them in order, but also pick up some other tricks on the way. To begin with, memorise this:
+
+> dataTable[ \<SELECT\> , \<DO_SOMETHING\> , \<GROUP_BY\> ]
+
+## The [ \<SELECT\> ,,] field
+
+While you're working in the indexing fields, you can simply refer to column names of the table directly, and they will be treated as vectors. Which, as far as the computer's understanding of a table goes, is exactly what they are.
+
+The output of whatever you write in the SELECT field is used to (surprise!) select rows. Here are some typical examples:
+
+```{r}
+lt[lap<3,]
+lt[lap<3 & driverId==20,]
+```
+
+This works because (say) `lap<3` outputs a logical vector that is TRUE when lap contains 1 or 2, and FALSE otherwise. But what you output can also be numbers referring to rows. A classic example is this trick used to sort the rows by some column ...
+
+```{r}
+lt[order(milliseconds),]
+```
+
+Note the comma is optional but you should write it anyway for good reasons that you can ask me about.
+
+Also note in Rstudio you can use `<tab>` to autocomplete column names while you work inside the indexing fields.
+
+### Special variable: `.N`
+
+Inside the indexing fields, `.N` always contains the number of rows of the table (or the group; see later). Hence, to reverse the table:
+
+```{r}
+lt[.N:1,]
+```
+
+### %in% and %between%
+
+These are exceptionally useful for selection:
 
 
 
+## Merging
 
+The SELECT field can also be used for one of`data.table`'s most powerful functions, merging tables together. Notice in `lt` that the drivers and races are given numbers, not names.
+
+If you look inside `ra` and `dr`, you will notice these tables allow us to see what number corresponds to what driver/race.
+
+Merging allows us to use one `data.table` to look up what rows of a second `data.table` it matches according to the values in some column that occurs in both tables (say, driverId). When you think about it, it is almost like the rows of one table are *selecting* which rows of a second data table to join with. This is why it makes sense to use the SELECT indexing field for merging.
+
+To do it, we just put the selecting `data.table` in the SELECT field of the other `data.table`, and then add an argument listing which column(s) to look for matches on.
+
+```{r}
+dr[lt,on=list(driverId)]
+```
+
+Note `data.table` uses lists often so the dot character `.` can be used as a shortcut for the `list` function.
+
+Also note you can join on more than one column, just add all the names to the `on=` list.
+
+For more flexibility, check the documentation with `?merge.data.table`. You'll find you can do cool things like return rows that do NOT match.
+Let's all our driver and race data into the lap times table and move on.
+
+```{r}
+lt <- dr[lt,on=.(driverId)]
+lt <- ra[lt,on=.(raceId)]
+```
+
+If you look at `lt` now, you'll see what happens when a column name overlaps between the tables, (besides the one being merged on; in this case, "url"). `data.table` automatically renames one of them (e.g.) "i.url".
+
+## The [, \<DO_SOMETHING\> ,] field
+
+The DO_SOMETHING field is where the work gets done. Whether you are manipulating or adding or deleting columns, making calculations and returning the results, or even plotting, you do it all here. For example, you could do some calculation on the columns. Treat columns just like regular vectors. That's how the computer thinks of them, so why shouldn't you too?
+
+```{r}
+#What was the fastest lap?
+lt[, min(milliseconds) ]
+# ... in minutes
+lt[, min(milliseconds)/1000/60 ]
+# ... at an Australian Grand Prix (notice we are now also using the SELECT field)
+lt[ name=="Australian Grand Prix" , min(milliseconds)/1000/60 ]
+# ... and what years did Sebastian Vettel race in Australia? 
+lt[ name=="Australian Grand Prix" , unique(year) ]
+# ... so what lap was Sebastian Vettel's fastest lap at the 2011 Australian Grand Prix?
+lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel" , lap[which(milliseconds==min(milliseconds))] ]
+```
+
+### Ceci n'est pas une pipe
+
+This last line could be cleaner. If we need to filter multiple times, we can just chain indexing operations together. This can simplify the above command as follows:
+
+```{r}
+lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel" , ][ milliseconds==min(milliseconds), lap ]
+```
+
+Command chaining like this makes `data.table` function as a **pipe**! Just like `magrittr`! Brilliant!
+
+I wonder how this lap compares to his other laps that day? Well, we could make a quick plot ...
+
+```{r}
+lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel" , plot(x=lap,y=milliseconds/1000/60) ]
+```
+
+... looks like he had two pit stops and got faster and faster as the race went on. Which is good because .. he won! See?
+
+```{r}
+lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel", ][ lap==max(lap), print(paste("At the end of the final lap, Vettel was in position",position,"!")) ]
+```
+
+### Returning a new `data.table`
+
+Very often, the result you want is another`data.table`. To do this, we use the <DO_SOMETHING> should return a list, in a format like `list( item1_name=<vector> , item2_name=<another vector> )` Each item in the list will become a column. Let's use it to generate some summary statistics for all the races together:
+
+```{r}
+#Remember, `.()` is a shortcut for `list()`
+lt[ , .( fastest_race_lap = min(milliseconds) , number_of_drivers = length(unique(driverId)) , average_driver_hours_per_race=sum(milliseconds)/3600000/length(unique(driverId)) ) ] 
+```
+
+Note, you can clean this code using multiple lines:
+
+```{r,eval=F}
+lt[ , .(
+  fastest_race_lap = min(milliseconds),
+  number_of_drivers = length(unique(driverId)),
+  average_driver_race_hours=sum(milliseconds)/3600000/length(unique(driverId))
+)]
+```
+
+A common use is to trim your `data.table` down to just important columns. Let's use it now to make a smaller table to look at in future, one that only includes the Melbourne Grand Prix stats:
+
+```{r}
+#(l)ap (t)imes, (A)ustralian GP
+lt[,unique(name)]
+ltA <- lt[ name=="Australian Grand Prix", .(
+  forename,
+  surname,
+  lap,
+  milliseconds,
+  position,
+  name,
+  circuitId,
+  year
+)]
+```
+
+### Adding or modifying columns
+
+The beautifully-named *walrus operator* `:=` is used to add, modify, or delete columns.
+
+To add:
+
+```{r}
+#add two columns using chaining
+ltA[,seconds:=milliseconds/1000][,fullname:=paste(forename,surname)]
+ltA
+```
+
+To modify:
+
+```{r}
+#replace spaces with underscores in $name
+ltA[,name:=gsub(" ","_",name)]
+ltA
+```
+
+To destroy:
+
+```{r}
+ltA[,milliseconds:=NULL]
+ltA
+```
+
+## The [,, \<GROUP_BY\> ] field
+
+We can work out the average lap time over all these races (try this yourself), but what about getting the average lap time for *each* race? We need to perform something like `mean(seconds)`, but do it separately for each unique entry in the `$year` column.
+
+This is known as *grouping*, in this case, grouping by `$year`. And we use the `by=` argument in the <GROUP_BY> field to provide a list of columns we wish to group by.
+
+```{r}
+ltA[ , mean(seconds) , by=.(year) ]
+```
+
+Whoops! We never provided a column name so `data.table` named it "V1". Let's fix that.
+
+```{r}
+ltA[ , .( mean_laptime = mean(seconds) ) , by=.(year) ]
+```
+
+And if we want to know the lap time per year per driver, we can group on more variables ...
+
+```{r}
+ltA[ , .( mean_laptime = mean(seconds) ) , by=.(year,fullname) ]
+```
+
+... and perform multiple calculations ...
+
+```{r}
+ltA[ , .( mean_laptime = mean(seconds) ,  fastest_lap = min(seconds) ) , by=.(year,fullname) ]
+```
+
+... and of course filter rows. Congratulations, we are now using all three indexing fields together!
+
+```{r}
+ltA[ year > 2010 , .( mean_laptime = mean(seconds) ,  fastest_lap = min(seconds) ) , by=.(year,fullname) ]
+```
+
+This is a great example of how quickly `data.table` aggregates good stats for plotting. We can very quickly use the above data to look at how lap times evolve over seasons, for example ...
+
+```{r}
+require(ggplot2)
+ggplot(
+  data=ltA[ , .( mean_laptime = mean(seconds) ,  fastest_lap = min(seconds) ) , by=.(year,fullname) ],
+  mapping=aes(x=year,y=fastest_lap,colour=fullname)
+) + geom_line() + theme(legend.position = "none")
+```
+
+
+> I HAVEN'T WRITTEN ANY MORE PROPERLY. SORRY. WHAT FOLLOWS IS WORK IN PROGRESS.
+
+Interesting. Clearly it's not as simple as getting steadily faster each year. I this just due to the weather? Well we could try to look at lots of different circuits ... but they all have different lengths, so to compare laptimes, maybe we have to calculate and average lap time for each over all the years, and see how the lap times each year deviate from that average at each circuit in each year?
+
+This is an *excellent* opportunity for you to practice what you have learned so far, and experience the power of `data.table` for analysis. Try to write it yourself before you derive hints from my way. With `data.table`, there are always multiple ways to do it.
+
+```{r}
+#list all circuits with data from all years in the set
+nYears <- lt[,length(unique(year))]
+includeCircuits <- lt[,.(nYears_circuit=length(unique(year))),by=.(name)][nYears_circuit==nYears,name]
+
+#Get the (av)erage (l)ap (t)imes for eac of these (c)ircuits over all years
+avLtC <- lt[ name %in% includeCircuits ,.(mean_lt_circuit = mean(milliseconds) ) , by=.(name)]
+
+FlC <- lt[name %in% includeCircuits, .(fl_circuit=min(milliseconds)) , by=.(name) ]
+avFlC <- lt[name %in% includeCircuits, .(fl_circuit=min(milliseconds)) , by=.(name) ]
+
+
+#Get the (av)erage (l)ap (t)imes for each (c)ircuit each in each (y)ear
+avLtCY <- lt[ name %in% includeCircuits ,.(mean_lt_circuit_year = mean(milliseconds)) , by=.(name,year)]
+
+FlDCY <- lt[name %in% includeCircuits, .(fl_circuit_driver_year=min(milliseconds)) , by=.(driverId,name,year) ]
+
+FlCY <- lt[name %in% includeCircuits, .(fl_circuit_year=min(milliseconds)) , by=.(name,year) ]
+
+#Attach them together
+avLtCY <- avLtC[avLtCY,on=.(name)]
+
+
+FlDCY <- FlC[FlDCY,on=.(name)]
+FlCY <- FlC[FlCY,on=.(name)]
+
+#Express circuit year averages as differences from the global circuit average
+avLtCY[,mean_laptime_vs_circuit_mean_pct_diff:=100*(mean_lt_circuit_year/mean_lt_circuit)-100]
+
+FlDCY[,driver_fastestLap_vs_record:=fl_circuit_driver_year-fl_circuit,by=.(driverId)]
+FlCY[,fastestLap_vs_record:=fl_circuit_year-fl_circuit]
+
+#Plot
+ggplot( avLtCY ,aes(x=year,y=mean_laptime_vs_circuit_mean_pct_diff,colour=name)) + geom_line()
+
+ggplot( FlDCY ,aes(x=year,y=driver_fastestLap_vs_record,colour=as.factor(name),group=as.factor(paste(driverId,name)))) + geom_line() + ylim(c(0,40000))
+
+ggplot( FlDCY ,aes(x=year,y=fl_circuit_driver_year,colour=as.factor(name),group=as.factor(paste(driverId,name)))) + geom_line() + ylim(c(60000,140000))
+
+ggplot( FlCY ,aes(x=year,y=fastestLap_vs_record,colour=name)) + geom_line()
+```
+
+## Getting slightly tricky
+
+## Group by .N
+
+## .SD
+
+## setorder
+
+## setnames
+
+## setDT
+
+## Getting extra tricky
+
+### Multiline DO_SOMETHING
+
+### Use as a *for* loop affecting outside variables
+
+### Special variable: `.SD`
+
+### Special variable: `.GRP`
+
+# Casting and melting
+
+# Helpful functions
+
+## foverlaps
+
+## fifelse
+
+## frank
+
+## frollapply
+
+## fintersect
+
+## fcoalesce

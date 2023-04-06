@@ -17,7 +17,6 @@ Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb
 
 +   Working in screen
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal
-+   Basic Bionformatics: Awk and the SAM format
-+   Basic Bioinformatics: Mapping and Variant Calling
++   Basic Bionformatics: AWK 
++   Basic Bioinformatics: Mapping, Variant Calling, and the SAM/BAM format
 +   Basic Bioinformatics: Homology searches and BLAST
-+   Basic Bioinformatics R::data.table

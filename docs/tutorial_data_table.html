@@ -606,25 +606,48 @@ div.tocify {
 
 <hr />
 <div id="what-is-data.table" class="section level1">
-<h1>What is data.table?</h1>
-<p><code>data.table</code> is an R package designed to make working with data as easy and efficient as it can possibly be. At a first glance it appears to update the standard R object <code>data.frame</code>. In case you haven’t used them, you can still follow this tutorial. Basically <code>data.frame</code>s are R’s most flexible and broadly used way to store data with a ‘spreadsheet’ structure, i.e., rows and columns.</p>
-<p>But <code>data.table</code> adds a lot of functionality besides just making data handling infinitely better. And it takes (and perfects) ideas from all the best data handling tools:</p>
+<h1>What is <code>data.table</code>?</h1>
+<p><code>data.table</code> is an R package designed to make working with
+data as easy and efficient as it can possibly be. At a first glance it
+appears to update the standard R object <code>data.frame</code>. In case
+you haven’t used them, you can still follow this tutorial. Basically
+<code>data.frame</code>s are R’s most flexible and broadly used way to
+store data with a ‘spreadsheet’ structure, i.e., rows and columns.</p>
+<p>But <code>data.table</code> adds a lot of functionality besides just
+making data handling infinitely better. And it takes (and perfects)
+ideas from all the best data handling tools:</p>
 <ul>
-<li>You can print tables on screen elegantly better than <code>tibble</code>.</li>
-<li>You can manipulate rows and columns and apply functions over them (grouping by factors etc.) better than <code>dplyr</code>.</li>
-<li>You can effectively run loops better than the various <code>*ply</code> functions.</li>
-<li>You can chain commands like <code>magrittr</code> (though … <code>magrittr</code> and <a href="https://ivelasq.rbind.io/blog/understanding-the-r-pipe/">native pipes</a> are still great and work excellently in tandem with <code>data.table</code>)</li>
+<li>You can print tables on screen elegantly better than
+<code>tibble</code>.</li>
+<li>You can manipulate rows and columns and apply functions over them
+(grouping by factors etc.) better than <code>dplyr</code>.</li>
+<li>You can effectively run loops better than the various
+<code>*ply</code> functions.</li>
+<li>You can chain commands like <code>magrittr</code> (though …
+<code>magrittr</code> and <a
+href="https://ivelasq.rbind.io/blog/understanding-the-r-pipe/">native
+pipes</a> are still great and work excellently in tandem with
+<code>data.table</code>)</li>
 <li>You can query tables with all the power of <code>SQL</code>.</li>
-<li>You can merge and join tables with the best of them, including very useful features like <a href="https://www.r-bloggers.com/2016/06/understanding-data-table-rolling-joins/">rolling joins</a>.</li>
+<li>You can merge and join tables with the best of them, including very
+useful features like <a
+href="https://www.r-bloggers.com/2016/06/understanding-data-table-rolling-joins/">rolling
+joins</a>.</li>
 <li>You can cast and melt tables better than <code>reshape2</code>.</li>
-<li>You can find “overlaps” between regions e.g. of genomic intervals, like with <code>GRanges</code> …</li>
+<li>You can find “overlaps” between regions e.g. of genomic intervals,
+like with <code>GRanges</code> …</li>
 </ul>
-<p>And because it does all this so elegantly, it is <strong>super easy to learn</strong>. To learn the most important stuff, let’s run an analysis on some Formula 1 racing data, because, of course.</p>
-<p>Follow along in an <a href="./tutorial_Rstart.Rmd">Rstudio session</a>.</p>
+<p>And because it does all this so elegantly, it is <strong>super easy
+to learn</strong>. To learn the most important stuff, let’s run an
+analysis on some Formula 1 racing data, because, of course.</p>
+<p>Follow along in an <a href="./tutorial_Rstart.Rmd">Rstudio
+session</a>. Make sure you run the commands, and most importantly,
+<em>experiment with them</em>.</p>
 <figure>
-<img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning data.table is a flawless race strategy for life." style="width:60%">
+<img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning `data.table` is a flawless race strategy for life." style="width:60%">
 <figcaption>
-By the time you’ve finished this tutorial you will be wrangling data faster than Charles Leclerc can drive this Ferrari.
+By the time you’ve finished this tutorial you will be wrangling data
+faster than Charles Leclerc can drive this Ferrari.
 </figcaption>
 </figure>
 <hr />
@@ -637,18 +660,40 @@ By the time you’ve finished this tutorial you will be wrangling data faster th
 </div>
 <div id="reading-and-writing-data" class="section level1">
 <h1>Reading and writing data</h1>
-<p>The data we’ll work with are from <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020">here</a>. You can also it on the Spartan storage server at /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.</p>
+<p>The data we’ll work with are from <a
+href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020">here</a>.
+You can also it on the Spartan storage server at
+/data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.</p>
 <div id="text-based-table-formats" class="section level2">
 <h2>Text-based table formats</h2>
-<p>Most text-based ways of storing data consist of lines of text (one per row), and a separation character delimiting the column entries of each row. For example, in the <strong>csv</strong> ([c]omma-[s]eparated [v]alue) format, <code>"a","row","with",7,"columns","would","look","like","this"</code>. Note that in X-separated formats, quote marks are often used to indicate when a column contains text (c.f., say, numbers) because, to a computer, numbers and the strings of text characters that represent them are very different things.</p>
-<p>The alternative to text-based data storage is binary files, which is a topic for another day.</p>
+<p>Most text-based ways of storing data consist of lines of text (one
+per row), and a separation character delimiting the column entries of
+each row. For example, in the <strong>csv</strong> ([c]omma-[s]eparated
+[v]alue) format,
+<code>"a","row","with",7,"columns","would","look","like","this"</code>.
+Note that in X-separated formats, quote marks are often used to indicate
+when a column contains text (c.f., say, numbers) because, to a computer,
+numbers and the strings of text characters that represent them are very
+different things.</p>
+<p>The alternative to text-based data storage is binary files, which is
+a topic for another day.</p>
 </div>
 <div id="fread" class="section level2">
 <h2>fread()</h2>
-<p><code>data.table</code> has its own table parsing function, <code>fread()</code> ([f]ast [read]). It assumes you are giving it some X-separated table and investigates the top of a the file (10,000 lines by default) and tries to work out what the separator is and what the kind of data in each column is, then reads it. Use it to read in the data about drivers and lap times, something like the following:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dr <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/drivers.csv&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/lapTimes.csv&quot;</span>)</span></code></pre></div>
-<p>The variables <code>dr</code> and <code>lt</code> now contain <code>data.table</code> objects. Since these are enhanced <code>data.frame</code>s, we can do data.frame type things with them, such as printing the contents by running the variable name alone:</p>
+<p><code>data.table</code> has its own table parsing function,
+<code>fread()</code> ([f]ast [read]). It assumes you are giving it some
+X-separated table and investigates the top of a the file (10,000 lines
+by default) and tries to work out what the separator is and what the
+kind of data in each column is, then reads it. Use it to read in the
+data about lap times, drivers, and races—something like the
+following:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/lapTimes.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dr <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/drivers.csv&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ra <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;data/races.csv&quot;</span>)</span></code></pre></div>
+<p>The variables <code>dr</code> and <code>lt</code> now contain
+<code>data.table</code> objects. Since these are enhanced
+<code>data.frame</code>s, we can do data.frame type things with them,
+such as printing the contents by running the variable name alone:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lt</span></code></pre></div>
 <pre><code>##         raceId driverId lap position     time milliseconds
 ##      1:    841       20   1        1 1:38.109        98109
@@ -662,31 +707,698 @@ By the time you’ve finished this tutorial you will be wrangling data faster th
 ## 426631:    988      825  52       13 1:43.934       103934
 ## 426632:    988      825  53       13 1:44.164       104164
 ## 426633:    988      825  54       13 1:44.285       104285</code></pre>
-<p>Notice it prints in a useful format showing the top and bottom five rows.</p>
-<p>There are some useful arguments you can give to <code>fread()</code> as necessary:</p>
+<p>Notice it prints in a useful format showing the top and bottom five
+rows.</p>
+<p>There are some useful arguments you can give to <code>fread()</code>
+as necessary:</p>
 <ul>
 <li><code>fread(header=F)</code>
 <ul>
-<li>Often your tables won’t have a top row containing names. In this case, tell <code>fread()</code> not to assume the top row is column labels. It will call the columns <em>“V1”</em>, <em>“V2”</em>, … <em>“Vn”</em> by default, unless …</li>
+<li>Often your tables won’t have a top row containing names. In this
+case, tell <code>fread()</code> not to assume the top row is column
+labels. It will call the columns <em>“V1”</em>, <em>“V2”</em>, …
+<em>“Vn”</em> by default, unless …</li>
 </ul></li>
 <li><code>fread(col.names=c("names","for","columns","go","in","this","vector"))</code>
 <ul>
-<li>Obviously, for this to work the vector of column names must equal the number of columns.</li>
+<li>Obviously, for this to work the vector of column names must equal
+the number of columns.</li>
 </ul></li>
 <li><code>fread(select=1:3)</code>
 <ul>
-<li>This would read only the first three columns. With <code>select=c(6,3,5)</code> we would get those columns in that order.</li>
+<li>This would read only the first three columns. With
+<code>select=c(6,3,5)</code> we would get those columns in that
+order.</li>
 </ul></li>
 </ul>
 </div>
 <div id="writing-data" class="section level2">
 <h2>Writing data</h2>
-<p>Is done with the normal R functions like <code>write.csv</code> and <code>saveRDS</code>.</p>
-<hr />
+<p>Is done with the normal R functions like <code>write.csv</code> and
+<code>saveRDS</code>.</p>
 </div>
 </div>
-<div id="accessing-and-setting-input" class="section level1">
-<h1>Accessing and setting input</h1>
+<div id="the-central-concept-three-indexing-fields"
+class="section level1">
+<h1>The central concept: Three indexing fields</h1>
+<p>A <code>data.table</code> is primarily manipulated using a
+square-bracket syntax similar to <code>data.frame</code>s. So you can,
+for example, provide indices for rows and columns in the first two
+arguments to select them, just like regular
+<code>data.frame</code>s:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lt[<span class="dv">5</span>,]</span></code></pre></div>
+<pre><code>##    raceId driverId lap position     time milliseconds
+## 1:    841       20   5        1 1:32.342        92342</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lt[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##    raceId driverId lap position     time milliseconds
+## 1:    841       20   1        1 1:38.109        98109
+## 2:    841       20   2        1 1:33.006        93006
+## 3:    841       20   3        1 1:32.713        92713
+## 4:    841       20   4        1 1:32.803        92803
+## 5:    841       20   5        1 1:32.342        92342</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lt[,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>##         raceId
+##      1:    841
+##      2:    841
+##      3:    841
+##      4:    841
+##      5:    841
+##     ---       
+## 426629:    988
+## 426630:    988
+## 426631:    988
+## 426632:    988
+## 426633:    988</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lt[,<span class="st">&quot;lap&quot;</span>]</span></code></pre></div>
+<pre><code>##         lap
+##      1:   1
+##      2:   2
+##      3:   3
+##      4:   4
+##      5:   5
+##     ---    
+## 426629:  50
+## 426630:  51
+## 426631:  52
+## 426632:  53
+## 426633:  54</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lt[,<span class="fu">c</span>(<span class="st">&quot;lap&quot;</span>,<span class="st">&quot;time&quot;</span>)]</span></code></pre></div>
+<pre><code>##         lap     time
+##      1:   1 1:38.109
+##      2:   2 1:33.006
+##      3:   3 1:32.713
+##      4:   4 1:32.803
+##      5:   5 1:32.342
+##     ---             
+## 426629:  50 1:43.928
+## 426630:  51 1:44.138
+## 426631:  52 1:43.934
+## 426632:  53 1:44.164
+## 426633:  54 1:44.285</code></pre>
+<p>And you can always use the dollar sign operator <code>$</code> to
+extract a column as a vector …</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dr<span class="sc">$</span>forename[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##  [1] &quot;Lewis&quot;    &quot;Nick&quot;     &quot;Nico&quot;     &quot;Fernando&quot; &quot;Heikki&quot;   &quot;Kazuki&quot;  
+##  [7] &quot;S̩bastien&quot; &quot;Kimi&quot;     &quot;Robert&quot;   &quot;Timo&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or perhaps you prefer ...</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dr[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]<span class="sc">$</span>forename</span></code></pre></div>
+<pre><code>##  [1] &quot;Lewis&quot;    &quot;Nick&quot;     &quot;Nico&quot;     &quot;Fernando&quot; &quot;Heikki&quot;   &quot;Kazuki&quot;  
+##  [7] &quot;S̩bastien&quot; &quot;Kimi&quot;     &quot;Robert&quot;   &quot;Timo&quot;</code></pre>
+<p>If you want to select specific rows based on some property, you
+<em>could</em> use logical vectors (vectors of TRUEs and FALSEs that
+indicate whether a row should be selected):</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>selectMe <span class="ot">&lt;-</span> lt<span class="sc">$</span>lap <span class="sc">&lt;</span> <span class="dv">3</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>selectMe[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##  [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lt[selectMe,]</span></code></pre></div>
+<pre><code>##        raceId driverId lap position     time milliseconds
+##     1:    841       20   1        1 1:38.109        98109
+##     2:    841       20   2        1 1:33.006        93006
+##     3:    841        1   1        2 1:40.573       100573
+##     4:    841        1   2        2 1:33.774        93774
+##     5:    841       17   1        3 1:41.467       101467
+##    ---                                                   
+## 16191:    988      843   2       18 1:48.460       108460
+## 16192:    988      154   1       14 1:55.433       115433
+## 16193:    988      154   2       14 1:47.792       107792
+## 16194:    988      825   1       20 2:00.490       120490
+## 16195:    988      825   2       20 1:48.699       108699</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(selectMe)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Four steps ... really?</span></span></code></pre></div>
+<p>… In reality, these operations are rarely used.
+<code>data.table</code>’s natural method of doing things is almost
+always better. Instead, we think of the indexing operator as having
+three fields, that we use for different purposes. We will learn them in
+order, but also pick up some other tricks on the way. To begin with,
+memorise this:</p>
+<blockquote>
+<p>dataTable[ &lt;SELECT&gt; , &lt;DO_SOMETHING&gt; , &lt;GROUP_BY&gt;
+]</p>
+</blockquote>
+<div id="the-select-field" class="section level2">
+<h2>The [ &lt;SELECT&gt; ,,] field</h2>
+<p>While you’re working in the indexing fields, you can simply refer to
+column names of the table directly, and they will be treated as vectors.
+Which, as far as the computer’s understanding of a table goes, is
+exactly what they are.</p>
+<p>The output of whatever you write in the SELECT field is used to
+(surprise!) select rows. Here are some typical examples:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lt[lap<span class="sc">&lt;</span><span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>##        raceId driverId lap position     time milliseconds
+##     1:    841       20   1        1 1:38.109        98109
+##     2:    841       20   2        1 1:33.006        93006
+##     3:    841        1   1        2 1:40.573       100573
+##     4:    841        1   2        2 1:33.774        93774
+##     5:    841       17   1        3 1:41.467       101467
+##    ---                                                   
+## 16191:    988      843   2       18 1:48.460       108460
+## 16192:    988      154   1       14 1:55.433       115433
+## 16193:    988      154   2       14 1:47.792       107792
+## 16194:    988      825   1       20 2:00.490       120490
+## 16195:    988      825   2       20 1:48.699       108699</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>lt[lap<span class="sc">&lt;</span><span class="dv">3</span> <span class="sc">&amp;</span> driverId<span class="sc">==</span><span class="dv">20</span>,]</span></code></pre></div>
+<pre><code>##      raceId driverId lap position     time milliseconds
+##   1:    841       20   1        1 1:38.109        98109
+##   2:    841       20   2        1 1:33.006        93006
+##   3:    842       20   1        1 1:49.614       109614
+##   4:    842       20   2        1 1:44.539       104539
+##   5:    843       20   1        3 1:47.942       107942
+##  ---                                                   
+## 377:    986       20   2       19 1:50.130       110130
+## 378:    987       20   1        1 1:52.494       112494
+## 379:    987       20   2        1 2:18.392       138392
+## 380:    988       20   1        3 1:47.471       107471
+## 381:    988       20   2        3 1:43.632       103632</code></pre>
+<p>This works because (say) <code>lap&lt;3</code> outputs a logical
+vector that is TRUE when lap contains 1 or 2, and FALSE otherwise. But
+what you output can also be numbers referring to rows. A classic example
+is this trick used to sort the rows by some column …</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lt[<span class="fu">order</span>(milliseconds),]</span></code></pre></div>
+<pre><code>##         raceId driverId lap position        time milliseconds
+##      1:    977        1  69        4    1:07.411        67411
+##      2:    977        1  65        4    1:07.424        67424
+##      3:    977      817  69        3    1:07.442        67442
+##      4:    977        8  68        5    1:07.486        67486
+##      5:    977       20  69        2    1:07.496        67496
+##     ---                                                      
+## 426629:    847       20  25        1 2:05:05.152      7505152
+## 426630:    847      155  25        2 2:05:06.095      7506095
+## 426631:    847      808  25        5 2:05:06.243      7506243
+## 426632:    847       13  25        3 2:05:06.656      7506656
+## 426633:    847        2  25        4 2:05:07.547      7507547</code></pre>
+<p>Note the comma is optional but you should write it anyway for good
+reasons that you can ask me about.</p>
+<p>Also note in Rstudio you can use <code>&lt;tab&gt;</code> to
+autocomplete column names while you work inside the indexing fields.</p>
+<div id="special-variable-.n" class="section level3">
+<h3>Special variable: <code>.N</code></h3>
+<p>Inside the indexing fields, <code>.N</code> always contains the
+number of rows of the table (or the group; see later). Hence, to reverse
+the table:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lt[.N<span class="sc">:</span><span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##         raceId driverId lap position     time milliseconds
+##      1:    988      825  54       13 1:44.285       104285
+##      2:    988      825  53       13 1:44.164       104164
+##      3:    988      825  52       13 1:43.934       103934
+##      4:    988      825  51       13 1:44.138       104138
+##      5:    988      825  50       13 1:43.928       103928
+##     ---                                                   
+## 426629:    841       20   5        1 1:32.342        92342
+## 426630:    841       20   4        1 1:32.803        92803
+## 426631:    841       20   3        1 1:32.713        92713
+## 426632:    841       20   2        1 1:33.006        93006
+## 426633:    841       20   1        1 1:38.109        98109</code></pre>
+</div>
+<div id="in-and-between" class="section level3">
+<h3>%in% and %between%</h3>
+<p>These are exceptionally useful for selection:</p>
+</div>
+</div>
+<div id="merging" class="section level2">
+<h2>Merging</h2>
+<p>The SELECT field can also be used for one of<code>data.table</code>’s
+most powerful functions, merging tables together. Notice in
+<code>lt</code> that the drivers and races are given numbers, not
+names.</p>
+<p>If you look inside <code>ra</code> and <code>dr</code>, you will
+notice these tables allow us to see what number corresponds to what
+driver/race.</p>
+<p>Merging allows us to use one <code>data.table</code> to look up what
+rows of a second <code>data.table</code> it matches according to the
+values in some column that occurs in both tables (say, driverId). When
+you think about it, it is almost like the rows of one table are
+<em>selecting</em> which rows of a second data table to join with. This
+is why it makes sense to use the SELECT indexing field for merging.</p>
+<p>To do it, we just put the selecting <code>data.table</code> in the
+SELECT field of the other <code>data.table</code>, and then add an
+argument listing which column(s) to look for matches on.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dr[lt,on<span class="ot">=</span><span class="fu">list</span>(driverId)]</span></code></pre></div>
+<pre><code>##         driverId       driverRef number code  forename   surname        dob
+##      1:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
+##      2:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
+##      3:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
+##      4:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
+##      5:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
+##     ---                                                                    
+## 426629:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
+## 426630:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
+## 426631:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
+## 426632:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
+## 426633:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
+##         nationality                                           url raceId lap
+##      1:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   1
+##      2:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   2
+##      3:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   3
+##      4:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   4
+##      5:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   5
+##     ---                                                                     
+## 426629:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  50
+## 426630:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  51
+## 426631:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  52
+## 426632:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  53
+## 426633:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  54
+##         position     time milliseconds
+##      1:        1 1:38.109        98109
+##      2:        1 1:33.006        93006
+##      3:        1 1:32.713        92713
+##      4:        1 1:32.803        92803
+##      5:        1 1:32.342        92342
+##     ---                               
+## 426629:       13 1:43.928       103928
+## 426630:       13 1:44.138       104138
+## 426631:       13 1:43.934       103934
+## 426632:       13 1:44.164       104164
+## 426633:       13 1:44.285       104285</code></pre>
+<p>Note <code>data.table</code> uses lists often so the dot character
+<code>.</code> can be used as a shortcut for the <code>list</code>
+function.</p>
+<p>Also note you can join on more than one column, just add all the
+names to the <code>on=</code> list.</p>
+<p>For more flexibility, check the documentation with
+<code>?merge.data.table</code>. You’ll find you can do cool things like
+return rows that do NOT match. Let’s all our driver and race data into
+the lap times table and move on.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> dr[lt,on<span class="ot">=</span>.(driverId)]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> ra[lt,on<span class="ot">=</span>.(raceId)]</span></code></pre></div>
+<p>If you look at <code>lt</code> now, you’ll see what happens when a
+column name overlaps between the tables, (besides the one being merged
+on; in this case, “url”). <code>data.table</code> automatically renames
+one of them (e.g.) “i.url”.</p>
+</div>
+<div id="the-do_something-field" class="section level2">
+<h2>The [, &lt;DO_SOMETHING&gt; ,] field</h2>
+<p>The DO_SOMETHING field is where the work gets done. Whether you are
+manipulating or adding or deleting columns, making calculations and
+returning the results, or even plotting, you do it all here. For
+example, you could do some calculation on the columns. Treat columns
+just like regular vectors. That’s how the computer thinks of them, so
+why shouldn’t you too?</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#What was the fastest lap?</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>lt[, <span class="fu">min</span>(milliseconds) ]</span></code></pre></div>
+<pre><code>## [1] 67411</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... in minutes</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>lt[, <span class="fu">min</span>(milliseconds)<span class="sc">/</span><span class="dv">1000</span><span class="sc">/</span><span class="dv">60</span> ]</span></code></pre></div>
+<pre><code>## [1] 1.123517</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... at an Australian Grand Prix (notice we are now also using the SELECT field)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> , <span class="fu">min</span>(milliseconds)<span class="sc">/</span><span class="dv">1000</span><span class="sc">/</span><span class="dv">60</span> ]</span></code></pre></div>
+<pre><code>## [1] 1.402083</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and what years did Sebastian Vettel race in Australia? </span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> , <span class="fu">unique</span>(year) ]</span></code></pre></div>
+<pre><code>##  [1] 2011 2012 2013 2014 2015 2016 1996 1997 1998 1999 2000 2001 2002 2003 2004
+## [16] 2005 2006 2007 2008 2009 2010 2017</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... so what lap was Sebastian Vettel&#39;s fastest lap at the 2011 Australian Grand Prix?</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> <span class="sc">&amp;</span> year<span class="sc">==</span><span class="dv">2011</span> <span class="sc">&amp;</span> surname<span class="sc">==</span><span class="st">&quot;Vettel&quot;</span> , lap[<span class="fu">which</span>(milliseconds<span class="sc">==</span><span class="fu">min</span>(milliseconds))] ]</span></code></pre></div>
+<pre><code>## [1] 44</code></pre>
+<div id="ceci-nest-pas-une-pipe" class="section level3">
+<h3>Ceci n’est pas une pipe</h3>
+<p>This last line could be cleaner. If we need to filter multiple times,
+we can just chain indexing operations together. This can simplify the
+above command as follows:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> <span class="sc">&amp;</span> year<span class="sc">==</span><span class="dv">2011</span> <span class="sc">&amp;</span> surname<span class="sc">==</span><span class="st">&quot;Vettel&quot;</span> , ][ milliseconds<span class="sc">==</span><span class="fu">min</span>(milliseconds), lap ]</span></code></pre></div>
+<pre><code>## [1] 44</code></pre>
+<p>Command chaining like this makes <code>data.table</code> function as
+a <strong>pipe</strong>! Just like <code>magrittr</code>! Brilliant!</p>
+<p>I wonder how this lap compares to his other laps that day? Well, we
+could make a quick plot …</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> <span class="sc">&amp;</span> year<span class="sc">==</span><span class="dv">2011</span> <span class="sc">&amp;</span> surname<span class="sc">==</span><span class="st">&quot;Vettel&quot;</span> , <span class="fu">plot</span>(<span class="at">x=</span>lap,<span class="at">y=</span>milliseconds<span class="sc">/</span><span class="dv">1000</span><span class="sc">/</span><span class="dv">60</span>) ]</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre><code>## NULL</code></pre>
+<p>… looks like he had two pit stops and got faster and faster as the
+race went on. Which is good because .. he won! See?</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> <span class="sc">&amp;</span> year<span class="sc">==</span><span class="dv">2011</span> <span class="sc">&amp;</span> surname<span class="sc">==</span><span class="st">&quot;Vettel&quot;</span>, ][ lap<span class="sc">==</span><span class="fu">max</span>(lap), <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;At the end of the final lap, Vettel was in position&quot;</span>,position,<span class="st">&quot;!&quot;</span>)) ]</span></code></pre></div>
+<pre><code>## [1] &quot;At the end of the final lap, Vettel was in position 1 !&quot;</code></pre>
+<pre><code>## [1] &quot;At the end of the final lap, Vettel was in position 1 !&quot;</code></pre>
+</div>
+<div id="returning-a-new-data.table" class="section level3">
+<h3>Returning a new <code>data.table</code></h3>
+<p>Very often, the result you want is another<code>data.table</code>. To
+do this, we use the <DO_SOMETHING> should return a list, in a format
+like
+<code>list( item1_name=&lt;vector&gt; , item2_name=&lt;another vector&gt; )</code>
+Each item in the list will become a column. Let’s use it to generate
+some summary statistics for all the races together:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remember, `.()` is a shortcut for `list()`</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>lt[ , .( <span class="at">fastest_race_lap =</span> <span class="fu">min</span>(milliseconds) , <span class="at">number_of_drivers =</span> <span class="fu">length</span>(<span class="fu">unique</span>(driverId)) , <span class="at">average_driver_hours_per_race=</span><span class="fu">sum</span>(milliseconds)<span class="sc">/</span><span class="dv">3600000</span><span class="sc">/</span><span class="fu">length</span>(<span class="fu">unique</span>(driverId)) ) ] </span></code></pre></div>
+<pre><code>##    fastest_race_lap number_of_drivers average_driver_hours_per_race
+## 1:            67411               123                       92.3044</code></pre>
+<p>Note, you can clean this code using multiple lines:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>lt[ , .(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fastest_race_lap =</span> <span class="fu">min</span>(milliseconds),</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_drivers =</span> <span class="fu">length</span>(<span class="fu">unique</span>(driverId)),</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">average_driver_race_hours=</span><span class="fu">sum</span>(milliseconds)<span class="sc">/</span><span class="dv">3600000</span><span class="sc">/</span><span class="fu">length</span>(<span class="fu">unique</span>(driverId))</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div>
+<p>A common use is to trim your <code>data.table</code> down to just
+important columns. Let’s use it now to make a smaller table to look at
+in future, one that only includes the Melbourne Grand Prix stats:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(l)ap (t)imes, (A)ustralian GP</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>lt[,<span class="fu">unique</span>(name)]</span></code></pre></div>
+<pre><code>##  [1] &quot;Australian Grand Prix&quot;    &quot;Malaysian Grand Prix&quot;    
+##  [3] &quot;Chinese Grand Prix&quot;       &quot;Turkish Grand Prix&quot;      
+##  [5] &quot;Spanish Grand Prix&quot;       &quot;Monaco Grand Prix&quot;       
+##  [7] &quot;Canadian Grand Prix&quot;      &quot;European Grand Prix&quot;     
+##  [9] &quot;British Grand Prix&quot;       &quot;German Grand Prix&quot;       
+## [11] &quot;Hungarian Grand Prix&quot;     &quot;Belgian Grand Prix&quot;      
+## [13] &quot;Italian Grand Prix&quot;       &quot;Singapore Grand Prix&quot;    
+## [15] &quot;Japanese Grand Prix&quot;      &quot;Korean Grand Prix&quot;       
+## [17] &quot;Indian Grand Prix&quot;        &quot;Abu Dhabi Grand Prix&quot;    
+## [19] &quot;Brazilian Grand Prix&quot;     &quot;Bahrain Grand Prix&quot;      
+## [21] &quot;United States Grand Prix&quot; &quot;Austrian Grand Prix&quot;     
+## [23] &quot;Russian Grand Prix&quot;       &quot;Mexican Grand Prix&quot;      
+## [25] &quot;Argentine Grand Prix&quot;     &quot;San Marino Grand Prix&quot;   
+## [27] &quot;French Grand Prix&quot;        &quot;Portuguese Grand Prix&quot;   
+## [29] &quot;Luxembourg Grand Prix&quot;    &quot;Azerbaijan Grand Prix&quot;</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>ltA <span class="ot">&lt;-</span> lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span>, .(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  forename,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  surname,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  lap,</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  milliseconds,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  position,</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  name,</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  circuitId,</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  year</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div>
+</div>
+<div id="adding-or-modifying-columns" class="section level3">
+<h3>Adding or modifying columns</h3>
+<p>The beautifully-named <em>walrus operator</em> <code>:=</code> is
+used to add, modify, or delete columns.</p>
+<p>To add:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#add two columns using chaining</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ltA[,seconds<span class="sc">:</span><span class="er">=</span>milliseconds<span class="sc">/</span><span class="dv">1000</span>][,fullname<span class="sc">:</span><span class="er">=</span><span class="fu">paste</span>(forename,surname)]</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##         forename   surname lap milliseconds position                  name
+##     1: Sebastian    Vettel   1        98109        1 Australian Grand Prix
+##     2: Sebastian    Vettel   2        93006        1 Australian Grand Prix
+##     3: Sebastian    Vettel   3        92713        1 Australian Grand Prix
+##     4: Sebastian    Vettel   4        92803        1 Australian Grand Prix
+##     5: Sebastian    Vettel   5        92342        1 Australian Grand Prix
+##    ---                                                                    
+## 19841:    Daniel Ricciardo  21        89447       18 Australian Grand Prix
+## 19842:    Daniel Ricciardo  22        90172       17 Australian Grand Prix
+## 19843:    Daniel Ricciardo  23        90407       17 Australian Grand Prix
+## 19844:    Daniel Ricciardo  24        89466       17 Australian Grand Prix
+## 19845:    Daniel Ricciardo  25        89708       17 Australian Grand Prix
+##        circuitId year seconds         fullname
+##     1:         1 2011  98.109 Sebastian Vettel
+##     2:         1 2011  93.006 Sebastian Vettel
+##     3:         1 2011  92.713 Sebastian Vettel
+##     4:         1 2011  92.803 Sebastian Vettel
+##     5:         1 2011  92.342 Sebastian Vettel
+##    ---                                        
+## 19841:         1 2017  89.447 Daniel Ricciardo
+## 19842:         1 2017  90.172 Daniel Ricciardo
+## 19843:         1 2017  90.407 Daniel Ricciardo
+## 19844:         1 2017  89.466 Daniel Ricciardo
+## 19845:         1 2017  89.708 Daniel Ricciardo</code></pre>
+<p>To modify:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replace spaces with underscores in $name</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>ltA[,name<span class="sc">:</span><span class="er">=</span><span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>,<span class="st">&quot;_&quot;</span>,name)]</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##         forename   surname lap milliseconds position                  name
+##     1: Sebastian    Vettel   1        98109        1 Australian_Grand_Prix
+##     2: Sebastian    Vettel   2        93006        1 Australian_Grand_Prix
+##     3: Sebastian    Vettel   3        92713        1 Australian_Grand_Prix
+##     4: Sebastian    Vettel   4        92803        1 Australian_Grand_Prix
+##     5: Sebastian    Vettel   5        92342        1 Australian_Grand_Prix
+##    ---                                                                    
+## 19841:    Daniel Ricciardo  21        89447       18 Australian_Grand_Prix
+## 19842:    Daniel Ricciardo  22        90172       17 Australian_Grand_Prix
+## 19843:    Daniel Ricciardo  23        90407       17 Australian_Grand_Prix
+## 19844:    Daniel Ricciardo  24        89466       17 Australian_Grand_Prix
+## 19845:    Daniel Ricciardo  25        89708       17 Australian_Grand_Prix
+##        circuitId year seconds         fullname
+##     1:         1 2011  98.109 Sebastian Vettel
+##     2:         1 2011  93.006 Sebastian Vettel
+##     3:         1 2011  92.713 Sebastian Vettel
+##     4:         1 2011  92.803 Sebastian Vettel
+##     5:         1 2011  92.342 Sebastian Vettel
+##    ---                                        
+## 19841:         1 2017  89.447 Daniel Ricciardo
+## 19842:         1 2017  90.172 Daniel Ricciardo
+## 19843:         1 2017  90.407 Daniel Ricciardo
+## 19844:         1 2017  89.466 Daniel Ricciardo
+## 19845:         1 2017  89.708 Daniel Ricciardo</code></pre>
+<p>To destroy:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>ltA[,milliseconds<span class="sc">:</span><span class="er">=</span><span class="cn">NULL</span>]</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##         forename   surname lap position                  name circuitId year
+##     1: Sebastian    Vettel   1        1 Australian_Grand_Prix         1 2011
+##     2: Sebastian    Vettel   2        1 Australian_Grand_Prix         1 2011
+##     3: Sebastian    Vettel   3        1 Australian_Grand_Prix         1 2011
+##     4: Sebastian    Vettel   4        1 Australian_Grand_Prix         1 2011
+##     5: Sebastian    Vettel   5        1 Australian_Grand_Prix         1 2011
+##    ---                                                                      
+## 19841:    Daniel Ricciardo  21       18 Australian_Grand_Prix         1 2017
+## 19842:    Daniel Ricciardo  22       17 Australian_Grand_Prix         1 2017
+## 19843:    Daniel Ricciardo  23       17 Australian_Grand_Prix         1 2017
+## 19844:    Daniel Ricciardo  24       17 Australian_Grand_Prix         1 2017
+## 19845:    Daniel Ricciardo  25       17 Australian_Grand_Prix         1 2017
+##        seconds         fullname
+##     1:  98.109 Sebastian Vettel
+##     2:  93.006 Sebastian Vettel
+##     3:  92.713 Sebastian Vettel
+##     4:  92.803 Sebastian Vettel
+##     5:  92.342 Sebastian Vettel
+##    ---                         
+## 19841:  89.447 Daniel Ricciardo
+## 19842:  90.172 Daniel Ricciardo
+## 19843:  90.407 Daniel Ricciardo
+## 19844:  89.466 Daniel Ricciardo
+## 19845:  89.708 Daniel Ricciardo</code></pre>
+</div>
+</div>
+<div id="the-group_by-field" class="section level2">
+<h2>The [,, &lt;GROUP_BY&gt; ] field</h2>
+<p>We can work out the average lap time over all these races (try this
+yourself), but what about getting the average lap time for <em>each</em>
+race? We need to perform something like <code>mean(seconds)</code>, but
+do it separately for each unique entry in the <code>$year</code>
+column.</p>
+<p>This is known as <em>grouping</em>, in this case, grouping by
+<code>$year</code>. And we use the <code>by=</code> argument in the
+<GROUP_BY> field to provide a list of columns we wish to group by.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>ltA[ , <span class="fu">mean</span>(seconds) , by<span class="ot">=</span>.(year) ]</span></code></pre></div>
+<pre><code>##     year        V1
+##  1: 2011  95.61877
+##  2: 2012  98.46993
+##  3: 2013  94.95944
+##  4: 2014 100.36624
+##  5: 2015  97.06216
+##  6: 2016 115.61428
+##  7: 1996  99.02105
+##  8: 1997  96.32692
+##  9: 1998  97.90307
+## 10: 1999 102.11266
+## 11: 2000  99.75171
+## 12: 2001 104.91423
+## 13: 2002 107.32122
+## 14: 2003  99.99782
+## 15: 2004  90.80846
+## 16: 2005  90.33247
+## 17: 2006 101.65096
+## 18: 2007  90.39787
+## 19: 2008  98.55718
+## 20: 2009  97.42775
+## 21: 2010 101.07681
+## 22: 2017  91.10589
+##     year        V1</code></pre>
+<p>Whoops! We never provided a column name so <code>data.table</code>
+named it “V1”. Let’s fix that.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ) , by<span class="ot">=</span>.(year) ]</span></code></pre></div>
+<pre><code>##     year mean_laptime
+##  1: 2011     95.61877
+##  2: 2012     98.46993
+##  3: 2013     94.95944
+##  4: 2014    100.36624
+##  5: 2015     97.06216
+##  6: 2016    115.61428
+##  7: 1996     99.02105
+##  8: 1997     96.32692
+##  9: 1998     97.90307
+## 10: 1999    102.11266
+## 11: 2000     99.75171
+## 12: 2001    104.91423
+## 13: 2002    107.32122
+## 14: 2003     99.99782
+## 15: 2004     90.80846
+## 16: 2005     90.33247
+## 17: 2006    101.65096
+## 18: 2007     90.39787
+## 19: 2008     98.55718
+## 20: 2009     97.42775
+## 21: 2010    101.07681
+## 22: 2017     91.10589
+##     year mean_laptime</code></pre>
+<p>And if we want to know the lap time per year per driver, we can group
+on more variables …</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
+<pre><code>##      year           fullname mean_laptime
+##   1: 2011   Sebastian Vettel     92.59067
+##   2: 2011     Lewis Hamilton     92.97510
+##   3: 2011        Mark Webber     93.24879
+##   4: 2011      Vitaly Petrov     93.11757
+##   5: 2011       Felipe Massa     94.05940
+##  ---                                     
+## 425: 2017  Stoffel Vandoorne     92.70558
+## 426: 2017 Antonio Giovinazzi     92.44118
+## 427: 2017    Marcus Ericsson     94.35571
+## 428: 2017    Kevin Magnussen     93.98472
+## 429: 2017   Daniel Ricciardo     98.88004</code></pre>
+<p>… and perform multiple calculations …</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ,  <span class="at">fastest_lap =</span> <span class="fu">min</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
+<pre><code>##      year           fullname mean_laptime fastest_lap
+##   1: 2011   Sebastian Vettel     92.59067      89.844
+##   2: 2011     Lewis Hamilton     92.97510      90.314
+##   3: 2011        Mark Webber     93.24879      89.600
+##   4: 2011      Vitaly Petrov     93.11757      90.064
+##   5: 2011       Felipe Massa     94.05940      88.947
+##  ---                                                 
+## 425: 2017  Stoffel Vandoorne     92.70558      89.440
+## 426: 2017 Antonio Giovinazzi     92.44118      89.052
+## 427: 2017    Marcus Ericsson     94.35571      92.052
+## 428: 2017    Kevin Magnussen     93.98472      87.568
+## 429: 2017   Daniel Ricciardo     98.88004      89.447</code></pre>
+<p>… and of course filter rows. Congratulations, we are now using all
+three indexing fields together!</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>ltA[ year <span class="sc">&gt;</span> <span class="dv">2010</span> , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ,  <span class="at">fastest_lap =</span> <span class="fu">min</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
+<pre><code>##      year           fullname mean_laptime fastest_lap
+##   1: 2011   Sebastian Vettel     92.59067      89.844
+##   2: 2011     Lewis Hamilton     92.97510      90.314
+##   3: 2011        Mark Webber     93.24879      89.600
+##   4: 2011      Vitaly Petrov     93.11757      90.064
+##   5: 2011       Felipe Massa     94.05940      88.947
+##  ---                                                 
+## 134: 2017  Stoffel Vandoorne     92.70558      89.440
+## 135: 2017 Antonio Giovinazzi     92.44118      89.052
+## 136: 2017    Marcus Ericsson     94.35571      92.052
+## 137: 2017    Kevin Magnussen     93.98472      87.568
+## 138: 2017   Daniel Ricciardo     98.88004      89.447</code></pre>
+<p>This is a great example of how quickly <code>data.table</code>
+aggregates good stats for plotting. We can very quickly use the above
+data to look at how lap times evolve over seasons, for example …</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code></pre></div>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ,  <span class="at">fastest_lap =</span> <span class="fu">min</span>(seconds) ) , <span class="at">by=</span>.(year,fullname) ],</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fastest_lap,<span class="at">colour=</span>fullname)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<blockquote>
+<p>I HAVEN’T WRITTEN ANY MORE PROPERLY. SORRY. WHAT FOLLOWS IS WORK IN
+PROGRESS.</p>
+</blockquote>
+<p>Interesting. Clearly it’s not as simple as getting steadily faster
+each year. I this just due to the weather? Well we could try to look at
+lots of different circuits … but they all have different lengths, so to
+compare laptimes, maybe we have to calculate and average lap time for
+each over all the years, and see how the lap times each year deviate
+from that average at each circuit in each year?</p>
+<p>This is an <em>excellent</em> opportunity for you to practice what
+you have learned so far, and experience the power of
+<code>data.table</code> for analysis. Try to write it yourself before
+you derive hints from my way. With <code>data.table</code>, there are
+always multiple ways to do it.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list all circuits with data from all years in the set</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>nYears <span class="ot">&lt;-</span> lt[,<span class="fu">length</span>(<span class="fu">unique</span>(year))]</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>includeCircuits <span class="ot">&lt;-</span> lt[,.(<span class="at">nYears_circuit=</span><span class="fu">length</span>(<span class="fu">unique</span>(year))),by<span class="ot">=</span>.(name)][nYears_circuit<span class="sc">==</span>nYears,name]</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the (av)erage (l)ap (t)imes for eac of these (c)ircuits over all years</span></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>avLtC <span class="ot">&lt;-</span> lt[ name <span class="sc">%in%</span> includeCircuits ,.(<span class="at">mean_lt_circuit =</span> <span class="fu">mean</span>(milliseconds) ) , by<span class="ot">=</span>.(name)]</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>FlC <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name) ]</span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>avFlC <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name) ]</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the (av)erage (l)ap (t)imes for each (c)ircuit each in each (y)ear</span></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>avLtCY <span class="ot">&lt;-</span> lt[ name <span class="sc">%in%</span> includeCircuits ,.(<span class="at">mean_lt_circuit_year =</span> <span class="fu">mean</span>(milliseconds)) , by<span class="ot">=</span>.(name,year)]</span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>FlDCY <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit_driver_year=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(driverId,name,year) ]</span>
+<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a>FlCY <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit_year=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name,year) ]</span>
+<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Attach them together</span></span>
+<span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a>avLtCY <span class="ot">&lt;-</span> avLtC[avLtCY,on<span class="ot">=</span>.(name)]</span>
+<span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-22"><a href="#cb77-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-23"><a href="#cb77-23" aria-hidden="true" tabindex="-1"></a>FlDCY <span class="ot">&lt;-</span> FlC[FlDCY,on<span class="ot">=</span>.(name)]</span>
+<span id="cb77-24"><a href="#cb77-24" aria-hidden="true" tabindex="-1"></a>FlCY <span class="ot">&lt;-</span> FlC[FlCY,on<span class="ot">=</span>.(name)]</span>
+<span id="cb77-25"><a href="#cb77-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-26"><a href="#cb77-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Express circuit year averages as differences from the global circuit average</span></span>
+<span id="cb77-27"><a href="#cb77-27" aria-hidden="true" tabindex="-1"></a>avLtCY[,mean_laptime_vs_circuit_mean_pct_diff<span class="sc">:</span><span class="er">=</span><span class="dv">100</span><span class="sc">*</span>(mean_lt_circuit_year<span class="sc">/</span>mean_lt_circuit)<span class="sc">-</span><span class="dv">100</span>]</span>
+<span id="cb77-28"><a href="#cb77-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-29"><a href="#cb77-29" aria-hidden="true" tabindex="-1"></a>FlDCY[,driver_fastestLap_vs_record<span class="sc">:</span><span class="er">=</span>fl_circuit_driver_year<span class="sc">-</span>fl_circuit,by<span class="ot">=</span>.(driverId)]</span>
+<span id="cb77-30"><a href="#cb77-30" aria-hidden="true" tabindex="-1"></a>FlCY[,fastestLap_vs_record<span class="sc">:</span><span class="er">=</span>fl_circuit_year<span class="sc">-</span>fl_circuit]</span>
+<span id="cb77-31"><a href="#cb77-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-32"><a href="#cb77-32" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot</span></span>
+<span id="cb77-33"><a href="#cb77-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( avLtCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>mean_laptime_vs_circuit_mean_pct_diff,<span class="at">colour=</span>name)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlDCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>driver_fastestLap_vs_record,<span class="at">colour=</span><span class="fu">as.factor</span>(name),<span class="at">group=</span><span class="fu">as.factor</span>(<span class="fu">paste</span>(driverId,name)))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40000</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 26 rows containing missing values (`geom_line()`).</code></pre>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlDCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fl_circuit_driver_year,<span class="at">colour=</span><span class="fu">as.factor</span>(name),<span class="at">group=</span><span class="fu">as.factor</span>(<span class="fu">paste</span>(driverId,name)))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">60000</span>,<span class="dv">140000</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 7 rows containing missing values (`geom_line()`).</code></pre>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fastestLap_vs_record,<span class="at">colour=</span>name)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-4.png" width="672" /></p>
+</div>
+<div id="getting-slightly-tricky" class="section level2">
+<h2>Getting slightly tricky</h2>
+</div>
+<div id="group-by-.n" class="section level2">
+<h2>Group by .N</h2>
+</div>
+<div id="sd" class="section level2">
+<h2>.SD</h2>
+</div>
+<div id="setorder" class="section level2">
+<h2>setorder</h2>
+</div>
+<div id="setnames" class="section level2">
+<h2>setnames</h2>
+</div>
+<div id="setdt" class="section level2">
+<h2>setDT</h2>
+</div>
+<div id="getting-extra-tricky" class="section level2">
+<h2>Getting extra tricky</h2>
+<div id="multiline-do_something" class="section level3">
+<h3>Multiline DO_SOMETHING</h3>
+</div>
+<div id="use-as-a-for-loop-affecting-outside-variables"
+class="section level3">
+<h3>Use as a <em>for</em> loop affecting outside variables</h3>
+</div>
+<div id="special-variable-.sd" class="section level3">
+<h3>Special variable: <code>.SD</code></h3>
+</div>
+<div id="special-variable-.grp" class="section level3">
+<h3>Special variable: <code>.GRP</code></h3>
+</div>
+</div>
+</div>
+<div id="casting-and-melting" class="section level1">
+<h1>Casting and melting</h1>
+</div>
+<div id="helpful-functions" class="section level1">
+<h1>Helpful functions</h1>
+<div id="foverlaps" class="section level2">
+<h2>foverlaps</h2>
+</div>
+<div id="fifelse" class="section level2">
+<h2>fifelse</h2>
+</div>
+<div id="frank" class="section level2">
+<h2>frank</h2>
+</div>
+<div id="frollapply" class="section level2">
+<h2>frollapply</h2>
+</div>
+<div id="fintersect" class="section level2">
+<h2>fintersect</h2>
+</div>
+<div id="fcoalesce" class="section level2">
+<h2>fcoalesce</h2>
+</div>
 </div>
 
 
