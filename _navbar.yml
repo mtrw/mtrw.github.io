@@ -1,5 +1,5 @@
-name: "CCG Bioinformatics"
-title: "CCG Bioinformatics"
+name: "CMG Bioinformatics"
+title: "CMG Bioinformatics"
 type: inverse
 left:
   - text: "Getting Started"
@@ -80,6 +80,10 @@ left:
           href: https://dashboard.hpc.unimelb.edu.au/started/
         - text: "Slurm Sbatch"
           href: https://slurm.schedmd.com/sbatch.html
+        - text: "MediaFlux"
+          href: https://wiki-rcs.unimelb.edu.au/display/RCS/Mediaflux
+        - text: "Linux SFTP"
+          href: https://man7.org/linux/man-pages/man1/sftp.1.html
         - text: "BLAST"
           href: https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf
         - text: "AWK"

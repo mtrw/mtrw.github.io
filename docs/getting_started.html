@@ -304,7 +304,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">CCG Bioinformatics</a>
+      <a class="navbar-brand" href="index.html">CMG Bioinformatics</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -446,6 +446,12 @@ div.tocify {
         </li>
         <li>
           <a href="https://slurm.schedmd.com/sbatch.html">Slurm Sbatch</a>
+        </li>
+        <li>
+          <a href="https://wiki-rcs.unimelb.edu.au/display/RCS/Mediaflux">MediaFlux</a>
+        </li>
+        <li>
+          <a href="https://man7.org/linux/man-pages/man1/sftp.1.html">Linux SFTP</a>
         </li>
         <li>
           <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf">BLAST</a>
@@ -662,7 +668,7 @@ for some quick inspiration.</li>
 <li><p>Import some customised profile files for Zsh and screen by
 running these commands (<strong>including</strong> the dot
 <code>.</code> at the end of some commands)</p>
-<pre><code> cd /home/$USER
+<pre><code> cd /home/${USER}
  [[ -e .bash_profile ]] &amp;&amp; mv .bash_profile .bash_profile_old
  cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
  [[ -e .bashrc ]] &amp;&amp; mv .bashrc .bashrc_old
@@ -671,7 +677,10 @@ running these commands (<strong>including</strong> the dot
  cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
  [[ -e .screenrc ]] &amp;&amp; mv .screenrc .screenrc_old
  cp /data/gpfs/projects/punim1869/.admin/assets/.screenrc .
- source /home/$USER/.zshrc</code></pre>
+ source /home/${USER}/.zshrc
+ mkdir -p /home/${USER}/.Arcitecta
+ cat $STO/.admin/assets/.mflux.cfg_template | sed &quot;s/___/${USER}/&quot; &gt; /home/${USER}/.Arcitecta/mflux.cfg
+ chmod -R go-rwx /home/${USER}/.Arcitecta</code></pre>
 <ul>
 <li>Screen is a Linux program you will use later</li>
 <li>Profile files contain settings for programs in order to customise

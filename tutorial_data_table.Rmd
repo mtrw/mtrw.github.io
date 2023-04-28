@@ -49,7 +49,7 @@ require(data.table)
 
 # Reading and writing data
 
-The data we'll work with are from [here](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020). You can also it on the Spartan storage server at /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.
+The data we'll work with are from [here](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020). You can also find it on the Spartan storage server at /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.
 
 ## Text-based table formats
 
@@ -196,7 +196,7 @@ lt[, min(milliseconds) ]
 lt[, min(milliseconds)/1000/60 ]
 # ... at an Australian Grand Prix (notice we are now also using the SELECT field)
 lt[ name=="Australian Grand Prix" , min(milliseconds)/1000/60 ]
-# ... and what years did Sebastian Vettel race in Australia? 
+# ... and what years did Sebastian Vettel race in Australia?
 lt[ name=="Australian Grand Prix" , unique(year) ]
 # ... so what lap was Sebastian Vettel's fastest lap at the 2011 Australian Grand Prix?
 lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel" , lap[which(milliseconds==min(milliseconds))] ]
@@ -321,7 +321,7 @@ ltA[ , .( mean_laptime = mean(seconds) ,  fastest_lap = min(seconds) ) , by=.(ye
 ltA[ year > 2010 , .( mean_laptime = mean(seconds) ,  fastest_lap = min(seconds) ) , by=.(year,fullname) ]
 ```
 
-This is a great example of how quickly `data.table` aggregates good stats for plotting. We can very quickly use the above data to look at how lap times evolve over seasons, for example ...
+This is a great example of how quickly `data.table` aggregates good stats for plotting. We can very quickly use the above data to look at how average lap times evolve over seasons, for example ...
 
 ```{r}
 require(ggplot2)
@@ -331,74 +331,81 @@ ggplot(
 ) + geom_line() + theme(legend.position = "none")
 ```
 
-
-> I HAVEN'T WRITTEN ANY MORE PROPERLY. SORRY. WHAT FOLLOWS IS WORK IN PROGRESS.
-
-Interesting. Clearly it's not as simple as getting steadily faster each year. I this just due to the weather? Well we could try to look at lots of different circuits ... but they all have different lengths, so to compare laptimes, maybe we have to calculate and average lap time for each over all the years, and see how the lap times each year deviate from that average at each circuit in each year?
-
-This is an *excellent* opportunity for you to practice what you have learned so far, and experience the power of `data.table` for analysis. Try to write it yourself before you derive hints from my way. With `data.table`, there are always multiple ways to do it.
-
-```{r}
-#list all circuits with data from all years in the set
-nYears <- lt[,length(unique(year))]
-includeCircuits <- lt[,.(nYears_circuit=length(unique(year))),by=.(name)][nYears_circuit==nYears,name]
-
-#Get the (av)erage (l)ap (t)imes for eac of these (c)ircuits over all years
-avLtC <- lt[ name %in% includeCircuits ,.(mean_lt_circuit = mean(milliseconds) ) , by=.(name)]
-
-FlC <- lt[name %in% includeCircuits, .(fl_circuit=min(milliseconds)) , by=.(name) ]
-avFlC <- lt[name %in% includeCircuits, .(fl_circuit=min(milliseconds)) , by=.(name) ]
-
-
-#Get the (av)erage (l)ap (t)imes for each (c)ircuit each in each (y)ear
-avLtCY <- lt[ name %in% includeCircuits ,.(mean_lt_circuit_year = mean(milliseconds)) , by=.(name,year)]
-
-FlDCY <- lt[name %in% includeCircuits, .(fl_circuit_driver_year=min(milliseconds)) , by=.(driverId,name,year) ]
-
-FlCY <- lt[name %in% includeCircuits, .(fl_circuit_year=min(milliseconds)) , by=.(name,year) ]
-
-#Attach them together
-avLtCY <- avLtC[avLtCY,on=.(name)]
-
-
-FlDCY <- FlC[FlDCY,on=.(name)]
-FlCY <- FlC[FlCY,on=.(name)]
-
-#Express circuit year averages as differences from the global circuit average
-avLtCY[,mean_laptime_vs_circuit_mean_pct_diff:=100*(mean_lt_circuit_year/mean_lt_circuit)-100]
-
-FlDCY[,driver_fastestLap_vs_record:=fl_circuit_driver_year-fl_circuit,by=.(driverId)]
-FlCY[,fastestLap_vs_record:=fl_circuit_year-fl_circuit]
-
-#Plot
-ggplot( avLtCY ,aes(x=year,y=mean_laptime_vs_circuit_mean_pct_diff,colour=name)) + geom_line()
-
-ggplot( FlDCY ,aes(x=year,y=driver_fastestLap_vs_record,colour=as.factor(name),group=as.factor(paste(driverId,name)))) + geom_line() + ylim(c(0,40000))
-
-ggplot( FlDCY ,aes(x=year,y=fl_circuit_driver_year,colour=as.factor(name),group=as.factor(paste(driverId,name)))) + geom_line() + ylim(c(60000,140000))
-
-ggplot( FlCY ,aes(x=year,y=fastestLap_vs_record,colour=name)) + geom_line()
-```
-
 ## Getting slightly tricky
 
-## Group by .N
+### Group by with .N
 
-## .SD
+Quite often you need to just count the members of each category, say, the number of laps each driver has driven. You could write ...
 
-## setorder
+```{r}
+ltA[,.(N=.N),by=.(surname)]
+```
 
-## setnames
+`data.table` offers this shortcut ...
+
+```{r,eval=F}
+ltA[,.N,by=.(surname)]
+```
+
+... which will automatically name the count column "N"
+
+### Special variable: `.SD`
+
+Say you want to filter your `data.table` to select the driver with the fastest lap in each race (or equivalently, filter BLAST results, taking the highest-scoring alignment for each query ... but this is a strictly F1-based tutorial).
+
+Naturally you will think about grouping by race. And about SELECTing a row based on lap time. But the SELECT field acts on the *whole table*, and you want to select from *each group*. What to do?
+
+When grouping, the special variable `.SD` gives you access to a mini data.table containing just the group it is working on.
+
+```{r}
+ltA[,.SD[seconds==min(seconds)],by=.(year)]
+```
+
+### `setorder()` ...
+
+We've already seen one method of ordering a `data.table`, something like: `dt <- dt[order(varname),]`. But this requires copying the entire table, which is not memory efficient. To sort the table more efficiently, we can use this function:
+
+```{r}
+ltA
+setorder(ltA,year,surname) #sort first by year, then by surname within each year
+ltA
+setorder(ltA,year,-surname) #Use a negative sign to reverse the ordering
+ltA
+```
+
+### ... and more importantly, `setkey()`
+
+There are computational advantages to having sorted tables. The reason is the same reason dictionaries put the words in alphabetical order and not randomly. When you search a dictionary for a word you (probably without thinking about it) implement a kind of [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) algorithm. `data.table` is often asked to find values, in fact that's most of that the SELECT field does. If `data.table` knows that one or more columns are sorted, it can search them far more quickly. `setkey()` does this:
+
+```{r}
+setkey(ltA,forename,lap) #Note you cannot use `-` to reverse the order. That's why `setorder()` still exists
+#This shows you that the data.table now has an attribute indicating which columns are sorted, or "keys", in the lingo
+attributes(ltA)["sorted"]
+setorder(ltA,-year)
+#Obviously, if you reorder the rows later the keys will be removed.
+attributes(ltA)["sorted"]
+```
+
+This becomes especially super important when performing very large merges, because these require a lot of searching behind the scenes to work out what rows match.
+
+### `setnames()`
+
+
+
+### `setDT()`
+
+### Multiline DO_SOMETHING
+
+
+
+
 
 ## setDT
 
 ## Getting extra tricky
 
-### Multiline DO_SOMETHING
 
 ### Use as a *for* loop affecting outside variables
-
-### Special variable: `.SD`
 
 ### Special variable: `.GRP`
 

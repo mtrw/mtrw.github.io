@@ -118,7 +118,7 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 
 9. Import some customised profile files for Zsh and screen by running these commands (**including** the dot `.` at the end of some commands)
 
-        cd /home/$USER
+        cd /home/${USER}
         [[ -e .bash_profile ]] && mv .bash_profile .bash_profile_old
         cp /data/gpfs/projects/punim1869/.admin/assets/.bash_profile .
         [[ -e .bashrc ]] && mv .bashrc .bashrc_old
@@ -127,7 +127,10 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
         cp /data/gpfs/projects/punim1869/.admin/assets/.zshrc .
         [[ -e .screenrc ]] && mv .screenrc .screenrc_old
         cp /data/gpfs/projects/punim1869/.admin/assets/.screenrc .
-        source /home/$USER/.zshrc
+        source /home/${USER}/.zshrc
+        mkdir -p /home/${USER}/.Arcitecta
+        cat $STO/.admin/assets/.mflux.cfg_template | sed "s/___/${USER}/" > /home/${USER}/.Arcitecta/mflux.cfg
+        chmod -R go-rwx /home/${USER}/.Arcitecta
 
     - Screen is a Linux program you will use later
     - Profile files contain settings for programs in order to customise them. For example, the .zshrc file will change your command prompt to a custom one I designed, and add a few helpful shortcut commands to (e.g.) take you straight to your storage directory.

@@ -35,7 +35,7 @@ As you can see I now have the file. `wget` gives it a name taken from the URL, s
 
 ## Transferring between your desktop and Spartan
 
-This is where we use the program [SFTP Drive 2022](https://www.nsoftware.com/sftp/drive/download.aspx). Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol under the bonnet, but applies some sexy wrapping to make it operate just like a regular directory on your own computer. Open SFTP Drive 2022 and click <new>.
+This is where we use the program [SFTP Drive 2022](https://www.nsoftware.com/sftp/drive/download.aspx). Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer! Open SFTP Drive 2022 and click <new>.
 
 ![](images/drive1.png)
 
@@ -69,15 +69,13 @@ If you want to copy directories and all their subdirectories, add the -r flag:
 
                 sftp -r <login_name>@<other.server.address>:</path/on/other.server/to/directory>
 
-So, say I am on Spartan and I want to copy a directory **/home/tim/data/sequences** from the server at my old work (where my username is **wallace**, the server address is **ipk-gatersleben.de**, and my password is of course a secret) I would run:
+So, say I am on Spartan and I want to copy a directory **/home/tim/data/seqfiles** from the server at my old work (where my username is **wallace**, the server address is **ipk-gatersleben.de**, and my password is of course a secret) I would run:
 
 ![](images/sftp1.png)
 
 ... and enter my password, and the directory will be downloaded.
 
-Note sftp will follow symlinks (shortcuts) and copy the original file. This is actually a great way to transfer many files: Put a directory of shortcuts to all the files on one server, and sftp the whole directory from the other server.
-
-Also, in reality most servers won't let you directly copy files from them, and Spartan is no exception. When you want to transfer between servers, the admins will set up a special *ftp server* for you, and you can transfer files to and from that exactly as above. If you need to use an ftp server, talk to the mighty admins.
+Also, in reality most servers won't let you directly copy files from them, and Spartan is no exception. When you want to transfer between servers, the admins will set up a special *ftp server* for you, and you can transfer files to and from that exactly as above. If you need to set up an ftp server, talk to the mighty admins.
 
 
 

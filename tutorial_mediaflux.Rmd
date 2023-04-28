@@ -1,0 +1,95 @@
+---
+title: "Transfer data to and from long-term storage (Mediaflux)"
+output:
+  html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+---
+
+# What is Mediaflux?
+
+Mediaflux is a system for storing huge amounts of data, developed by the US company [Arcitecta](https://www.arcitecta.com/mediaflux/features/). The Uni uses it.
+
+## Why do I need to know about this?
+
+We have limited space to store data on [Spartan](getting_started.html). Once a dataset is no longer being used regularly, it should be moved to Mediaflux.
+
+# Interacting with Mediaflux
+
+There are [several ways](https://wiki-rcs.unimelb.edu.au/display/RCS/Getting+Started+with+Mediaflux). I prefer *SFTP* client, which you may have met in [this](tutorial_sftp.html) tutorial on transferring data. STFP is basically a set of rules governing how computers can securely transfer data between them.
+
+## Start an SFTP connection
+
+To open an SFTP connection to Mediaflux from Spartan, run
+
+```{bash,eval=F}
+sftp -P 22 unimelb:${USER}@mediaflux.researchsoftware.unimelb.edu.au
+```
+
+It will ask for a password. You need to give it your *University of Melbourne* password, and **not** your Spartan/HPC password. The reason for this is that suffering builds character.
+
+This will log you in. We now refer to the place you logged in from (Spartan) as `local` and the place you logged in to as `remote`, as in *the remote directory* or *the local machine*.
+
+Once you are logged in, you will have a command line that allows you many commands analogous to those in linux, things like `cd`, `ls`, `pwd`, `mkdir`, and (careful!) `rm`. Head over to our Mediaflux storage directory with:
+
+```{bash,eval=F}
+sftp> cd Volumes/proj-2590_ccg_fridge-1128.4.730
+```
+
+## Transfter Spartan --> Mediaflux
+
+Before you transfer data, think carefully about a directory name for it. You can make directories and subdirectories as needed. Remember, someone in 100 years might be looking for it based on your thesis, so use an informative title.
+
+Since I will transfer files as a demo, and delete tham afterwards, I will create a directory called `tim_mediaflux_demo_DELETE_ME`:
+
+```{bash,eval=F}
+sftp> mkdir tim_mediaflux_demo_DELETE_ME
+sftp> cd tim_mediaflux_demo_DELETE_ME/
+```
+
+## Exiting SFTP
+
+```{bash,eval=F}
+sftp> exit
+```
+
+### Running local commands (!)
+
+I have a directory in my Spartan home directory (`~`) called `transfer_me` containing three files; `file1`, `file2`, and `file3.` In fact despite being logged in to the remote computer, I can actually see it on my local computer using a cool trick. A command prefaced with a bang character (for some reason this is what computer nerds call an exclamation mark, '`!`') is executed on the local system and the result displayed.
+
+```{bash,eval=F}
+sftp> !ls
+#Result: transfer_me
+sftp> !ls transfer_me
+#Result: file1 file2 file3
+```
+
+### Make the transfer
+
+To transfer it to the remote directory, use `put`. As with the linux command `cp` (copy), you need to add the *recursive* (`-R`) flag to the command to copy a directory (and any subdirectories inside it).
+
+```{bash,eval=F}
+sftp> put -R transfer_me
+sftp> ls transfer_me
+#Result: file1 file2 file3
+```
+
+## Transfter Mediaflux --> Spartan
+
+This is done with the `get` command.
+
+```{bash,eval=F}
+sftp> get -R transfer_me
+```
+
+## SECURITY! (concerns)
+
+There doesn't seem to be a way to limit access to files on Mediaflux. Anyone who has access to the lab group directory (i.e. all of you) can delete anything they want. That's bad. **Never** delete anything unless you personally know exactly what it is and you are 100% sure that there is zero chance in a billion years it will be wanted again. I will talk to admins about enabling better access control.
+
+## Helpful hints
+
+-   Run large transfers in a `screen` session, and be sure to allocate resources for a long time.
+-   The SFTP flag `-a` will attempt to resume an interrupted transfer by (e.g.) completing partially-complete file transfers and ignoring already-transferred files.
+

@@ -411,7 +411,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">CCG Bioinformatics</a>
+      <a class="navbar-brand" href="index.html">CMG Bioinformatics</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -555,6 +555,12 @@ div.tocify {
           <a href="https://slurm.schedmd.com/sbatch.html">Slurm Sbatch</a>
         </li>
         <li>
+          <a href="https://wiki-rcs.unimelb.edu.au/display/RCS/Mediaflux">MediaFlux</a>
+        </li>
+        <li>
+          <a href="https://man7.org/linux/man-pages/man1/sftp.1.html">Linux SFTP</a>
+        </li>
+        <li>
           <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/pdf/Bookshelf_NBK279690.pdf">BLAST</a>
         </li>
         <li>
@@ -662,7 +668,7 @@ faster than Charles Leclerc can drive this Ferrari.
 <h1>Reading and writing data</h1>
 <p>The data we’ll work with are from <a
 href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020">here</a>.
-You can also it on the Spartan storage server at
+You can also find it on the Spartan storage server at
 /data/gpfs/projects/punim1869/shared_data/bioinfo_tutorials/f1.</p>
 <div id="text-based-table-formats" class="section level2">
 <h2>Text-based table formats</h2>
@@ -1002,7 +1008,7 @@ why shouldn’t you too?</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... at an Australian Grand Prix (notice we are now also using the SELECT field)</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> , <span class="fu">min</span>(milliseconds)<span class="sc">/</span><span class="dv">1000</span><span class="sc">/</span><span class="dv">60</span> ]</span></code></pre></div>
 <pre><code>## [1] 1.402083</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and what years did Sebastian Vettel race in Australia? </span></span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and what years did Sebastian Vettel race in Australia?</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>lt[ name<span class="sc">==</span><span class="st">&quot;Australian Grand Prix&quot;</span> , <span class="fu">unique</span>(year) ]</span></code></pre></div>
 <pre><code>##  [1] 2011 2012 2013 2014 2015 2016 1996 1997 1998 1999 2000 2001 2002 2003 2004
 ## [16] 2005 2006 2007 2008 2009 2010 2017</code></pre>
@@ -1275,7 +1281,8 @@ three indexing fields together!</p>
 ## 138: 2017   Daniel Ricciardo     98.88004      89.447</code></pre>
 <p>This is a great example of how quickly <code>data.table</code>
 aggregates good stats for plotting. We can very quickly use the above
-data to look at how lap times evolve over seasons, for example …</p>
+data to look at how average lap times evolve over seasons, for example
+…</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -1283,93 +1290,219 @@ data to look at how lap times evolve over seasons, for example …</p>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fastest_lap,<span class="at">colour=</span>fullname)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-<blockquote>
-<p>I HAVEN’T WRITTEN ANY MORE PROPERLY. SORRY. WHAT FOLLOWS IS WORK IN
-PROGRESS.</p>
-</blockquote>
-<p>Interesting. Clearly it’s not as simple as getting steadily faster
-each year. I this just due to the weather? Well we could try to look at
-lots of different circuits … but they all have different lengths, so to
-compare laptimes, maybe we have to calculate and average lap time for
-each over all the years, and see how the lap times each year deviate
-from that average at each circuit in each year?</p>
-<p>This is an <em>excellent</em> opportunity for you to practice what
-you have learned so far, and experience the power of
-<code>data.table</code> for analysis. Try to write it yourself before
-you derive hints from my way. With <code>data.table</code>, there are
-always multiple ways to do it.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list all circuits with data from all years in the set</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>nYears <span class="ot">&lt;-</span> lt[,<span class="fu">length</span>(<span class="fu">unique</span>(year))]</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>includeCircuits <span class="ot">&lt;-</span> lt[,.(<span class="at">nYears_circuit=</span><span class="fu">length</span>(<span class="fu">unique</span>(year))),by<span class="ot">=</span>.(name)][nYears_circuit<span class="sc">==</span>nYears,name]</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the (av)erage (l)ap (t)imes for eac of these (c)ircuits over all years</span></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>avLtC <span class="ot">&lt;-</span> lt[ name <span class="sc">%in%</span> includeCircuits ,.(<span class="at">mean_lt_circuit =</span> <span class="fu">mean</span>(milliseconds) ) , by<span class="ot">=</span>.(name)]</span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>FlC <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name) ]</span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>avFlC <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name) ]</span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the (av)erage (l)ap (t)imes for each (c)ircuit each in each (y)ear</span></span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>avLtCY <span class="ot">&lt;-</span> lt[ name <span class="sc">%in%</span> includeCircuits ,.(<span class="at">mean_lt_circuit_year =</span> <span class="fu">mean</span>(milliseconds)) , by<span class="ot">=</span>.(name,year)]</span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>FlDCY <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit_driver_year=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(driverId,name,year) ]</span>
-<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a>FlCY <span class="ot">&lt;-</span> lt[name <span class="sc">%in%</span> includeCircuits, .(<span class="at">fl_circuit_year=</span><span class="fu">min</span>(milliseconds)) , by<span class="ot">=</span>.(name,year) ]</span>
-<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Attach them together</span></span>
-<span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a>avLtCY <span class="ot">&lt;-</span> avLtC[avLtCY,on<span class="ot">=</span>.(name)]</span>
-<span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-22"><a href="#cb77-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-23"><a href="#cb77-23" aria-hidden="true" tabindex="-1"></a>FlDCY <span class="ot">&lt;-</span> FlC[FlDCY,on<span class="ot">=</span>.(name)]</span>
-<span id="cb77-24"><a href="#cb77-24" aria-hidden="true" tabindex="-1"></a>FlCY <span class="ot">&lt;-</span> FlC[FlCY,on<span class="ot">=</span>.(name)]</span>
-<span id="cb77-25"><a href="#cb77-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-26"><a href="#cb77-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Express circuit year averages as differences from the global circuit average</span></span>
-<span id="cb77-27"><a href="#cb77-27" aria-hidden="true" tabindex="-1"></a>avLtCY[,mean_laptime_vs_circuit_mean_pct_diff<span class="sc">:</span><span class="er">=</span><span class="dv">100</span><span class="sc">*</span>(mean_lt_circuit_year<span class="sc">/</span>mean_lt_circuit)<span class="sc">-</span><span class="dv">100</span>]</span>
-<span id="cb77-28"><a href="#cb77-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-29"><a href="#cb77-29" aria-hidden="true" tabindex="-1"></a>FlDCY[,driver_fastestLap_vs_record<span class="sc">:</span><span class="er">=</span>fl_circuit_driver_year<span class="sc">-</span>fl_circuit,by<span class="ot">=</span>.(driverId)]</span>
-<span id="cb77-30"><a href="#cb77-30" aria-hidden="true" tabindex="-1"></a>FlCY[,fastestLap_vs_record<span class="sc">:</span><span class="er">=</span>fl_circuit_year<span class="sc">-</span>fl_circuit]</span>
-<span id="cb77-31"><a href="#cb77-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-32"><a href="#cb77-32" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot</span></span>
-<span id="cb77-33"><a href="#cb77-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( avLtCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>mean_laptime_vs_circuit_mean_pct_diff,<span class="at">colour=</span>name)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlDCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>driver_fastestLap_vs_record,<span class="at">colour=</span><span class="fu">as.factor</span>(name),<span class="at">group=</span><span class="fu">as.factor</span>(<span class="fu">paste</span>(driverId,name)))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40000</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 26 rows containing missing values (`geom_line()`).</code></pre>
-<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlDCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fl_circuit_driver_year,<span class="at">colour=</span><span class="fu">as.factor</span>(name),<span class="at">group=</span><span class="fu">as.factor</span>(<span class="fu">paste</span>(driverId,name)))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">60000</span>,<span class="dv">140000</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 7 rows containing missing values (`geom_line()`).</code></pre>
-<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( FlCY ,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>fastestLap_vs_record,<span class="at">colour=</span>name)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-28-4.png" width="672" /></p>
 </div>
 <div id="getting-slightly-tricky" class="section level2">
 <h2>Getting slightly tricky</h2>
+<div id="group-by-with-.n" class="section level3">
+<h3>Group by with .N</h3>
+<p>Quite often you need to just count the members of each category, say,
+the number of laps each driver has driven. You could write …</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>ltA[,.(<span class="at">N=</span>.N),by<span class="ot">=</span>.(surname)]</span></code></pre></div>
+<pre><code>##         surname   N
+##   1:     Vettel 430
+##   2:   Hamilton 580
+##   3:     Webber 525
+##   4:     Petrov 101
+##   5:      Massa 625
+##  ---               
+##  99:  di Grassi  26
+## 100:       Ocon  56
+## 101:     Stroll  40
+## 102:  Vandoorne  55
+## 103: Giovinazzi  55</code></pre>
+<p><code>data.table</code> offers this shortcut …</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>ltA[,.N,by<span class="ot">=</span>.(surname)]</span></code></pre></div>
+<p>… which will automatically name the count column “N”</p>
 </div>
-<div id="group-by-.n" class="section level2">
-<h2>Group by .N</h2>
+<div id="special-variable-.sd" class="section level3">
+<h3>Special variable: <code>.SD</code></h3>
+<p>Say you want to filter your <code>data.table</code> to select the
+driver with the fastest lap in each race (or equivalently, filter BLAST
+results, taking the highest-scoring alignment for each query … but this
+is a strictly F1-based tutorial).</p>
+<p>Naturally you will think about grouping by race. And about SELECTing
+a row based on lap time. But the SELECT field acts on the <em>whole
+table</em>, and you want to select from <em>each group</em>. What to
+do?</p>
+<p>When grouping, the special variable <code>.SD</code> gives you access
+to a mini data.table containing just the group it is working on.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>ltA[,.SD[seconds<span class="sc">==</span><span class="fu">min</span>(seconds)],by<span class="ot">=</span>.(year)]</span></code></pre></div>
+<pre><code>##     year     forename      surname lap position                  name circuitId
+##  1: 2011       Felipe        Massa  55        9 Australian_Grand_Prix         1
+##  2: 2012       Jenson       Button  56        1 Australian_Grand_Prix         1
+##  3: 2013         Kimi R\xcc_ikk̦nen  56        1 Australian_Grand_Prix         1
+##  4: 2014         Nico      Rosberg  19        1 Australian_Grand_Prix         1
+##  5: 2015        Lewis     Hamilton  50        1 Australian_Grand_Prix         1
+##  6: 2016       Daniel    Ricciardo  49        4 Australian_Grand_Prix         1
+##  7: 1996      Jacques   Villeneuve  27        1 Australian_Grand_Prix         1
+##  8: 1997 Heinz-Harald     Frentzen  36        1 Australian_Grand_Prix         1
+##  9: 1998         Mika H\xcc_kkinen  39        2 Australian_Grand_Prix         1
+## 10: 1999      Michael   Schumacher  55        8 Australian_Grand_Prix         1
+## 11: 2000       Rubens  Barrichello  41        2 Australian_Grand_Prix         1
+## 12: 2001      Michael   Schumacher  34        1 Australian_Grand_Prix         1
+## 13: 2002         Kimi R\xcc_ikk̦nen  37        2 Australian_Grand_Prix         1
+## 14: 2003         Kimi R\xcc_ikk̦nen  32        1 Australian_Grand_Prix         1
+## 15: 2004      Michael   Schumacher  29        1 Australian_Grand_Prix         1
+## 16: 2005     Fernando       Alonso  24        3 Australian_Grand_Prix         1
+## 17: 2006         Kimi R\xcc_ikk̦nen  57        2 Australian_Grand_Prix         1
+## 18: 2007         Kimi R\xcc_ikk̦nen  41        1 Australian_Grand_Prix         1
+## 19: 2008       Heikki   Kovalainen  43        1 Australian_Grand_Prix         1
+## 20: 2009         Nico      Rosberg  48        7 Australian_Grand_Prix         1
+## 21: 2010         Mark       Webber  47        6 Australian_Grand_Prix         1
+## 22: 2017         Kimi R\xcc_ikk̦nen  56        4 Australian_Grand_Prix         1
+##     year     forename      surname lap position                  name circuitId
+##     seconds              fullname
+##  1:  88.947          Felipe Massa
+##  2:  89.187         Jenson Button
+##  3:  89.274     Kimi R\xcc_ikk̦nen
+##  4:  92.478          Nico Rosberg
+##  5:  90.945        Lewis Hamilton
+##  6:  88.997      Daniel Ricciardo
+##  7:  93.421    Jacques Villeneuve
+##  8:  90.585 Heinz-Harald Frentzen
+##  9:  91.649     Mika H\xcc_kkinen
+## 10:  92.112    Michael Schumacher
+## 11:  91.481    Rubens Barrichello
+## 12:  88.214    Michael Schumacher
+## 13:  88.541     Kimi R\xcc_ikk̦nen
+## 14:  87.724     Kimi R\xcc_ikk̦nen
+## 15:  84.125    Michael Schumacher
+## 16:  85.683       Fernando Alonso
+## 17:  86.045     Kimi R\xcc_ikk̦nen
+## 18:  85.235     Kimi R\xcc_ikk̦nen
+## 19:  87.418     Heikki Kovalainen
+## 20:  87.706          Nico Rosberg
+## 21:  88.358           Mark Webber
+## 22:  86.538     Kimi R\xcc_ikk̦nen
+##     seconds              fullname</code></pre>
 </div>
-<div id="sd" class="section level2">
-<h2>.SD</h2>
+<div id="setorder" class="section level3">
+<h3><code>setorder()</code> …</h3>
+<p>We’ve already seen one method of ordering a <code>data.table</code>,
+something like: <code>dt &lt;- dt[order(varname),]</code>. But this
+requires copying the entire table, which is not memory efficient. To
+sort the table more efficiently, we can use this function:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##         forename   surname lap position                  name circuitId year
+##     1: Sebastian    Vettel   1        1 Australian_Grand_Prix         1 2011
+##     2: Sebastian    Vettel   2        1 Australian_Grand_Prix         1 2011
+##     3: Sebastian    Vettel   3        1 Australian_Grand_Prix         1 2011
+##     4: Sebastian    Vettel   4        1 Australian_Grand_Prix         1 2011
+##     5: Sebastian    Vettel   5        1 Australian_Grand_Prix         1 2011
+##    ---                                                                      
+## 19841:    Daniel Ricciardo  21       18 Australian_Grand_Prix         1 2017
+## 19842:    Daniel Ricciardo  22       17 Australian_Grand_Prix         1 2017
+## 19843:    Daniel Ricciardo  23       17 Australian_Grand_Prix         1 2017
+## 19844:    Daniel Ricciardo  24       17 Australian_Grand_Prix         1 2017
+## 19845:    Daniel Ricciardo  25       17 Australian_Grand_Prix         1 2017
+##        seconds         fullname
+##     1:  98.109 Sebastian Vettel
+##     2:  93.006 Sebastian Vettel
+##     3:  92.713 Sebastian Vettel
+##     4:  92.803 Sebastian Vettel
+##     5:  92.342 Sebastian Vettel
+##    ---                         
+## 19841:  89.447 Daniel Ricciardo
+## 19842:  90.172 Daniel Ricciardo
+## 19843:  90.407 Daniel Ricciardo
+## 19844:  89.466 Daniel Ricciardo
+## 19845:  89.708 Daniel Ricciardo</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,surname) <span class="co">#sort first by year, then by surname within each year</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##         forename surname lap position                  name circuitId year
+##     1:      Jean   Alesi   1        5 Australian_Grand_Prix         1 1996
+##     2:      Jean   Alesi   2        5 Australian_Grand_Prix         1 1996
+##     3:      Jean   Alesi   3        5 Australian_Grand_Prix         1 1996
+##     4:      Jean   Alesi   4        5 Australian_Grand_Prix         1 1996
+##     5:      Jean   Alesi   5        5 Australian_Grand_Prix         1 1996
+##    ---                                                                    
+## 19841: Sebastian  Vettel  53        1 Australian_Grand_Prix         1 2017
+## 19842: Sebastian  Vettel  54        1 Australian_Grand_Prix         1 2017
+## 19843: Sebastian  Vettel  55        1 Australian_Grand_Prix         1 2017
+## 19844: Sebastian  Vettel  56        1 Australian_Grand_Prix         1 2017
+## 19845: Sebastian  Vettel  57        1 Australian_Grand_Prix         1 2017
+##        seconds         fullname
+##     1: 106.506       Jean Alesi
+##     2:  97.554       Jean Alesi
+##     3:  96.830       Jean Alesi
+##     4:  96.437       Jean Alesi
+##     5:  95.765       Jean Alesi
+##    ---                         
+## 19841:  86.638 Sebastian Vettel
+## 19842:  87.007 Sebastian Vettel
+## 19843:  87.369 Sebastian Vettel
+## 19844:  87.437 Sebastian Vettel
+## 19845:  88.709 Sebastian Vettel</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,<span class="sc">-</span>surname) <span class="co">#Use a negative sign to reverse the ordering</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<pre><code>##        forename    surname lap position                  name circuitId year
+##     1:  Jacques Villeneuve   1        1 Australian_Grand_Prix         1 1996
+##     2:  Jacques Villeneuve   2        1 Australian_Grand_Prix         1 1996
+##     3:  Jacques Villeneuve   3        1 Australian_Grand_Prix         1 1996
+##     4:  Jacques Villeneuve   4        1 Australian_Grand_Prix         1 1996
+##     5:  Jacques Villeneuve   5        1 Australian_Grand_Prix         1 1996
+##    ---                                                                      
+## 19841: Fernando     Alonso  46       10 Australian_Grand_Prix         1 2017
+## 19842: Fernando     Alonso  47       10 Australian_Grand_Prix         1 2017
+## 19843: Fernando     Alonso  48       10 Australian_Grand_Prix         1 2017
+## 19844: Fernando     Alonso  49       10 Australian_Grand_Prix         1 2017
+## 19845: Fernando     Alonso  50       10 Australian_Grand_Prix         1 2017
+##        seconds           fullname
+##     1: 103.702 Jacques Villeneuve
+##     2:  97.036 Jacques Villeneuve
+##     3:  95.959 Jacques Villeneuve
+##     4:  95.648 Jacques Villeneuve
+##     5:  95.223 Jacques Villeneuve
+##    ---                           
+## 19841:  90.247    Fernando Alonso
+## 19842:  90.081    Fernando Alonso
+## 19843:  90.077    Fernando Alonso
+## 19844:  90.493    Fernando Alonso
+## 19845:  92.485    Fernando Alonso</code></pre>
 </div>
-<div id="setorder" class="section level2">
-<h2>setorder</h2>
+<div id="and-more-importantly-setkey" class="section level3">
+<h3>… and more importantly, <code>setkey()</code></h3>
+<p>There are computational advantages to having sorted tables. The
+reason is the same reason dictionaries put the words in alphabetical
+order and not randomly. When you search a dictionary for a word you
+(probably without thinking about it) implement a kind of <a
+href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary
+search</a> algorithm. <code>data.table</code> is often asked to find
+values, in fact that’s most of that the SELECT field does. If
+<code>data.table</code> knows that one or more columns are sorted, it
+can search them far more quickly. <code>setkey()</code> does this:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(ltA,forename,lap) <span class="co">#Note you cannot use `-` to reverse the order. That&#39;s why `setorder()` still exists</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This shows you that the data.table now has an attribute indicating which columns are sorted, or &quot;keys&quot;, in the lingo</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
+<pre><code>## $sorted
+## [1] &quot;forename&quot; &quot;lap&quot;</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,<span class="sc">-</span>year)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Obviously, if you reorder the rows later the keys will be removed.</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
+<pre><code>## $&lt;NA&gt;
+## NULL</code></pre>
+<p>This becomes especially super important when performing very large
+merges, because these require a lot of searching behind the scenes to
+work out what rows match.</p>
 </div>
-<div id="setnames" class="section level2">
-<h2>setnames</h2>
+<div id="setnames" class="section level3">
+<h3><code>setnames()</code></h3>
 </div>
-<div id="setdt" class="section level2">
+<div id="setdt" class="section level3">
+<h3><code>setDT()</code></h3>
+</div>
+<div id="multiline-do_something" class="section level3">
+<h3>Multiline DO_SOMETHING</h3>
+</div>
+</div>
+<div id="setdt-1" class="section level2">
 <h2>setDT</h2>
 </div>
 <div id="getting-extra-tricky" class="section level2">
 <h2>Getting extra tricky</h2>
-<div id="multiline-do_something" class="section level3">
-<h3>Multiline DO_SOMETHING</h3>
-</div>
 <div id="use-as-a-for-loop-affecting-outside-variables"
 class="section level3">
 <h3>Use as a <em>for</em> loop affecting outside variables</h3>
-</div>
-<div id="special-variable-.sd" class="section level3">
-<h3>Special variable: <code>.SD</code></h3>
 </div>
 <div id="special-variable-.grp" class="section level3">
 <h3>Special variable: <code>.GRP</code></h3>
