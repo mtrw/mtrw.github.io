@@ -113,8 +113,8 @@ If you want to select specific rows based on some property, you *could* use logi
 ```{r}
 selectMe <- lt$lap < 3
 selectMe[1:10]
-lt[selectMe,]
-rm(selectMe)
+lt[selectMe,] # Note now only data for laps 1 and 2 are there
+rm(selectMe)  # It's good to clean up variables you don't need later to save memory
 # Four steps ... really?
 ```
 
@@ -155,7 +155,13 @@ lt[.N:1,]
 
 These are exceptionally useful for selection:
 
+```{r}
+lt[lap %between% c(4,7),] # Select laps between (and including) 4 and 7
+lt[lap %in% c(4,6,7),] # Select laps 4, 6 and 7
+lt[!lap %in% c(4,6,7),] # Select all laps except 4, 6 and 7
+```
 
+As you can imagine, this is something you might use to select, say, genes or SNPs falling within a particular range.
 
 ## Merging
 
@@ -176,7 +182,7 @@ Note `data.table` uses lists often so the dot character `.` can be used as a sho
 Also note you can join on more than one column, just add all the names to the `on=` list.
 
 For more flexibility, check the documentation with `?merge.data.table`. You'll find you can do cool things like return rows that do NOT match.
-Let's all our driver and race data into the lap times table and move on.
+Let's merge all our driver and race data into the lap times table and move on.
 
 ```{r}
 lt <- dr[lt,on=.(driverId)]
@@ -221,7 +227,7 @@ lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel" , plot(x=lap,
 ... looks like he had two pit stops and got faster and faster as the race went on. Which is good because .. he won! See?
 
 ```{r}
-lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel", ][ lap==max(lap), print(paste("At the end of the final lap, Vettel was in position",position,"!")) ]
+lt[ name=="Australian Grand Prix" & year==2011 & surname=="Vettel", ][ lap==max(lap), paste("At the end of the final lap, Vettel was in position",position,"!") ]
 ```
 
 ### Returning a new `data.table`
@@ -247,7 +253,7 @@ A common use is to trim your `data.table` down to just important columns. Let's 
 
 ```{r}
 #(l)ap (t)imes, (A)ustralian GP
-lt[,unique(name)]
+lt[,unique(name)] # Just to have a look at the Grand Prix names
 ltA <- lt[ name=="Australian Grand Prix", .(
   forename,
   surname,
