@@ -1,13 +1,15 @@
 ---
 title: "The glorious R::data.table"
 output:
-  html_document
+    html_document:
+      toc_depth: 3
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r,label=setup,include=F}
 require(data.table)
+options(datatable.print.nrows = 10,datatable.print.topn = 3)
 ```
 
 ---
@@ -38,10 +40,10 @@ Follow along in an [Rstudio session](./tutorial_Rstart.Rmd). Make sure you run t
 
 ---
 
-# Installation
+# Installation / loading
 
 ```{r,eval=F}
-install.packages("data.table")
+#If not already installed: install.packages("data.table")
 require(data.table)
 ```
 
@@ -73,7 +75,7 @@ The variables `dr` and `lt` now contain `data.table` objects. Since these are en
 lt
 ```
 
-Notice it prints in a useful format showing the top and bottom five rows.
+Notice it prints in a useful format showing the top and bottom few rows (default is five but you can [play with it](https://jangorecki.gitlab.io/data.cube/library/data.table/html/print.data.table.html)).
 
 There are some useful arguments you can give to `fread()` as necessary:
 
@@ -339,6 +341,21 @@ ggplot(
 
 ## Getting slightly tricky
 
+### Initialise a new data.table from scratch
+
+To make a `data.table` directly in R:
+
+```{r}
+newDt <- data.table(
+  colCharacter = c("h","e","l","l","o","!"),
+  colInteger   = 1L:2L,
+  colLogical   = c(F,F,T)
+)
+newDt
+```
+
+Notice the vectors you provide to fill the columns "recycle", i.e., they repeat again and again until they match the length of the longest vector. If they are not divisible evenly into that length `data.table` will ... actually that's a good exercise, try it and find out! 
+
 ### Group by with .N
 
 Quite often you need to just count the members of each category, say, the number of laps each driver has driven. You could write ...
@@ -396,15 +413,73 @@ This becomes especially super important when performing very large merges, becau
 
 ### `setnames()`
 
+This is a good way to change column names. The syntax is `setnames(dataTable,c("vector","of","old","names"),c("VECTOR","OF","NEW","NAMES"))`
 
+```{r}
+colnames(newDt)
+setnames(newDt,c("colCharacter","colInteger"),c("colChar","colInt"))
+colnames(newDt)
+
+# I like to use it in conjunction with magrittr pipes (if you don't get this command don't worry, magrittr can be a tutorial for another day)
+require(magrittr)
+newDt %>% setnames(colnames(.),LETTERS[1:(ncol(.))])
+newDt
+```
 
 ### `setDT()`
 
+Similar to functions like `as.matrix()` and `as.data.frame()`, there is an `as.data.table()` function that will attempt to convert other objects into `data.table`s. This requires a lot of copying of data behind the scenes. Unless, of course, the object you are converting is a `data.frame` because as we discussed, a `data.table` is just an extension of a `data.frame`. To really bring that home:
+
+```{r}
+class(newDt) #See? It's classed as a data.table AND a data.frame
+```
+
+So, why bother copying? `setDT(dataFrame)` will instantly convert a `dataFrame` into a `data.table` with almost zero extra memory or processing required.
+
+This and the other "set" functions above all save memory using this this zero-copying paradigm, so now is a good time to talk about that more generally.
+
+#### Pass by reference, the key to speed and memory efficiency
+
+**This is technical background**, feel free to skip it. But as you get more advanced with R, it will become very important.
+
+Normally, when you pass a function an object in R, the function makes a copy of the object and works on the copy (oversimplified but, in general that's true). Copying data is inefficient, but can help programs to act "safely", since you are less likely to end up accidentally modifying an object you don't want to. This paradigm is known as *copy on modify semantics*.
+
+`data.table` avoids making copies unless absolutely necessary. This is partly why it is so much faster and uses less memory than the same operations in tidyverse packages. It also bears some risks. Consider this function that involves adding a column to a `data.table`:
+
+```{r}
+addCol <- function(dt){
+  dt[,newCol:=1:.N]
+  return(NULL)
+}
+```
+
+If we run this on `newDt` as defined above, nothing (well ... NULL) is returned. But look at the table before and after!
+
+```{r}
+colnames(newDt)
+addCol(newDt)
+colnames(newDt)
+```
+
+As you can see, even though we never specifically over-wrote our original table, it has been modified. that is because the walrus operator function (`:=`), like many `data.table` functions, uses *reference semantics*, that is, it is passed the memory address of the actual original table, which it them modifies. So you have to be careful. Other `data.table` operations will indeed copy part of or the whole table, but always aims to optimise speed and memory usage without being too risky. I mean ... there's no real harm in having an extra column floating around, but imagine if we deleted a column! That could actually be a problem. Be alert but not alarmed.
+
 ### Multiline DO_SOMETHING
 
+#HERE IS WHERE I AM UP TO WRITING!!! PESTER ME TO FINISH THE REST!!!
 
+Do_something can get very complex. Use curly braces (`{` and `}`) to denote multi-command operations in there. I speculate that a driver's fastest lap of a race is usually a few laps before the last lap, when they are pushing the car hard but the tyres have not yet worn out too much. Let's look at our current world champion Max Verstappen and check how many laps from the end of the race he completed his fastest lap.
 
+```{r}
+ltA[,{
+  lastLap <- max(lap)
+  verstappenFastest <- .SD[fullname=="Max Verstappen",lap[seconds==min(seconds)]]
+  
+},by=.(circuitId,year)]
+```
 
+Take some time to make sure you understand every part of this command, it contains many tricks and is a good recap of the tutorial so far. 
+
+Want a fun challenge? Figure out a way to do this with one line.
 
 ## setDT
 

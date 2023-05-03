@@ -658,9 +658,9 @@ faster than Charles Leclerc can drive this Ferrari.
 </figure>
 <hr />
 </div>
-<div id="installation" class="section level1">
-<h1>Installation</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;data.table&quot;</span>)</span>
+<div id="installation-loading" class="section level1">
+<h1>Installation / loading</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#If not already installed: install.packages(&quot;data.table&quot;)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(data.table)</span></code></pre></div>
 <hr />
 </div>
@@ -705,16 +705,14 @@ such as printing the contents by running the variable name alone:</p>
 ##      1:    841       20   1        1 1:38.109        98109
 ##      2:    841       20   2        1 1:33.006        93006
 ##      3:    841       20   3        1 1:32.713        92713
-##      4:    841       20   4        1 1:32.803        92803
-##      5:    841       20   5        1 1:32.342        92342
 ##     ---                                                   
-## 426629:    988      825  50       13 1:43.928       103928
-## 426630:    988      825  51       13 1:44.138       104138
 ## 426631:    988      825  52       13 1:43.934       103934
 ## 426632:    988      825  53       13 1:44.164       104164
 ## 426633:    988      825  54       13 1:44.285       104285</code></pre>
-<p>Notice it prints in a useful format showing the top and bottom five
-rows.</p>
+<p>Notice it prints in a useful format showing the top and bottom few
+rows (default is five but you can <a
+href="https://jangorecki.gitlab.io/data.cube/library/data.table/html/print.data.table.html">play
+with it</a>).</p>
 <p>There are some useful arguments you can give to <code>fread()</code>
 as necessary:</p>
 <ul>
@@ -767,11 +765,7 @@ arguments to select them, just like regular
 ##      1:    841
 ##      2:    841
 ##      3:    841
-##      4:    841
-##      5:    841
 ##     ---       
-## 426629:    988
-## 426630:    988
 ## 426631:    988
 ## 426632:    988
 ## 426633:    988</code></pre>
@@ -780,11 +774,7 @@ arguments to select them, just like regular
 ##      1:   1
 ##      2:   2
 ##      3:   3
-##      4:   4
-##      5:   5
 ##     ---    
-## 426629:  50
-## 426630:  51
 ## 426631:  52
 ## 426632:  53
 ## 426633:  54</code></pre>
@@ -793,11 +783,7 @@ arguments to select them, just like regular
 ##      1:   1 1:38.109
 ##      2:   2 1:33.006
 ##      3:   3 1:32.713
-##      4:   4 1:32.803
-##      5:   5 1:32.342
 ##     ---             
-## 426629:  50 1:43.928
-## 426630:  51 1:44.138
 ## 426631:  52 1:43.934
 ## 426632:  53 1:44.164
 ## 426633:  54 1:44.285</code></pre>
@@ -821,11 +807,7 @@ indicate whether a row should be selected):</p>
 ##     1:    841       20   1        1 1:38.109        98109
 ##     2:    841       20   2        1 1:33.006        93006
 ##     3:    841        1   1        2 1:40.573       100573
-##     4:    841        1   2        2 1:33.774        93774
-##     5:    841       17   1        3 1:41.467       101467
 ##    ---                                                   
-## 16191:    988      843   2       18 1:48.460       108460
-## 16192:    988      154   1       14 1:55.433       115433
 ## 16193:    988      154   2       14 1:47.792       107792
 ## 16194:    988      825   1       20 2:00.490       120490
 ## 16195:    988      825   2       20 1:48.699       108699</code></pre>
@@ -854,11 +836,7 @@ exactly what they are.</p>
 ##     1:    841       20   1        1 1:38.109        98109
 ##     2:    841       20   2        1 1:33.006        93006
 ##     3:    841        1   1        2 1:40.573       100573
-##     4:    841        1   2        2 1:33.774        93774
-##     5:    841       17   1        3 1:41.467       101467
 ##    ---                                                   
-## 16191:    988      843   2       18 1:48.460       108460
-## 16192:    988      154   1       14 1:55.433       115433
 ## 16193:    988      154   2       14 1:47.792       107792
 ## 16194:    988      825   1       20 2:00.490       120490
 ## 16195:    988      825   2       20 1:48.699       108699</code></pre>
@@ -867,11 +845,7 @@ exactly what they are.</p>
 ##   1:    841       20   1        1 1:38.109        98109
 ##   2:    841       20   2        1 1:33.006        93006
 ##   3:    842       20   1        1 1:49.614       109614
-##   4:    842       20   2        1 1:44.539       104539
-##   5:    843       20   1        3 1:47.942       107942
 ##  ---                                                   
-## 377:    986       20   2       19 1:50.130       110130
-## 378:    987       20   1        1 1:52.494       112494
 ## 379:    987       20   2        1 2:18.392       138392
 ## 380:    988       20   1        3 1:47.471       107471
 ## 381:    988       20   2        3 1:43.632       103632</code></pre>
@@ -884,11 +858,7 @@ is this trick used to sort the rows by some column …</p>
 ##      1:    977        1  69        4    1:07.411        67411
 ##      2:    977        1  65        4    1:07.424        67424
 ##      3:    977      817  69        3    1:07.442        67442
-##      4:    977        8  68        5    1:07.486        67486
-##      5:    977       20  69        2    1:07.496        67496
 ##     ---                                                      
-## 426629:    847       20  25        1 2:05:05.152      7505152
-## 426630:    847      155  25        2 2:05:06.095      7506095
 ## 426631:    847      808  25        5 2:05:06.243      7506243
 ## 426632:    847       13  25        3 2:05:06.656      7506656
 ## 426633:    847        2  25        4 2:05:07.547      7507547</code></pre>
@@ -906,11 +876,7 @@ the table:</p>
 ##      1:    988      825  54       13 1:44.285       104285
 ##      2:    988      825  53       13 1:44.164       104164
 ##      3:    988      825  52       13 1:43.934       103934
-##      4:    988      825  51       13 1:44.138       104138
-##      5:    988      825  50       13 1:43.928       103928
 ##     ---                                                   
-## 426629:    841       20   5        1 1:32.342        92342
-## 426630:    841       20   4        1 1:32.803        92803
 ## 426631:    841       20   3        1 1:32.713        92713
 ## 426632:    841       20   2        1 1:33.006        93006
 ## 426633:    841       20   1        1 1:38.109        98109</code></pre>
@@ -923,11 +889,7 @@ the table:</p>
 ##     1:    841       20   4        1 1:32.803        92803
 ##     2:    841       20   5        1 1:32.342        92342
 ##     3:    841       20   6        1 1:32.605        92605
-##     4:    841       20   7        1 1:32.502        92502
-##     5:    841        1   4        2 1:32.582        92582
 ##    ---                                                   
-## 31712:    988      154   7       14 1:46.225       106225
-## 31713:    988      825   4       20 1:46.760       106760
 ## 31714:    988      825   5       20 1:47.197       107197
 ## 31715:    988      825   6       20 1:46.957       106957
 ## 31716:    988      825   7       19 1:46.344       106344</code></pre>
@@ -936,11 +898,7 @@ the table:</p>
 ##     1:    841       20   4        1 1:32.803        92803
 ##     2:    841       20   6        1 1:32.605        92605
 ##     3:    841       20   7        1 1:32.502        92502
-##     4:    841        1   4        2 1:32.582        92582
-##     5:    841        1   6        2 1:32.434        92434
 ##    ---                                                   
-## 23758:    988      154   6       14 1:46.921       106921
-## 23759:    988      154   7       14 1:46.225       106225
 ## 23760:    988      825   4       20 1:46.760       106760
 ## 23761:    988      825   6       20 1:46.957       106957
 ## 23762:    988      825   7       19 1:46.344       106344</code></pre>
@@ -949,11 +907,7 @@ the table:</p>
 ##      1:    841       20   1        1 1:38.109        98109
 ##      2:    841       20   2        1 1:33.006        93006
 ##      3:    841       20   3        1 1:32.713        92713
-##      4:    841       20   5        1 1:32.342        92342
-##      5:    841       20   8        1 1:32.537        92537
 ##     ---                                                   
-## 402867:    988      825  50       13 1:43.928       103928
-## 402868:    988      825  51       13 1:44.138       104138
 ## 402869:    988      825  52       13 1:43.934       103934
 ## 402870:    988      825  53       13 1:44.164       104164
 ## 402871:    988      825  54       13 1:44.285       104285</code></pre>
@@ -984,11 +938,7 @@ argument listing which column(s) to look for matches on.</p>
 ##      1:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
 ##      2:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
 ##      3:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
-##      4:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
-##      5:       20          vettel      5  VET Sebastian    Vettel 03/07/1987
 ##     ---                                                                    
-## 426629:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
-## 426630:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
 ## 426631:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
 ## 426632:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
 ## 426633:      825 kevin_magnussen     20  MAG     Kevin Magnussen 05/10/1992
@@ -996,11 +946,7 @@ argument listing which column(s) to look for matches on.</p>
 ##      1:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   1
 ##      2:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   2
 ##      3:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   3
-##      4:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   4
-##      5:      German http://en.wikipedia.org/wiki/Sebastian_Vettel    841   5
 ##     ---                                                                     
-## 426629:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  50
-## 426630:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  51
 ## 426631:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  52
 ## 426632:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  53
 ## 426633:      Danish  http://en.wikipedia.org/wiki/Kevin_Magnussen    988  54
@@ -1008,11 +954,7 @@ argument listing which column(s) to look for matches on.</p>
 ##      1:        1 1:38.109        98109
 ##      2:        1 1:33.006        93006
 ##      3:        1 1:32.713        92713
-##      4:        1 1:32.803        92803
-##      5:        1 1:32.342        92342
 ##     ---                               
-## 426629:       13 1:43.928       103928
-## 426630:       13 1:44.138       104138
 ## 426631:       13 1:43.934       103934
 ## 426632:       13 1:44.164       104164
 ## 426633:       13 1:44.285       104285</code></pre>
@@ -1136,11 +1078,7 @@ used to add, modify, or delete columns.</p>
 ##     1: Sebastian    Vettel   1        98109        1 Australian Grand Prix
 ##     2: Sebastian    Vettel   2        93006        1 Australian Grand Prix
 ##     3: Sebastian    Vettel   3        92713        1 Australian Grand Prix
-##     4: Sebastian    Vettel   4        92803        1 Australian Grand Prix
-##     5: Sebastian    Vettel   5        92342        1 Australian Grand Prix
 ##    ---                                                                    
-## 19841:    Daniel Ricciardo  21        89447       18 Australian Grand Prix
-## 19842:    Daniel Ricciardo  22        90172       17 Australian Grand Prix
 ## 19843:    Daniel Ricciardo  23        90407       17 Australian Grand Prix
 ## 19844:    Daniel Ricciardo  24        89466       17 Australian Grand Prix
 ## 19845:    Daniel Ricciardo  25        89708       17 Australian Grand Prix
@@ -1148,11 +1086,7 @@ used to add, modify, or delete columns.</p>
 ##     1:         1 2011  98.109 Sebastian Vettel
 ##     2:         1 2011  93.006 Sebastian Vettel
 ##     3:         1 2011  92.713 Sebastian Vettel
-##     4:         1 2011  92.803 Sebastian Vettel
-##     5:         1 2011  92.342 Sebastian Vettel
 ##    ---                                        
-## 19841:         1 2017  89.447 Daniel Ricciardo
-## 19842:         1 2017  90.172 Daniel Ricciardo
 ## 19843:         1 2017  90.407 Daniel Ricciardo
 ## 19844:         1 2017  89.466 Daniel Ricciardo
 ## 19845:         1 2017  89.708 Daniel Ricciardo</code></pre>
@@ -1164,11 +1098,7 @@ used to add, modify, or delete columns.</p>
 ##     1: Sebastian    Vettel   1        98109        1 Australian_Grand_Prix
 ##     2: Sebastian    Vettel   2        93006        1 Australian_Grand_Prix
 ##     3: Sebastian    Vettel   3        92713        1 Australian_Grand_Prix
-##     4: Sebastian    Vettel   4        92803        1 Australian_Grand_Prix
-##     5: Sebastian    Vettel   5        92342        1 Australian_Grand_Prix
 ##    ---                                                                    
-## 19841:    Daniel Ricciardo  21        89447       18 Australian_Grand_Prix
-## 19842:    Daniel Ricciardo  22        90172       17 Australian_Grand_Prix
 ## 19843:    Daniel Ricciardo  23        90407       17 Australian_Grand_Prix
 ## 19844:    Daniel Ricciardo  24        89466       17 Australian_Grand_Prix
 ## 19845:    Daniel Ricciardo  25        89708       17 Australian_Grand_Prix
@@ -1176,11 +1106,7 @@ used to add, modify, or delete columns.</p>
 ##     1:         1 2011  98.109 Sebastian Vettel
 ##     2:         1 2011  93.006 Sebastian Vettel
 ##     3:         1 2011  92.713 Sebastian Vettel
-##     4:         1 2011  92.803 Sebastian Vettel
-##     5:         1 2011  92.342 Sebastian Vettel
 ##    ---                                        
-## 19841:         1 2017  89.447 Daniel Ricciardo
-## 19842:         1 2017  90.172 Daniel Ricciardo
 ## 19843:         1 2017  90.407 Daniel Ricciardo
 ## 19844:         1 2017  89.466 Daniel Ricciardo
 ## 19845:         1 2017  89.708 Daniel Ricciardo</code></pre>
@@ -1191,11 +1117,7 @@ used to add, modify, or delete columns.</p>
 ##     1: Sebastian    Vettel   1        1 Australian_Grand_Prix         1 2011
 ##     2: Sebastian    Vettel   2        1 Australian_Grand_Prix         1 2011
 ##     3: Sebastian    Vettel   3        1 Australian_Grand_Prix         1 2011
-##     4: Sebastian    Vettel   4        1 Australian_Grand_Prix         1 2011
-##     5: Sebastian    Vettel   5        1 Australian_Grand_Prix         1 2011
 ##    ---                                                                      
-## 19841:    Daniel Ricciardo  21       18 Australian_Grand_Prix         1 2017
-## 19842:    Daniel Ricciardo  22       17 Australian_Grand_Prix         1 2017
 ## 19843:    Daniel Ricciardo  23       17 Australian_Grand_Prix         1 2017
 ## 19844:    Daniel Ricciardo  24       17 Australian_Grand_Prix         1 2017
 ## 19845:    Daniel Ricciardo  25       17 Australian_Grand_Prix         1 2017
@@ -1203,11 +1125,7 @@ used to add, modify, or delete columns.</p>
 ##     1:  98.109 Sebastian Vettel
 ##     2:  93.006 Sebastian Vettel
 ##     3:  92.713 Sebastian Vettel
-##     4:  92.803 Sebastian Vettel
-##     5:  92.342 Sebastian Vettel
 ##    ---                         
-## 19841:  89.447 Daniel Ricciardo
-## 19842:  90.172 Daniel Ricciardo
 ## 19843:  90.407 Daniel Ricciardo
 ## 19844:  89.466 Daniel Ricciardo
 ## 19845:  89.708 Daniel Ricciardo</code></pre>
@@ -1228,26 +1146,10 @@ column.</p>
 ##  1: 2011  95.61877
 ##  2: 2012  98.46993
 ##  3: 2013  94.95944
-##  4: 2014 100.36624
-##  5: 2015  97.06216
-##  6: 2016 115.61428
-##  7: 1996  99.02105
-##  8: 1997  96.32692
-##  9: 1998  97.90307
-## 10: 1999 102.11266
-## 11: 2000  99.75171
-## 12: 2001 104.91423
-## 13: 2002 107.32122
-## 14: 2003  99.99782
-## 15: 2004  90.80846
-## 16: 2005  90.33247
-## 17: 2006 101.65096
-## 18: 2007  90.39787
-## 19: 2008  98.55718
+## ---               
 ## 20: 2009  97.42775
 ## 21: 2010 101.07681
-## 22: 2017  91.10589
-##     year        V1</code></pre>
+## 22: 2017  91.10589</code></pre>
 <p>Whoops! We never provided a column name so <code>data.table</code>
 named it “V1”. Let’s fix that.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ) , by<span class="ot">=</span>.(year) ]</span></code></pre></div>
@@ -1255,70 +1157,42 @@ named it “V1”. Let’s fix that.</p>
 ##  1: 2011     95.61877
 ##  2: 2012     98.46993
 ##  3: 2013     94.95944
-##  4: 2014    100.36624
-##  5: 2015     97.06216
-##  6: 2016    115.61428
-##  7: 1996     99.02105
-##  8: 1997     96.32692
-##  9: 1998     97.90307
-## 10: 1999    102.11266
-## 11: 2000     99.75171
-## 12: 2001    104.91423
-## 13: 2002    107.32122
-## 14: 2003     99.99782
-## 15: 2004     90.80846
-## 16: 2005     90.33247
-## 17: 2006    101.65096
-## 18: 2007     90.39787
-## 19: 2008     98.55718
+## ---                  
 ## 20: 2009     97.42775
 ## 21: 2010    101.07681
-## 22: 2017     91.10589
-##     year mean_laptime</code></pre>
+## 22: 2017     91.10589</code></pre>
 <p>And if we want to know the lap time per year per driver, we can group
 on more variables …</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
-<pre><code>##      year           fullname mean_laptime
-##   1: 2011   Sebastian Vettel     92.59067
-##   2: 2011     Lewis Hamilton     92.97510
-##   3: 2011        Mark Webber     93.24879
-##   4: 2011      Vitaly Petrov     93.11757
-##   5: 2011       Felipe Massa     94.05940
-##  ---                                     
-## 425: 2017  Stoffel Vandoorne     92.70558
-## 426: 2017 Antonio Giovinazzi     92.44118
-## 427: 2017    Marcus Ericsson     94.35571
-## 428: 2017    Kevin Magnussen     93.98472
-## 429: 2017   Daniel Ricciardo     98.88004</code></pre>
+<pre><code>##      year         fullname mean_laptime
+##   1: 2011 Sebastian Vettel     92.59067
+##   2: 2011   Lewis Hamilton     92.97510
+##   3: 2011      Mark Webber     93.24879
+##  ---                                   
+## 427: 2017  Marcus Ericsson     94.35571
+## 428: 2017  Kevin Magnussen     93.98472
+## 429: 2017 Daniel Ricciardo     98.88004</code></pre>
 <p>… and perform multiple calculations …</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>ltA[ , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ,  <span class="at">fastest_lap =</span> <span class="fu">min</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
-<pre><code>##      year           fullname mean_laptime fastest_lap
-##   1: 2011   Sebastian Vettel     92.59067      89.844
-##   2: 2011     Lewis Hamilton     92.97510      90.314
-##   3: 2011        Mark Webber     93.24879      89.600
-##   4: 2011      Vitaly Petrov     93.11757      90.064
-##   5: 2011       Felipe Massa     94.05940      88.947
-##  ---                                                 
-## 425: 2017  Stoffel Vandoorne     92.70558      89.440
-## 426: 2017 Antonio Giovinazzi     92.44118      89.052
-## 427: 2017    Marcus Ericsson     94.35571      92.052
-## 428: 2017    Kevin Magnussen     93.98472      87.568
-## 429: 2017   Daniel Ricciardo     98.88004      89.447</code></pre>
+<pre><code>##      year         fullname mean_laptime fastest_lap
+##   1: 2011 Sebastian Vettel     92.59067      89.844
+##   2: 2011   Lewis Hamilton     92.97510      90.314
+##   3: 2011      Mark Webber     93.24879      89.600
+##  ---                                               
+## 427: 2017  Marcus Ericsson     94.35571      92.052
+## 428: 2017  Kevin Magnussen     93.98472      87.568
+## 429: 2017 Daniel Ricciardo     98.88004      89.447</code></pre>
 <p>… and of course filter rows. Congratulations, we are now using all
 three indexing fields together!</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>ltA[ year <span class="sc">&gt;</span> <span class="dv">2010</span> , .( <span class="at">mean_laptime =</span> <span class="fu">mean</span>(seconds) ,  <span class="at">fastest_lap =</span> <span class="fu">min</span>(seconds) ) , by<span class="ot">=</span>.(year,fullname) ]</span></code></pre></div>
-<pre><code>##      year           fullname mean_laptime fastest_lap
-##   1: 2011   Sebastian Vettel     92.59067      89.844
-##   2: 2011     Lewis Hamilton     92.97510      90.314
-##   3: 2011        Mark Webber     93.24879      89.600
-##   4: 2011      Vitaly Petrov     93.11757      90.064
-##   5: 2011       Felipe Massa     94.05940      88.947
-##  ---                                                 
-## 134: 2017  Stoffel Vandoorne     92.70558      89.440
-## 135: 2017 Antonio Giovinazzi     92.44118      89.052
-## 136: 2017    Marcus Ericsson     94.35571      92.052
-## 137: 2017    Kevin Magnussen     93.98472      87.568
-## 138: 2017   Daniel Ricciardo     98.88004      89.447</code></pre>
+<pre><code>##      year         fullname mean_laptime fastest_lap
+##   1: 2011 Sebastian Vettel     92.59067      89.844
+##   2: 2011   Lewis Hamilton     92.97510      90.314
+##   3: 2011      Mark Webber     93.24879      89.600
+##  ---                                               
+## 136: 2017  Marcus Ericsson     94.35571      92.052
+## 137: 2017  Kevin Magnussen     93.98472      87.568
+## 138: 2017 Daniel Ricciardo     98.88004      89.447</code></pre>
 <p>This is a great example of how quickly <code>data.table</code>
 aggregates good stats for plotting. We can very quickly use the above
 data to look at how average lap times evolve over seasons, for example
@@ -1333,25 +1207,44 @@ data to look at how average lap times evolve over seasons, for example
 </div>
 <div id="getting-slightly-tricky" class="section level2">
 <h2>Getting slightly tricky</h2>
+<div id="initialise-a-new-data.table-from-scratch"
+class="section level3">
+<h3>Initialise a new data.table from scratch</h3>
+<p>To make a <code>data.table</code> directly in R:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>newDt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">colCharacter =</span> <span class="fu">c</span>(<span class="st">&quot;h&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;l&quot;</span>,<span class="st">&quot;l&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;!&quot;</span>),</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colInteger   =</span> 1L<span class="sc">:</span>2L,</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colLogical   =</span> <span class="fu">c</span>(F,F,T)</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>newDt</span></code></pre></div>
+<pre><code>##    colCharacter colInteger colLogical
+## 1:            h          1      FALSE
+## 2:            e          2      FALSE
+## 3:            l          1       TRUE
+## 4:            l          2      FALSE
+## 5:            o          1      FALSE
+## 6:            !          2       TRUE</code></pre>
+<p>Notice the vectors you provide to fill the columns “recycle”, i.e.,
+they repeat again and again until they match the length of the longest
+vector. If they are not divisible evenly into that length
+<code>data.table</code> will … actually that’s a good exercise, try it
+and find out!</p>
+</div>
 <div id="group-by-with-.n" class="section level3">
 <h3>Group by with .N</h3>
 <p>Quite often you need to just count the members of each category, say,
 the number of laps each driver has driven. You could write …</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>ltA[,.(<span class="at">N=</span>.N),by<span class="ot">=</span>.(surname)]</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>ltA[,.(<span class="at">N=</span>.N),by<span class="ot">=</span>.(surname)]</span></code></pre></div>
 <pre><code>##         surname   N
 ##   1:     Vettel 430
 ##   2:   Hamilton 580
 ##   3:     Webber 525
-##   4:     Petrov 101
-##   5:      Massa 625
 ##  ---               
-##  99:  di Grassi  26
-## 100:       Ocon  56
 ## 101:     Stroll  40
 ## 102:  Vandoorne  55
 ## 103: Giovinazzi  55</code></pre>
 <p><code>data.table</code> offers this shortcut …</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>ltA[,.N,by<span class="ot">=</span>.(surname)]</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>ltA[,.N,by<span class="ot">=</span>.(surname)]</span></code></pre></div>
 <p>… which will automatically name the count column “N”</p>
 </div>
 <div id="special-variable-.sd" class="section level3">
@@ -1366,55 +1259,23 @@ table</em>, and you want to select from <em>each group</em>. What to
 do?</p>
 <p>When grouping, the special variable <code>.SD</code> gives you access
 to a mini data.table containing just the group it is working on.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>ltA[,.SD[seconds<span class="sc">==</span><span class="fu">min</span>(seconds)],by<span class="ot">=</span>.(year)]</span></code></pre></div>
-<pre><code>##     year     forename      surname lap position                  name circuitId
-##  1: 2011       Felipe        Massa  55        9 Australian_Grand_Prix         1
-##  2: 2012       Jenson       Button  56        1 Australian_Grand_Prix         1
-##  3: 2013         Kimi R\xcc_ikk̦nen  56        1 Australian_Grand_Prix         1
-##  4: 2014         Nico      Rosberg  19        1 Australian_Grand_Prix         1
-##  5: 2015        Lewis     Hamilton  50        1 Australian_Grand_Prix         1
-##  6: 2016       Daniel    Ricciardo  49        4 Australian_Grand_Prix         1
-##  7: 1996      Jacques   Villeneuve  27        1 Australian_Grand_Prix         1
-##  8: 1997 Heinz-Harald     Frentzen  36        1 Australian_Grand_Prix         1
-##  9: 1998         Mika H\xcc_kkinen  39        2 Australian_Grand_Prix         1
-## 10: 1999      Michael   Schumacher  55        8 Australian_Grand_Prix         1
-## 11: 2000       Rubens  Barrichello  41        2 Australian_Grand_Prix         1
-## 12: 2001      Michael   Schumacher  34        1 Australian_Grand_Prix         1
-## 13: 2002         Kimi R\xcc_ikk̦nen  37        2 Australian_Grand_Prix         1
-## 14: 2003         Kimi R\xcc_ikk̦nen  32        1 Australian_Grand_Prix         1
-## 15: 2004      Michael   Schumacher  29        1 Australian_Grand_Prix         1
-## 16: 2005     Fernando       Alonso  24        3 Australian_Grand_Prix         1
-## 17: 2006         Kimi R\xcc_ikk̦nen  57        2 Australian_Grand_Prix         1
-## 18: 2007         Kimi R\xcc_ikk̦nen  41        1 Australian_Grand_Prix         1
-## 19: 2008       Heikki   Kovalainen  43        1 Australian_Grand_Prix         1
-## 20: 2009         Nico      Rosberg  48        7 Australian_Grand_Prix         1
-## 21: 2010         Mark       Webber  47        6 Australian_Grand_Prix         1
-## 22: 2017         Kimi R\xcc_ikk̦nen  56        4 Australian_Grand_Prix         1
-##     year     forename      surname lap position                  name circuitId
-##     seconds              fullname
-##  1:  88.947          Felipe Massa
-##  2:  89.187         Jenson Button
-##  3:  89.274     Kimi R\xcc_ikk̦nen
-##  4:  92.478          Nico Rosberg
-##  5:  90.945        Lewis Hamilton
-##  6:  88.997      Daniel Ricciardo
-##  7:  93.421    Jacques Villeneuve
-##  8:  90.585 Heinz-Harald Frentzen
-##  9:  91.649     Mika H\xcc_kkinen
-## 10:  92.112    Michael Schumacher
-## 11:  91.481    Rubens Barrichello
-## 12:  88.214    Michael Schumacher
-## 13:  88.541     Kimi R\xcc_ikk̦nen
-## 14:  87.724     Kimi R\xcc_ikk̦nen
-## 15:  84.125    Michael Schumacher
-## 16:  85.683       Fernando Alonso
-## 17:  86.045     Kimi R\xcc_ikk̦nen
-## 18:  85.235     Kimi R\xcc_ikk̦nen
-## 19:  87.418     Heikki Kovalainen
-## 20:  87.706          Nico Rosberg
-## 21:  88.358           Mark Webber
-## 22:  86.538     Kimi R\xcc_ikk̦nen
-##     seconds              fullname</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>ltA[,.SD[seconds<span class="sc">==</span><span class="fu">min</span>(seconds)],by<span class="ot">=</span>.(year)]</span></code></pre></div>
+<pre><code>##     year forename      surname lap position                  name circuitId
+##  1: 2011   Felipe        Massa  55        9 Australian_Grand_Prix         1
+##  2: 2012   Jenson       Button  56        1 Australian_Grand_Prix         1
+##  3: 2013     Kimi R\xcc_ikk̦nen  56        1 Australian_Grand_Prix         1
+## ---                                                                        
+## 20: 2009     Nico      Rosberg  48        7 Australian_Grand_Prix         1
+## 21: 2010     Mark       Webber  47        6 Australian_Grand_Prix         1
+## 22: 2017     Kimi R\xcc_ikk̦nen  56        4 Australian_Grand_Prix         1
+##     seconds          fullname
+##  1:  88.947      Felipe Massa
+##  2:  89.187     Jenson Button
+##  3:  89.274 Kimi R\xcc_ikk̦nen
+## ---                          
+## 20:  87.706      Nico Rosberg
+## 21:  88.358       Mark Webber
+## 22:  86.538 Kimi R\xcc_ikk̦nen</code></pre>
 </div>
 <div id="setorder" class="section level3">
 <h3><code>setorder()</code> …</h3>
@@ -1422,16 +1283,12 @@ to a mini data.table containing just the group it is working on.</p>
 something like: <code>dt &lt;- dt[order(varname),]</code>. But this
 requires copying the entire table, which is not memory efficient. To
 sort the table more efficiently, we can use this function:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
 <pre><code>##         forename   surname lap position                  name circuitId year
 ##     1: Sebastian    Vettel   1        1 Australian_Grand_Prix         1 2011
 ##     2: Sebastian    Vettel   2        1 Australian_Grand_Prix         1 2011
 ##     3: Sebastian    Vettel   3        1 Australian_Grand_Prix         1 2011
-##     4: Sebastian    Vettel   4        1 Australian_Grand_Prix         1 2011
-##     5: Sebastian    Vettel   5        1 Australian_Grand_Prix         1 2011
 ##    ---                                                                      
-## 19841:    Daniel Ricciardo  21       18 Australian_Grand_Prix         1 2017
-## 19842:    Daniel Ricciardo  22       17 Australian_Grand_Prix         1 2017
 ## 19843:    Daniel Ricciardo  23       17 Australian_Grand_Prix         1 2017
 ## 19844:    Daniel Ricciardo  24       17 Australian_Grand_Prix         1 2017
 ## 19845:    Daniel Ricciardo  25       17 Australian_Grand_Prix         1 2017
@@ -1439,25 +1296,17 @@ sort the table more efficiently, we can use this function:</p>
 ##     1:  98.109 Sebastian Vettel
 ##     2:  93.006 Sebastian Vettel
 ##     3:  92.713 Sebastian Vettel
-##     4:  92.803 Sebastian Vettel
-##     5:  92.342 Sebastian Vettel
 ##    ---                         
-## 19841:  89.447 Daniel Ricciardo
-## 19842:  90.172 Daniel Ricciardo
 ## 19843:  90.407 Daniel Ricciardo
 ## 19844:  89.466 Daniel Ricciardo
 ## 19845:  89.708 Daniel Ricciardo</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,surname) <span class="co">#sort first by year, then by surname within each year</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,surname) <span class="co">#sort first by year, then by surname within each year</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
 <pre><code>##         forename surname lap position                  name circuitId year
 ##     1:      Jean   Alesi   1        5 Australian_Grand_Prix         1 1996
 ##     2:      Jean   Alesi   2        5 Australian_Grand_Prix         1 1996
 ##     3:      Jean   Alesi   3        5 Australian_Grand_Prix         1 1996
-##     4:      Jean   Alesi   4        5 Australian_Grand_Prix         1 1996
-##     5:      Jean   Alesi   5        5 Australian_Grand_Prix         1 1996
 ##    ---                                                                    
-## 19841: Sebastian  Vettel  53        1 Australian_Grand_Prix         1 2017
-## 19842: Sebastian  Vettel  54        1 Australian_Grand_Prix         1 2017
 ## 19843: Sebastian  Vettel  55        1 Australian_Grand_Prix         1 2017
 ## 19844: Sebastian  Vettel  56        1 Australian_Grand_Prix         1 2017
 ## 19845: Sebastian  Vettel  57        1 Australian_Grand_Prix         1 2017
@@ -1465,25 +1314,17 @@ sort the table more efficiently, we can use this function:</p>
 ##     1: 106.506       Jean Alesi
 ##     2:  97.554       Jean Alesi
 ##     3:  96.830       Jean Alesi
-##     4:  96.437       Jean Alesi
-##     5:  95.765       Jean Alesi
 ##    ---                         
-## 19841:  86.638 Sebastian Vettel
-## 19842:  87.007 Sebastian Vettel
 ## 19843:  87.369 Sebastian Vettel
 ## 19844:  87.437 Sebastian Vettel
 ## 19845:  88.709 Sebastian Vettel</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,<span class="sc">-</span>surname) <span class="co">#Use a negative sign to reverse the ordering</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,year,<span class="sc">-</span>surname) <span class="co">#Use a negative sign to reverse the ordering</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>ltA</span></code></pre></div>
 <pre><code>##        forename    surname lap position                  name circuitId year
 ##     1:  Jacques Villeneuve   1        1 Australian_Grand_Prix         1 1996
 ##     2:  Jacques Villeneuve   2        1 Australian_Grand_Prix         1 1996
 ##     3:  Jacques Villeneuve   3        1 Australian_Grand_Prix         1 1996
-##     4:  Jacques Villeneuve   4        1 Australian_Grand_Prix         1 1996
-##     5:  Jacques Villeneuve   5        1 Australian_Grand_Prix         1 1996
 ##    ---                                                                      
-## 19841: Fernando     Alonso  46       10 Australian_Grand_Prix         1 2017
-## 19842: Fernando     Alonso  47       10 Australian_Grand_Prix         1 2017
 ## 19843: Fernando     Alonso  48       10 Australian_Grand_Prix         1 2017
 ## 19844: Fernando     Alonso  49       10 Australian_Grand_Prix         1 2017
 ## 19845: Fernando     Alonso  50       10 Australian_Grand_Prix         1 2017
@@ -1491,11 +1332,7 @@ sort the table more efficiently, we can use this function:</p>
 ##     1: 103.702 Jacques Villeneuve
 ##     2:  97.036 Jacques Villeneuve
 ##     3:  95.959 Jacques Villeneuve
-##     4:  95.648 Jacques Villeneuve
-##     5:  95.223 Jacques Villeneuve
 ##    ---                           
-## 19841:  90.247    Fernando Alonso
-## 19842:  90.081    Fernando Alonso
 ## 19843:  90.077    Fernando Alonso
 ## 19844:  90.493    Fernando Alonso
 ## 19845:  92.485    Fernando Alonso</code></pre>
@@ -1511,14 +1348,14 @@ search</a> algorithm. <code>data.table</code> is often asked to find
 values, in fact that’s most of that the SELECT field does. If
 <code>data.table</code> knows that one or more columns are sorted, it
 can search them far more quickly. <code>setkey()</code> does this:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(ltA,forename,lap) <span class="co">#Note you cannot use `-` to reverse the order. That&#39;s why `setorder()` still exists</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This shows you that the data.table now has an attribute indicating which columns are sorted, or &quot;keys&quot;, in the lingo</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(ltA,forename,lap) <span class="co">#Note you cannot use `-` to reverse the order. That&#39;s why `setorder()` still exists</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This shows you that the data.table now has an attribute indicating which columns are sorted, or &quot;keys&quot;, in the lingo</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
 <pre><code>## $sorted
 ## [1] &quot;forename&quot; &quot;lap&quot;</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,<span class="sc">-</span>year)</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Obviously, if you reorder the rows later the keys will be removed.</span></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(ltA,<span class="sc">-</span>year)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Obviously, if you reorder the rows later the keys will be removed.</span></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(ltA)[<span class="st">&quot;sorted&quot;</span>]</span></code></pre></div>
 <pre><code>## $&lt;NA&gt;
 ## NULL</code></pre>
 <p>This becomes especially super important when performing very large
@@ -1527,12 +1364,155 @@ work out what rows match.</p>
 </div>
 <div id="setnames" class="section level3">
 <h3><code>setnames()</code></h3>
+<p>This is a good way to change column names. The syntax is
+<code>setnames(dataTable,c("vector","of","old","names"),c("VECTOR","OF","NEW","NAMES"))</code></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(newDt)</span></code></pre></div>
+<pre><code>## [1] &quot;colCharacter&quot; &quot;colInteger&quot;   &quot;colLogical&quot;</code></pre>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(newDt,<span class="fu">c</span>(<span class="st">&quot;colCharacter&quot;</span>,<span class="st">&quot;colInteger&quot;</span>),<span class="fu">c</span>(<span class="st">&quot;colChar&quot;</span>,<span class="st">&quot;colInt&quot;</span>))</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(newDt)</span></code></pre></div>
+<pre><code>## [1] &quot;colChar&quot;    &quot;colInt&quot;     &quot;colLogical&quot;</code></pre>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I like to use it in conjunction with magrittr pipes (if you don&#39;t get this command don&#39;t worry, magrittr can be a tutorial for another day)</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(magrittr)</span></code></pre></div>
+<pre><code>## Loading required package: magrittr</code></pre>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>newDt <span class="sc">%&gt;%</span> <span class="fu">setnames</span>(<span class="fu">colnames</span>(.),LETTERS[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(.))])</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>newDt</span></code></pre></div>
+<pre><code>##    A B     C
+## 1: h 1 FALSE
+## 2: e 2 FALSE
+## 3: l 1  TRUE
+## 4: l 2 FALSE
+## 5: o 1 FALSE
+## 6: ! 2  TRUE</code></pre>
 </div>
 <div id="setdt" class="section level3">
 <h3><code>setDT()</code></h3>
+<p>Similar to functions like <code>as.matrix()</code> and
+<code>as.data.frame()</code>, there is an <code>as.data.table()</code>
+function that will attempt to convert other objects into
+<code>data.table</code>s. This requires a lot of copying of data behind
+the scenes. Unless, of course, the object you are converting is a
+<code>data.frame</code> because as we discussed, a
+<code>data.table</code> is just an extension of a
+<code>data.frame</code>. To really bring that home:</p>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(newDt) <span class="co">#See? It&#39;s classed as a data.table AND a data.frame</span></span></code></pre></div>
+<pre><code>## [1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<p>So, why bother copying? <code>setDT(dataFrame)</code> will instantly
+convert a <code>dataFrame</code> into a <code>data.table</code> with
+almost zero extra memory or processing required.</p>
+<p>This and the other “set” functions above all save memory using this
+this zero-copying paradigm, so now is a good time to talk about that
+more generally.</p>
+<div id="pass-by-reference-the-key-to-speed-and-memory-efficiency"
+class="section level4">
+<h4>Pass by reference, the key to speed and memory efficiency</h4>
+<p><strong>This is technical background</strong>, feel free to skip it.
+But as you get more advanced with R, it will become very important.</p>
+<p>Normally, when you pass a function an object in R, the function makes
+a copy of the object and works on the copy (oversimplified but, in
+general that’s true). Copying data is inefficient, but can help programs
+to act “safely”, since you are less likely to end up accidentally
+modifying an object you don’t want to. This paradigm is known as
+<em>copy on modify semantics</em>.</p>
+<p><code>data.table</code> avoids making copies unless absolutely
+necessary. This is partly why it is so much faster and uses less memory
+than the same operations in tidyverse packages. It also bears some
+risks. Consider this function that involves adding a column to a
+<code>data.table</code>:</p>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>addCol <span class="ot">&lt;-</span> <span class="cf">function</span>(dt){</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>  dt[,newCol<span class="sc">:</span><span class="er">=</span><span class="dv">1</span><span class="sc">:</span>.N]</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>If we run this on <code>newDt</code> as defined above, nothing (well
+… NULL) is returned. But look at the table before and after!</p>
+<div class="sourceCode" id="cb110"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(newDt)</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot;</code></pre>
+<div class="sourceCode" id="cb112"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addCol</span>(newDt)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb114"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(newDt)</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot;      &quot;B&quot;      &quot;C&quot;      &quot;newCol&quot;</code></pre>
+<p>As you can see, even though we never specifically over-wrote our
+original table, it has been modified. that is because the walrus
+operator function (<code>:=</code>), like many <code>data.table</code>
+functions, uses <em>reference semantics</em>, that is, it is passed the
+memory address of the actual original table, which it them modifies. So
+you have to be careful. Other <code>data.table</code> operations will
+indeed copy part of or the whole table, but always aims to optimise
+speed and memory usage without being too risky. I mean … there’s no real
+harm in having an extra column floating around, but imagine if we
+deleted a column! That could actually be a problem. Be alert but not
+alarmed.</p>
+</div>
 </div>
 <div id="multiline-do_something" class="section level3">
 <h3>Multiline DO_SOMETHING</h3>
+<p>#HERE IS WHERE I AM UP TO WRITING!!! PESTER ME TO FINISH THE
+REST!!!</p>
+<p>Do_something can get very complex. Use curly braces (<code>{</code>
+and <code>}</code>) to denote multi-command operations in there. I
+speculate that a driver’s fastest lap of a race is usually a few laps
+before the last lap, when they are pushing the car hard but the tyres
+have not yet worn out too much. Let’s look at our current world champion
+Max Verstappen and check how many laps from the end of the race he
+completed his fastest lap.</p>
+<div class="sourceCode" id="cb116"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>ltA[,{</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  lastLap <span class="ot">&lt;-</span> <span class="fu">max</span>(lap)</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  verstappenFastest <span class="ot">&lt;-</span> .SD[fullname<span class="sc">==</span><span class="st">&quot;Max Verstappen&quot;</span>,lap[seconds<span class="sc">==</span><span class="fu">min</span>(seconds)]]</span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>},by<span class="ot">=</span>.(circuitId,year)]</span></code></pre></div>
+<pre><code>## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf
+
+## Warning in min(seconds): no non-missing arguments to min; returning Inf</code></pre>
+<pre><code>##    circuitId year V1
+## 1:         1 2017 43
+## 2:         1 2016 44
+## 3:         1 2015 30</code></pre>
+<p>Take some time to make sure you understand every part of this
+command, it contains many tricks and is a good recap of the tutorial so
+far.</p>
+<p>Want a fun challenge? Figure out a way to do this with one line.</p>
 </div>
 </div>
 <div id="setdt-1" class="section level2">
@@ -1623,7 +1603,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
