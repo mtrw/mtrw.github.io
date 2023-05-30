@@ -465,32 +465,40 @@ As you can see, even though we never specifically over-wrote our original table,
 
 ### Multiline DO_SOMETHING
 
-#HERE IS WHERE I AM UP TO WRITING!!! PESTER ME TO FINISH THE REST!!!
 
-Do_something can get very complex. Use curly braces (`{` and `}`) to denote multi-command operations in there. I speculate that a driver's fastest lap of a race is usually a few laps before the last lap, when they are pushing the car hard but the tyres have not yet worn out too much. Let's look at our current world champion Max Verstappen and check how many laps from the end of the race he completed his fastest lap.
+DO_SOMETHING can get very complex. Use curly braces (`{` and `}`) to denote multi-command operations in there. I speculate that a driver's fastest lap of a race is usually a few laps before the last lap, when they are pushing the car hard but the tyres have not yet worn out too much. Let's check how many laps from the end of the race drivers normally complete their fastest lap of the race.
 
 ```{r}
-ltA[,{
+fastLapDt <- lt[,{
   lastLap <- max(lap)
-  verstappenFastest <- .SD[fullname=="Max Verstappen",lap[seconds==min(seconds)]]
-  
+  verstappenFastest <- .SD[,lap[milliseconds==min(milliseconds)]]
+  .( lapsBeforeLastFastest = verstappenFastest - lastLap )
 },by=.(circuitId,year)]
+
+hist( fastLapDt$lapsBeforeLastFastest, breaks=function(x){min(x):0} )
 ```
+
+Yep, looks like it's most often the second to last lap, but by a tiny margin.
 
 Take some time to make sure you understand every part of this command, it contains many tricks and is a good recap of the tutorial so far. 
 
 Want a fun challenge? Figure out a way to do this with one line.
 
-## setDT
+#### Use as a *for* loop
+
+The GROUP_BY field effectively runs a set of commands for each group. When you think about it, that's quite similar to what a `for(){ ... }` loop does. R for-loops are [famously slow](https://towardsdatascience.com/r-is-slow-and-its-your-fault-2fcedacc7abb). There's a fascinating history as to why, it's partially on purpose to encourage you to use faster alternatives. [`*ply`-type functions](https://www.guru99.com/r-apply-sapply-tapply.html) are good, but using `data.table`s to mimic for-loops, as we have done above, is even faster.
+
+You can even modify a variable outside the `data.table` while it is "looping", using the [`<<-` operator](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/assignOps).
 
 ## Getting extra tricky
 
-
-### Use as a *for* loop affecting outside variables
-
 ### Special variable: `.GRP`
 
+When you GROUP_BY, the groups are given a number you can access with the special variable .GRP. I can't think of a use case right now but remember it, it does occasionally come in very handy.
+
 # Casting and melting
+
+It's very common to want to **pivot** a table from wide to long form or back.
 
 # Helpful functions
 

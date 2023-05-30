@@ -1453,84 +1453,59 @@ alarmed.</p>
 </div>
 <div id="multiline-do_something" class="section level3">
 <h3>Multiline DO_SOMETHING</h3>
-<p>#HERE IS WHERE I AM UP TO WRITING!!! PESTER ME TO FINISH THE
-REST!!!</p>
-<p>Do_something can get very complex. Use curly braces (<code>{</code>
+<p>DO_SOMETHING can get very complex. Use curly braces (<code>{</code>
 and <code>}</code>) to denote multi-command operations in there. I
 speculate that a driver’s fastest lap of a race is usually a few laps
 before the last lap, when they are pushing the car hard but the tyres
-have not yet worn out too much. Let’s look at our current world champion
-Max Verstappen and check how many laps from the end of the race he
-completed his fastest lap.</p>
+have not yet worn out too much. Let’s check how many laps from the end
+of the race drivers normally complete their fastest lap of the race.</p>
 <div class="sourceCode" id="cb116"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>ltA[,{</span>
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>fastLapDt <span class="ot">&lt;-</span> lt[,{</span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  lastLap <span class="ot">&lt;-</span> <span class="fu">max</span>(lap)</span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  verstappenFastest <span class="ot">&lt;-</span> .SD[fullname<span class="sc">==</span><span class="st">&quot;Max Verstappen&quot;</span>,lap[seconds<span class="sc">==</span><span class="fu">min</span>(seconds)]]</span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>},by<span class="ot">=</span>.(circuitId,year)]</span></code></pre></div>
-<pre><code>## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf
-
-## Warning in min(seconds): no non-missing arguments to min; returning Inf</code></pre>
-<pre><code>##    circuitId year V1
-## 1:         1 2017 43
-## 2:         1 2016 44
-## 3:         1 2015 30</code></pre>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  verstappenFastest <span class="ot">&lt;-</span> .SD[,lap[milliseconds<span class="sc">==</span><span class="fu">min</span>(milliseconds)]]</span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>  .( <span class="at">lapsBeforeLastFastest =</span> verstappenFastest <span class="sc">-</span> lastLap )</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>},by<span class="ot">=</span>.(circuitId,year)]</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>( fastLapDt<span class="sc">$</span>lapsBeforeLastFastest, <span class="at">breaks=</span><span class="cf">function</span>(x){<span class="fu">min</span>(x)<span class="sc">:</span><span class="dv">0</span>} )</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Yep, looks like it’s most often the second to last lap, but by a tiny
+margin.</p>
 <p>Take some time to make sure you understand every part of this
 command, it contains many tricks and is a good recap of the tutorial so
 far.</p>
 <p>Want a fun challenge? Figure out a way to do this with one line.</p>
+<div id="use-as-a-for-loop" class="section level4">
+<h4>Use as a <em>for</em> loop</h4>
+<p>The GROUP_BY field effectively runs a set of commands for each group.
+When you think about it, that’s quite similar to what a
+<code>for(){ ... }</code> loop does. R for-loops are <a
+href="https://towardsdatascience.com/r-is-slow-and-its-your-fault-2fcedacc7abb">famously
+slow</a>. There’s a fascinating history as to why, it’s partially on
+purpose to encourage you to use faster alternatives. <a
+href="https://www.guru99.com/r-apply-sapply-tapply.html"><code>*ply</code>-type
+functions</a> are good, but using <code>data.table</code>s to mimic
+for-loops, as we have done above, is even faster.</p>
+<p>You can even modify a variable outside the <code>data.table</code>
+while it is “looping”, using the <a
+href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/assignOps"><code>&lt;&lt;-</code>
+operator</a>.</p>
 </div>
 </div>
-<div id="setdt-1" class="section level2">
-<h2>setDT</h2>
 </div>
 <div id="getting-extra-tricky" class="section level2">
 <h2>Getting extra tricky</h2>
-<div id="use-as-a-for-loop-affecting-outside-variables"
-class="section level3">
-<h3>Use as a <em>for</em> loop affecting outside variables</h3>
-</div>
 <div id="special-variable-.grp" class="section level3">
 <h3>Special variable: <code>.GRP</code></h3>
+<p>When you GROUP_BY, the groups are given a number you can access with
+the special variable .GRP. I can’t think of a use case right now but
+remember it, it does occasionally come in very handy.</p>
 </div>
 </div>
 </div>
 <div id="casting-and-melting" class="section level1">
 <h1>Casting and melting</h1>
+<p>It’s very common to want to <strong>pivot</strong> a table from wide
+to long form or back.</p>
 </div>
 <div id="helpful-functions" class="section level1">
 <h1>Helpful functions</h1>
