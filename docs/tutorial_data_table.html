@@ -13,7 +13,7 @@
 
 <title>The glorious R::data.table</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -1504,8 +1504,206 @@ remember it, it does occasionally come in very handy.</p>
 </div>
 <div id="casting-and-melting" class="section level1">
 <h1>Casting and melting</h1>
-<p>It’s very common to want to <strong>pivot</strong> a table from wide
-to long form or back.</p>
+<p>It’s very common to want to <em>pivot</em> a table from
+<strong>wide</strong> to <strong>long</strong> form or back.
+Intuitively, wide is like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Driver</th>
+<th align="left">Lap 1</th>
+<th align="left">Lap 2</th>
+<th align="left">Lap 3</th>
+<th align="left">Lap 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Driver 1</td>
+<td align="left">1:18.5</td>
+<td align="left">1:18.2</td>
+<td align="left">1:17.9</td>
+<td align="left">1:18.2</td>
+</tr>
+<tr class="even">
+<td align="left">Driver 2</td>
+<td align="left">1:17.2</td>
+<td align="left">1:17.0</td>
+<td align="left">1:16.5</td>
+<td align="left">1:17.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Driver 3</td>
+<td align="left">1:18.8</td>
+<td align="left">1:17.1</td>
+<td align="left">1:18.4</td>
+<td align="left">1:20.0</td>
+</tr>
+<tr class="even">
+<td align="left">Driver 4</td>
+<td align="left">1:19.1</td>
+<td align="left">1:17.0</td>
+<td align="left">1:15.9</td>
+<td align="left">1:20.2</td>
+</tr>
+</tbody>
+</table>
+<p>… and long would be like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Driver</th>
+<th align="left">Lap</th>
+<th align="left">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Driver 1</td>
+<td align="left">Lap 1</td>
+<td align="left">1:18.5</td>
+</tr>
+<tr class="even">
+<td align="left">Driver 1</td>
+<td align="left">Lap 2</td>
+<td align="left">1:18.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Driver 1</td>
+<td align="left">Lap 3</td>
+<td align="left">1:17.9</td>
+</tr>
+<tr class="even">
+<td align="left">Driver 1</td>
+<td align="left">Lap 4</td>
+<td align="left">1:18.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Driver 2</td>
+<td align="left">Lap 1</td>
+<td align="left">1:17.2</td>
+</tr>
+<tr class="even">
+<td align="left">Driver 2</td>
+<td align="left">Lap 2</td>
+<td align="left">1:17.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Driver 2</td>
+<td align="left">Lap 3</td>
+<td align="left">1:16.5</td>
+</tr>
+<tr class="even">
+<td align="left">etc …</td>
+<td align="left">—</td>
+<td align="left">—</td>
+</tr>
+</tbody>
+</table>
+<p>Changing the <em>shape</em> of data from wide to long is called
+<em>melting</em> (picture melting cheese dripping from a Vegemite
+jaffel, creating long vertical strings [rows]). Long –&gt; wide is
+called <em>casting</em> in a poorly executed attempt to maintain
+semantic symmetry with its counterpart.</p>
+<p>Shapeshifting requires some interesting syntax. Going from long to
+wide is (contrary to popular opinion) easier. You want a kind of grid,
+right? So just specify the variable whose levels should be represented
+on each axis of the grid. In this case you would specify that the
+drivers should be on the row axis, and the laps should be on the column
+axis.</p>
+<div id="casting" class="section level2">
+<h2>Casting</h2>
+<p>Here’s a demo, using <code>data.table</code>s casting function
+<code>dcast()</code>.</p>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>ltA17LapTimes <span class="ot">&lt;-</span> ltA[year<span class="sc">==</span><span class="dv">2017</span>,.(<span class="at">Driver=</span>fullname,lap,seconds)]</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ltA17LapTimes)</span></code></pre></div>
+<pre><code>##                  Driver lap seconds
+##   1: Antonio Giovinazzi   1 107.489
+##   2: Antonio Giovinazzi   2  94.891
+##   3: Antonio Giovinazzi   3  93.874
+##  ---                               
+## 940:    Valtteri Bottas  55  88.670
+## 941:    Valtteri Bottas  56  86.593
+## 942:    Valtteri Bottas  57  87.507</code></pre>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>ltA17LapTimesCast <span class="ot">&lt;-</span> <span class="fu">dcast</span>(ltA17LapTimes, <span class="at">formula =</span> Driver <span class="sc">~</span> lap)</span></code></pre></div>
+<pre><code>## Using &#39;seconds&#39; as value column. Use &#39;value.var&#39; to override</code></pre>
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ltA17LapTimesCast[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>##                 Driver       1      2      3      4
+##  1: Antonio Giovinazzi 107.489 94.891 93.874 94.121
+##  2:       Carlos Sainz 101.891 91.386 91.658 90.646
+##  3:   Daniel Ricciardo 296.773 92.510 91.619 92.111
+## ---                                                
+## 18:        Sergio P̩rez 102.868 91.589 91.539 91.043
+## 19:  Stoffel Vandoorne 106.762 94.509 93.571 93.110
+## 20:    Valtteri Bottas  96.009 90.141 89.635 89.301</code></pre>
+<div class="sourceCode" id="cb123"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(ltA17LapTimesCast[,<span class="sc">-</span><span class="st">&quot;Driver&quot;</span>] <span class="sc">%&gt;%</span> as.matrix,<span class="at">Rowv =</span> <span class="cn">NA</span>,<span class="at">Colv =</span> <span class="cn">NA</span>,<span class="at">labRow =</span> <span class="fu">iconv</span>(ltA17LapTimesCast<span class="sc">$</span>Driver))</span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>So that worked but we had a warning:</p>
+<p><strong>“Using ‘seconds’ as value column. Use ‘value.var’ to
+override”</strong></p>
+<p>This is for a very good reason. Casting creates a grid. We told the
+function what variables (AKA columns) should define the rows and columns
+of the grid. But we didn’t specify which column should be used to put
+values in the grid. In this case was asked for a grid defined by drivers
+and laps, there was only one column (“seconds”) left over to provide
+values for the grid. But it <a
+href="https://www.youtube.com/watch?v=u1eSiso7VZs">ain’t necessarily
+so</a>. There will often be many columns to choose from, and you need to
+specify which is the value-filling columns using the argument
+<code>value.var=...</code>.</p>
+<p>A related case that comes up often is that there isn’t one unique (to
+use this example) lap column for each driver, or vice versa. For
+example, if there were two rows recording a time for the driver “Carlos
+Sainz” in lap 4, which one should provide the “seconds” to fill the grid
+position corresponding to that driver/lap combination? One option would
+be to, say, just take all the candidate rows and add their values
+together. In this case, adding would be a form of <em>aggregation</em> —
+a way of compressing multiple values into one. Faced with multiple
+values per grid item, <code>data.table</code> will ask you to provide a
+function to use for aggregation.</p>
+</div>
+<div id="melt" class="section level2">
+<h2>Melt</h2>
+<p>Melt is (sort of) the opposite of cast. So we’ll use it to (sort of)
+recover the original table from the one we just produced. We can’t
+normally recover the <strong>exact</strong> table, because some
+information is normally lost in casting (for example, by aggregating
+multiple values into one). But in this instance we can!</p>
+<p>If you look at those two tables above and think about how you would
+convert wide to long, you might notice there are some bits of
+information that need to be given.</p>
+<ol style="list-style-type: decimal">
+<li>Which columns should provide data to be compressed into the new
+column? ( “1” , “2” , “3” , … )</li>
+<li>There will be a new column that tells you what original column the
+data came from. What should that be called? (“Lap”)</li>
+<li>What should the new column of data be called? (“Time”)</li>
+</ol>
+<p>You provide this information in arguments to <code>melt()</code>,
+using the arguments <code>measure.vars</code> (1),
+<code>value.name</code> (2), and <code>variable.name</code> (2):</p>
+<div class="sourceCode" id="cb124"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We want to melt all the columns besides the first one, so let&#39;s make a list of their names (&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, ...)</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>meltVars <span class="ot">&lt;-</span> <span class="fu">colnames</span>(ltA17LapTimesCast)[<span class="sc">-</span><span class="dv">1</span>] <span class="co"># Do you know this trick? Cool, right?</span></span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="fu">melt</span>(ltA17LapTimesCast,<span class="at">measure.vars=</span>meltVars,<span class="at">value.name=</span><span class="st">&quot;Lap&quot;</span>,<span class="at">variable.name=</span><span class="st">&quot;Time&quot;</span>)</span></code></pre></div>
+<pre><code>##                   Driver Time     Lap
+##    1: Antonio Giovinazzi    1 107.489
+##    2:       Carlos Sainz    1 101.891
+##    3:   Daniel Ricciardo    1 296.773
+##   ---                                
+## 1138:        Sergio P̩rez   57      NA
+## 1139:  Stoffel Vandoorne   57      NA
+## 1140:    Valtteri Bottas   57  87.507</code></pre>
+<p>Casting and melting come up all the time in genetics. For example,
+imagine having a list of gene expression values with a column for
+‘treatment’. You’d likely want to turn that into a matrix and plot it,
+so <code>dcast</code> would come into play. They are tricky operations,
+but they make more sense once you have a use case of your own.</p>
+</div>
 </div>
 <div id="helpful-functions" class="section level1">
 <h1>Helpful functions</h1>

@@ -37,7 +37,6 @@ Follow along in an [Rstudio session](./tutorial_Rstart.Rmd). Make sure you run t
   <img src="images/f1.jpg" title="Ferrari make famously bad strategic decisions. In contrast, learning `data.table` is a flawless race strategy for life." style="width:60%">
   <figcaption>By the time you've finished this tutorial you will be wrangling data faster than Charles Leclerc can drive this Ferrari.</figcaption>
 </figure>
-
 ---
 
 # Installation / loading
@@ -498,11 +497,77 @@ When you GROUP_BY, the groups are given a number you can access with the special
 
 # Casting and melting
 
-It's very common to want to **pivot** a table from wide to long form or back.
+It's very common to want to *pivot* a table from **wide** to **long** form or back. Intuitively, wide is like this:
+
+| Driver      | Lap 1  | Lap 2  | Lap 3  | Lap 4  |
+| :---    | :---   | :---   | :---   | :---   |
+| Driver 1 | 1:18.5 | 1:18.2 | 1:17.9 | 1:18.2 |
+| Driver 2 | 1:17.2 | 1:17.0 | 1:16.5 | 1:17.2 |
+| Driver 3 | 1:18.8 | 1:17.1 | 1:18.4 | 1:20.0 |
+| Driver 4 | 1:19.1 | 1:17.0 | 1:15.9 | 1:20.2 |
+
+... and long would be like this:
+
+| Driver   | Lap   | Time   |
+| :---     | :---- | :---   |
+| Driver 1 | Lap 1 | 1:18.5 |
+| Driver 1 | Lap 2 | 1:18.2 |
+| Driver 1 | Lap 3 | 1:17.9 |
+| Driver 1 | Lap 4 | 1:18.2 |
+| Driver 2 | Lap 1 | 1:17.2 |
+| Driver 2 | Lap 2 | 1:17.0 |
+| Driver 2 | Lap 3 | 1:16.5 |
+| etc ... | --- | --- |
+
+Changing the *shape* of data from wide to long is called *melting* (picture melting cheese dripping from a Vegemite jaffel, creating long vertical strings [rows]). Long --> wide is called *casting* in a poorly executed attempt to maintain semantic symmetry with its counterpart.
+
+Shapeshifting requires some interesting syntax. Going from long to wide is (contrary to popular opinion) easier. You want a kind of grid, right? So just specify the variable whose levels should be represented on each axis of the grid. In this case you would specify that the drivers should be on the row axis, and the laps should be on the column axis.
+
+## Casting
+
+Here's a demo, using `data.table`s casting function `dcast()`.
+
+```{r}
+ltA17LapTimes <- ltA[year==2017,.(Driver=fullname,lap,seconds)]
+print(ltA17LapTimes)
+ltA17LapTimesCast <- dcast(ltA17LapTimes, formula = Driver ~ lap)
+print(ltA17LapTimesCast[,1:5])
+heatmap(ltA17LapTimesCast[,-"Driver"] %>% as.matrix,Rowv = NA,Colv = NA,labRow = iconv(ltA17LapTimesCast$Driver))
+```
+
+So that worked but we had a warning:
+
+**"Using 'seconds' as value column. Use 'value.var' to override"**
+
+This is for a very good reason. Casting creates a grid. We told the function what variables (AKA columns) should define the rows and columns of the grid. But we didn't specify which column should be used to put values in the grid. In this case was asked for a grid defined by drivers and laps, there was only one column ("seconds") left over to provide values for the grid. But it [ain't necessarily so](https://www.youtube.com/watch?v=u1eSiso7VZs). There will often be many columns to choose from, and you need to specify which is the value-filling columns using the argument `value.var=...`.
+
+A related case that comes up often is that there isn't one unique (to use this example) lap column for each driver, or vice versa. For example, if there were two rows recording a time for the driver "Carlos Sainz" in lap 4, which one should provide the "seconds" to fill the grid position corresponding to that driver/lap combination? One option would be to, say, just take all the candidate rows and add their values together. In this case, adding would be a form of *aggregation* --- a way of compressing multiple values into one. Faced with multiple values per grid item, `data.table` will ask you to provide a function to use for aggregation.
+
+## Melt
+
+Melt is (sort of) the opposite of cast. So we'll use it to (sort of) recover the original table from the one we just produced. We can't normally recover the **exact** table, because some information is normally lost in casting (for example, by aggregating multiple values into one). But in this instance we can!
+
+If you look at those two tables above and think about how you would convert wide to long, you might notice there are some bits of information that need to be given.
+
+1) Which columns should provide data to be compressed into the new column? ( "1" , "2" , "3" , ... )
+2) There will be a new column that tells you what original column the data came from. What should that be called? ("Lap")
+3) What should the new column of data be called? ("Time")
+
+You provide this information in arguments to `melt()`, using the arguments `measure.vars` (1), `value.name` (2), and `variable.name` (2):
+
+```{r}
+# We want to melt all the columns besides the first one, so let's make a list of their names ("1", "2", "3", ...)
+meltVars <- colnames(ltA17LapTimesCast)[-1] # Do you know this trick? Cool, right?
+melt(ltA17LapTimesCast,measure.vars=meltVars,value.name="Lap",variable.name="Time")
+```
+
+Casting and melting come up all the time in genetics. For example, imagine having a list of gene expression values with a column for 'treatment'. You'd likely want to turn that into a matrix and plot it, so `dcast` would come into play. They are tricky operations, but they make more sense once you have a use case of your own.
 
 # Helpful functions
 
 ## foverlaps
+
+
 
 ## fifelse
 
