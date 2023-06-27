@@ -1,4 +1,4 @@
-name: "CCG Bioinformatics"
+name: "CropGEM Bioinformatics Hub"
 output_dir: 'docs'
 output:
   html_document:

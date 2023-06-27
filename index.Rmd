@@ -5,9 +5,9 @@ output:
     toc: false
 ---
 
-**Welcome to the bioinformatics info portal for the Crop Molecular Genetics workgroup at the University of Melbourne!**
+**Welcome to the bioinformatics info portal for the CropGEM workgroup at the University of Melbourne!**
 
-Here you will find resources to help you get started with bioinformatics at CMG, useful links, resources, and tutorials.
+Here you will find resources to help you get started with bioinformatics at CropGEM, useful links, resources, and tutorials.
 
 ---
 

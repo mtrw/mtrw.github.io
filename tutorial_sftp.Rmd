@@ -35,6 +35,8 @@ As you can see I now have the file. `wget` gives it a name taken from the URL, s
 
 ## Transferring between your desktop and Spartan
 
+Mac users go [here](./tutorial_sftp_mac.html).
+
 This is where we use the program [SFTP Drive 2022](https://www.nsoftware.com/sftp/drive/download.aspx), Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
 
 First, install SFTP drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx).
@@ -43,7 +45,7 @@ Then open SFTP Drive 2022 and click <new>.
 
 ![](images/drive1.png)
 
-Then set up a connection to spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any name you want, and use your spartan username and password.
+Then set up a connection to Spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any name you want, and use your Spartan username and password.
 
 ![](images/drive2.png)
 
@@ -54,7 +56,7 @@ Right click the drive and click enable if it is disabled. Then right click again
 
 ![](images/drive3.png)
 
-Assuming that's all fine, you will now have your spartan home directory accessible as a drive, e.g. in Windows explorer:
+Assuming that's all fine, you will now have your Spartan home directory accessible as a drive, e.g. in Windows explorer:
 
 
 ![](images/drive4.png)

@@ -497,7 +497,7 @@ When you GROUP_BY, the groups are given a number you can access with the special
 
 # Casting and melting
 
-It's very common to want to *pivot* a table from **wide** to **long** form or back. Intuitively, wide is like this:
+It's very common to want to *pivot* a table from a **wide** shape to **long** shape or back. Intuitively, wide is like this:
 
 | Driver      | Lap 1  | Lap 2  | Lap 3  | Lap 4  |
 | :---    | :---   | :---   | :---   | :---   |
@@ -519,11 +519,12 @@ It's very common to want to *pivot* a table from **wide** to **long** form or ba
 | Driver 2 | Lap 3 | 1:16.5 |
 | etc ... | --- | --- |
 
-Changing the *shape* of data from wide to long is called *melting* (picture melting cheese dripping from a Vegemite jaffel, creating long vertical strings [rows]). Long --> wide is called *casting* in a poorly executed attempt to maintain semantic symmetry with its counterpart.
+Changing the *shape* of data from wide to long is called *melting* (picture melting cheese dripping from a pizza: it starts out widely distributed over the base and ends up as long vertical strings [columns]). Long --> wide is called *casting*, in a questionably successful attempt to maintain semantic symmetry with its counterpart.
 
-Shapeshifting requires some interesting syntax. Going from long to wide is (contrary to popular opinion) easier. You want a kind of grid, right? So just specify the variable whose levels should be represented on each axis of the grid. In this case you would specify that the drivers should be on the row axis, and the laps should be on the column axis.
 
 ## Casting
+
+Shape-shifting data requires some interesting syntax. Casting (going from long to wide) is (contrary to popular opinion) easier. The table you want is a kind of two-dimensional grid (look above), so you just specify the two variable whose levels should be represented on each axis of the grid. In this case you would specify that the drivers should be on the row axis, and the laps should be on the column axis.
 
 Here's a demo, using `data.table`s casting function `dcast()`.
 
@@ -539,9 +540,9 @@ So that worked but we had a warning:
 
 **"Using 'seconds' as value column. Use 'value.var' to override"**
 
-This is for a very good reason. Casting creates a grid. We told the function what variables (AKA columns) should define the rows and columns of the grid. But we didn't specify which column should be used to put values in the grid. In this case was asked for a grid defined by drivers and laps, there was only one column ("seconds") left over to provide values for the grid. But it [ain't necessarily so](https://www.youtube.com/watch?v=u1eSiso7VZs). There will often be many columns to choose from, and you need to specify which is the value-filling columns using the argument `value.var=...`.
+This is for a very good reason. Casting creates a grid. We told the function what variables (AKA columns) should define the rows and columns of the grid. But we didn't specify which column should be used to put values in the actual grid itself. In this case we asked for a grid defined by drivers and laps, there was only one column ("seconds") left over to provide values for the grid. But it [ain't necessarily so](https://www.youtube.com/watch?v=u1eSiso7VZs). There will often be many columns to choose from, and you need to specify which is the value-filling columns using the argument `value.var=...`.
 
-A related case that comes up often is that there isn't one unique (to use this example) lap column for each driver, or vice versa. For example, if there were two rows recording a time for the driver "Carlos Sainz" in lap 4, which one should provide the "seconds" to fill the grid position corresponding to that driver/lap combination? One option would be to, say, just take all the candidate rows and add their values together. In this case, adding would be a form of *aggregation* --- a way of compressing multiple values into one. Faced with multiple values per grid item, `data.table` will ask you to provide a function to use for aggregation.
+A related case that comes up often is that there isn't one unique (to use this example) lap column for each driver, or vice versa. For example, if there were two rows recording a time for the driver "Carlos Sainz" in lap 4, then which one should provide the "seconds" to fill the grid position corresponding to that driver/lap combination? One option would be to, say, just take all the candidate rows and add their values together. In this case, 'adding' would be a form of *aggregation* --- a way of compressing multiple values into one. Faced with multiple values per grid item, `data.table` will ask you to provide a function to use for aggregation.
 
 ## Melt
 
@@ -553,7 +554,7 @@ If you look at those two tables above and think about how you would convert wide
 2) There will be a new column that tells you what original column the data came from. What should that be called? ("Lap")
 3) What should the new column of data be called? ("Time")
 
-You provide this information in arguments to `melt()`, using the arguments `measure.vars` (1), `value.name` (2), and `variable.name` (2):
+You provide this information in arguments to `melt()`, using the arguments `measure.vars` (1), `value.name` (2), and `variable.name` (3):
 
 ```{r}
 # We want to melt all the columns besides the first one, so let's make a list of their names ("1", "2", "3", ...)
