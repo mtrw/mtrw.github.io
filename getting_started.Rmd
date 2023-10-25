@@ -1,6 +1,6 @@
 ---
 title: "Getting set up to use the High Performance Computing resources"
-output: 
+output:
   html_document:
     toc: true
     toc_float: true
@@ -33,7 +33,7 @@ A **teletypewriter** (or TTY) interface is a device that provides a screen and a
 
 ![Once upon a time they looked like this ...](images/TTY.jpg)
 
-... but nowadays, a TTY is just a program. You will use a TTY program called *PuTTy*.
+... but nowadays, a TTY is just a program. Windows users will use a TTY program called *PuTTy* and MacOS users will use the TTY program *terminal*, which comes with MacOS.
 
 So far, we have this:
 
@@ -49,7 +49,7 @@ So, to tie it all together so far:
 
 *PuTTy* uses the *SSH* *protocol* to connect to a server and provide a *TTY* interface to a *shell* around the server's *operating system*, which is *Linux*.
 
-Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). We will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*.
+Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). Windows users will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*. Mac users can use the program *CyberDuck* which does the sme thing.
 
 ***
 
@@ -59,13 +59,19 @@ Other protocols you may have heard of are SCP (ways of transferring files), HTTP
 
 ### Download the software
 
+**Windows users:**
+
 1. Get PuTTy from [here](https://www.putty.org/) and install it.
 
-2. Get SFTP Drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx) and install it.
+2. Get SFTP Drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx) and install it
 
-### Joining the CCG HPC project and getting a username
+**MacOS users:**
 
-To get access to the Spartan server, you need to join the CCG's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CCG project is called "punim1869".
+1. Get CyberDuck from [here](https://cyberduck.io/download/) and install it.
+
+### Joining the CropGEM HPC project and getting a username
+
+To get access to the Spartan server, you need to join CropGEM's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CropGEM project is called "punim1869".
 
 ### Setting your default login shell to zsh
 
@@ -81,7 +87,9 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 
 ![](images/karaage_zsh.png)
 
-### Connecting with PuTTy
+### Connecting to the spartan linux server via SSH
+
+**Windows users** (*MacOS users see the bottom of this section*)
 
 1. Open PuTTy
 
@@ -103,16 +111,34 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 
 6. Click Open. You may get a prompt asking about a new connection or a network key. Click yes/ok to either.
 
-7. You have a terminal! It should look a bit like this (but with your choice of colours/fonts) ...
-
+7. You have a terminal! It should look a bit like this (but with your choice of colours/fonts) ..
 ![](images/shell_firstlogin.png)
+
+
+**MacOS users**
+
+Open the program *terminal*.
+
+1. At the command prompt, type `ssh <YOUR_SPARTAN_USERNAME>\@spartan.hpc.unimelb.edu.au`. For example, I would type `ssh mrabanuswall\@spartan.hpc.unimelb.edu.au`.
+
+2. Enter your spartan password when prompted.
+
+3. The first time you may be asked a question about authenticating a new SSH key. If so, Type 'Y' to confirm.
+
+4. If all goes well, you should connect successfully and see a message similar to the image above.
+
+5. The default terminal colour scheme and font are not very readable or cool. Consider going into the settings and making the terminal your own. A dark background is easier on the eyes.
+
+**Both Windows and MacOS users**
+
+The terminal can be a scary place for beginners. Don't worry. It becomes easy. For now, just copy commands into the prompt as given
 
 8. Install Zsh and oh-my-zsh, using the command:
 
         cd /home/$USER
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-    - HINT: In PuTTy, you copy text just by highlighting it, and paste it with a right-click.
+    - HINT: In most terminal apps like PuTTy, you copy text just by highlighting it, and paste it with a right-click.
     - You may get prompts asking you if you want to adopt the default options (YES) and/or change your shell (also YES)
     - Zsh offers a LOT of great features that make your command line experience easier, some of which feature in the Linux [tutorial](./tutorials.html). But you can browse the [cheatsheet](https://www.bash2zsh.com/zsh_refcard/refcard.pdf) for some quick inspiration.
 
@@ -142,12 +168,14 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
         mkdir -p /data/gpfs/projects/punim1869/users/$USER/workspace
         mkdir -p /data/gpfs/projects/punim1869/users/$USER/.R_PACKAGES
 
-    - A workspace is a good place to put projects in
-    - If you use R, it's good to have somewhere to store all your packages. Note the dot at the beginning -- this makes the directory hidden.
+    - A workspace is a good place to put projects in.
+    - If you use R, it's good to have somewhere to store all your packages. Note the dot at the beginning of .R_PACKAGES -- this makes the directory hidden.
 
 ### Getting familiar with your new environment
 
-1. To look inside the .zsh profile
+1. If you aren't familiar with Linux and you want to run Linux analyses, time to learn some [Linux basics!](https://www.youtube.com/watch?v=oxuRxtrO2Ag). Find a video or blog or book that suits you. If you are only here to access the shared data or use R, then skip to step 3.
+        
+2. To look inside the .zsh profile
     - Type `less ~/.zshrc` to read the .zsh profile file. Scroll down with the arrows until you find some lines that begin with `alias`. Have a look and then press `q` to leave the reader.
     - These lines create shortcut commands. For example, the command `samtools view` is what you would use to look at the mapped reads in a .bam file. But it's a lot to type. The line `alias sv='samtools view'` means we can now just type `sv` instead. Here are some others now available:
         - `lincmd` --- Print a list of common Linux commands and command line editing shortcuts
@@ -156,7 +184,7 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
         - `hme` --- Display tasks you are running and the resources they are using (with htop)
         - ... and more, that will come up in other tutorials.
         
-2. Storage and your workspace
+3. Storage and your workspace
     - The directory you land in is called your *home directory*. It is basically meant for things like profile files. It does not have much disk space. You should do your work somewhere with more storage space. We have a lot of allocated storage space, and you even have a working directory within it. It is located at `/data/gpfs/projects/punim1869/`.
         - You can get there using the command `cd /data/gpfs/projects/punim1869/`, and list the contents using `tree -L 4`
         - Alternatively, there is an alias set up, `gs` ("[g]o to [s]torage") will take you there.
@@ -165,17 +193,16 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
         - You can get there with the alias `gw` ("[g]o to [w]orkplace").
         - The address is also automatically stored in the variable $WS.
 
-3. Shared resources
+4. Shared resources
     - Things like reference genomes, that take up a lot of space and which everyone uses, are kept in a shared storage area, located at [project storage dir]/shared_storage. If you need a large file like that, talk to [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to get it added to the shared storage.
     
 ![Structure of storage on Spartan](images/storage_structure.png)
 
-4. Resource management with Slurm
-
 5. What now?
-    - If you haven't already, it's time to learn some Linux!
-        - [Basics](https://www.youtube.com/watch?v=oxuRxtrO2Ag)
-        - [More advanced features and shell scripting](https://www.youtube.com/watch?v=emhouufDnB4), or (a bit more gently) [here](https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w)
-        - [Zsh](https://zsh.sourceforge.io/Intro/intro_1.html)
-    - Once you're comfortable with that, either learn to [run jobs on the Spartan](./tutorial_slurm_shellscripts.html), or read on to get set up with R.
+    - This depends what you want to do, you could ...
+        - [Learn more advanced features and shell scripting](https://www.youtube.com/watch?v=emhouufDnB4), or (a bit more gently) [here](https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w)
+        - [Gain familiarity with the convenient functions of Zsh](https://zsh.sourceforge.io/Intro/intro_1.html)
+    - Do you want to run bioinformatics programs on spartan? Then you should first learn to [run jobs on the Spartan cluster](./tutorial_slurm_shellscripts.html).
+    - Do you want to use R studio on spartan? Read about [how to get set up with R](./tutorial_Rstart.html), and how to become a fierce data analyst with [R::data.table](./tutorial_data_table.html).
+    - 
     

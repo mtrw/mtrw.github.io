@@ -13,7 +13,7 @@
 
 <title>The glorious R::data.table</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -29,12 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -1091,7 +1091,7 @@ used to add, modify, or delete columns.</p>
 ## 19844:         1 2017  89.466 Daniel Ricciardo
 ## 19845:         1 2017  89.708 Daniel Ricciardo</code></pre>
 <p>To modify:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="co">#replace spaces with underscores in $name</span></span>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="co">#replace spaces with underscores in the column name</span></span>
 <span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a>ltA[,name<span class="sc">:=</span><span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>,<span class="st">&quot;_&quot;</span>,name)]</span>
 <span id="cb65-3"><a href="#cb65-3" tabindex="-1"></a>ltA</span></code></pre></div>
 <pre><code>##         forename   surname lap milliseconds position                  name
@@ -1708,24 +1708,149 @@ but they make more sense once you have a use case of your own.</p>
 </div>
 <div id="helpful-functions" class="section level1">
 <h1>Helpful functions</h1>
+<p>These make everyday tasks easy and fast … in fact the prefix ‘f’ on a
+lot of <code>data.table</code> functions stands for “fast”—they are
+speed-optimised implementations of popular functions.</p>
 <div id="foverlaps" class="section level2">
 <h2>foverlaps</h2>
+<p>This function (“fast overlaps”, or I like to think of it as “find
+overlaps”) is made for genomics.</p>
+<p>And is hence best understood with a genomics example. It solves the
+classic problem of needing to find the overlaps between genomic
+features, for example, when you want to know what genes overlap some
+genomic region, say, a QTL. In such a case you might have a data.table
+called “genes” describing gene positions, so it would have columns named
+something like “chromosome”, “start”, and “end”, and perhaps some kind
+of gene description called “description”. Let’s make one …</p>
+<div class="sourceCode" id="cb126"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb126-2"><a href="#cb126-2" tabindex="-1"></a>  <span class="at">chr         =</span> <span class="fu">c</span>(<span class="st">&quot;chr1&quot;</span>,<span class="st">&quot;chr3&quot;</span>,<span class="st">&quot;chr3&quot;</span>,<span class="st">&quot;chr4&quot;</span>),</span>
+<span id="cb126-3"><a href="#cb126-3" tabindex="-1"></a>  <span class="at">start       =</span> <span class="fu">c</span>( <span class="dv">1239</span>,  <span class="dv">120</span>,   <span class="dv">450</span>,   <span class="dv">8953</span>),</span>
+<span id="cb126-4"><a href="#cb126-4" tabindex="-1"></a>  <span class="at">end         =</span> <span class="fu">c</span>( <span class="dv">1278</span>,  <span class="dv">183</span>,   <span class="dv">620</span>,   <span class="dv">9232</span>),</span>
+<span id="cb126-5"><a href="#cb126-5" tabindex="-1"></a>  <span class="at">description =</span> <span class="fu">c</span>(<span class="st">&quot;abc1&quot;</span>,<span class="st">&quot;xyz2&quot;</span>,<span class="st">&quot;def3&quot;</span>,<span class="st">&quot;uvw4&quot;</span>)</span>
+<span id="cb126-6"><a href="#cb126-6" tabindex="-1"></a>)</span></code></pre></div>
+<p>And you would have a second data.table describing the QTL ranges:</p>
+<div class="sourceCode" id="cb127"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a>QTLs <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb127-2"><a href="#cb127-2" tabindex="-1"></a>  <span class="at">chr         =</span> <span class="fu">c</span>(<span class="st">&quot;chr3&quot;</span>,<span class="st">&quot;chr4&quot;</span>,<span class="st">&quot;chr5&quot;</span>),</span>
+<span id="cb127-3"><a href="#cb127-3" tabindex="-1"></a>  <span class="at">start       =</span> <span class="fu">c</span>( <span class="dv">98</span>,    <span class="dv">1302</span>,   <span class="dv">8953</span>),</span>
+<span id="cb127-4"><a href="#cb127-4" tabindex="-1"></a>  <span class="at">end         =</span> <span class="fu">c</span>( <span class="dv">1034</span>,  <span class="dv">9032</span>,   <span class="dv">9232</span>),</span>
+<span id="cb127-5"><a href="#cb127-5" tabindex="-1"></a>  <span class="at">description =</span> <span class="fu">c</span>(<span class="st">&quot;qtl1&quot;</span>,<span class="st">&quot;qtl2&quot;</span>,<span class="st">&quot;qtl3&quot;</span>)</span>
+<span id="cb127-6"><a href="#cb127-6" tabindex="-1"></a>)</span></code></pre></div>
+<p>So, in this case, qtl1 fully overlaps both genes on chr3, and qtl3
+partially overlaps the gene on chr4.</p>
+<p>Remember <code>setkey()</code> from earlier? <code>foverlaps()</code>
+requires keyed data.tables (for very good speed-related reasons), and it
+works by assuming the first key column is the <em>chromosome</em>, and
+the next two are the <em>start</em> and <em>end</em> coordinates of the
+feature. so we set up our data.tables accordingly:</p>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a><span class="fu">setkey</span>(genes,chr,start,end)</span>
+<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a><span class="fu">setkey</span>(QTLs,chr,start,end)</span></code></pre></div>
+<p>That may look a bit silly because we conveniently named our columns
+the same in both data tables. But this function has many uses, and your
+columns won’t always have the same names. Imagine for example checking
+which festivals overlap with what season. Or what towns fall within
+certain ranges of latitudes. Or what experimental plots fall within
+certain distances of a water source. It’s flexible.</p>
+<p>Let’s find the overlaps using <code>foverlaps()</code>, starting with
+all instances where any part of a gene overlaps a QTL.</p>
+<div class="sourceCode" id="cb129"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a><span class="fu">foverlaps</span>(genes,QTLs,<span class="at">type=</span><span class="st">&quot;any&quot;</span>)</span></code></pre></div>
+<pre><code>##     chr start  end description i.start i.end i.description
+## 1: chr1    NA   NA        &lt;NA&gt;    1239  1278          abc1
+## 2: chr3    98 1034        qtl1     120   183          xyz2
+## 3: chr3    98 1034        qtl1     450   620          def3
+## 4: chr4  1302 9032        qtl2    8953  9232          uvw4</code></pre>
+<p>Great, right? Notice in the output the prefix ‘i.’ is prepended to
+columns names in the first data.table given to the function, so you can
+distinguish them from the columns in the other.</p>
+<p>Remember in the section on merging how merges can be conceptualised
+as one data.table SELECTing rows from another? The same idea applies
+here: the first data.table selects rows from the second. And like merge,
+if a row in the selecting data.table that doesn’t find a match, it will
+produce a row with NAs in the relevant columns.</p>
+<p>For example, let’s switch it around and ask the QTLs to find genes
+they overlap. The QTL on chr5 isn’t going to hit any genes, so notice we
+get NAs there:</p>
+<div class="sourceCode" id="cb131"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" tabindex="-1"></a><span class="fu">foverlaps</span>(QTLs,genes,<span class="at">type=</span><span class="st">&quot;any&quot;</span>)</span></code></pre></div>
+<pre><code>##     chr start  end description i.start i.end i.description
+## 1: chr3   120  183        xyz2      98  1034          qtl1
+## 2: chr3   450  620        def3      98  1034          qtl1
+## 3: chr4  8953 9232        uvw4    1302  9032          qtl2
+## 4: chr5    NA   NA        &lt;NA&gt;    8953  9232          qtl3</code></pre>
+<p>We can suppress output from unmatched rows using
+<code>nomatch=0</code>.</p>
+<div class="sourceCode" id="cb133"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" tabindex="-1"></a><span class="fu">foverlaps</span>(QTLs,genes,<span class="at">type=</span><span class="st">&quot;any&quot;</span>,<span class="at">nomatch=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>##     chr start  end description i.start i.end i.description
+## 1: chr3   120  183        xyz2      98  1034          qtl1
+## 2: chr3   450  620        def3      98  1034          qtl1
+## 3: chr4  8953 9232        uvw4    1302  9032          qtl2</code></pre>
+<p>And finally, say we only want to select items where the (say) gene,
+falls <em>entirely</em> within the (say) QTL, and doesn’t just overlap
+some bit of it. Modify the <code>type=</code> argument.</p>
+<div class="sourceCode" id="cb135"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" tabindex="-1"></a><span class="fu">foverlaps</span>(genes,QTLs,<span class="at">type=</span><span class="st">&quot;within&quot;</span>,<span class="at">nomatch=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>##     chr start  end description i.start i.end i.description
+## 1: chr3    98 1034        qtl1     120   183          xyz2
+## 2: chr3    98 1034        qtl1     450   620          def3</code></pre>
 </div>
 <div id="fifelse" class="section level2">
 <h2>fifelse</h2>
+<p>Just like <code>ifelse()</code>, but faster …</p>
+<div class="sourceCode" id="cb137"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" tabindex="-1"></a>dr[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="fu">ifelse</span>(</span>
+<span id="cb137-2"><a href="#cb137-2" tabindex="-1"></a>  nationality<span class="sc">==</span><span class="st">&quot;German&quot;</span>,</span>
+<span id="cb137-3"><a href="#cb137-3" tabindex="-1"></a>  <span class="fu">paste</span>(forename,<span class="st">&quot;wants leberwurst and saurkraut for breakfast&quot;</span>),</span>
+<span id="cb137-4"><a href="#cb137-4" tabindex="-1"></a>  <span class="fu">paste</span>(forename,<span class="st">&quot;doesn&#39;t want pulverised offal for breakfast&quot;</span>)</span>
+<span id="cb137-5"><a href="#cb137-5" tabindex="-1"></a>)]</span></code></pre></div>
+<pre><code>##  [1] &quot;Lewis doesn&#39;t want pulverised offal for breakfast&quot;   
+##  [2] &quot;Nick wants leberwurst and saurkraut for breakfast&quot;   
+##  [3] &quot;Nico wants leberwurst and saurkraut for breakfast&quot;   
+##  [4] &quot;Fernando doesn&#39;t want pulverised offal for breakfast&quot;
+##  [5] &quot;Heikki doesn&#39;t want pulverised offal for breakfast&quot;  
+##  [6] &quot;Kazuki doesn&#39;t want pulverised offal for breakfast&quot;  
+##  [7] &quot;S̩bastien doesn&#39;t want pulverised offal for breakfast&quot;
+##  [8] &quot;Kimi doesn&#39;t want pulverised offal for breakfast&quot;    
+##  [9] &quot;Robert doesn&#39;t want pulverised offal for breakfast&quot;  
+## [10] &quot;Timo wants leberwurst and saurkraut for breakfast&quot;</code></pre>
 </div>
 <div id="frank" class="section level2">
 <h2>frank</h2>
-</div>
-<div id="frollapply" class="section level2">
-<h2>frollapply</h2>
-</div>
-<div id="fintersect" class="section level2">
-<h2>fintersect</h2>
+<p>Super useful. Let’s say you want to plot the driver times on the
+first lap of Melbourne 2017, in order of speed. In other words, you want
+to <em>rank</em> them …</p>
+<div class="sourceCode" id="cb139"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" tabindex="-1"></a>ltA27lap1 <span class="ot">&lt;-</span> ltA[lap<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> year<span class="sc">==</span><span class="dv">2017</span>,.(</span>
+<span id="cb139-2"><a href="#cb139-2" tabindex="-1"></a>  seconds,</span>
+<span id="cb139-3"><a href="#cb139-3" tabindex="-1"></a>  <span class="at">rank=</span><span class="fu">frank</span>(seconds)</span>
+<span id="cb139-4"><a href="#cb139-4" tabindex="-1"></a>)]</span>
+<span id="cb139-5"><a href="#cb139-5" tabindex="-1"></a><span class="fu">plot</span>(ltA27lap1<span class="sc">$</span>rank,ltA27lap1<span class="sc">$</span>seconds,<span class="at">pch=</span><span class="dv">20</span>) <span class="co"># That super-slow time is result of Daniel Ricciardo&#39;s fuel cell shitting itself during the formation lap. Boo.</span></span></code></pre></div>
+<p><img src="tutorial_data_table_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>What happens if there are two identical lap times though? Should
+these both get the same rank? Or be ranked next to each other in a
+random order? <code>frank</code> does the latter by default. To give
+them equal ranks, use the <code>ties="dense"</code> argument. I use this
+all the time when I want to rank SNP positions to lay them out nicely on
+a graphical genotype plot.</p>
 </div>
 <div id="fcoalesce" class="section level2">
 <h2>fcoalesce</h2>
+<p>Replaces missing values by stealing values from other columns. I’ve
+used it once. I don’t know why I mentioned it here. Sorry.</p>
 </div>
+</div>
+<div id="the-end" class="section level1">
+<h1>The end</h1>
+<p>Well done! Like Lewis Hamilton in c(2008, 2014:2015, 2017:2020), your
+persistence has made you a world champion. Not at going around and
+around in a circle in a glorified go-kart for the benefit of gambling
+app developers, fossil fuel lobbies, and cigarette companies. No, you’re
+a world champion at data.table! Which is probably better for the world
+anyway.</p>
+<p><img src="images/lh2008.jpg" /></p>
 </div>
 
 

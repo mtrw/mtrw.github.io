@@ -282,7 +282,7 @@ ltA
 To modify:
 
 ```{r}
-#replace spaces with underscores in $name
+#replace spaces with underscores in the column name
 ltA[,name:=gsub(" ","_",name)]
 ltA
 ```
@@ -464,7 +464,6 @@ As you can see, even though we never specifically over-wrote our original table,
 
 ### Multiline DO_SOMETHING
 
-
 DO_SOMETHING can get very complex. Use curly braces (`{` and `}`) to denote multi-command operations in there. I speculate that a driver's fastest lap of a race is usually a few laps before the last lap, when they are pushing the car hard but the tyres have not yet worn out too much. Let's check how many laps from the end of the race drivers normally complete their fastest lap of the race.
 
 ```{r}
@@ -521,7 +520,6 @@ It's very common to want to *pivot* a table from a **wide** shape to **long** sh
 
 Changing the *shape* of data from wide to long is called *melting* (picture melting cheese dripping from a pizza: it starts out widely distributed over the base and ends up as long vertical strings [columns]). Long --> wide is called *casting*, in a questionably successful attempt to maintain semantic symmetry with its counterpart.
 
-
 ## Casting
 
 Shape-shifting data requires some interesting syntax. Casting (going from long to wide) is (contrary to popular opinion) easier. The table you want is a kind of two-dimensional grid (look above), so you just specify the two variable whose levels should be represented on each axis of the grid. In this case you would specify that the drivers should be on the row axis, and the laps should be on the column axis.
@@ -566,16 +564,105 @@ Casting and melting come up all the time in genetics. For example, imagine havin
 
 # Helpful functions
 
+These make everyday tasks easy and fast ... in fact the prefix 'f' on a lot of `data.table` functions stands for "fast"---they are speed-optimised implementations of popular functions.
+
 ## foverlaps
 
+This function ("fast overlaps", or I like to think of it as "find overlaps") is made for genomics.
 
+And is hence best understood with a genomics example. It solves the classic problem of needing to find the overlaps between genomic features, for example, when you want to know what genes overlap some genomic region, say, a QTL. In such a case you might have a data.table called "genes" describing gene positions, so it would have columns named something like "chromosome", "start", and "end", and perhaps some kind of gene description called "description". Let's make one ...
+
+```{r}
+genes <- data.table(
+  chr         = c("chr1","chr3","chr3","chr4"),
+  start       = c( 1239,  120,   450,   8953),
+  end         = c( 1278,  183,   620,   9232),
+  description = c("abc1","xyz2","def3","uvw4")
+)
+```
+
+And you would have a second data.table describing the QTL ranges:
+
+```{r}
+QTLs <- data.table(
+  chr         = c("chr3","chr4","chr5"),
+  start       = c( 98,    1302,   8953),
+  end         = c( 1034,  9032,   9232),
+  description = c("qtl1","qtl2","qtl3")
+)
+```
+
+So, in this case, qtl1 fully overlaps both genes on chr3, and qtl3 partially overlaps the gene on chr4.
+
+Remember `setkey()` from earlier? `foverlaps()` requires keyed data.tables (for very good speed-related reasons), and it works by assuming the first key column is the *chromosome*, and the next two are the *start* and *end* coordinates of the feature. so we set up our data.tables accordingly:
+
+```{r}
+setkey(genes,chr,start,end)
+setkey(QTLs,chr,start,end)
+```
+
+That may look a bit silly because we conveniently named our columns the same in both data tables. But this function has many uses, and your columns won't always have the same names. Imagine for example checking which festivals overlap with what season. Or what towns fall within certain ranges of latitudes. Or what experimental plots fall within certain distances of a water source. It's flexible.
+
+Let's find the overlaps using `foverlaps()`, starting with all instances where any part of a gene overlaps a QTL.
+
+```{r}
+foverlaps(genes,QTLs,type="any")
+```
+
+Great, right? Notice in the output the prefix 'i.' is prepended to columns names in the first data.table given to the function, so you can distinguish them from the columns in the other.
+
+Remember in the section on merging how merges can be conceptualised as one data.table SELECTing rows from another? The same idea applies here: the first data.table selects rows from the second. And like merge, if a row in the selecting data.table that doesn't find a match, it will produce a row with NAs in the relevant columns.
+
+For example, let's switch it around and ask the QTLs to find genes they overlap. The QTL on chr5 isn't going to hit any genes, so notice we get NAs there:
+
+```{r}
+foverlaps(QTLs,genes,type="any")
+```
+
+We can suppress output from unmatched rows using `nomatch=0`.
+
+```{r}
+foverlaps(QTLs,genes,type="any",nomatch=0)
+```
+
+And finally, say we only want to select items where the (say) gene, falls *entirely* within the (say) QTL, and doesn't just overlap some bit of it. Modify the `type=` argument.
+
+```{r}
+foverlaps(genes,QTLs,type="within",nomatch=0)
+```
 
 ## fifelse
 
+Just like `ifelse()`, but faster ...
+
+```{r}
+dr[1:10,ifelse(
+  nationality=="German",
+  paste(forename,"wants leberwurst and saurkraut for breakfast"),
+  paste(forename,"doesn't want pulverised offal for breakfast")
+)]
+```
+
 ## frank
 
-## frollapply
+Super useful. Let's say you want to plot the driver times on the first lap of Melbourne 2017, in order of speed. In other words, you want to *rank* them ...
 
-## fintersect
+```{r}
+ltA27lap1 <- ltA[lap==1 & year==2017,.(
+  seconds,
+  rank=frank(seconds)
+)]
+plot(ltA27lap1$rank,ltA27lap1$seconds,pch=20) # That super-slow time is result of Daniel Ricciardo's fuel cell shitting itself during the formation lap. Boo.
+```
+
+What happens if there are two identical lap times though? Should these both get the same rank? Or be ranked next to each other in a random order? `frank` does the latter by default. To give them equal ranks, use the `ties="dense"` argument. I use this all the time when I want to rank SNP positions to lay them out nicely on a graphical genotype plot.
 
 ## fcoalesce
+
+Replaces missing values by stealing values from other columns. I've used it once. I don't know why I mentioned it here. Sorry.
+
+# The end
+
+Well done! Like Lewis Hamilton in c(2008, 2014:2015, 2017:2020), your persistence has made you a world champion. Not at going around and around in a circle in a glorified go-kart for the benefit of gambling app developers, fossil fuel lobbies, and cigarette companies. No, you're a world champion at data.table! Which is probably better for the world anyway.
+
+![](images/lh2008.jpg)

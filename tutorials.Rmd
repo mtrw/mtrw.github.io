@@ -12,12 +12,11 @@ Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb
 +   [Transferring data and opening files on your desktop with SFTP](./tutorial_sftp.html)
 +   [Transfer data to and from long-term storage (Mediaflux)](./tutorial_mediaflux.html)
 +   [Where are all the programs I want? Loading modules on Spartan](./tutorial_module.html)
-+   [Level up your data skills with R::data.table (in progress)](./tutorial_data_table.html)
++   [Level up your data skills with R::data.table](./tutorial_data_table.html)
 
 *TO DO*
 
-+   Working in screen
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal
-+   Basic Bionformatics: AWK 
++   Basic Bionformatics: AWK
 +   Basic Bioinformatics: Mapping, Variant Calling, and the SAM/BAM format
 +   Basic Bioinformatics: Homology searches and BLAST
