@@ -49,7 +49,7 @@ So, to tie it all together so far:
 
 *PuTTy* uses the *SSH* *protocol* to connect to a server and provide a *TTY* interface to a *shell* around the server's *operating system*, which is *Linux*.
 
-Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). Windows users will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*. Mac users can use the program *CyberDuck* which does the sme thing.
+Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). Windows users will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*. Mac users can use the program *CyberDuck* which does the same thing.
 
 ***
 
@@ -93,7 +93,7 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 
 1. Open PuTTy
 
-2. In the Host Name box, type <YOUR_USERNAME>\@spartan.hpc.unimelb.edu.au 
+2. In the Host Name box, type `<YOUR_SPARTAN_USERNAME>@spartan.hpc.unimelb.edu.au` 
 
 ![](images/putty_login.png)
 
@@ -119,7 +119,7 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 
 Open the program *terminal*.
 
-1. At the command prompt, type `ssh <YOUR_SPARTAN_USERNAME>\@spartan.hpc.unimelb.edu.au`. For example, I would type `ssh mrabanuswall\@spartan.hpc.unimelb.edu.au`.
+1. At the command prompt, type `ssh <YOUR_SPARTAN_USERNAME>@spartan.hpc.unimelb.edu.au`. For example, I would type `ssh mrabanuswall@spartan.hpc.unimelb.edu.au`.
 
 2. Enter your spartan password when prompted.
 
