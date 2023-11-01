@@ -534,7 +534,7 @@ toolchain</a>. At the moment</p></li>
 R session (or using the terminal built in to Rstudio), you will need the
 relevant modules loaded. Type the module identifiers here. For example I
 normally set it to
-<code>harfbuzz/2.8.2 fribidi/1.0.10 blast+/2.12.0 bedtools/2.30.0 bcftools/1.15 vcftools/0.1.16 samtools/1.16.1 lastz/1.04.03</code>.</p></li>
+<code>GCC/11.3.0 SAMtools/1.16.1 BEDTools/2.30.0 VCFtools/0.1.16 BCFtools/1.15.1 BLAST/2.14.0-Linux_x86_64 OpenMPI/4.1.4 LASTZ/1.04.03</code>.</p></li>
 <li><p><em>Number of hours</em> — If you request a short time, your
 session will be approved faster. I tend to use 12 hour sessions, they
 get accepted within a few minutes.</p></li>
@@ -544,8 +544,8 @@ functions/packages/scripts you use request multiple cores. The package
 code in parallel and can really speed up your work. I use 4 cores by
 default and up to 50 if I am making heavy use of multi-core
 functions.</p></li>
-<li><p><em>Partition</em> — “Physical” tends to provide resources
-faster.</p></li>
+<li><p><em>Partition</em> — “cascade” tends to provide resources
+fastest.</p></li>
 <li><p><em>QoS</em> — Leave blank</p></li>
 <li><p><em>Number of GPUs</em> — Use more if the
 functions/packages/scripts you use are specifically written to make use
