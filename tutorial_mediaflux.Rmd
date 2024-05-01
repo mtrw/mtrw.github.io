@@ -25,7 +25,7 @@ There are [several ways](https://wiki-rcs.unimelb.edu.au/display/RCS/Getting+Sta
 To open an SFTP connection to Mediaflux from Spartan, run
 
 ```{bash,eval=F}
-sftp -P 22 unimelb:${USER}@mediaflux.researchsoftware.unimelb.edu.au
+sftp -o User=unimelb:${USER} mediaflux.researchsoftware.unimelb.edu.au
 ```
 
 It will ask for a password. You need to give it your *University of Melbourne* password, and **not** your Spartan/HPC password. The reason for this is that suffering builds character.
@@ -91,5 +91,5 @@ There doesn't seem to be a way to limit access to files on Mediaflux. Anyone who
 ## Helpful hints
 
 -   Run large transfers in a `screen` session, and be sure to allocate resources for a long time.
--   The SFTP flag `-a` will attempt to resume an interrupted transfer by (e.g.) completing partially-complete file transfers and ignoring already-transferred files.
+-   The SFTP command `reget` will attempt to resume an interrupted transfer by (e.g.) completing partially-complete file transfers and ignoring already-transferred files.
 
