@@ -13,7 +13,7 @@
 
 <title>Transfer data to and from long-term storage (Mediaflux)</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -637,7 +637,7 @@ transfer data between them.</p>
 <h2>Start an SFTP connection</h2>
 <p>To open an SFTP connection to Mediaflux from Spartan, run</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-P</span> 22 unimelb:<span class="va">${USER}</span>@mediaflux.researchsoftware.unimelb.edu.au</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-o</span> User=unimelb:<span class="va">${USER}</span> mediaflux.researchsoftware.unimelb.edu.au</span></code></pre></div>
 <p>It will ask for a password. You need to give it your <em>University
 of Melbourne</em> password, and <strong>not</strong> your Spartan/HPC
 password. The reason for this is that suffering builds character.</p>
@@ -717,9 +717,9 @@ again. I will talk to admins about enabling better access control.</p>
 <ul>
 <li>Run large transfers in a <code>screen</code> session, and be sure to
 allocate resources for a long time.</li>
-<li>The SFTP flag <code>-a</code> will attempt to resume an interrupted
-transfer by (e.g.) completing partially-complete file transfers and
-ignoring already-transferred files.</li>
+<li>The SFTP command <code>reget</code> will attempt to resume an
+interrupted transfer by (e.g.) completing partially-complete file
+transfers and ignoring already-transferred files.</li>
 </ul>
 </div>
 </div>

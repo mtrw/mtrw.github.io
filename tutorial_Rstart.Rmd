@@ -20,7 +20,7 @@ This will take you to a settings screen. Here's what to enter:
 
 - *RStudio Version* --- Use the latest version (top of the list). This also loads a recent [foss toolchain](tutorial_module.html).
  At the moment 
-- *Load extra module* --- If you call shell programs from the R session (or using the terminal built in to Rstudio), you will need the relevant modules loaded. Type the module identifiers here. For example I normally set it to `GCC/11.3.0 SAMtools/1.16.1 BEDTools/2.30.0 VCFtools/0.1.16 BCFtools/1.15.1 BLAST/2.14.0-Linux_x86_64 OpenMPI/4.1.4 LASTZ/1.04.03`.
+- *Load extra module* --- If you call shell programs from the R session (or using the terminal built in to Rstudio), you will need the relevant modules loaded. Type the module identifiers here. For example I normally set it to `GCC/11.3.0  OpenMPI/4.1.4 BLAST/2.14.0-Linux_x86_64 BEDTools/2.30.0 VCFtools/0.1.16 BCFtools/1.15.1 SAMtools/1.16.1 LASTZ/1.04.03 CD-HIT/4.8.1`.
 
 - *Number of hours* --- If you request a short time, your session will be approved faster. I tend to use 12 hour sessions, they get accepted within a few minutes.
 

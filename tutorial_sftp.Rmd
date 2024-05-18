@@ -45,7 +45,7 @@ Then open SFTP Drive 2022 and click <new>.
 
 ![](images/drive1.png)
 
-Then set up a connection to Spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any name you want, and use your Spartan username and password.
+Then set up a connection to Spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any drive name you want, and use your Spartan username and password.
 
 ![](images/drive2.png)
 
@@ -61,7 +61,7 @@ Assuming that's all fine, you will now have your Spartan home directory accessib
 
 ![](images/drive4.png)
 
-To add a drive that directly takes you to storage, simply repeat the process and configure the drive like this:
+To add a drive that directly takes you to storage, simply repeat the process and configure the drive like this, with the drive as (e.g.) /data/gpfs/projects/punim1869/users/\<YOUR_USERNAME\>:
 
 ![](images/drive5.png)
 
