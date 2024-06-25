@@ -25,24 +25,27 @@ Make sure you have the most recent version of the .zsh profile file. Note: **Thi
 
 I've built a shortcut `si` ([s]tart [i]nteractive) to make these requests, the syntax is:
 
-        si <CPUs> <RAM_in_Gb> <time_formatted_for_slurm>
+        si <session_name> <CPUs> <RAM_in_Gb> <time_formatted_for_slurm>
                 
+The session name can be anything, and is what will show up in the slurm job queue.
+
 Two common time formats are `<days>-<hours>` and `<hours>:<minutes>:<seconds>`.
 
-An example, to request 10 CPU cores and 50 Gb RAM for two days might be:
+An example, to request 10 CPU cores and 50 Gb RAM for two hours might be:
 
-        si 10 50 48:00:00
+        si my_session 10 50 2:00:00
 
-For convenience if you just enter `si` by itself, it will automatically make a request for 4 cores and 16 Gb RAM for one day.
+For convenience if you just enter `si` by itself, it will automatically make a request for 2 cores and 2 Gb RAM for 45 minutes.
 
 ## Am I in an interactive session?
 
-A shortcut function `csi` ([c]heck [s]lurm [i]nteractives) will show you the details of the interactive you are currently running in, including the time allocated and the time elapsed. If the list is empty, you are not in an interactive session.
+The command `hn` (an alias for `hostname`) will show you which cluster node you are on. If the result is something like `spartan-login2.hpc.unimelb.edu.au`, then you are in the login node and **NOT** in an interactive session. If it shows a node ID, which will look something like `spartan-bm046.hpc.unimelb.edu.au`, then you are in an an interactive.
+
+*NOTE:* You can run `squ` ("Slurm Queue, User"; a function defined by the custom .zshrc) to show your list of running jobs, which will list your interactive by name and the node ID it is running on.
+
 
 ## Are interactive sessions all I need to get jobs done?
 
 NO!
 
 They are still resource-limited and jobs in then will occasionally be killed when resources are scarce---and you will still need to run some jobs that go for a longer time than you want to risk keeping an interactive session connected for. Run any significant tasks using slurm batch files. Tutorial [here](tutorial_slurm_shellscripts.html).
-
-![A little demo. `csi` reveals I am not in an interactive session. I request 1 core and 1Gb RAM for 15 minutes. Once granted, a new shell opens (revealing the message of the day). `csi` now shows I am in an interactive session, in which 9 seconds of 15 minutes has elapsed.](images/csi.png)

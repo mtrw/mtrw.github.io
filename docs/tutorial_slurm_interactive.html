@@ -539,22 +539,32 @@ them properly.</p>
 <h2>Requesting an interactive session</h2>
 <p>I’ve built a shortcut <code>si</code> ([s]tart [i]nteractive) to make
 these requests, the syntax is:</p>
-<pre><code>    si &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt;
+<pre><code>    si &lt;session_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt;
             </code></pre>
+<p>The session name can be anything, and is what will show up in the
+slurm job queue.</p>
 <p>Two common time formats are <code>&lt;days&gt;-&lt;hours&gt;</code>
 and <code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>.</p>
-<p>An example, to request 10 CPU cores and 50 Gb RAM for two days might
+<p>An example, to request 10 CPU cores and 50 Gb RAM for two hours might
 be:</p>
-<pre><code>    si 10 50 48:00:00</code></pre>
+<pre><code>    si my_session 10 50 2:00:00</code></pre>
 <p>For convenience if you just enter <code>si</code> by itself, it will
-automatically make a request for 4 cores and 16 Gb RAM for one day.</p>
+automatically make a request for 2 cores and 2 Gb RAM for 45
+minutes.</p>
 </div>
 <div id="am-i-in-an-interactive-session" class="section level2">
 <h2>Am I in an interactive session?</h2>
-<p>A shortcut function <code>csi</code> ([c]heck [s]lurm [i]nteractives)
-will show you the details of the interactive you are currently running
-in, including the time allocated and the time elapsed. If the list is
-empty, you are not in an interactive session.</p>
+<p>The command <code>hn</code> (an alias for <code>hostname</code>) will
+show you which cluster node you are on. If the result is something like
+<code>spartan-login2.hpc.unimelb.edu.au</code>, then you are in the
+login node and <strong>NOT</strong> in an interactive session. If it
+shows a node ID, which will look something like
+<code>spartan-bm046.hpc.unimelb.edu.au</code>, then you are in an an
+interactive.</p>
+<p><em>NOTE:</em> You can run <code>squ</code> (“Slurm Queue, User”; a
+function defined by the custom .zshrc) to show your list of running
+jobs, which will list your interactive by name and the node ID it is
+running on.</p>
 </div>
 <div id="are-interactive-sessions-all-i-need-to-get-jobs-done"
 class="section level2">
@@ -566,15 +576,6 @@ jobs that go for a longer time than you want to risk keeping an
 interactive session connected for. Run any significant tasks using slurm
 batch files. Tutorial <a
 href="tutorial_slurm_shellscripts.html">here</a>.</p>
-<div class="float">
-<img src="images/csi.png"
-alt="A little demo. csi reveals I am not in an interactive session. I request 1 core and 1Gb RAM for 15 minutes. Once granted, a new shell opens (revealing the message of the day). csi now shows I am in an interactive session, in which 9 seconds of 15 minutes has elapsed." />
-<div class="figcaption">A little demo. <code>csi</code> reveals I am not
-in an interactive session. I request 1 core and 1Gb RAM for 15 minutes.
-Once granted, a new shell opens (revealing the message of the day).
-<code>csi</code> now shows I am in an interactive session, in which 9
-seconds of 15 minutes has elapsed.</div>
-</div>
 </div>
 
 
