@@ -537,20 +537,26 @@ them properly.</p>
 </div>
 <div id="requesting-an-interactive-session" class="section level2">
 <h2>Requesting an interactive session</h2>
-<p>I’ve built a shortcut <code>si</code> ([s]tart [i]nteractive) to make
-these requests, the syntax is:</p>
-<pre><code>    si &lt;session_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt;
-            </code></pre>
+<ol style="list-style-type: decimal">
+<li><p>I’ve built a shortcut <code>si</code> ([s]tart [i]nteractive) to
+make these requests, the syntax is:</p>
+<pre><code> si &lt;session_name&gt; &lt;CPUs&gt; &lt;RAM_in_Gb&gt; &lt;time_formatted_for_slurm&gt;</code></pre>
 <p>The session name can be anything, and is what will show up in the
-slurm job queue.</p>
-<p>Two common time formats are <code>&lt;days&gt;-&lt;hours&gt;</code>
-and <code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>.</p>
-<p>An example, to request 10 CPU cores and 50 Gb RAM for two hours might
-be:</p>
-<pre><code>    si my_session 10 50 2:00:00</code></pre>
+slurm job queue. Two common time formats are
+<code>&lt;days&gt;-&lt;hours&gt;</code> and
+<code>&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;</code>. An example,
+to request 10 CPU cores and 50 Gb RAM for two hours might be:</p>
+<pre><code> si my_session 10 50 2:00:00</code></pre>
 <p>For convenience if you just enter <code>si</code> by itself, it will
 automatically make a request for 2 cores and 2 Gb RAM for 45
-minutes.</p>
+minutes.</p></li>
+<li><p>Once you’re in the session, a new instance of Zsh will be
+launched. For curious reasons, it will not automatically load your Zsh
+profile (which gives you access to all the shortcut commands like
+<code>si</code> above). To do this manually, type:</p>
+<pre><code> source ~/.zshrc</code></pre>
+<p>Do this every time you start an interactive session.</p></li>
+</ol>
 </div>
 <div id="am-i-in-an-interactive-session" class="section level2">
 <h2>Am I in an interactive session?</h2>

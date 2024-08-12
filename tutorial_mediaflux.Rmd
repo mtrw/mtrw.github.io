@@ -22,10 +22,13 @@ There are [several ways](https://wiki-rcs.unimelb.edu.au/display/RCS/Getting+Sta
 
 ## Start an SFTP connection
 
-To open an SFTP connection to Mediaflux from Spartan, run
+To open an SFTP connection to Mediaflux from Spartan, run one of these, depending on whether your account is a student account or not:
 
 ```{bash,eval=F}
+# Standard unimelb account
 sftp -o User=unimelb:${USER} mediaflux.researchsoftware.unimelb.edu.au
+# Student account
+sftp -o User=student:${USER} mediaflux.researchsoftware.unimelb.edu.au
 ```
 
 It will ask for a password. You need to give it your *University of Melbourne* password, and **not** your Spartan/HPC password. The reason for this is that suffering builds character.

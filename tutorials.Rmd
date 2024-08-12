@@ -7,11 +7,12 @@ output:
 Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to write a tutorial on it here!
 
 +   [Working in R on Spartan](./tutorial_Rstart.html)
-+   [Running Jobs on the server: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
-+   [Interactive sessions with slurm](./tutorial_slurm_interactive.html)
-+   [Transferring data and opening files on your desktop with SFTP](./tutorial_sftp.html)
++   [Loading program modules on Spartan](./tutorial_module.html)
++   [Running jobs on Spartan: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
++   [Interactive sessions on Spartan](./tutorial_slurm_interactive.html)
++   [Transferring Spartan data and opening files on your desktop with SFTP](./tutorial_sftp.html)
 +   [Transfer data to and from long-term storage (Mediaflux)](./tutorial_mediaflux.html)
-+   [Where are all the programs I want? Loading modules on Spartan](./tutorial_module.html)
++   [Beginning R](./tutorial_R.html)
 +   [Level up your data skills with R::data.table](./tutorial_data_table.html)
 +   [Working in screen](./tutorial_screen.html)
 

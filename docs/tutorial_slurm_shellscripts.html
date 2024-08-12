@@ -536,7 +536,7 @@ them properly.</p>
 file</em>. Let’s say I wanted to map <code>reads.fastq</code> to
 <code>genome.fasta</code> using the aligner <code>minimap2</code>. A
 command to do this might be:</p>
-<pre><code>            minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
+<pre><code>    minimap -a -x sr reads.fastq genome.fasta &gt; reads_to_genome.sam</code></pre>
 <p>To do this quickly, it would be useful to have quite a lot of
 capacity for parallel computing (say, 25 CPU cores), and and also a lot
 of memory (say, 10Gb RAM). A slurm batch file to request this task would
