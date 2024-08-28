@@ -659,7 +659,7 @@ What happens if there are two identical lap times though? Should these both get 
 
 ## fcoalesce
 
-Replaces missing values by stealing values from other columns. I've used it once. I don't know why I mentioned it here. Sorry.
+Replaces missing values by stealing values from other columns. I've used it once, ever. I don't know why I mentioned it here. Sorry.
 
 # The end
 

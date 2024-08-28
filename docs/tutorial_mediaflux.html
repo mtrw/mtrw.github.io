@@ -13,7 +13,7 @@
 
 <title>Transfer data to and from long-term storage (Mediaflux)</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -635,9 +635,14 @@ is basically a set of rules governing how computers can securely
 transfer data between them.</p>
 <div id="start-an-sftp-connection" class="section level2">
 <h2>Start an SFTP connection</h2>
-<p>To open an SFTP connection to Mediaflux from Spartan, run</p>
+<p>To open an SFTP connection to Mediaflux from Spartan, run one of
+these, depending on whether your account is a student account or
+not:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-o</span> User=unimelb:<span class="va">${USER}</span> mediaflux.researchsoftware.unimelb.edu.au</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Standard unimelb account</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-o</span> User=unimelb:<span class="va">${USER}</span> mediaflux.researchsoftware.unimelb.edu.au</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Student account</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-o</span> User=student:<span class="va">${USER}</span> mediaflux.researchsoftware.unimelb.edu.au</span></code></pre></div>
 <p>It will ask for a password. You need to give it your <em>University
 of Melbourne</em> password, and <strong>not</strong> your Spartan/HPC
 password. The reason for this is that suffering builds character.</p>

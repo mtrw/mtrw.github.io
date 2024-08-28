@@ -13,7 +13,7 @@
 
 <title>Getting started with R for statistics and bioinformatics</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -614,8 +614,8 @@ bioinformatics</h1>
 <hr />
 <div id="background" class="section level1">
 <h1>Background</h1>
-<div id="what-is-r" class="section level2">
-<h2>What is <code>R</code>?</h2>
+<div id="what-is-r" class="section level3">
+<h3>What is <code>R</code>?</h3>
 <p>R is a <em>programming language</em>–a way for a human to tell a
 computer to do things–designed specifically for analysing data, doing
 statistics, and creating graphics. It is extremely popular, and
@@ -626,8 +626,8 @@ applications. In the field of bioinformatics, R’s only main competitor
 is the language Python, and knowing at least one of these is essential
 to working as a bioinformatician.</p>
 </div>
-<div id="what-makes-this-tutorial-different" class="section level2">
-<h2>What makes this tutorial different</h2>
+<div id="what-makes-this-tutorial-different" class="section level3">
+<h3>What makes this tutorial different</h3>
 <p>There are plenty of R tutorials out there, and even some specific to
 bioinformatics. Subtly, each reflects the preferences and styles of the
 writer. You will eventually develop your own style, but your starting
@@ -642,6 +642,27 @@ understanding of all the code at a deep level. This: - <strong>Promotes
 creativity</strong>, by encouraging understanding of all the code at a
 deep level, meaning you are free to express any idea that comes into
 your head. ‘Black boxes’ are avoided.</p>
+<p>Because it aims to give you a deeper understanding, it spends a while
+on the fundamentals. Much of what you learn in Part 1, you will not use
+in everyday code because there are simpler ways to do it using more
+sophisticated tools. BUT, as soon as you want to do something
+<em>special</em>, or <em>creative</em>, or exceptionally
+<em>efficient</em>, or <em>new</em>, you will need to understand the
+fundamentals. Similarly, knowing your fundamentals means you become far
+better at using more advanced tools. Errors become less mysterious,
+results make more sense, customising the tools becomes possible. This
+tutorial assumes you want to truly learn the R language, not just use it
+to get one task done.</p>
+<p>That said, the tutorial does not waste your time forcing you to learn
+every single tiny feature and function in R. It focuses on examples to
+help you get the key <strong>concepts</strong>. The best way to find and
+understand specific features you want to use in your work is to find
+code written by more experienced people who have done a task similar to
+yours before, and learn from it—but once you’ve finished these
+tutorials, the code you read from other people and from internet
+searches will make much more sense and be much faster to absorb and
+modify.</p>
+</div>
 <div
 id="dazzling-data.table-and-the-tidyverse-tyranny-do-decide-to-to-dump-dplyr."
 class="section level3">
@@ -652,8 +673,8 @@ of plugins for browsers or apps for a phone. Some packages fundamentally
 change the way you write R code. The developers of R and R studio have
 developed a collection of packages known as the <em>tidyverse</em>
 packages. They are immensely popular, partly because they are easy to
-use, and partly because the developers of R have a natural advantage in
-encouraging people to code a certain way.</p>
+use, and partly because the developers of R and Rstudio have a natural
+advantage in ‘influencing’ (or … monopolising?) the way people code.</p>
 <p>Unfortunately, the tidyverse way of coding is neither the optimal for
 bioinformatics, nor is it the best for creativity.</p>
 <p>The package <code>data.table</code> is a far better option. Compared
@@ -664,56 +685,55 @@ two full days compared with one full day. But it is worth it. There is a
 special tutorial on data.table waiting for you once you finish this one,
 <a href="tutorial_data_table.Rmd">here</a>.</p>
 </div>
-</div>
-<div id="how-to-do-this-tutorial" class="section level2">
-<h2>How to do this tutorial</h2>
+<div id="how-to-do-this-tutorial" class="section level3">
+<h3>How to do this tutorial</h3>
 <ol style="list-style-type: decimal">
-<li>Don’t just read. Write the commands yourself, and most importantly,
-<em>play with them</em>. Change things around, try new things, connect
-ideas together, try to break the commands, then figure out why (Google
-might help).</li>
-<li>Avoid tidyverse functions. Do <strong>NOT</strong> under any
-circumstances load the package <code>dplyr</code>. do
+<li>Don’t just read. Write and run all the commands yourself. If you
+miss one, others later may not run. Most importantly, <em>play with the
+commands</em>. Change things around, try new things, connect ideas
+together, try to break the commands, then figure out why (<a
+href="www.duckduckgo.com">searching the web</a> might help).</li>
+<li>This is about learning the fundamentals. Don’t load any packages. Do
+<strong>NOT</strong> under any circumstances load <code>dplyr</code>, do
 <strong>NOT</strong> use <code>select</code>, <code>filter</code>,
 <code>arrange</code>, <code>mutate</code>, or any of those silly
 things.</li>
 <li>If you get stuck or you want to dig into a topic for greater
-understanding, first try R’s inbuilt help functions (see below). Google
-can also be great, but be aware the answers vary a lot in quality. There
-is also chatGPT, which needs a short discussion …</li>
+understanding, first try R’s inbuilt help functions (see below). Web
+searches can also be great, but be aware the answers vary a lot in
+quality. There is also …</li>
+<li>ChatGPT, which needs a short discussion …</li>
 </ol>
-<div
-id="dont-use-chatgpt-to-write-code-for-you-especially-while-you-are-learning"
-class="section level3">
-<h3><strong>Don’t</strong> use chatGPT to write code for you, especially
-while you are learning</h3>
-<p>It generally produces awful code. In particular, it has been trained
-on code it finds on the internet, and it cannot distinguish good code
-from bad code. Since most code on the internet is bad, that is what it
-produces. It relies excessively on loading obscure packages to perform
-tasks that can easily and quickly be done with standard functions, it
-wantonly and wastefully converts data between different formats, makes
-inefficient choices, and worst of all, it makes it very tempting to run
-code you don’t actually understand and couldn’t write yourself.</p>
-</div>
-<div id="do-use-chatgpt-to-read-the-manual-for-you"
-class="section level3">
-<h3><strong>Do</strong> use chatGPT to read the manual for you</h3>
-<p>Once you already know some R, use chatGPT to remind yourself of bits
-you can’t remember or haven’t discovered yet. You will find yourself
+<ul>
+<li><strong>Don’t</strong> <em>use chatGPT to write code for you</em>,
+especially while you are learning. It generally produces awful code. In
+particular, it has been trained on code it finds on the internet, and it
+cannot distinguish good code from bad code. Since most code on the
+internet is bad, that is what it produces. It relies excessively on
+loading obscure packages to perform tasks that can easily and quickly be
+done with standard functions, it wantonly and wastefully converts data
+between different formats, makes inefficient choices, and worst of all,
+it makes it very tempting to run code you don’t actually understand and
+couldn’t write yourself.</li>
+<li><strong>Do</strong> <em>use chatGPT to read the manual for you</em>.
+Once you already know some R, use chatGPT to remind yourself of bits you
+can’t remember or haven’t discovered yet. You will find yourself
 thinking “I’m sure there is a function to do this, but I don’t know what
 it is!” That’s a great time to ask chatGPT for help. Ask it for example:
-- “what are the parameters that control the size and type of points in a
-scatterplot in base R?” - “”</p>
-</div>
-<div id="do-use-chatgpt-to-explain-functions-or-code-to-you"
-class="section level3">
-<h3><strong>Do</strong> use chatGPT to explain functions or code to
-you</h3>
-<p>Excellent uses of chatGPT are questions like - “Please break down
-this line of R code: ‘m %&lt;&gt;% apply( 1 , function(x){x/sum(x)} )’”
-- “In the R code ‘frank(x,ties.method=“dense”)’, what does the”dense”
-argument mean?”</p>
+<ul>
+<li>“What are the parameters that control the size and type of points in
+a scatterplot in base R?”</li>
+<li>“How can I check whether a file exists in R?”</li>
+</ul></li>
+<li><strong>Do</strong> <em>use chatGPT to explain functions or code to
+you</em>. Excellent uses of chatGPT are questions like
+<ul>
+<li>“Please break down this line of R code: ‘m %&lt;&gt;% apply( 1 ,
+function(x){x/sum(x)} )’”</li>
+<li>“In the R code ‘frank(x,ties.method=’dense’)‘, what does the ’dense’
+argument mean?”</li>
+</ul></li>
+</ul>
 <blockquote>
 <p>A good rule-of-thumb is that chatGPT is something you show code
 <em>to</em>, not something you get code <em>from</em>, especially not
@@ -722,15 +742,16 @@ whole lines or multiple lines of code.</p>
 <hr />
 </div>
 </div>
-</div>
-<div id="starting-an-r-session-on-spartan" class="section level1">
-<h1>Starting an R session on Spartan</h1>
+<div id="part-1-r-fundamentals" class="section level1">
+<h1>Part 1: R fundamentals</h1>
+<div id="starting-an-r-session-on-spartan" class="section level2">
+<h2>Starting an R session on Spartan</h2>
 <p>If you haven’t already, start an R session by following <a
 href="tutorial_Rstart.html">these</a> instructions.</p>
 </div>
 <div id="creating-and-running-commands-in-your-first-r-script"
-class="section level1">
-<h1>Creating and running commands in your first R script</h1>
+class="section level2">
+<h2>Creating and running commands in your first R script</h2>
 <p>You will start with a screen like this …</p>
 <p><img src="images/RstudioScreen.png" /></p>
 <p>First thing, create a new <em>script</em> using this button. A script
@@ -742,12 +763,10 @@ some task. Use <code>&lt;ctrl&gt; + s</code> so save, and name it, say,
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">print</span>(a)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">plot</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Each of these lines is a command. Let’s run the first command.
+<p>Each of these lines is a command. Let’s run the first command.
 Highlight the command using the mouse, then run it using
 <code>&lt;ctrl&gt; + &lt;return&gt;</code> (aka
-<code>&lt;ctrl&gt; + &lt;enter&gt;</code>).</li>
-</ol>
+<code>&lt;ctrl&gt; + &lt;enter&gt;</code>).</p>
 <p>You should see this:</p>
 <p><img src="images/RfirstRun.png" /></p>
 <p>Notice: - The command appears in the lower left window. This is known
@@ -773,13 +792,13 @@ command. this is the result of the command we sent it.</p>
 <p>Run the last command, which creates a plot. If it works ok, you will
 see a plot appear in the lower right window, which will automatically
 switch to the ‘Plots’ tab.</p>
-<p><img src="images/RplotFirst.png" /> Look for the button labelled
-“Export”. This is one way to save plots you create as images or vector
-graphics. Try it if you want.</p>
+<p><img src="images/RplotFirst.png" /></p>
+<p>Look for the button labelled “Export”. This is one way to save plots
+you create as images or vector graphics. Try it if you want.</p>
 </div>
 <div id="basic-operations-and-operator-precendence"
-class="section level1">
-<h1>Basic operations and operator precendence</h1>
+class="section level2">
+<h2>Basic operations and operator precendence</h2>
 <p>Some of the most simple commands in R perform basic maths. Play
 around with running these.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span></span>
@@ -801,8 +820,8 @@ operator (<code>+</code>).</p>
 <p>The double asterisk (**) does exponentiation (raising to a power).
 The carat symbol (^) also works.</p>
 </div>
-<div id="comments" class="section level1">
-<h1>Comments</h1>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
 <p>Any command that begins with a hash (<code>#</code>) will not be run.
 These are known as <em>code comments</em> and are what you use to
 include helpful notes in your script. They are immensely important when
@@ -819,8 +838,8 @@ run.</p>
 <pre><code>## [1] 2</code></pre>
 </div>
 <div id="variables-vectors-and-vectorised-functions"
-class="section level1">
-<h1>Variables, vectors, and vectorised functions</h1>
+class="section level2">
+<h2>Variables, vectors, and vectorised functions</h2>
 <p>What did the command <code>a &lt;- 1:10</code> do? We can find out
 with some experimentation. Highlight only the <code>1:10</code> part of
 the command and have a look at the output:</p>
@@ -833,19 +852,25 @@ the command and have a look at the output:</p>
 are called <em>vectors</em> and are fundamental to R. The colon
 (<code>:</code>) is a shortcut for creating vectors of concurrent
 integers.</p>
-<p><strong>Exercises:</strong> - Try using it to create a vector numbers
-from 201 to 1002. - Then try making a list of numbers that goes
-backwards, starting on a positive number, and ending on a negative
-number.</p>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Try using the colon operator to create a vector numbers from 201 to
+1002.</li>
+<li>Then try making a list of numbers that goes backwards, starting on a
+positive number, and ending on a negative number.</li>
+</ul>
 <details>
 <summary>
 <strong>See answers:</strong>
 </summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="dv">201</span><span class="sc">:</span><span class="dv">1002</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="dv">6</span><span class="sc">:-</span><span class="dv">2</span></span></code></pre></div>
 <p>Answer</p>
 </details>
 </div>
-<div id="variable-assignment-and-printing" class="section level1">
-<h1>Variable assignment and printing</h1>
+<div id="variable-assignment-and-printing" class="section level2">
+<h2>Variable assignment and printing</h2>
 <p>The command we ran, though, had two more components: <code>a</code>
 and <code>&lt;-</code>.</p>
 <p>The symbol <code>a</code> here is a user-chosen name given to a
@@ -857,18 +882,18 @@ on the left.</p>
 <p>The variable name can them be used in code to provide the value it
 contains. Play around with that idea until it feels comfortable,
 e.g. …</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>a <span class="co"># Running a variable name by itself outputs the contents in the console</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>a <span class="co"># Running a variable name by itself outputs the contents in the console</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>a <span class="sc">+</span> a</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>a <span class="sc">+</span> a</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>c <span class="ot">&lt;-</span> a <span class="sc">/</span> b</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>c <span class="sc">*</span> <span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>c <span class="ot">&lt;-</span> a <span class="sc">/</span> b</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>c <span class="sc">*</span> <span class="dv">7</span></span></code></pre></div>
 <pre><code>## [1] 10.5</code></pre>
 <strong>Exercises:</strong> - Guess a way to assign the value 2 to
 <em>two</em> variables named ‘a’ and ‘b’ using just one line of code …
@@ -876,52 +901,1600 @@ e.g. …</p>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>a <span class="co"># prints 2</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>b <span class="co"># ... same</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>a <span class="co"># prints 2</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>b <span class="co"># ... same</span></span></code></pre></div>
 </details>
-<pre><code>    - In the above example, if you change the value of &#39;a&#39;, will that affect the value of &#39;b&#39;? To find out, try increasing the value of &#39;a&#39; by 1. Do it in such a way that it would work no matter what value &#39;a&#39; contains.</code></pre>
+<ul>
+<li>In the above example, if you change the value of ‘a’, will that
+affect the value of ‘b’? To find out, try increasing the value of ‘a’ by
+1. Do it in such a way that it would work no matter what value ‘a’
+contains.
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>a <span class="co"># prints 3</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>b <span class="co"># prints 2. No!--changing b does not affect a.</span></span></code></pre></div>
+</details>
+</div>
+<div id="vectorised-operations" class="section level2">
+<h2>Vectorised operations</h2>
+<p>Now we have seen a few operations like <code>+</code>,
+<code>*</code>, etc. working on numbers, and we know how to create a
+vector using <code>1:10</code> containing the numbers 1, 2, 3, …, 10, we
+may well ask what happens when we do these operations on a vector.</p>
+<p><strong>Exercise: (using numeric vectors
+e.g. <code>1:10</code>)</strong></p>
+<ul>
+<li>Work out what happens when you add a single number to a vector of
+length 10.</li>
+<li>Try the same with the operands swapped. Is the result the same?</li>
+<li>Work out what happens when you add a vector of length 10 to
+itself.</li>
+<li>Create two vectors of length 10, and divide one by the other.
+<ul>
+<li>Try including a zero in the denominator vector. What happens when
+you try to divide by zero?</li>
+</ul></li>
+<li>Subtract a vector of length 10 from a vector if length 3. What
+happens?</li>
+<li>Subtract a vector of length 10 from a vector if length 2. What
+happens?
+<ul>
+<li>Try this with the operands reversed. What happens?</li>
+</ul></li>
+</ul>
 <details>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>a <span class="co"># prints 3</span></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>b <span class="co"># prints 2. No--changing b does not affect a.</span></span></code></pre></div>
+<p>Here are some examples of commands that fit the exercise, and the
+answers as comments:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">+</span> <span class="dv">5</span> <span class="co"># The single value is added to each element of the vector</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># Same result</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>v <span class="sc">+</span> v <span class="co"># Each element in the left hand operand is added to the corresponding element in the right hand operand.</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>v<span class="sc">/</span>w <span class="co"># As above. The results are decimals.</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>v<span class="sc">/</span>w <span class="co"># When dividing by zero, we get the special value &#39;Inf&#39; meaning &#39;infinite&#39;.</span></span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>v<span class="sc">-</span>x <span class="co"># Error! &quot;In v/x : longer object length is not a multiple of shorter object length&quot;</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>v<span class="sc">-</span>y <span class="co"># Interesting. We get `0 0 2 2 4 4 6 6 8 8`. Discussed below.</span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>y<span class="sc">-</span>v <span class="co"># We get `0  0 -2 -2 -4 -4 -6 -6 -8 -8`.</span></span></code></pre></div>
+</details>
+<p>So, if we think about those results a bit we an arrive at a few
+general rules:</p>
+<ol style="list-style-type: decimal">
+<li>The results are given by ‘lining up’ the vectors and running the
+operation on each pair of <em>elements</em> (or “members” of a
+vector):</li>
+</ol>
+<pre><code>Command:
+---------
+1:4 + 5:2
+---------
+
+
+Calculations:
+-------
+1 2 3 4
++ + + +
+5 4 3 2
+-------
+
+Result:
+-------
+6 6 6 6
+-------</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>If one vector ‘runs out’ of elements, it is repeated (or as it is
+known, <em>recycled</em>):</li>
+</ol>
+<pre><code>Command:
+---------
+1:4 + 2:3
+---------
+
+
+Calculations:
+-------
+1 2 3 4
++ + + +
+2 3 2 3
+-------
+
+Result:
+-------
+3 5 5 7
+-------</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>The length of the shorter vector must divide into the length of the
+longer one.</li>
+</ol>
+<p><em>Vectorised</em> operations–operations that work on vectors
+following these rules–are really at the heart of R, and are the main
+reason it is so powerful as a statistical language.</p>
+<p>All these rules extend naturally to operations on more than two
+vectors.</p>
+<p><strong>Exercise:</strong></p>
+<ul>
+<li>Use what you know about <strong>vectorised operations</strong> and
+<strong>precendence</strong> to carefully predict what these functions
+will do before you run them. Note that <code>*</code> has precendence
+over <code>+</code>.</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span></code></pre></div>
+<ul>
+<li>Add brackets to one or both commands to make them both work.</li>
+</ul>
+<summary>
+<strong>Get help with the answer:</strong>
+</summary>
+<details>
+Try running sub-parts of each command separately,
+e.g. <code>1:4 * 1:6</code> and <code>1:6 + 1:12</code>. Ask yourself
+which will be run first, given the precendence rules. Note the length of
+the outputs, and think about how they will be recycled in the context of
+the whole command.
 </details>
 </div>
-<div id="creating-a-vector" class="section level1">
-<h1>Creating a vector</h1>
+<div id="vector-classes" class="section level2">
+<h2>Vector classes</h2>
+<p>Different kinds of data or information needs to be stored in
+different ways. A list of SNP positions is a collection of integer
+numbers, while a list of plant heights in centimetres will be a decimal
+number. A list of sample ID codes is probably strings of text, while
+data on whether a plant belongs to the control group might suit a
+TRUE/FALSE format. R has different kinds (or <em>classes</em>) of
+vectors to cover all these cases.</p>
+<p>Later, we will learn how these can be connected together into tables,
+a bit like spreadsheets. But first we need to master the basics of the
+different types of vector and how to work with them.</p>
+<div id="integer-numeric" class="section level3">
+<h3>Integer &amp; numeric</h3>
+<p>We have already worked with vectors containing integers (-1, 0, 1, 2,
+3, …) so far, and we have seen that vectors with decimals can also
+exist.</p>
+<p>These two types of vector <em>classes</em>—<em>integer</em> and
+<em>numeric</em>—are actually different. Behind the scenes, it takes
+more memory to store decimal numbers, and performing operations on them
+takes more calculations (more info for the perplexed (here)[<a
+href="https://matloka.com/blog/floating-point-101"
+class="uri">https://matloka.com/blog/floating-point-101</a>]). But they
+can store not only decimals, but far larger numbers than integer vectors
+can. By default, R assumes we are happy with integers wherever possible,
+and will silently convert vectors to numeric types when necessary.</p>
 </div>
-<div id="help" class="section level1">
-<h1>Help</h1>
+<div id="character" class="section level3">
+<h3>Character</h3>
+<p>We haven’t yet seen character vectors. R actually loads a variable
+containing a character vector automatically when it starts, the variable
+<code>letters</code>. This is what it contains.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>letters</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
+## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<p>Not surprising. Notice all the entries are in quote marks
+(<code>"..."</code>), which tells R you are dealing with character
+types. Consider the following to see why that’s important:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="st">&quot;a&quot;</span></span></code></pre></div>
+<p>Here, <code>b</code> contains 3, which is an integer that was copied
+from the <em>variable</em> <code>a</code>. But <code>c</code> contains
+the <em>character</em> “a”, which R knew because we put it in quote
+marks.</p>
 </div>
-<div id="autocomplete" class="section level1">
-<h1>Autocomplete</h1>
+<div id="logical" class="section level3">
+<h3>Logical</h3>
+<p>One of the most important vector types stores the values
+<code>TRUE</code> or <code>FALSE</code> (or <code>NA</code>). They are
+truly fundamental in R and we will see more of this in the section on
+logical operations.</p>
 </div>
-<div id="indexing-and-logical-operators" class="section level1">
-<h1>Indexing and logical operators</h1>
-<div id="types" class="section level2">
-<h2>Types</h2>
+</div>
+<div id="special-values-including-na" class="section level2">
+<h2>Special values including ‘NA’</h2>
+<p>As we saw when dividing by zero, some calculations don’t result in a
+‘normal’ value, and R accommodates this.</p>
+<p>Some special values include “Inf” and “-Inf” (infinite, or negative
+infinite), “NaN” (not-a-number), and “NA” (not applicable, invalid). We
+can indeed use special values ourselves. Here are examples of times when
+they are generated:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span> <span class="co"># Inf</span></span></code></pre></div>
+<pre><code>## [1] Inf</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="dv">0</span><span class="sc">/</span><span class="dv">0</span> <span class="co"># NaN</span></span></code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">0</span>) <span class="co"># -Inf</span></span></code></pre></div>
+<pre><code>## [1] -Inf</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="cn">Inf</span><span class="sc">/-</span><span class="cn">Inf</span> <span class="co"># NaN</span></span></code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+<p>The value ‘NA’ is not produced by any simple operation, but is
+extremely common as it is often used to denote missing data. We will
+learn how to deal with it in time. For now, note that most operations
+with ‘NA’ in them will produce either an error or ‘NA’.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">+</span> <span class="dv">1</span> <span class="co"># produces NA</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="cn">NA</span>   <span class="co"># produces an error: &quot;Error in 1:NA : NA/NaN argument&quot;</span></span></code></pre></div>
+</div>
+<div id="running-functions" class="section level2">
+<h2>Running functions</h2>
+<p>If we wanted to calculate the sum of all those numbers we can use a
+<em>function</em> called ‘sum’.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># Notice we use &#39;numbers&#39; as the variable name, which is far more intuitive than &#39;a&#39; or &#39;b&#39; etc.</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu">sum</span>(numbers)</span></code></pre></div>
+<pre><code>## [1] 55</code></pre>
+<p>Functions always have the syntax <code>FUNCTION_NAME( ... )</code>,
+where the ‘…’ represents information the function needs to work.</p>
+<p>Functions typically take some <em>object</em> (like a vector or a
+list or a data.frame–things we will cover later) or a collection of
+objects, do some processing, and <em>return</em> some other object. For
+example, all these simple functions take a vector object and return a
+single number. Note though, that in R, a single number is in practice
+simply a vector with a length of 1.</p>
+<p>Try these:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>many_numbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">100</span><span class="sc">:</span><span class="dv">100</span> <span class="co"># Variable naming using words separated by underscores is a convention called snake_case. The main alternative is camelCase in which capital letters indicate new words. mixedCase_isAlsoUsed. Some people like to police which should be used in what scenario but I think you should do what feels right to you.</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="fu">sum</span>(many_numbers)</span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="fu">length</span>(many_numbers)</span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="fu">max</span>(many_numbers)</span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="fu">min</span>(many_numbers)</span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="fu">prod</span>(many_numbers) <span class="co"># product</span></span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="fu">mean</span>(many_numbers)</span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="fu">var</span>(many_numbers) <span class="co"># variance</span></span>
+<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="fu">sd</span>(many_numbers) <span class="co"># standard deviation</span></span>
+<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="fu">median</span>(many_numbers)</span></code></pre></div>
+<p>The <code>class()</code> function will explicitly tell you which
+class(es) an object is … as a character vector.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">1.24212</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">1.0</span>) <span class="co"># Notice this is a way to enforce that values you define are numeric</span></span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">+</span> <span class="fl">0.0</span>) <span class="co"># ... and here&#39;s a trick to do the same using the &#39;:&#39; method. The `+ 0.0` just forces R to convert the whole thing from an integer into a numeric vector.</span></span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Other functions return vectors. For example, try:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>someNumbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># Camel case! Because the capital letters look like the humps on a camel, of course.</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">log</span>(someNumbers) <span class="co"># The natural logarithm. A vector the same length as the input. Notice the special values.</span></span></code></pre></div>
+<pre><code>## Warning in log(someNumbers): NaNs produced</code></pre>
+<pre><code>##  [1]       NaN       NaN       NaN       NaN       NaN      -Inf 0.0000000
+##  [8] 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="fu">log10</span>(someNumbers) <span class="co"># The base-10 log</span></span></code></pre></div>
+<pre><code>## Warning: NaNs produced</code></pre>
+<pre><code>##  [1]       NaN       NaN       NaN       NaN       NaN      -Inf 0.0000000
+##  [8] 0.3010300 0.4771213 0.6020600 0.6989700</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="fu">sin</span>(someNumbers) <span class="co"># sine</span></span></code></pre></div>
+<pre><code>##  [1]  0.9589243  0.7568025 -0.1411200 -0.9092974 -0.8414710  0.0000000
+##  [7]  0.8414710  0.9092974  0.1411200 -0.7568025 -0.9589243</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="fu">acosh</span>(someNumbers) <span class="co"># hyperbolic arc-cosine. I&#39;ve never used it but good to know it exists.</span></span></code></pre></div>
+<pre><code>## Warning in acosh(someNumbers): NaNs produced</code></pre>
+<pre><code>##  [1]      NaN      NaN      NaN      NaN      NaN      NaN 0.000000 1.316958
+##  [9] 1.762747 2.063437 2.292432</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="fu">abs</span>(someNumbers) <span class="co"># Absolute (positive) value</span></span></code></pre></div>
+<pre><code>##  [1] 5 4 3 2 1 0 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="fu">sort</span>(someNumbers) <span class="co"># A vector the same length as the input.</span></span></code></pre></div>
+<pre><code>##  [1] -5 -4 -3 -2 -1  0  1  2  3  4  5</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="fu">range</span>(someNumbers) <span class="co"># A length 2 vector containing  the maximum and minimum values</span></span></code></pre></div>
+<pre><code>## [1] -5  5</code></pre>
+<p>Others return more obscure objects:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="fu">summary</span>(someNumbers) <span class="co"># A &#39;table&#39;-class object</span></span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    -5.0    -2.5     0.0     0.0     2.5     5.0</code></pre>
+<p>… and yet others, such as <code>plot()</code>, don’t produce any
+output on the console, but perform some other task. Other examples
+include <code>dir.create()</code> which creates directories and
+<code>read.csv()</code> which reads data from .csv files.</p>
+</div>
+<div id="arguments" class="section level2">
+<h2>Arguments</h2>
+<p>Functions can sometimes take more than one <em>argument</em>. The
+word ‘argument’ in programming strictly describes bits of information
+(or objects) that are given to a function or a program:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="fu">max</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="fu">range</span>(<span class="dv">1</span>,<span class="dv">58</span>,<span class="sc">-</span><span class="dv">1777</span>)</span></code></pre></div>
+<pre><code>## [1] -1777    58</code></pre>
+<p>These examples just run the same talk across all inputs. A more
+common case is that the different arguments contain different bits of
+information about how the function should run.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 5 4 3 2 1</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>So, the TRUE and FALSE here appear to be the answer to the question
+“should I sort this list in decreasing order?”</p>
+<div id="named-arguments" class="section level3">
+<h3>Named arguments</h3>
+<p>Since this gets very confusing as more arguments are added, R’s
+arguments have names. We could have written the above command this
+way:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">decreasing=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>So, the argument giving a vector of inputs to sort is called ‘x’, and
+the argument saying whether or not to sort in decreasing order is called
+‘decreasing’. A single equals sign (<code>=</code>) is used for argument
+assignment. It is possible to use the single equals for variable
+assignment too, but you shouldn’t, and if I catch you doing it then you
+have to buy me a Snickers bar. That’s how it works.</p>
+</div>
+<div id="default-arguments" class="section level3">
+<h3>Default arguments</h3>
+<p>Not every argument a function has needs to be given to it. When we
+run <code>sort(10:2)</code>, it does not ask us whether we want
+‘decreasing=TRUE’ or ‘decreasing=FALSE’; It just assumes
+decreasing=FALSE. In this case, we say that the <em>default</em>
+argument of ‘decreasing’ is FALSE. Some arguments don’t have defaults,
+and these must be given or else an error message will tell you an
+argument is missing. Most functions require only one input, and the
+defaults of any remaining arguments are chosen to suit the most common
+usage.</p>
+<p>How do you know what arguments a function needs, and what its
+defaults are? There are two ways, and they are the next two topics …</p>
 </div>
 </div>
-<div id="plotting" class="section level1">
-<h1>Plotting</h1>
+<div id="autocomplete-and-other-ide-shortcuts" class="section level2">
+<h2>Autocomplete and other IDE shortcuts</h2>
+<p>In R, you end up typing the same things a lot. The IDE (Rstudio) will
+guess the ending of a lot of half-typed things, when prompted by the
+<code>&lt;TAB&gt;</code> key. For example, we know the variable
+‘letters’ exists. Just type …</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a>le</span></code></pre></div>
+<p>…, leave your cursor at the end and hit <code>&lt;TAB&gt;</code>. You
+will get a scrollable, clickable, list of possible autocompletes:</p>
+<p><img src="images/Rautocomplete.png" /></p>
+<p>These may even bring up more help info when you highlight them. If
+there is only one option, it will be filled automatically. Otherwise
+select one with arrow keys or mouse and press
+<code>&lt;RETURN&gt;</code> or click to insert it. Easy.</p>
+<p>If you are writing a function, you can also use
+<code>&lt;TAB&gt;</code> to list the arguments. To try it out type the
+function name and brackets, put the cursor <em>inside the brackets</em>,
+and <code>&lt;TAB&gt;</code> …</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="fu">sort</span>()</span></code></pre></div>
+<p><img src="images/Rautoargs.png" /></p>
+<p>And suddenly you have a list of valid arguments with (usually)
+descriptions, indicated by the purple symbol on the left.</p>
 </div>
-<div id="lists" class="section level1">
-<h1>Lists</h1>
+<div id="help" class="section level2">
+<h2>HELP!!!</h2>
+<p>If you want even more help with a function or another object, many
+come with manuals. You can search the function name here on the lower
+right panel:</p>
+<p><img src="images/Rsearchhelp.png" /></p>
+<p>Or you can run the function name preceded by a <code>?</code>
+symbol:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>?class</span></code></pre></div>
+<p>… which will give you a help document containing (most importantly),
+descriptions of the arguments, and examples, which are usually very
+helpful.</p>
+<p><img src="images/Rhelp.png" /></p>
 </div>
-<div id="writing-your-own-functions" class="section level1">
-<h1>Writing your own functions</h1>
+<div id="creating-vectors" class="section level2">
+<h2>Creating vectors</h2>
+<p>The function that creates vectors is simply called <code>c()</code>,
+short for “combine” (but I think of it as “create”). For example:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;this&quot;</span>,<span class="st">&quot;character&quot;</span>,<span class="st">&quot;vector&quot;</span>,<span class="st">&quot;has&quot;</span>,<span class="st">&quot;six&quot;</span>,<span class="st">&quot;entries&quot;</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>v</span></code></pre></div>
+<pre><code>## [1] &quot;this&quot;      &quot;character&quot; &quot;vector&quot;    &quot;has&quot;       &quot;six&quot;       &quot;entries&quot;</code></pre>
+<p>These demonstrate the use of c to combine vectors, and how R will
+convert between classes to accommodate the input classes. Try guessing
+the classes of these before you run them …</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a>a_integer <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>b_numeric <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>,<span class="sc">-</span><span class="fl">4.543</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>c_character <span class="ot">&lt;-</span> LETTERS</span>
+<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a></span>
+<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a>(a_b <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric)) <span class="co"># Notice the extra set of brackets around the whole command? This is a cool trick that tells R to print the result fo the assignment</span></span></code></pre></div>
+<pre><code>## [1]  1.000  2.000  3.000  1.000 -4.543</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="fu">class</span>(a_b)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a>(a_b_c <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric,c_character))</span></code></pre></div>
+<pre><code>##  [1] &quot;1&quot;      &quot;2&quot;      &quot;3&quot;      &quot;1&quot;      &quot;-4.543&quot; &quot;A&quot;      &quot;B&quot;      &quot;C&quot;     
+##  [9] &quot;D&quot;      &quot;E&quot;      &quot;F&quot;      &quot;G&quot;      &quot;H&quot;      &quot;I&quot;      &quot;J&quot;      &quot;K&quot;     
+## [17] &quot;L&quot;      &quot;M&quot;      &quot;N&quot;      &quot;O&quot;      &quot;P&quot;      &quot;Q&quot;      &quot;R&quot;      &quot;S&quot;     
+## [25] &quot;T&quot;      &quot;U&quot;      &quot;V&quot;      &quot;W&quot;      &quot;X&quot;      &quot;Y&quot;      &quot;Z&quot;</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="fu">class</span>(a_b_c)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p><strong>Exercises (including some lessons about
+arguments):</strong></p>
+<ul>
+<li>Use <code>c(...)</code> to create a vector containing the entries 1,
+-4.3623, 3e6, Inf, NA, NA, and 1/3. Store it in a variable named using
+the camelCase convention.</li>
+<li>What would have happened if you had enclosed the first value (1) in
+quotes, as in (“1”)? Would this also affect the other values in the
+stored vector?</li>
+<li>Try to calculate the minimum of the vector using the
+<code>min()</code> function. Don’t type the whole name of your
+vector–try using autocomplete (<code>&lt;TAB&gt;</code>) to help you.
+What result do you get?</li>
+<li>Explore the arguments to <code>min()</code> using
+<code>&lt;TAB&gt;</code> as above, or the help documentation. Find an
+argument that will make the function ignore ‘NA’ values when calculating
+the minimum.</li>
+<li>Find two more ways that use a function to give you the minimum value
+in the vector (it’s ok if it tells you other stats too). Three such
+functions have already come up in this tutorial.</li>
+<li>Use the function <code>log()</code> to calculate the natural log of
+something. Then, give it a named argument that changes it to base 2.
+Finally, give it a named argument like <code>beans=...</code>, that
+doesn’t exist. What happens?</li>
+<li>Run your log-base-2 function again, but delete the argument names
+(just leave the values, separated by commas), which will make R guess
+which value belongs to which argument. Does it still work?</li>
+<li>Change the order of the values. Does it still work? Does providing
+argument names to one or more of the values help R to guess?</li>
+</ul>
+<summary>
+<strong>Answers:</strong>
+</summary>
+<details>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a>thisIsMyVector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb90-4"><a href="#cb90-4" tabindex="-1"></a><span class="co"># &quot;1&quot; would be interpreted as a character string, and as such a character vector would be produced, with all the other values would being converted to character strings. This is because it is simple to convert other classes to character strings, but not always the other way around. For example, the character representation of an integer like 64917 can be &quot;64917&quot;, but there is no obvious integer representation of the string &quot;beans!&quot;.</span></span>
+<span id="cb90-5"><a href="#cb90-5" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="#cb90-6" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector)</span>
+<span id="cb90-7"><a href="#cb90-7" tabindex="-1"></a></span>
+<span id="cb90-8"><a href="#cb90-8" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb90-9"><a href="#cb90-9" tabindex="-1"></a></span>
+<span id="cb90-10"><a href="#cb90-10" tabindex="-1"></a><span class="fu">summary</span>(thisIsMyVector)</span>
+<span id="cb90-11"><a href="#cb90-11" tabindex="-1"></a><span class="fu">range</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb90-12"><a href="#cb90-12" tabindex="-1"></a></span>
+<span id="cb90-13"><a href="#cb90-13" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>)</span>
+<span id="cb90-14"><a href="#cb90-14" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>, <span class="at">base=</span><span class="fl">2.0</span>)</span>
+<span id="cb90-15"><a href="#cb90-15" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>,<span class="fl">2.0</span>) <span class="co"># Yes, that does work, it produces the same result as above.</span></span>
+<span id="cb90-16"><a href="#cb90-16" tabindex="-1"></a></span>
+<span id="cb90-17"><a href="#cb90-17" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># That&#39;s not what we wanted</span></span>
+<span id="cb90-18"><a href="#cb90-18" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That works</span></span>
+<span id="cb90-19"><a href="#cb90-19" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That also works</span></span>
+<span id="cb90-20"><a href="#cb90-20" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># And that works too.</span></span></code></pre></div>
+</details>
+<p>As you can see, R is good at connecting the correct values to the
+correct arguments. It basically follows the rule assign all named values
+first, then go through the unnamed values in order and connect them to
+the remaining unnamed arguments, in order.</p>
+<div id="vector-creating-functions-rnorm-and-friends"
+class="section level3">
+<h3>Vector-creating functions: rnorm and friends</h3>
+<p>In statistical analysis, you’ll often want to generate random
+numbers, and we’ll use these to demonstrate more of R. Here are a few
+functions to do it.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="co"># 20 random integers between 1 and 10</span></span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 10 14  2  4 20 12 18  3  8 13</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co"># 20 random real numbers between -1 and 1</span></span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>,<span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">max =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##  [1]  0.25765697  0.29001910 -0.58345492 -0.28554779  0.31352690  0.02244683
+##  [7]  0.28343263 -0.80060113  0.04226564  0.82533539  0.13998101 -0.25669504
+## [13] -0.14025911  0.05164237  0.58233313 -0.51599903 -0.11919688  0.66240752
+## [19] -0.34783406  0.08640833</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="co"># 20 normally-distributed numbers with mean 0 and standard deviation 0.5</span></span>
+<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="fl">0.0</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>##  [1]  0.19558587 -0.02181517  0.81409043  0.61756933  0.10504693 -0.13510071
+##  [7]  0.61983897 -0.47844583 -0.60417638  0.44383219 -0.18888873  0.12726215
+## [13] -0.17615026 -0.37675382 -0.69228131 -0.11906326  0.40858524  0.42309796
+## [19] -0.47314587 -0.39744949</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Similarly, these and others:</span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="co"># rbinom(...)</span></span>
+<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a><span class="co"># rpois(...)</span></span>
+<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a><span class="co"># rbeta(...)</span></span>
+<span id="cb97-5"><a href="#cb97-5" tabindex="-1"></a><span class="co"># rchisq(...)</span></span>
+<span id="cb97-6"><a href="#cb97-6" tabindex="-1"></a><span class="co"># rweibull...()</span></span>
+<span id="cb97-7"><a href="#cb97-7" tabindex="-1"></a><span class="co"># rcauchy(...)</span></span></code></pre></div>
 </div>
-<div id="loops" class="section level1">
-<h1>Loops</h1>
 </div>
-<div id="packages" class="section level1">
-<h1>Packages</h1>
+<div id="indexing-vectors" class="section level2">
+<h2>Indexing vectors</h2>
+<p>Extracting elements of a vector can be done with the square brackets
+(<code>[</code> and <code>]</code>). If we place a vector of numbers
+inside the brackets, then the numbers will be taken to represent the
+<em>indices</em> (singular: <em>index</em>) of the vector, i.e., 1 is
+the first element, and 2 is the 2nd, etc.:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a>poem <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a>  <span class="st">&quot;There&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;sky&quot;</span>, <span class="st">&quot;where&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;gets&quot;</span>, <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb98-3"><a href="#cb98-3" tabindex="-1"></a>  <span class="st">&quot;but&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;small&quot;</span>, <span class="st">&quot;that&#39;s&quot;</span>, <span class="st">&quot;why&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;thin&quot;</span></span>
+<span id="cb98-4"><a href="#cb98-4" tabindex="-1"></a>)</span>
+<span id="cb98-5"><a href="#cb98-5" tabindex="-1"></a><span class="co"># Notice I spread the command out over a few lines to make reading easier. If a line ends with a bracket still open or a command otherwise unfinished, it will assume you have a multi-line command.</span></span>
+<span id="cb98-6"><a href="#cb98-6" tabindex="-1"></a></span>
+<span id="cb98-7"><a href="#cb98-7" tabindex="-1"></a>poem[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;holes&quot;</code></pre>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a>poem[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">12</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;There&quot; &quot;gets&quot;  &quot;are&quot;   &quot;but&quot;</code></pre>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a>poem[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>]</span></code></pre></div>
+<pre><code>##  [1] &quot;There&quot; &quot;are&quot;   &quot;holes&quot; &quot;in&quot;    &quot;the&quot;   &quot;sky&quot;   &quot;where&quot; &quot;the&quot;   &quot;rain&quot; 
+## [10] &quot;gets&quot;  &quot;in&quot;</code></pre>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a>poem[<span class="dv">12</span><span class="sc">:</span><span class="fu">length</span>(poem)]</span></code></pre></div>
+<pre><code>##  [1] &quot;but&quot;    &quot;the&quot;    &quot;holes&quot;  &quot;are&quot;    &quot;small&quot;  &quot;that&#39;s&quot; &quot;why&quot;    &quot;rain&quot;  
+##  [9] &quot;is&quot;     &quot;thin&quot;</code></pre>
+<strong>Exercises:</strong> - With the vector ‘poem’ above, use indexing
+to produce a vector containing the words of the poem above, backwards. -
+Research the <code>seq()</code> function. Use <code>seq()</code> in
+conjunction with indexing, to produce a vector with every second word of
+the poem. - Use an appropriate random vector generating function in
+conjunction with indexing to shuffle the words of the poem randomly.
+<details>
+<summary>
+<strong>See answers:</strong>
+</summary>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a>poem[<span class="fu">length</span>(poem)<span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a>poem[<span class="fu">seq</span>(<span class="at">from=</span><span class="dv">2</span>,<span class="at">to=</span><span class="fu">length</span>(poem),<span class="at">by=</span><span class="dv">2</span>)]</span>
+<span id="cb106-3"><a href="#cb106-3" tabindex="-1"></a>poem[<span class="fu">sample</span>(<span class="fu">length</span>(poem),<span class="fu">length</span>(poem))] <span class="co"># FYI, sample is a flexible function, you could also just do this: `sample(poem)`</span></span></code></pre></div>
+</details>
+<p>This poem is by Spike Milligan, incidentally.</p>
+<div id="logical-vectors-for-indexing" class="section level3">
+<h3>Logical vectors for indexing</h3>
+<p>Another way to index is with logical vectors. Consider the
+following:</p>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">&quot;A&quot;</span> , <span class="st">&quot;B&quot;</span>  , <span class="st">&quot;C&quot;</span> , <span class="st">&quot;D&quot;</span> )</span>
+<span id="cb107-2"><a href="#cb107-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb107-3"><a href="#cb107-3" tabindex="-1"></a>v[l]</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;D&quot;</code></pre>
+<p>As we can see, the elements of ‘v’ corresponding to the TRUE elements
+of ‘l’ were selected.</p>
+<p>R has shortcuts for TRUE and FALSE: You can just use T and F. Use
+these cautiously as people often use these as variable names:</p>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Great!</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb111"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1234</span></span>
+<span id="cb111-2"><a href="#cb111-2" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Oh no!</span></span></code></pre></div>
+<pre><code>## [1] 1234    0</code></pre>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" tabindex="-1"></a><span class="fu">rm</span>(T) <span class="co"># This removes the variable T, so we are safe to use T and F as TRUE/FALSE again</span></span>
+<span id="cb113-2"><a href="#cb113-2" tabindex="-1"></a><span class="fu">c</span>(T,F)</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a><span class="co">#TRUE &lt;- 3 # This is not allowed, and will generate an error (try it!), so using TRUE is always safe</span></span></code></pre></div>
+<strong>Exercises:</strong> - Create a vector containing the letters
+C—J. Create it by using R’s pre-defined vector LETTERS, in conjunction
+with indexing. Name this vector ‘L’. - Use a logical vector and indexing
+to extract the letters C, E, and F. - Try selecting elements using a
+logical vector of length 4. Play around if necessary. What happens? What
+is the word for the process that happens? (We have seen it before and it
+begins with an “R” …) - Use logical indexing and the above r-word to
+extract every second letter from the vector ‘L’.
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb116"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>L <span class="ot">&lt;-</span> LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="#cb116-3" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)] <span class="co"># The indexing vector is RECYCLED, that is, it is repeated.</span></span>
+<span id="cb116-4"><a href="#cb116-4" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="#cb116-5" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>)]</span></code></pre></div>
+</details>
 </div>
-<div id="profiling-benchmarking" class="section level1">
-<h1>Profiling / benchmarking</h1>
+</div>
+<div id="logical-operations" class="section level2">
+<h2>Logical operations</h2>
+<p>Some of the most fundamental operators in R involve asking yes/no
+questions of vector elements. Some of the simplest are the ‘greater
+than’ (<code>&gt;</code>), ‘less than’ (<code>&lt;</code>), and ‘equal
+to’ (<code>==</code>) operators:</p>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a>v <span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" tabindex="-1"></a>v <span class="sc">==</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb123"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="co"># != means &quot;is not equal to&quot;. Many programming languages associate `!` with &quot;not&quot;</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb125"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" tabindex="-1"></a>v_notEqual_zero <span class="ot">&lt;-</span> v <span class="sc">!=</span> <span class="dv">0</span> <span class="co"># We can save the results in a variable</span></span>
+<span id="cb125-2"><a href="#cb125-2" tabindex="-1"></a><span class="fu">print</span>(v_notEqual_zero)</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Notice the equality operator is a <em>double</em> equals sign, to
+distinguish it from the argument assignment operator.</p>
+<div id="and-or-not" class="section level3">
+<h3>AND , OR, NOT, …</h3>
+<p>Often we want to combine the results of logical operations, for
+example asking whether elements are less than 3, <strong>AND</strong>
+greater than 1. For this we use the ‘and’ operator
+(<code>&amp;</code>).</p>
+<div class="sourceCode" id="cb127"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span> ) )</span>
+<span id="cb127-2"><a href="#cb127-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&gt;</span> <span class="dv">1</span></span></code></pre></div>
+<p>Other useful logical operators that correspond to everyday language
+concepts are ‘or’ represented by a pipe symbol (<code>|</code>) and
+‘not’, represented by a bang symbol (<code>!</code>). In programming we
+refer to the exclamation mark as bang. If you (understandably) find that
+offensively abstruse, prepare yourself to eventually encounter the
+<code>?!</code> construct called an <strong>interrobang</strong>.</p>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> )</span>
+<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> v <span class="sc">==</span> <span class="dv">3</span></span>
+<span id="cb128-3"><a href="#cb128-3" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="sc">!</span> v <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<p>This can get very tricky. To avoid ambuiguity, brackets can be used.
+For example, imagine asking which entries are either: - Greater than
+three and less than six ~ <em>OR</em> ~ - Less than two and not equal to
+0</p>
+<div class="sourceCode" id="cb129"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb129-2"><a href="#cb129-2" tabindex="-1"></a>(v <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&lt;</span><span class="dv">6</span>) <span class="sc">|</span> (v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> <span class="sc">!</span>(v<span class="sc">==</span><span class="dv">0</span>) ) <span class="co"># v!=0 would also work</span></span></code></pre></div>
+<p>It is more common to leave out the middle step though, as in …</p>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span></code></pre></div>
+<pre><code>##  [1] 0.831447331 0.595266702 0.678970784 0.824628491 1.292267282 0.944873709
+##  [7] 0.055532810 0.111119364 1.323866078 0.632807138 0.796073230 0.085488811
+## [13] 1.760586973 1.196612297 1.126294837 1.368126129 0.460105674 0.993031007
+## [19] 0.945201694 1.599768150 1.064147814 0.703932881 0.213373819 0.622765323
+## [25] 0.878593703 0.376579736 0.653030594 0.078604072 1.080265923 0.179887627
+## [31] 0.928267034 0.767106135 1.811784377 0.206885344 1.062997354 0.166224920
+## [37] 0.359830985 0.251158951 0.494439547 0.384741308 0.188562965 0.093564249
+## [43] 0.180255735 0.380470005 0.516807804 0.006951351 0.172749225 1.001703640</code></pre>
+<p>And one last thing, the very common function <code>which()</code>
+tells you <strong>which</strong> entries of a logical vector are TRUE.
+So <code>which(c(TRUE,FALSE,TRUE))</code> will return the vector ( 1 , 3
+), because 1 and 3 are the indices of the TRUE entries. Based on this,
+explain to yourself why these produce the same result:</p>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb132-2"><a href="#cb132-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## numeric(0)</code></pre>
+<div class="sourceCode" id="cb134"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>## numeric(0)</code></pre>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># Look, I know you are thinking &quot;actually ... that seems pointless&quot;. And yes, which() is often pointless. But it is extremely common, and so you need to know it to read other peoples&#39; code.</span></span></code></pre></div>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Create a vector ‘v’ containing 20 numbers drawn from a normal
+distribution with a mean of zero.</li>
+<li>Create logical vector telling you which values of ‘v’ are greater
+than one standard deviation above the mean, and use it to produce a
+vector containing only those values of ‘v’.</li>
+<li>Using one command only, make a vector of values from ‘v’ that are
+within standard deviation of the mean, either above <em>or</em>
+below.</li>
+<li>Modify the above command to return the <em>range</em> of the values
+from ‘v’ that are within standard deviation of the mean.</li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb137"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>) ) <span class="co"># Remember, surrounding the assignment command in brackets forces it to print</span></span>
+<span id="cb137-2"><a href="#cb137-2" tabindex="-1"></a></span>
+<span id="cb137-3"><a href="#cb137-3" tabindex="-1"></a>( vPositive <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb137-4"><a href="#cb137-4" tabindex="-1"></a>v[vPositive]</span>
+<span id="cb137-5"><a href="#cb137-5" tabindex="-1"></a></span>
+<span id="cb137-6"><a href="#cb137-6" tabindex="-1"></a>vGt1SD <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )</span>
+<span id="cb137-7"><a href="#cb137-7" tabindex="-1"></a>v[vGt1SD]</span>
+<span id="cb137-8"><a href="#cb137-8" tabindex="-1"></a></span>
+<span id="cb137-9"><a href="#cb137-9" tabindex="-1"></a>v[ (v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">-</span> <span class="fu">sd</span>(v) )) <span class="sc">&amp;</span> (v <span class="sc">&lt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )) ]</span>
+<span id="cb137-10"><a href="#cb137-10" tabindex="-1"></a>v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] <span class="co"># Or alternatively ...</span></span>
+<span id="cb137-11"><a href="#cb137-11" tabindex="-1"></a></span>
+<span id="cb137-12"><a href="#cb137-12" tabindex="-1"></a><span class="fu">range</span>( v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] )</span></code></pre></div>
+</details>
+<p>Last thing! If you use <code>sum()</code> on a logical vector, it
+will count the ’TRUE’s. Very useful. In general, if you use logical
+vectors in functions that usually expect numbers, then they will treat
+TRUE and FALSE as 1 and 0. So <code>sum(c(TRUE,FALSE,TRUE))</code> will
+give the answer 2.</p>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Create a one-line command that generates 10,000 random numbers with
+a mean of 0 and a standard deviation of 10, and tells you how many are
+positive.</li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="fu">sum</span>( <span class="fu">rnorm</span>(<span class="fl">1e4</span>,<span class="dv">0</span>,<span class="dv">10</span>) <span class="sc">&gt;</span> <span class="dv">0</span> )</span></code></pre></div>
+</details>
+</div>
+<div id="indexing-with-assignment" class="section level3">
+<h3>Indexing with assignment</h3>
+<p>Indexing doesn’t just let you extract parts of vectors—it also lets
+you assign values to them. Consider:</p>
+<div class="sourceCode" id="cb139"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> LETTERS[<span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>]</span>
+<span id="cb139-2"><a href="#cb139-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot;</code></pre>
+<div class="sourceCode" id="cb141"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;POITION 2 IS HERE&quot;</span></span>
+<span id="cb141-2"><a href="#cb141-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;D&quot;                 &quot;POITION 2 IS HERE&quot; &quot;F&quot;                
+## [4] &quot;G&quot;                 &quot;H&quot;                 &quot;I&quot;</code></pre>
+<div class="sourceCode" id="cb143"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" tabindex="-1"></a>a[<span class="fu">c</span>(T,F,T,F,F,F)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;POSITION 1 IS HERE&quot;</span>,<span class="st">&quot;POSITION 3 IS HERE&quot;</span>) <span class="co"># We selected two spots (two TRUE elements, and assigning them two new values)</span></span>
+<span id="cb143-2"><a href="#cb143-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;POSITION 1 IS HERE&quot; &quot;POITION 2 IS HERE&quot;  &quot;POSITION 3 IS HERE&quot;
+## [4] &quot;G&quot;                  &quot;H&quot;                  &quot;I&quot;</code></pre>
+<div class="sourceCode" id="cb145"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" tabindex="-1"></a>a[<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="st">&quot;XXX&quot;</span> <span class="co"># We are selecting three items, and assigning them one new value---all three will be set to this one value</span></span>
+<span id="cb145-2"><a href="#cb145-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;POSITION 1 IS HERE&quot; &quot;POITION 2 IS HERE&quot;  &quot;POSITION 3 IS HERE&quot;
+## [4] &quot;G&quot;                  &quot;H&quot;                  &quot;I&quot;                 
+## [7] &quot;XXX&quot;                &quot;XXX&quot;                &quot;XXX&quot;</code></pre>
+</div>
+<div
+id="towards-real-data-analysis-indexing-and-calculations-using-multiple-data-vectors"
+class="section level3">
+<h3>Towards real data analysis: Indexing and calculations using multiple
+data vectors</h3>
+<p>Imagine you have two vectors describing a dataset in which 20 <a
+href="https://en.wikipedia.org/wiki/Santalum_acuminatum">quandong
+trees</a> were grown in each of two fields, one of which is treated with
+fertiliser. At the end of the growing season, the quandong fruits each
+tree were counted. To describe this dataset, we could use two vectors.
+First, we could make one vector that gives each sample a unique ID, and
+a second vector to tell us which group–fertiliser or control–each sample
+is in, and a third to tell us the number of fruits for each.</p>
+<p>I will make some ‘toy’ data (fake data, to use while developing
+analysis pipelines) below. We VERY often use toy datasets in
+bioinformatics–it means we can get on with writing analyses before the
+data arrive, and they often help to spot possible experimental problems
+and bugs in our code. I have no idea whether these ‘data’ are realistic
+but it doesn’t matter.</p>
+<p>As we make and analyse toy data I will use some functions you have
+not seen before. They are very common. Use experimentation, the help
+docs, and web searches to work out what they do.</p>
+<div class="sourceCode" id="cb147"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" tabindex="-1"></a><span class="co"># This is a toy dataset to practise on, so we are just using some random data. Make sure you understand how I&#39;ve generated it by breaking these commands down into pieces and using the help function where needed ...</span></span>
+<span id="cb147-2"><a href="#cb147-2" tabindex="-1"></a>sampleIds <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Sample&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="co"># paste() combines strings together</span></span>
+<span id="cb147-3"><a href="#cb147-3" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Fertiliser&quot;</span>,<span class="st">&quot;Control&quot;</span>), <span class="at">each=</span><span class="dv">10</span> ) <span class="co"># rep repeats vectors or items from vectors multiple times</span></span>
+<span id="cb147-4"><a href="#cb147-4" tabindex="-1"></a>nFruits   <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2400</span>,<span class="dv">50</span>) , <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2300</span>,<span class="dv">50</span>) )</span></code></pre></div>
+<p>Now, use what you know to answer these. There are several ways to do
+each (so your answer may differ from mine). If you’ve done some R before
+and you feel like loading a package–don’t! This is about using
+fundamentals.</p>
+<p>Feel free to peek at the solutions–we combine several ideas here.</p>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>What is the mean fruit count for trees grown with fertiliser?</li>
+<li>What is the average change in fruit yield you expect to see when
+fertilising a crop of quandongs, based on these data? (express as a
+percentage)</li>
+<li>Which fruit(s) (sample IDs) in the control group have the highest
+number of fruits? You will probably need more than one command to do
+this.</li>
+<li>Research the <code>order()</code> function. Use it to produce a list
+of sample names in the order of highest fruit count to lowest.</li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb148"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>])</span>
+<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="#cb148-3" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>]) <span class="sc">/</span> <span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb148-4"><a href="#cb148-4" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="#cb148-5" tabindex="-1"></a>ctrlSamps   <span class="ot">&lt;-</span> sampleIds[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
+<span id="cb148-6"><a href="#cb148-6" tabindex="-1"></a>ctrlNfruits <span class="ot">&lt;-</span>  nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
+<span id="cb148-7"><a href="#cb148-7" tabindex="-1"></a>ctrlSamps[ctrlNfruits<span class="sc">==</span><span class="fu">max</span>(ctrlNfruits)]</span>
+<span id="cb148-8"><a href="#cb148-8" tabindex="-1"></a></span>
+<span id="cb148-9"><a href="#cb148-9" tabindex="-1"></a>sampleIds[<span class="fu">order</span>(nFruits,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span></code></pre></div>
+</details>
+<p>Ok that’s the end of this section! The next section will learn some
+slightly more advanced ideas that are used to manipulate and analyse
+real data.</p>
+</div>
+</div>
+</div>
+<div id="part-2-basic-data-analysis" class="section level1">
+<h1>Part 2: Basic data analysis</h1>
+<div id="data-frames" class="section level2">
+<h2>Data frames</h2>
+<p>In the last example we used three vectors to store three pieces of
+information about a collection of samples. If we were to add in
+formation about the plant heights to the dataset, we would have to
+create another vector–and every new piece of information about each
+sample would require yet another.</p>
+<p>There are some things you have to pay attention to storing and
+manipulating data in this way: All the vectors have to keep the same
+length, and remain in same order. This would be very tricky to manage as
+soon as more than a two or three vectors are involved. Thankfully, we
+have a way of ‘tying’ vectors toegether for just this purpose.</p>
+<p>The structure is called a data frame, and we traditionally view them
+with each vector of data stacked vertically, just like the columns of a
+spreadsheet. Let’s make one now …</p>
+<div class="sourceCode" id="cb149"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb149-2"><a href="#cb149-2" tabindex="-1"></a>  sampleIds,</span>
+<span id="cb149-3"><a href="#cb149-3" tabindex="-1"></a>  treatment,</span>
+<span id="cb149-4"><a href="#cb149-4" tabindex="-1"></a>  nFruits</span>
+<span id="cb149-5"><a href="#cb149-5" tabindex="-1"></a>)</span>
+<span id="cb149-6"><a href="#cb149-6" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##    sampleIds  treatment  nFruits
+## 1   Sample 1 Fertiliser 2492.022
+## 2   Sample 2 Fertiliser 2345.043
+## 3   Sample 3 Fertiliser 2357.993
+## 4   Sample 4 Fertiliser 2486.500
+## 5   Sample 5 Fertiliser 2388.334
+## 6   Sample 6 Fertiliser 2367.458
+## 7   Sample 7 Fertiliser 2488.338
+## 8   Sample 8 Fertiliser 2482.048
+## 9   Sample 9 Fertiliser 2380.633
+## 10 Sample 10 Fertiliser 2303.073
+## 11 Sample 11    Control 2271.800
+## 12 Sample 12    Control 2281.979
+## 13 Sample 13    Control 2234.136
+## 14 Sample 14    Control 2265.898
+## 15 Sample 15    Control 2234.895
+## 16 Sample 16    Control 2262.642
+## 17 Sample 17    Control 2307.121
+## 18 Sample 18    Control 2379.304
+## 19 Sample 19    Control 2384.701
+## 20 Sample 20    Control 2307.999</code></pre>
+<p>Much neater! We can use indexing on data frames to get and set
+variables. With data frames we use two indexes (for rows and columns),
+separated by a comma. So the to see or set the third entry in the first
+column we do this:</p>
+<div class="sourceCode" id="cb151"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 3&quot;</span></span>
+<span id="cb151-2"><a href="#cb151-2" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Sample 21&quot;</span></span>
+<span id="cb151-3"><a href="#cb151-3" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 21&quot;</span></span></code></pre></div>
+<p>We can also use ranges and logical vectors, as we have seen before.
+These can be used to assign values—and this uses recycling rules! That
+is, the range being written to must be a multiple of the range being
+written:</p>
+<div class="sourceCode" id="cb152"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># Select rows 1 to 8 of columns 2 and 3</span></span>
+<span id="cb152-2"><a href="#cb152-2" tabindex="-1"></a>df[<span class="fu">c</span>(T,F),<span class="fu">c</span>(T,T,F)] <span class="co"># Select every second row of columns 1 and 2. Note the use of recycling here!</span></span>
+<span id="cb152-3"><a href="#cb152-3" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="#cb152-4" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>,<span class="st">&quot;Control&quot;</span>) <span class="co"># Replaces the first two entries of the treatment column, overwrites them both with &quot;Control&quot;.</span></span></code></pre></div>
+<p>And we can select whole rows or columns by leaving the field
+blank:</p>
+<div class="sourceCode" id="cb153"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" tabindex="-1"></a>df[<span class="dv">4</span>,] <span class="co"># Fourth row only</span></span>
+<span id="cb153-2"><a href="#cb153-2" tabindex="-1"></a>df[,<span class="dv">3</span>] <span class="co"># Third column only</span></span></code></pre></div>
+<p>We can also select columns by name using character vectors:</p>
+<div class="sourceCode" id="cb154"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a>df[,<span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>,<span class="st">&quot;sampleIds&quot;</span>)][<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,] <span class="co"># First five rows of two selected columns. Note the use of indexing twice--the second one applies to the results first. You will use this a lot!</span></span></code></pre></div>
+<p>The functions <code>nrow()</code> and <code>ncol()</code> give you
+the row and column counts of data frames, which is useful:</p>
+<div class="sourceCode" id="cb155"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" tabindex="-1"></a>df[<span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span>,] <span class="co"># Reversing the order of the rows</span></span></code></pre></div>
+<p>For convenience, columns can be extracted with the dollar
+(<code>$</code>) operator. It also lets you autocomplete with
+<code>\&lt;TAB\&gt;</code>, remember that?</p>
+<div class="sourceCode" id="cb156"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a>df<span class="sc">$</span>sampleIds</span></code></pre></div>
+<p>We now have three ways to access columns, by number, name, and by
+name using the dollar sign. All three can be used to create new columns.
+Simply assign values to a column that does not exist yet!</p>
+<div class="sourceCode" id="cb157"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" tabindex="-1"></a>df[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">nrow</span>(df)) <span class="co"># A new fourth column of &#39;NA&#39;s will appear. It will be automatically named &#39;V4&#39;</span></span>
+<span id="cb157-2"><a href="#cb157-2" tabindex="-1"></a></span>
+<span id="cb157-3"><a href="#cb157-3" tabindex="-1"></a>df[,<span class="st">&quot;newCol2&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;These&quot;</span>,<span class="st">&quot;will&quot;</span>,<span class="st">&quot;recycle---&quot;</span>,<span class="st">&quot;now!&quot;</span>)</span>
+<span id="cb157-4"><a href="#cb157-4" tabindex="-1"></a></span>
+<span id="cb157-5"><a href="#cb157-5" tabindex="-1"></a>df<span class="sc">$</span>newCol3 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span></span></code></pre></div>
+<p>Now with these tools, you have the power to simplify calculations,
+such as the maximum of the fruit counts in the control group:</p>
+<div class="sourceCode" id="cb158"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,<span class="st">&quot;nFruits&quot;</span>])</span>
+<span id="cb158-2"><a href="#cb158-2" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="#cb158-3" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]<span class="sc">$</span>nFruits) <span class="co"># Identical but using dollar sign operator after the indexing ...</span></span></code></pre></div>
+<p>Many calculations will involve adding new columns based on the
+current columns. For instance, what if we want to give fruit counts as a
+percentage of the maximum?</p>
+<div class="sourceCode" id="cb159"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" tabindex="-1"></a>df<span class="sc">$</span>nFruitsPercentMax <span class="ot">&lt;-</span> df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">max</span>(df<span class="sc">$</span>nFruits) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<p><strong>Exercises:</strong></p>
+<p>Using the data frame ‘df’ as created above using:</p>
+<p><code>{eval-FALSE} df &lt;- data.frame(   sampleIds,   treatment,   nFruits )</code></p>
+<ul>
+<li>Replace the first four entries in the ‘treatment’ column with the
+value “Heat”.</li>
+<li>Write a one-line command to print the number of rows remaining in
+the “Fertiliser” treatment group.</li>
+<li>Create and store a new data frame called ‘df_ctrl’ containing data
+only from control samples.</li>
+<li>Set any samples of this data frame that have fruit counts less than
+1 standard deviation below the mean to ‘NA’</li>
+<li>Add a new column named “percentVsCtrl” to ‘df’ that records that
+sample’s fruit count as a percentage of the average fruit count in the
+control samples (excluding those ‘NA’ samples from the last step—you
+will have to account for this in your command(s) somehow).</li>
+<li>Try out the functions <code>colnames()</code> and
+<code>rownames()</code> on your data frame ‘df’—they extract the column-
+and row names. The row names will be empty by default. Use a combination
+of the <code>rownames()</code> function, the assignment operator
+(<code>&lt;-</code>), and the <code>paste()</code> function to set the
+row names to “Row_1”, “Row_2”, … , “Row_20”.</li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb160"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;treatment&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Heat&quot;</span></span>
+<span id="cb160-2"><a href="#cb160-2" tabindex="-1"></a></span>
+<span id="cb160-3"><a href="#cb160-3" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>)</span>
+<span id="cb160-4"><a href="#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="#cb160-5" tabindex="-1"></a>df_ctrl <span class="ot">&lt;-</span> df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]</span>
+<span id="cb160-6"><a href="#cb160-6" tabindex="-1"></a></span>
+<span id="cb160-7"><a href="#cb160-7" tabindex="-1"></a>df_ctrl[df_ctrl<span class="sc">$</span>nFruits <span class="sc">&lt;</span> ( <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits) <span class="sc">-</span> <span class="fu">sd</span>(df_ctrl<span class="sc">$</span>nFruits) ),]<span class="sc">$</span>nFruits <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb160-8"><a href="#cb160-8" tabindex="-1"></a></span>
+<span id="cb160-9"><a href="#cb160-9" tabindex="-1"></a>df<span class="sc">$</span>percentVsCtrl <span class="ot">&lt;-</span> ( df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) ) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb160-10"><a href="#cb160-10" tabindex="-1"></a></span>
+<span id="cb160-11"><a href="#cb160-11" tabindex="-1"></a><span class="fu">colnames</span>(df)</span>
+<span id="cb160-12"><a href="#cb160-12" tabindex="-1"></a><span class="fu">rownames</span>(df)</span>
+<span id="cb160-13"><a href="#cb160-13" tabindex="-1"></a><span class="fu">rownames</span>(df) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Row&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df),<span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+</details>
+<div id="creating-data-frames" class="section level4">
+<h4>Creating data frames</h4>
+<p>It is possible to create data frames from nothing, by giving column
+names as argument names, and the corresponding values as arguments:</p>
+<div class="sourceCode" id="cb161"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb161-2"><a href="#cb161-2" tabindex="-1"></a>  <span class="at">someIntegers      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb161-3"><a href="#cb161-3" tabindex="-1"></a>  <span class="at">someLetters       =</span> letters[<span class="dv">26</span><span class="sc">:</span><span class="dv">24</span>],</span>
+<span id="cb161-4"><a href="#cb161-4" tabindex="-1"></a>  <span class="at">someRandomNumbers =</span> <span class="fu">runif</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb161-5"><a href="#cb161-5" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##   someIntegers someLetters someRandomNumbers
+## 1            1           z        -0.3144245
+## 2            2           y        -0.6893751
+## 3            3           x        -0.5682444</code></pre>
+</div>
+<div id="combining-data-frames-with-rbind" class="section level4">
+<h4>Combining data frames with rbind</h4>
+<p>If two data frames have identical columns, then the rows can be
+joined together using <code>rbind()</code>:</p>
+<div class="sourceCode" id="cb163"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" tabindex="-1"></a>iris1 <span class="ot">&lt;-</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] <span class="co"># R always loads several datasets to experiment on. &#39;iris&#39; is a famous data set indeed--you can read about it by running `?iris`</span></span>
+<span id="cb163-2"><a href="#cb163-2" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> iris[<span class="fu">nrow</span>(iris)<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">0</span>,] <span class="co"># This selects the last two rows --- can you work out why it works?</span></span>
+<span id="cb163-3"><a href="#cb163-3" tabindex="-1"></a>iris1</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa</code></pre>
+<div class="sourceCode" id="cb165"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" tabindex="-1"></a>iris2</span></code></pre></div>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 149          6.2         3.4          5.4         2.3 virginica
+## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
+<div class="sourceCode" id="cb167"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" tabindex="-1"></a><span class="fu">rbind</span>(iris1,iris2)</span></code></pre></div>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 1            5.1         3.5          1.4         0.2    setosa
+## 2            4.9         3.0          1.4         0.2    setosa
+## 149          6.2         3.4          5.4         2.3 virginica
+## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
+<p>The corresponding function <code>cbind()</code> for columns also
+exists—but should almost never be used as there is almost always a
+better way. Both these functions can enable inefficient code, because
+ech time they are used they create an entirely new copy of both data
+frames, consuming time and memory. They should be used rarely and
+carefully.</p>
+<p>The next time we see data frames, everything will get far easier,
+thanks to the package data.table. But now you understand the
+fundamentals about how they work you have the power to take R much
+further.</p>
+</div>
+</div>
+<div id="str" class="section level2">
+<h2><code>str()</code></h2>
+<p>The function <code>str()</code> is the most useful general purpose
+tool for describing what is R objects contain. You can try it on
+basically any object. In the case of data frames, it describes the
+contents of each of the columns, the dimensions of the data frame, etc
+….</p>
+<div class="sourceCode" id="cb169"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div id="readingwriting-data" class="section level2">
+<h2>Reading/writing data</h2>
+<div id="as-data-frames-csv-and-other-excel-compatible-formats"
+class="section level4">
+<h4>… as data frames: CSV and other Excel-compatible formats</h4>
+<p>Data often needs to be transported between different programs.
+Bioinformatic data often takes the form of tables, and one of the most
+simple text-based table formats that exists is called CSV:
+Comma-Separated Values. It follow these simple rules:</p>
+<ul>
+<li>A new row starts ever time there is a new line.</li>
+<li>A new column starts every time there is a comma.</li>
+<li>The first line is normally the column names.</li>
+<li>Each row must have the same number of columns (commas).</li>
+<li>If a value between commas is in quote marks (“…”) it is interpreted
+as a single character string, even if it contains a comma.</li>
+</ul>
+<p>Here’s an example using Formula 1 drivers:</p>
+<pre><code>team,driver,wins,born
+McLaren,&quot;Piastri, Norris&quot;,1,2001
+Mercedes,&quot;Russel, George&quot;,2,1998
+Ferrari,&quot;Leclerc, Charles&quot;,6,1997</code></pre>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Copy this text into a blank file and save it as “drivers.csv”. You
+can use this option in Rstudio to make blank text files:</li>
+</ul>
+<p><img src="images/RtextFile.PNG" /></p>
+<ul>
+<li>Read the file into R as a data frame, using a command like
+<code>read.csv("drivers.csv")</code>. Give it a name like ‘F1’.</li>
+<li>Add a column to (any name and values are fine).</li>
+<li>Write ‘F1’ with the new name to a file using the function
+<code>write.csv()</code>, and check you can open the file in Excel. If
+you are on the cluster you may have to use <a
+href="docs/tutorial_sftp.html">SFTP</a> or some other method to access
+it from the desktop.</li>
+<li>Add the argument “row.names=FALSE” and try again. Confirm that the
+row names are not present as an extra column in the output.</li>
+</ul>
+<p>Other common formats include TSV (Tab-Separated Values) and SSV
+(Space …) which are identical but with different column separation
+characters. Common bioinformatic formats like GFF, BED, and VCF all
+approximately fit the TSV format.</p>
+</div>
+</div>
+<div id="plotting-with-base" class="section level2">
+<h2>Plotting (with base)</h2>
+<p>In R we make plots by adding items into the plot, step-by-step.</p>
+<p>Let’s use the ‘iris’ dataset to start off (have a look at it yourself
+and note the different columns), and explore the relationship between
+petal dimensions of iris flowers. The first step …</p>
+<ul>
+<li>Creates the axes, and</li>
+<li>Adds the first plot item (e.g. lines or points)</li>
+</ul>
+<div class="sourceCode" id="cb172"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb172-2"><a href="#cb172-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb172-3"><a href="#cb172-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb172-4"><a href="#cb172-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
+<span id="cb172-5"><a href="#cb172-5" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>The “type = ‘p’” argument directs R to make points (a scatterplot),
+but it is the default anyway. Lines don’t make much sense here but if
+you want to try that, run the command with “type = ‘l’”.</p>
+<p>Let’s add some layers. By calling another plot function
+<code>abline()</code>, we can add lines to the plot. Let’s add some
+lines to indicate the minimum and maximum range of petal lengths in the
+species <em>setosa</em>. We will use some arguments to manipulate the
+colours etc.</p>
+<ul>
+<li><code>abline()</code> will draw a vertical line if given the
+argument ‘v=…’</li>
+<li>We can set the line’s colours using the argument ‘col=…’. You can
+use some names like “red”, “darkblue”, etc., but for total freedom I
+like to use RGB colours, which you can look up at (e.g.) <a
+href="https://rgbcolorpicker.com/"
+class="uri">https://rgbcolorpicker.com/</a></li>
+<li>‘lwd=…’ sets the line width. 1 is default</li>
+<li>‘lty=…’ sets the line type, such as dashed lines with varying length
+dashes</li>
+</ul>
+<p><img src="images/Rcolpick.PNG" /></p>
+<div class="sourceCode" id="cb173"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb173-2"><a href="#cb173-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb173-3"><a href="#cb173-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb173-4"><a href="#cb173-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
+<span id="cb173-5"><a href="#cb173-5" tabindex="-1"></a>)</span>
+<span id="cb173-6"><a href="#cb173-6" tabindex="-1"></a></span>
+<span id="cb173-7"><a href="#cb173-7" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb173-8"><a href="#cb173-8" tabindex="-1"></a>  <span class="at">v   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,]<span class="sc">$</span>Petal.Length), <span class="co"># `range()` produces two numbers, so we will get one line for each</span></span>
+<span id="cb173-9"><a href="#cb173-9" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;#2a2fdb73&quot;</span>,<span class="st">&quot;#c73a3a73&quot;</span>), <span class="co"># Notice we are giving two colours--one colour per line</span></span>
+<span id="cb173-10"><a href="#cb173-10" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">5</span>, <span class="co"># Now we are giving just one value. This will recycle--so it will be applied to all lines!</span></span>
+<span id="cb173-11"><a href="#cb173-11" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span></span>
+<span id="cb173-12"><a href="#cb173-12" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p>You can look up parameters like line types here: <a
+href="https://r-graph-gallery.com/6-graph-parameters-reminder.html"
+class="uri">https://r-graph-gallery.com/6-graph-parameters-reminder.html</a></p>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Add a column to ‘iris’ called “colour”. Make it contain the value
+“red” when the species is <em>setosa</em>, “blue” for
+<em>versicolor</em>, and “black” for <em>virginica</em>. This may take a
+few lines of code (although, you can research a function like
+<code>switch()</code> to get it done in one …)</li>
+<li>Create a scatterplot of sepal length (x) vs sepal width (y), with:
+<ul>
+<li>Colours corresponding to species, using the column you added. The
+relevant argument will look something like
+<code>col=iris$colour</code></li>
+<li>Use the “pch=…” argument to change the point type to a small filled
+dot (e.g. … number 20).</li>
+<li>Use the “cex=…” argument to change the size of the points. Set them
+all to 2. ‘cex’ means ‘coefficient of expansion’, I think …</li>
+<li>Use the “xlab=…” argument to set the label on the x-axis to “Sepal
+Width”.</li>
+</ul></li>
+<li>Add horizontal (“h==…”) lines to mark the range of sepal widths in
+species <em>versicolor</em>.
+<ul>
+<li>The line widths should be 4 for the smaller end of the range, and 8
+for the larger end.</li>
+<li>Both should be semi-transparent pastel green. Use an RGB colour to
+set them. You will have to use the “alpha” setting on the website to get
+the semi-transparency.</li>
+</ul></li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb174"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb174-2"><a href="#cb174-2" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
+<span id="cb174-3"><a href="#cb174-3" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;virginica&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb174-4"><a href="#cb174-4" tabindex="-1"></a></span>
+<span id="cb174-5"><a href="#cb174-5" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb174-6"><a href="#cb174-6" tabindex="-1"></a>  <span class="at">x   =</span> iris<span class="sc">$</span>Sepal.Length,</span>
+<span id="cb174-7"><a href="#cb174-7" tabindex="-1"></a>  <span class="at">y   =</span> iris<span class="sc">$</span>Sepal.Width,</span>
+<span id="cb174-8"><a href="#cb174-8" tabindex="-1"></a>  <span class="at">col =</span> iris<span class="sc">$</span>colour,</span>
+<span id="cb174-9"><a href="#cb174-9" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;Sepal Width&quot;</span>,</span>
+<span id="cb174-10"><a href="#cb174-10" tabindex="-1"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb174-11"><a href="#cb174-11" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">20</span></span>
+<span id="cb174-12"><a href="#cb174-12" tabindex="-1"></a>)</span>
+<span id="cb174-13"><a href="#cb174-13" tabindex="-1"></a></span>
+<span id="cb174-14"><a href="#cb174-14" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb174-15"><a href="#cb174-15" tabindex="-1"></a>  <span class="at">h   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,]<span class="sc">$</span>Sepal.Width),</span>
+<span id="cb174-16"><a href="#cb174-16" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>),</span>
+<span id="cb174-17"><a href="#cb174-17" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;#4a8a43a0&quot;</span></span>
+<span id="cb174-18"><a href="#cb174-18" tabindex="-1"></a>)</span></code></pre></div>
+</details>
+<div id="layer-layer-layer" class="section level4">
+<h4>Layer, layer, layer</h4>
+<p>These basic concepts you have can be extended to produce almost any
+figure you can imagine. In almost all cases, you will start by
+manipulating your data to create columns that are helpful for plotting
+(as we did with iris$colour before), then create some sort of basic
+plot, then add layers.</p>
+<p>The basic plot types that base R (i.e. R without packages added)
+allows include:</p>
+<ul>
+<li>Scatterplots (<code>plot(...,type='p')</code>)</li>
+<li>Line plots (<code>plot(...,type='l')</code>)</li>
+<li><code>histogram()</code></li>
+<li><code>boxplot()</code></li>
+</ul>
+<p>And the functions you will use to layer things on will include …</p>
+<ul>
+<li><code>points()</code></li>
+<li><code>lines()</code></li>
+<li><code>legend()</code> – Draw a legend!</li>
+<li><code>rect()</code> – Rectangles, anywhere, any size, colour
+etc.</li>
+<li><code>polygon()</code> – Even more flexibility! Draw whatever shape
+you can describe using x/y coordinates.</li>
+<li><code>text()</code> – Anywhere, any font, size, colour, angle
+etc.</li>
+</ul>
+<p>You can also produce multiple plots per page, of any size, even
+overlapping, and have full control over the axes, text, etc. This
+tutorial won’t cover all the things that can be done, just be aware:</p>
+<ul>
+<li>Let your imagination guide you—not the tools you can find! Sketch
+the plot you want on a whiteboard, then set about finding what tools can
+do it.</li>
+<li>MANY packages exist to help make really interesting and intricate
+plots. The package <code>ggplot2</code> is an excellent example. Just
+remember—to become completely expressive in R, you will need to go back
+to basics (and you may need to remember some trigonometry).</li>
+</ul>
+<p>For example, let’s say you want to represent wind directions and
+magnitudes in an intuitive plot like the below. There’s no package to do
+it—but it takes about 6 R commands to make from basics. Ask me if you
+want to see the code but the take-home point is, if you can imagine it,
+there’s a way to do it …</p>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+</div>
+</div>
+<div id="lists" class="section level2">
+<h2>Lists</h2>
+<p>Remember how a data frame neatly ties a group of equal-length vectors
+together into a sort of table? Well what if you want to tie a collection
+of data frames together? Or a collection of vectors? Or a mixture?</p>
+<p>Lists are the data structures that allow this, and the following
+demonstrates that …</p>
+<ul>
+<li>A list can be created using very similar syntax to creating a data
+frame.</li>
+<li>List members can be named or unnamed, and members is accessed using
+double square brackets, or the dollar sign operator.</li>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb175"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" tabindex="-1"></a><span class="co"># Creating a list</span></span>
+<span id="cb175-2"><a href="#cb175-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb175-3"><a href="#cb175-3" tabindex="-1"></a>  <span class="at">a_vector =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb175-4"><a href="#cb175-4" tabindex="-1"></a>  <span class="at">another_vector =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">NA</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb175-5"><a href="#cb175-5" tabindex="-1"></a>  <span class="at">a_data_frame =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;Sepal.Width&quot;</span>)],</span>
+<span id="cb175-6"><a href="#cb175-6" tabindex="-1"></a>  <span class="at">a_list =</span> <span class="fu">list</span>( <span class="at">a =</span> <span class="st">&quot;A&quot;</span> , <span class="at">b =</span> <span class="st">&quot;B&quot;</span> ),</span>
+<span id="cb175-7"><a href="#cb175-7" tabindex="-1"></a>  <span class="st">&quot;an unnamed member&quot;</span></span>
+<span id="cb175-8"><a href="#cb175-8" tabindex="-1"></a>)</span>
+<span id="cb175-9"><a href="#cb175-9" tabindex="-1"></a></span>
+<span id="cb175-10"><a href="#cb175-10" tabindex="-1"></a><span class="co"># Explore contents</span></span>
+<span id="cb175-11"><a href="#cb175-11" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
+<pre><code>## List of 5
+##  $ a_vector      : int [1:4] 1 2 3 4
+##  $ another_vector: logi [1:4] TRUE NA FALSE TRUE
+##  $ a_data_frame  :&#39;data.frame&#39;:  3 obs. of  2 variables:
+##   ..$ Species    : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1
+##   ..$ Sepal.Width: num [1:3] 3.5 3 3.2
+##  $ a_list        :List of 2
+##   ..$ a: chr &quot;A&quot;
+##   ..$ b: chr &quot;B&quot;
+##  $               : chr &quot;an unnamed member&quot;</code></pre>
+<div class="sourceCode" id="cb177"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" tabindex="-1"></a><span class="co"># Access (and edit) first item a few ways</span></span>
+<span id="cb177-2"><a href="#cb177-2" tabindex="-1"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb179"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb181"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" tabindex="-1"></a>l[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb181-2"><a href="#cb181-2" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
+<pre><code>## [1]  1 NA  3  4</code></pre>
+<div class="sourceCode" id="cb183"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" tabindex="-1"></a><span class="co"># A demonstation -- the double square brakets extract the actual items in the list...</span></span>
+<span id="cb183-2"><a href="#cb183-2" tabindex="-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
+<pre><code>##   Species Sepal.Width
+## 1  setosa         3.5
+## 2  setosa         3.0
+## 3  setosa         3.2</code></pre>
+<div class="sourceCode" id="cb185"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" tabindex="-1"></a><span class="fu">class</span>(l[[<span class="dv">3</span>]])</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb187"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1" tabindex="-1"></a><span class="fu">class</span>(l[<span class="dv">3</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+</div>
+<div id="writing-your-own-functions" class="section level2">
+<h2>Writing your own functions</h2>
+<p>A key skill is writing your own functions. The way to create a
+function follows this syntax:</p>
+<pre><code>FUNCTION_NAME &lt;- function( argument1_name , argument2_name = &lt;argument2_default&gt; ){
+  # Function body
+  return(&lt;return value&gt;)
+}</code></pre>
+<p>Let’s create a function to transform a vector of numbers to express
+them in standard deviations from the mean, that is, as Z-scores. We name
+the function ‘zScore’. It will need to take a vector, so let’s start it
+off with just one argument called ‘x’.</p>
+<div class="sourceCode" id="cb190"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" tabindex="-1"></a>zScore <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
+<span id="cb190-2"><a href="#cb190-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb190-3"><a href="#cb190-3" tabindex="-1"></a>  <span class="co"># return(&lt;return value&gt;)</span></span>
+<span id="cb190-4"><a href="#cb190-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ok, as for the function body, that’s where we perform the relevant
+calculations. In this case, we need to follow the formula for Z-scores
+<span class="math inline">\(Z_x\)</span> of the vector <span
+class="math inline">\(x\)</span>: <span class="math display">\[
+Z_x = \frac{x - \bar{x}}{\sigma^2_x}
+\]</span> Where <span class="math inline">\(\bar{x}\)</span> is the mean
+of all the values in x and <span
+class="math inline">\(\sigma^2_x\)</span> is the standard deviation of
+x.</p>
+<p>And the return value is of course the result of these calculations,
+the Z-scores.</p>
+<div class="sourceCode" id="cb191"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
+<span id="cb191-2"><a href="#cb191-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb191-3"><a href="#cb191-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb191-4"><a href="#cb191-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb191-5"><a href="#cb191-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
+<span id="cb191-6"><a href="#cb191-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
+<span id="cb191-7"><a href="#cb191-7" tabindex="-1"></a>}</span>
+<span id="cb191-8"><a href="#cb191-8" tabindex="-1"></a></span>
+<span id="cb191-9"><a href="#cb191-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
+<span id="cb191-10"><a href="#cb191-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb191-11"><a href="#cb191-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">runif</span>(<span class="dv">10</span>))</span></code></pre></div>
+<p>Ok, what about when there are ‘NA’ values in the vectors though?</p>
+<div class="sourceCode" id="cb192"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Error</span></span></code></pre></div>
+<p>We could fix this in the function by adding <code>na.rm=TRUE</code>
+to both the <code>mean()</code> and <code>sd()</code> functions. But
+what if the user doesn’t <em>want</em> the function to ignore ‘NA’
+values? Perhaps we can let the user choose? We can do this by adding
+another argument, for example called “removeNAs=…”, and <em>passing</em>
+its value on to the “na.rm=…” arguments of <code>mean()</code> and
+<code>sd()</code> inside the function body …</p>
+<div class="sourceCode" id="cb193"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , removeNAs ){</span>
+<span id="cb193-2"><a href="#cb193-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb193-3"><a href="#cb193-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb193-4"><a href="#cb193-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb193-5"><a href="#cb193-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
+<span id="cb193-6"><a href="#cb193-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
+<span id="cb193-7"><a href="#cb193-7" tabindex="-1"></a>}</span>
+<span id="cb193-8"><a href="#cb193-8" tabindex="-1"></a></span>
+<span id="cb193-9"><a href="#cb193-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
+<span id="cb193-10"><a href="#cb193-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),<span class="at">removeNAs =</span> <span class="cn">TRUE</span>) <span class="co"># Works</span></span>
+<span id="cb193-11"><a href="#cb193-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># ... fails --- missing argument!</span></span></code></pre></div>
+<p>Better, but it’s a bit annoying to specify “removeNAs=…” every time
+we use the function. Maybe we can put in a default value of ‘FALSE’,
+that way we only need the user to specify it when they want it to be
+TRUE:</p>
+<div class="sourceCode" id="cb194"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , <span class="at">removeNAs=</span><span class="cn">FALSE</span> ){</span>
+<span id="cb194-2"><a href="#cb194-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb194-3"><a href="#cb194-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb194-4"><a href="#cb194-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb194-5"><a href="#cb194-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
+<span id="cb194-6"><a href="#cb194-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
+<span id="cb194-7"><a href="#cb194-7" tabindex="-1"></a>}</span>
+<span id="cb194-8"><a href="#cb194-8" tabindex="-1"></a></span>
+<span id="cb194-9"><a href="#cb194-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
+<span id="cb194-10"><a href="#cb194-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),<span class="at">removeNAs =</span> <span class="cn">TRUE</span>) <span class="co"># Works</span></span>
+<span id="cb194-11"><a href="#cb194-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Works!</span></span></code></pre></div>
+<p><strong>Exercises:</strong></p>
+<ul>
+<li>Create a function called ‘topRows’ that takes a data frame (like
+‘iris’) and an integer (call it, say, ‘n’), and returns the top n rows
+of the data frame
+<ul>
+<li>The user should be able to specify how many rows in the returned
+data table</li>
+<li>The default number of rows returned should be 1</li>
+</ul></li>
+</ul>
+<details>
+<summary>
+<strong>See answer:</strong>
+</summary>
+<div class="sourceCode" id="cb195"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb195-2"><a href="#cb195-2" tabindex="-1"></a>  out <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
+<span id="cb195-3"><a href="#cb195-3" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb195-4"><a href="#cb195-4" tabindex="-1"></a>}</span>
+<span id="cb195-5"><a href="#cb195-5" tabindex="-1"></a></span>
+<span id="cb195-6"><a href="#cb195-6" tabindex="-1"></a><span class="co"># Even more concise:</span></span>
+<span id="cb195-7"><a href="#cb195-7" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb195-8"><a href="#cb195-8" tabindex="-1"></a>  <span class="fu">return</span> (df[<span class="dv">1</span><span class="sc">:</span>n,])</span>
+<span id="cb195-9"><a href="#cb195-9" tabindex="-1"></a>}</span>
+<span id="cb195-10"><a href="#cb195-10" tabindex="-1"></a></span>
+<span id="cb195-11"><a href="#cb195-11" tabindex="-1"></a><span class="co">#Even even more concise. If the function finishes without hitting a return statement, it returns the last line. Avoid this except in extremely simple functions.</span></span>
+<span id="cb195-12"><a href="#cb195-12" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb195-13"><a href="#cb195-13" tabindex="-1"></a>  df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
+<span id="cb195-14"><a href="#cb195-14" tabindex="-1"></a>}</span>
+<span id="cb195-15"><a href="#cb195-15" tabindex="-1"></a></span>
+<span id="cb195-16"><a href="#cb195-16" tabindex="-1"></a><span class="co"># Try it!</span></span>
+<span id="cb195-17"><a href="#cb195-17" tabindex="-1"></a><span class="fu">topRows</span>(iris,<span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="loops-with-lapply" class="section level2">
+<h2>Loops! with <code>lapply()</code></h2>
+<blockquote>
+<p>This is the hardest part of learning basic R.</p>
+</blockquote>
+<p>… but <a
+href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker&#39;s_Guide_to_the_Galaxy#Don&#39;t_Panic"><strong>DON’T
+PANIC</strong></a>! Just have a strong coffee and follow the
+instructions carefully. Once you get it, it’s all much more relaxing
+from there.</p>
+<p>A theme across most programming languages is the need to perform a
+similar task many times on slightly different inputs. For example, if
+the task is creating a genetic map, then we might need to complete it
+once for chromosome 1, again for chromosome 2, and again for chromosomes
+3, 4, etc.</p>
+<p>We can automate these cases using <em>apply</em>-type functions.</p>
+<p>Create a toy data frame describing a collection of gene expression
+(“tpm”—transcript per million) values using this code:</p>
+<div class="sourceCode" id="cb196"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" tabindex="-1"></a><span class="co"># Don&#39;t try to understand this, we will learn it later.</span></span>
+<span id="cb196-2"><a href="#cb196-2" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb196-3"><a href="#cb196-3" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb196-4"><a href="#cb196-4" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
+<span id="cb196-5"><a href="#cb196-5" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
+<span id="cb196-6"><a href="#cb196-6" tabindex="-1"></a>)</span>
+<span id="cb196-7"><a href="#cb196-7" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
+<p>Now, create a function that will take expression data like this, and
+return the tissue of the highest expressing gene:</p>
+<div class="sourceCode" id="cb197"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" tabindex="-1"></a>highestExpGeneID <span class="ot">&lt;-</span> <span class="cf">function</span>(edf){</span>
+<span id="cb197-2"><a href="#cb197-2" tabindex="-1"></a>  edf[edf<span class="sc">$</span>tpm<span class="sc">==</span><span class="fu">max</span>(edf<span class="sc">$</span>tpm),]<span class="sc">$</span>tissue</span>
+<span id="cb197-3"><a href="#cb197-3" tabindex="-1"></a>}</span>
+<span id="cb197-4"><a href="#cb197-4" tabindex="-1"></a></span>
+<span id="cb197-5"><a href="#cb197-5" tabindex="-1"></a><span class="co"># Test it ...</span></span>
+<span id="cb197-6"><a href="#cb197-6" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e)</span></code></pre></div>
+<p>Now, use this function, along with data frame indexing, to find the
+highest expressing tissue of gene with ID “GeneID:3”</p>
+<div class="sourceCode" id="cb198"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span><span class="st">&quot;GeneID:3&quot;</span>,])</span></code></pre></div>
+<p>But what if you want a readout for <em>every</em> gene?</p>
+<p>Well the starting point might be to get a list of all the gene IDs,
+so for that we could use the function unique:</p>
+<div class="sourceCode" id="cb199"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" tabindex="-1"></a><span class="fu">unique</span>(e<span class="sc">$</span>geneID) <span class="co"># &quot;GeneID:1&quot; &quot;GeneID:2&quot; &quot;GeneID:3&quot; &quot;GeneID:4&quot; &quot;GeneID:5&quot; &quot;GeneID:6&quot;</span></span></code></pre></div>
+<p>But how do we make the function <code>highestExpGeneID()</code> run
+once for every one of these?</p>
+<p>Here is where we use <code>lapply()</code>, which stands for “list
+apply”; “list” because the thing we will get back is a list (with one
+entry for each run of the function), and “apply” because it is going to
+<em>apply</em> the function several times. The syntax is like this:</p>
+<pre><code>result_list &lt;- lapply( X=&lt;list of items&gt; , FUN=&lt;function that will be applied once for each list item&gt; )</code></pre>
+<p>Now, ‘FUN’ is a function, that describes what we want to do with each
+item in ‘X’. What do we want to do for each item (geneID)?</p>
+<ul>
+<li>Extract the rows of ‘e’ that contain data for that geneID, and
+…</li>
+<li>… run <code>highestExpGeneID()</code> on those rows.</li>
+</ul>
+<p>So we will have a function that calls a function. We don’t need to
+name the function–we just need to know that it will receive the geneIDs
+in ‘X’ one at a time, <em>as its first argument, no matter what that
+argument is named</em>. I call it ‘g’, in the example below.</p>
+<details>
+<summary>
+<strong>If you’re confused, study these examples (if not, go
+on):</strong>
+</summary>
+<div class="sourceCode" id="cb201"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" tabindex="-1"></a><span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="cf">function</span>(x) { x <span class="sc">+</span> <span class="dv">100</span> } )</span>
+<span id="cb201-2"><a href="#cb201-2" tabindex="-1"></a></span>
+<span id="cb201-3"><a href="#cb201-3" tabindex="-1"></a><span class="fu">lapply</span>( letters , <span class="cf">function</span>(letter) { <span class="fu">paste0</span>(<span class="st">&quot;:&quot;</span>,letter,<span class="st">&quot;:&quot;</span>) } )</span>
+<span id="cb201-4"><a href="#cb201-4" tabindex="-1"></a></span>
+<span id="cb201-5"><a href="#cb201-5" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Fish&quot;</span>,<span class="st">&quot;Frog&quot;</span>,<span class="st">&quot;Pangolin&quot;</span>,<span class="st">&quot;Wallaby&quot;</span>,<span class="st">&quot;Turtle&quot;</span>) , <span class="at">mammal =</span> <span class="fu">c</span>(F,F,T,T,F) )</span>
+<span id="cb201-6"><a href="#cb201-6" tabindex="-1"></a><span class="co"># Which animals are mammals? Which are not?</span></span>
+<span id="cb201-7"><a href="#cb201-7" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) , <span class="cf">function</span>(tf) {</span>
+<span id="cb201-8"><a href="#cb201-8" tabindex="-1"></a>  animals[animals<span class="sc">$</span>mammal<span class="sc">==</span>tf,]<span class="sc">$</span>name</span>
+<span id="cb201-9"><a href="#cb201-9" tabindex="-1"></a>} )</span></code></pre></div>
+</details>
+<p>Ok, so here’s our command to find the highest expressing tissue for
+each gene:</p>
+<div class="sourceCode" id="cb202"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" tabindex="-1"></a>highestExpressionEachGene <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){</span>
+<span id="cb202-2"><a href="#cb202-2" tabindex="-1"></a>  <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,])</span>
+<span id="cb202-3"><a href="#cb202-3" tabindex="-1"></a>} )</span>
+<span id="cb202-4"><a href="#cb202-4" tabindex="-1"></a>highestExpressionEachGene</span></code></pre></div>
+<div id="sapply" class="section level4">
+<h4>sapply</h4>
+<p>It is natural to wonder whether a list is really the most useful
+thing to get back here. We gave it a vector of gene IDs. Could we get a
+vector back? Well, yes. But this will only work well then the thing you
+get back is a single-item vector—what if it returned a data frame?</p>
+<p>The answer is to replace <code>lapply()</code> with
+<code>sapply()</code> (“simplified apply”). Or …</p>
+<div class="sourceCode" id="cb203"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" tabindex="-1"></a><span class="fu">unlist</span>(highestExpressionEachGene)</span></code></pre></div>
+<p>With this in hand, you could even create a nice little data frame of
+results:</p>
+<div class="sourceCode" id="cb204"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" tabindex="-1"></a>maxExp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb204-2"><a href="#cb204-2" tabindex="-1"></a>  <span class="at">geneID       =</span> <span class="fu">unique</span>(e<span class="sc">$</span>geneID),</span>
+<span id="cb204-3"><a href="#cb204-3" tabindex="-1"></a>  <span class="at">maxExpTissue =</span> <span class="fu">sapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){ <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,]) } )</span>
+<span id="cb204-4"><a href="#cb204-4" tabindex="-1"></a>)</span>
+<span id="cb204-5"><a href="#cb204-5" tabindex="-1"></a>maxExp</span></code></pre></div>
+<p>Great! Your turn.</p>
+<p><strong>Exercises:</strong></p>
+<p>Use the expression data as generated by:</p>
+<div class="sourceCode" id="cb205"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb205-2"><a href="#cb205-2" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb205-3"><a href="#cb205-3" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
+<span id="cb205-4"><a href="#cb205-4" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
+<span id="cb205-5"><a href="#cb205-5" tabindex="-1"></a>)</span>
+<span id="cb205-6"><a href="#cb205-6" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
+<ul>
+<li>Using lapply/sapply and other tricks from this section, create a
+data frame that contains a row each for the “Stem” and “Leaf” tissues ,
+with one column called ‘tissue’ naming the tissue, and another called
+‘medianExp’ which contains the median tpm expression value across genes
+for that tissue.</li>
+</ul>
+<details>
+<summary>
+<strong>See clues (and answer):</strong>
+</summary>
+<div class="sourceCode" id="cb206"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="#cb206-1" tabindex="-1"></a><span class="co">#I will build this up in several steps</span></span>
+<span id="cb206-2"><a href="#cb206-2" tabindex="-1"></a></span>
+<span id="cb206-3"><a href="#cb206-3" tabindex="-1"></a><span class="co"># the syntax is `lapply(X,FUN)`</span></span>
+<span id="cb206-4"><a href="#cb206-4" tabindex="-1"></a><span class="co"># We need to apply to two tissues so we list them in X. For FUN, let&#39;s just create a simple function that returns exactly what is given ...</span></span>
+<span id="cb206-5"><a href="#cb206-5" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t){ t } )</span>
+<span id="cb206-6"><a href="#cb206-6" tabindex="-1"></a><span class="co"># So, t is set to &quot;Leaf&quot; first, then &quot;Stem&quot;</span></span>
+<span id="cb206-7"><a href="#cb206-7" tabindex="-1"></a><span class="co"># We need to be selecting rows of e there e$tissue is &quot;Leaf&quot; and then &quot;Stem&quot;, so let&#39;s try returning versions of e with just those selected ...</span></span>
+<span id="cb206-8"><a href="#cb206-8" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,] } )</span>
+<span id="cb206-9"><a href="#cb206-9" tabindex="-1"></a><span class="co"># Ok, and but what we want to work with is the tpm, so let&#39;s use qhat we know about data frames to extract just that column ...</span></span>
+<span id="cb206-10"><a href="#cb206-10" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm } )</span>
+<span id="cb206-11"><a href="#cb206-11" tabindex="-1"></a><span class="co"># Good, and what do we want with tpm? The median, so we use the function median() to calcualte it on those results ...</span></span>
+<span id="cb206-12"><a href="#cb206-12" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb206-13"><a href="#cb206-13" tabindex="-1"></a><span class="co"># So close! We just prefer this as a vector not a list, so we use `sapply()`</span></span>
+<span id="cb206-14"><a href="#cb206-14" tabindex="-1"></a><span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb206-15"><a href="#cb206-15" tabindex="-1"></a></span>
+<span id="cb206-16"><a href="#cb206-16" tabindex="-1"></a></span>
+<span id="cb206-17"><a href="#cb206-17" tabindex="-1"></a><span class="co"># That&#39;s great -- we have the tissues we need ( c(&quot;Leaf&quot;,&quot;Stem&quot;) ) and their median expression values ( the long sapply command above ).</span></span>
+<span id="cb206-18"><a href="#cb206-18" tabindex="-1"></a><span class="co"># To make a data frame, we just use the regular syntax for making one ...</span></span>
+<span id="cb206-19"><a href="#cb206-19" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb206-20"><a href="#cb206-20" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb206-21"><a href="#cb206-21" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</span>
+<span id="cb206-22"><a href="#cb206-22" tabindex="-1"></a>)</span>
+<span id="cb206-23"><a href="#cb206-23" tabindex="-1"></a><span class="co"># ... except we enter the tissue and median tpm values using the calculations we worked out:</span></span>
+<span id="cb206-24"><a href="#cb206-24" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb206-25"><a href="#cb206-25" tabindex="-1"></a>  <span class="at">tissue    =</span> <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>),</span>
+<span id="cb206-26"><a href="#cb206-26" tabindex="-1"></a>  <span class="at">medianExp =</span> <span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb206-27"><a href="#cb206-27" tabindex="-1"></a>)</span>
+<span id="cb206-28"><a href="#cb206-28" tabindex="-1"></a></span>
+<span id="cb206-29"><a href="#cb206-29" tabindex="-1"></a><span class="co"># That&#39;s the answer!</span></span></code></pre></div>
+</details>
+<p>If you understand this</p>
+<hr />
+</div>
+</div>
+<div id="matrices" class="section level2">
+<h2>Matrices</h2>
+</div>
+<div id="apply" class="section level2">
+<h2>apply()</h2>
+</div>
+<div id="if-type-conditional-statements" class="section level2">
+<h2><code>if</code>-type conditional statements</h2>
+</div>
+<div id="debugging" class="section level2">
+<h2>Debugging</h2>
+</div>
+<div id="packages-and-magrittr" class="section level2">
+<h2>Packages (and Magrittr)</h2>
+</div>
+<div id="plotting-with-ggplot2" class="section level2">
+<h2>Plotting (with ggplot2)</h2>
+</div>
+<div id="profiling-benchmarking" class="section level2">
+<h2>Profiling / benchmarking</h2>
+</div>
+<div id="everything-is-everything" class="section level2">
+<h2>Everything is everything</h2>
+<p>Just so you know, functions are just a special kind of object, and
+operators are just functions, and syntactical things like braces
+(<code>(</code> and <code>)</code>) are also functions, and … basically
+everything that isn’t a code comment is an object of some kind, and
+quite often it’s function. If you want proof, consider this very silly
+code. Have a nice day.</p>
+<div class="sourceCode" id="cb207"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" tabindex="-1"></a><span class="co"># You are not expected to understand this</span></span>
+<span id="cb207-2"><a href="#cb207-2" tabindex="-1"></a></span>
+<span id="cb207-3"><a href="#cb207-3" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb209"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb211"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb213"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb215"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" tabindex="-1"></a><span class="st">`</span><span class="at">[</span><span class="st">`</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb217"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> sum</span>
+<span id="cb217-2"><a href="#cb217-2" tabindex="-1"></a><span class="fu">s</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb219"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" tabindex="-1"></a><span class="st">`</span><span class="at">&lt;-</span><span class="st">`</span>(s2,sum)</span>
+<span id="cb219-2"><a href="#cb219-2" tabindex="-1"></a><span class="fu">s2</span>(<span class="st">`</span><span class="at">:</span><span class="st">`</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+</div>
 </div>
 
 
