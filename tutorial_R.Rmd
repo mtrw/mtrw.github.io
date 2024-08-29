@@ -9,6 +9,7 @@ editor_options:
 
 ```{r,label=setup,include=F}
 require(data.table)
+require(magrittr)
 options(datatable.print.nrows = 10,datatable.print.topn = 3)
 ```
 
@@ -25,9 +26,10 @@ R is a *programming language*--a way for a human to tell a computer to do things
 There are plenty of R tutorials out there, and even some specific to bioinformatics. Subtly, each reflects the preferences and styles of the writer. You will eventually develop your own style, but your starting point will greatly affect how fast you converge on a style that is optimal for the work you're doing while reflecting your personality. And yes, coding is a very expressive, creative activity and (in my opinion) just as much a means of self-expression as painting or writing music.
 
 This tutorial favours a style that:
-    - Is **best for bioinformatics**, where SPEED is hugely important.
-    - Encourages understanding of all the code at a deep level. This:
-        - **Promotes creativity**, by encouraging understanding of all the code at a deep level, meaning you are free to express any idea that comes into your head. 'Black boxes' are avoided.
+
+- Is **best for bioinformatics**, where SPEED is hugely important.
+- Encourages understanding of all the code at a deep level. This:
+    - **Promotes creativity**, by encouraging understanding of all the code at a deep level, meaning you are free to express any idea that comes into your head. 'Black boxes' are avoided.
         
 Because it aims to give you a deeper understanding, it spends a while on the fundamentals. Much of what you learn in Part 1, you will not use in everyday code because there are simpler ways to do it using more sophisticated tools. BUT, as soon as you want to do something *special*, or *creative*, or exceptionally *efficient*, or *new*, you will need to understand the fundamentals. Similarly, knowing your fundamentals means you become far better at using more advanced tools. Errors become less mysterious, results make more sense, customising the tools becomes possible. This tutorial assumes you want to truly learn the R language, not just use it to get one task done.
 
@@ -47,13 +49,13 @@ The package `data.table` is a far better option. Compared to tidyverse methods, 
 2) This is about learning the fundamentals. Don't load any packages. Do **NOT** under any circumstances load `dplyr`, do **NOT** use `select`, `filter`, `arrange`, `mutate`, or any of those silly things. 
 3) If you get stuck or you want to dig into a topic for greater understanding, first try R's inbuilt help functions (see below). Web searches can also be great, but be aware the answers vary a lot in quality. There is also ... 
 4) ChatGPT, which needs a short discussion ...
-  - **Don't** *use chatGPT to write code for you*, especially while you are learning. It generally produces awful code. In particular, it has been trained on code it finds on the internet, and it cannot distinguish good code from bad code. Since most code on the internet is bad, that is what it produces. It relies excessively on loading obscure packages to perform tasks that can easily and quickly be done with standard functions, it wantonly and wastefully converts data between different formats, makes inefficient choices, and worst of all, it makes it very tempting to run code you don't actually understand and couldn't write yourself.
-  - **Do** *use chatGPT to read the manual for you*. Once you already know some R, use chatGPT to remind yourself of bits you can't remember or haven't discovered yet. You will find yourself thinking "I'm sure there is a function to do this, but I don't know what it is!" That's a great time to ask chatGPT for help. Ask it for example:
-    - "What are the parameters that control the size and type of points in a scatterplot in base R?"
-    - "How can I check whether a file exists in R?"
-  - **Do** *use chatGPT to explain functions or code to you*. Excellent uses of chatGPT are questions like
-    - "Please break down this line of R code: 'm %<>% apply( 1 , function(x){x/sum(x)} )'"
-    - "In the R code 'frank(x,ties.method='dense')', what does the 'dense' argument mean?"
+    - **Don't** *use chatGPT to write code for you*, especially while you are learning. It generally produces awful code. In particular, it has been trained on code it finds on the internet, and it cannot distinguish good code from bad code. Since most code on the internet is bad, that is what it produces. It relies excessively on loading obscure packages to perform tasks that can easily and quickly be done with standard functions, it wantonly and wastefully converts data between different formats, makes inefficient choices, and worst of all, it makes it very tempting to run code you don't actually understand and couldn't write yourself.
+    - **Do** *use chatGPT to read the manual for you*. Once you already know some R, use chatGPT to remind yourself of bits you can't remember or haven't discovered yet. You will find yourself thinking "I'm sure there is a function to do this, but I don't know what it is!" That's a great time to ask chatGPT for help. Ask it for example:
+        - "What are the parameters that control the size and type of points in a scatterplot in base R?"
+        - "How can I check whether a file exists in R?"
+    - **Do** *use chatGPT to explain functions or code to you*. Excellent uses of chatGPT are questions like
+        - "Please break down this line of R code: 'm %<>% apply( 1 , function(x){x/sum(x)} )'"
+        - "In the R code 'frank(x,ties.method='dense')', what does the 'dense' argument mean?"
 
 > A good rule-of-thumb is that chatGPT is something you show code *to*, not something you get code *from*, especially not whole lines or multiple lines of code.
 
@@ -63,11 +65,13 @@ The package `data.table` is a far better option. Compared to tidyverse methods, 
 
 
 ---
+
 ## Starting an R session on Spartan
 
 If you haven't already, start an R session by following [these](tutorial_Rstart.html) instructions.
 
 ---
+
 ## Creating and running commands in your first R script
 
 You will start with a screen like this ...
@@ -111,6 +115,7 @@ Run the last command, which creates a plot. If it works ok, you will see a plot 
 Look for the button labelled "Export". This is one way to save plots you create as images or vector graphics. Try it if you want.
 
 ---
+
 ## Basic operations and operator precendence
 
 Some of the most simple commands in R perform basic maths. Play around with running these.
@@ -144,19 +149,16 @@ We can control the order of operations using brackets:
 The double asterisk (**) does exponentiation (raising to a power). The carat symbol (^) also works.
 
 ---
+
 ## Comments
 
 Any command that begins with a hash (`#`) will not be run. These are known as *code comments* and are what you use to include helpful notes in your script. They are immensely important when writing good code. They can also be very funny. The most famous code comment ever written is "/* You are not expected to understand this */" which was [part of the UNIX operating system](https://thenewstack.io/not-expected-understand-explainer/?utm_referrer=https%3A%2F%2Fwww.linux.com%2F).
 
 If the hash occurs within a line, everything to the right will not run.
 
-```{r,eval=FALSE}
-# Running this does nothing
-# ... even if it contains legitimate commands like 1+1
-1+1 # Produces 2
-```
 
 ---
+
 ## Variables, vectors, and vectorised functions
 
 What did the command `a <- 1:10` do? We can find out with some experimentation. Highlight only the `1:10` part of the command and have a look at the output:
@@ -186,6 +188,7 @@ Answer
 </details>
 
 ---
+
 ## Variable assignment and printing
 
 The command we ran, though, had two more components: `a` and `<-`.
@@ -206,7 +209,9 @@ c * 7
 ```
 
 **Exercises:**
+
 - Guess a way to assign the value 2 to *two* variables named 'a' and 'b' using just one line of code ...
+
 <details>
 <summary> **See answer:** </summary>
 ```{r,eval=F}
@@ -215,7 +220,9 @@ a # prints 2
 b # ... same
 ```
 </details>
+
 - In the above example, if you change the value of 'a', will that affect the value of 'b'? To find out, try increasing the value of 'a' by 1. Do it in such a way that it would work no matter what value 'a' contains.
+
 <details>
 <summary> **See answer:** </summary>
 ```{r,eval=F}
@@ -226,6 +233,7 @@ b # prints 2. No!--changing b does not affect a.
 </details>
 
 ---
+
 ## Vectorised operations
 
 Now we have seen a few operations like `+`, `*`, etc. working on numbers, and we know how to create a vector using `1:10` containing the numbers 1, 2, 3, ..., 10, we may well ask what happens when we do these operations on a vector.
@@ -338,6 +346,7 @@ Try running sub-parts of each command separately, e.g. `1:4 * 1:6` and `1:6 + 1:
 </details>
 
 ---
+
 ## Vector classes
 
 Different kinds of data or information needs to be stored in different ways. A list of SNP positions is a collection of integer numbers, while a list of plant heights in centimetres will be a decimal number. A list of sample ID codes is probably strings of text, while data on whether a plant belongs to the control group might suit a TRUE/FALSE format. R has different kinds (or *classes*) of vectors to cover all these cases.
@@ -373,6 +382,7 @@ Here, `b` contains 3, which is an integer that was copied from the *variable* `a
 One of the most important vector types stores the values `TRUE` or `FALSE` (or `NA`). They are truly fundamental in R and we will see more of this in the section on logical operations.
 
 ---
+
 ## Special values including 'NA'
 
 As we saw when dividing by zero, some calculations don't result in a 'normal' value, and R accommodates this.
@@ -397,6 +407,7 @@ NA + 1 # produces NA
 ```
 
 ---
+
 ## Running functions
 
 If we wanted to calculate the sum of all those numbers we can use a *function* called 'sum'.
@@ -436,7 +447,7 @@ class(0:4 + 0.0) # numeric ... Even though 0:4 is an integer vector, the `+ 0.0`
 
 Other functions return vectors. For example, try:
 
-```{r}
+```{r,eval=FALSE}
 someNumbers <- -5:5 # Camel case! Because the capital letters look like the humps on a camel, of course.
 log(someNumbers) # The natural logarithm. A vector the same length as the input. Notice the special values.
 log10(someNumbers) # The base-10 log
@@ -451,27 +462,28 @@ range(someNumbers) # A length 2 vector containing  the maximum and minimum value
 
 Others return more obscure objects:
 
-```{r}
+```{r,eval=FALSE}
 summary(someNumbers) # A 'table'-class object
 ```
 
 ... and yet others, such as `plot()`, don't produce any output on the console, but perform some other task. Other examples include `dir.create()` which creates directories and `read.csv()` which reads data from .csv files.
 
 ---
+
 ## Arguments
 
 Functions can sometimes take more than one *argument*. The word 'argument' in programming strictly describes bits of information (or objects) that are given to a function or a program:
 
-```{r}
-max(1:4,5:10)
-range(1,58,-1777)
+```{r,eval=F}
+max(1:4,5:10) # 10
+range(1,58,-1777) # -1777, 58
 ```
 
 These examples just run the same talk across all inputs. A more common case is that the different arguments contain different bits of information about how the function should run.
 
-```{r}
-sort(1:5,TRUE)
-sort(1:5,FALSE)
+```{r,eval=F}
+sort(1:5,TRUE) # 5, 4, 3, 2, 1
+sort(1:5,FALSE) # 1, 2, 3, 4, 5
 ```
 
 So, the TRUE and FALSE here appear to be the answer to the question "should I sort this list in decreasing order?"
@@ -493,6 +505,7 @@ Not every argument a function has needs to be given to it. When we run `sort(10:
 How do you know what arguments a function needs, and what its defaults are? There are two ways, and they are the next two topics ...
 
 ---
+
 ## Autocomplete and other IDE shortcuts
 
 In R, you end up typing the same things a lot. The IDE (Rstudio) will guess the ending of a lot of half-typed things, when prompted by the `<TAB>` key. For example, we know the variable 'letters' exists. Just type ...
@@ -518,6 +531,7 @@ sort()
 And suddenly you have a list of valid arguments with (usually) descriptions, indicated by the purple symbol on the left.
 
 ---
+
 ## HELP!!!
 
 If you want even more help with a function or another object, many come with manuals. You can search the function name here on the lower right panel:
@@ -534,6 +548,7 @@ Or you can run the function name preceded by a `?` symbol:
 
 ![](images/Rhelp.png)
 ---
+
 ## Creating vectors
 
 The function that creates vectors is simply called `c()`, short for "combine" (but I think of it as "create"). For example:
@@ -621,6 +636,7 @@ rnorm(n = 20, mean = 0.0, sd = 0.5)
 ```
 
 ---
+
 ## Indexing vectors
 
 Extracting elements of a vector can be done with the square brackets (`[` and `]`). If we place a vector of numbers inside the brackets, then the numbers will be taken to represent the *indices* (singular: *index*) of the vector, i.e., 1 is the first element, and 2 is the 2nd, etc.:
@@ -661,22 +677,22 @@ This poem is by Spike Milligan, incidentally.
 
 Another way to index is with logical vectors. Consider the following:
 
-```{r}
+```{r,eval=FALSE}
 v <- c( "A" , "B"  , "C" , "D" )
 l <- c( TRUE, FALSE, TRUE, TRUE)
-v[l]
+v[l] # "A", "C", "D"
 ```
 
 As we can see, the elements of 'v' corresponding to the TRUE elements of 'l' were selected.
 
 R has shortcuts for TRUE and FALSE: You can just use T and F. Use these cautiously as people often use these as variable names:
 
-```{r}
-c(T,F) # Great!
-T <- 1234
-c(T,F) # Oh no!
+```{r,eval-FALSE}
+c(T,F) # Produces TRUE, FALSE
+T <- 1234 
+c(T,F) # Produces 1234, 0 --- not what we wanted!
 rm(T) # This removes the variable T, so we are safe to use T and F as TRUE/FALSE again
-c(T,F)
+c(T,F) # TRUE, FALSE
 
 #TRUE <- 3 # This is not allowed, and will generate an error (try it!), so using TRUE is always safe
 ```
@@ -699,18 +715,19 @@ L[c(FALSE,TRUE)]
 </details>
 
 ---
+
 ## Logical operations
 
 Some of the most fundamental operators in R involve asking yes/no questions of vector elements. Some of the simplest are the 'greater than' (`>`), 'less than' (`<`), and 'equal to' (`==`) operators:
 
-```{r}
-v <- -3:3
-v > 0
-v < 0
-v == 0
-v != 1 # != means "is not equal to". Many programming languages associate `!` with "not"
+```{r,eval=FALSE}
+v <- -3:3 # -3 -2 -1 0 1 2 3
+v > 0 # TRUE TRUE TRUE FALSE FALSE FALSE FALSE
+v < 0 # FALSE FALSE FALSE FALSE TRUE TRUE TRUE
+v == 0 # FALSE FALSE FALSE TRUE FALSE FALSE FALSE 
+v != 1 # Try it. != means "is not equal to". Many programming languages associate `!` with "not"
 v_notEqual_zero <- v != 0 # We can save the results in a variable
-print(v_notEqual_zero)
+print(v_notEqual_zero) # TRUE TRUE TRUE FALSE TRUE TRUE TRUE
 ```
 
 Notice the equality operator is a *double* equals sign, to distinguish it from the argument assignment operator.
@@ -749,14 +766,15 @@ v <- rnorm(100)
 v[v>0]
 ```
 
-And one last thing, the very common function `which()` tells you **which** entries of a logical vector are TRUE. So `which(c(TRUE,FALSE,TRUE))` will return the vector ( 1 , 3 ), because 1 and 3 are the indices of the TRUE entries. Based on this, explain to yourself why these produce the same result:
+And one last thing, the very common function `which()` tells you **which** entries of a logical vector are TRUE. So `which(c(TRUE,FALSE,TRUE))` will return the vector ( 1 , 3 ), because 1 and 3 are the indices of the TRUE entries. Based on this, explain to yourself why the two commands below produce the same result:
 
-```{r}
+```{r, eval=FALSE}
 v <- rnorm(10)
-v[v>5]
-v[which(v>5)]
 
-# Look, I know you are thinking "actually ... that seems pointless". And yes, which() is often pointless. But it is extremely common, and so you need to know it to read other peoples' code.
+v[v>5] # a logical vector
+v[which(v>5)] # the same logical vector ... why?
+
+# Look, I know you are thinking "actually ... `which` seems pointless". And yes, which() is often pointless. But it is extremely common, and so you need to know it to read other peoples' code.
 ```
 
 **Exercises:**
@@ -861,6 +879,7 @@ Ok that's the end of this section! The next section will learn some slightly mor
 # Part 2: Basic data analysis
 
 ---
+
 ## Data frames
 
 In the last example we used three vectors to store three pieces of information about a collection of samples. If we were to add in formation about the plant heights to the dataset, we would have to create another vector--and every new piece of information about each sample would require yet another.
@@ -948,7 +967,7 @@ df$nFruitsPercentMax <- df$nFruits / max(df$nFruits) * 100
 
 Using the data frame 'df' as created above using:
 
-```{eval-FALSE}
+```{r,eval=FALSE}
 df <- data.frame(
   sampleIds,
   treatment,
@@ -1011,6 +1030,7 @@ The corresponding function `cbind()` for columns also exists---but should almost
 The next time we see data frames, everything will get far easier, thanks to the package data.table. But now you understand the fundamentals about how they work you have the power to take R much further.
 
 ---
+
 ## `str()`
 
 The function `str()` is the most useful general purpose tool for describing what is R objects contain. You can try it on basically any object. In the case of data frames, it describes the contents of each of the columns, the dimensions of the data frame, etc ....
@@ -1020,6 +1040,7 @@ str(iris)
 ```
 
 ---
+
 ## Reading/writing data
 
 #### ... as data frames: CSV and other Excel-compatible formats
@@ -1055,6 +1076,7 @@ Ferrari,"Leclerc, Charles",6,1997
 Other common formats include TSV (Tab-Separated Values) and SSV (Space ...) which are identical but with different column separation characters. Common bioinformatic formats like GFF, BED, and VCF all approximately fit the TSV format.
 
 ---
+
 ## Plotting (with base)
 
 In R we make plots by adding items into the plot, step-by-step.
@@ -1164,8 +1186,6 @@ You can also produce multiple plots per page, of any size, even overlapping, and
 For example, let's say you want to represent wind directions and magnitudes in an intuitive plot like the below. There's no package to do it---but it takes about 6 R commands to make from basics. Ask me if you want to see the code but the take-home point is, if you can imagine it, there's a way to do it ...
 
 ```{r,echo=FALSE}
-require(data.table)
-require(magrittr)
 set.seed(1)
 d <- data.table(
   angle = c(rnorm(100,0,.1),rnorm(300,1,.2)) %% 2*pi
@@ -1190,6 +1210,7 @@ lapply( unique(p$I) , function(i){
 ```
 
 ---
+
 ## Lists
 
 Remember how a data frame neatly ties a group of equal-length vectors together into a sort of table? Well what if you want to tie a collection of data frames together? Or a collection of vectors? Or a mixture?
@@ -1197,8 +1218,8 @@ Remember how a data frame neatly ties a group of equal-length vectors together i
 Lists are the data structures that allow this, and the following demonstrates that ...
 
 - A list can be created using very similar syntax to creating a data frame.
-- List members can be named or unnamed, and members is accessed using double square brackets, or the dollar sign operator.
-- 
+- List members can be named or unnamed, and members is accessed using double square brackets (`[[...]]`) or the dollar sign operator.
+- The difference between accessing list items with double and single square bracket operators.
 
 ```{r}
 # Creating a list
@@ -1222,10 +1243,12 @@ l$a_vector
 # A demonstation -- the double square brakets extract the actual items in the list...
 l[[3]]
 class(l[[3]])
+# The single square brackets extract subsets of the list, as a list. The example below produces a list of length 1.
 class(l[3])
 ```
 
 ---
+
 ## Writing your own functions
 
 A key skill is writing your own functions. The way to create a function follows this syntax:
@@ -1274,7 +1297,7 @@ Ok, what about when there are 'NA' values in the vectors though?
 sdFromMean(c(1:5,NA,6:10)) # Error
 ```
 
-We could fix this in the function by adding `na.rm=TRUE` to both the `mean()` and `sd()` functions. But what if the user doesn't *want* the function to  ignore 'NA' values? Perhaps we can let the user choose? We can do this by adding another argument, for example called "removeNAs=...", and *passing* its value on to the "na.rm=..." arguments of `mean()` and `sd()` inside the function body ...
+We could fix this in the function by adding `na.rm=TRUE` to both the `mean()` and `sd()` functions. But what if the user doesn't *want* the function to ignore 'NA' values? Perhaps we can let the user choose? We can do this by adding another argument, for example called "removeNAs=...", and *passing* its value on to the "na.rm=..." arguments of `mean()` and `sd()` inside the function body ...
 
 ```{r,eval=FALSE}
 sdFromMean <- function( x , removeNAs ){
@@ -1336,6 +1359,7 @@ topRows(iris,n=3)
 </details>
 
 ---
+
 ## Loops! with `lapply()`
 
 > This is the hardest part of learning basic R.
@@ -1469,7 +1493,7 @@ lapply( c("Leaf","Stem") , function(t){ t } )
 # So, t is set to "Leaf" first, then "Stem"
 # We need to be selecting rows of e there e$tissue is "Leaf" and then "Stem", so let's try returning versions of e with just those selected ...
 lapply( c("Leaf","Stem") , function(t) { e[e$tissue==t,] } )
-# Ok, and but what we want to work with is the tpm, so let's use qhat we know about data frames to extract just that column ...
+# Ok, and but what we want to work with is the tpm, so let's use what we know about data frames to extract just that column ...
 lapply( c("Leaf","Stem") , function(t) { e[e$tissue==t,]$tpm } )
 # Good, and what do we want with tpm? The median, so we use the function median() to calcualte it on those results ...
 lapply( c("Leaf","Stem") , function(t) { median( e[e$tissue==t,]$tpm ) } )
@@ -1500,6 +1524,7 @@ You can be very proud that you have managed to do many tasks using the very fund
 # Part 3: Beyond fundamentals
 
 ---
+
 ## Matrices
 
 We saw lists and data frames. Matrices are another object, use to store grids, most often of numbers. The advantages of matrices are that certain operations become very, very fast. They work much like vectors and lists and things you are already good at. We will just demonstrate the basics here for you to run so you are not surprised when you run into them:
@@ -1537,6 +1562,7 @@ apply( m1 , 2 , function(col) {col/mean(col)} ) # The `2` refers to the function
 ```
 
 ---
+
 ## `if` and `if-else`-type conditional statements
 
 Another programming fundamental is the if statement. Use it when code needs to make a decision that can be worded like:
@@ -1630,6 +1656,7 @@ c("Ref","Het","Alt")[GTs+1]
 </details>
 
 ---
+
 ## Packages (and Magrittr)
 
 Packages are available on the internet. "Official" R packages are on a site called [CRAN](https://cran.r-project.org/), and are expected to meet some kind of standards for reliability and compatibility.
@@ -1683,36 +1710,37 @@ require(data.table)
 
 There is a full data.table tutorial you should do, but to give you a taste of how much easier data.table and magrittr can make things, consider how you would calculate the mean petal length from the iris dataset normally:
 
-```{e,eval=F}
+```{r,eval=F}
 mean(iris[iris$Species=="setosa","Petal.Length"])
 ```
 
 Ok, so magrittr could help avoid that awkward `mean()` function needing to be wrapped around a big inner command:
 
-```{e,eval=F}
+```{r,eval=F}
 iris[iris$Species=="setosa","Petal.Length"] %>% mean
 ```
 
 Still, why do we have to write iris twice? Wouldn't it be great if inside the indexing fields, we could just access the columns by name like normal vectors? We can, if we convert it to a data.table, which allows this usage:
 
-```{e,eval=F}
+```{r,eval=F}
 iris %<>% as.data.table # A magrittr trick, see ?magrittr::`%<>%`
 ```
 Then we could write:
 
-```{e,eval=F}
+```{r,eval=F}
 iris[Species=="setosa",Petal.Length] %>% mean
 ```
 
 But since we are allowed to use raw column names as vectors inside the indexing ... couldn't we also just run functions on them there?
 
-```{e,eval=F}
+```{r,eval=F}
 iris[Species=="setosa",mean(Petal.Length)]
 ```
 
 Easy! Head over to the [full data.table tutorial](docs/tutorial_data_table.html) once you're done here ...
 
 ---
+
 ## Plotting (with ggplot2)
 
 This is a brilliant plotting package. I won't teach it here, but don't be afraid to learn it, there are plenty of good resources online.
@@ -1721,15 +1749,16 @@ An example:
 
 ```{r}
 require(ggplot2)
-ggplot( iris , aes( x = Petal.Width , y = Petal.Length , size=Sepal.Length ,  group = Species ) ) +
+ggplot( iris , aes( x = Petal.Width , y = Petal.Length ,  group = as.factor(Species) ) ) +
   geom_point() +
   geom_smooth(method = "lm") +
-  facet_grid(Species~.,scales = "free")
+  facet_grid(Species~.,scales="free")
 ```
 
 As you can see, ggplot is excellent for quickly showing your data in ways that help you see the general picture and decide how to move on. **However**, the moment you find yourself using all kinds of complicated tricks to make ggplot produce the thing you imagine in your head, I suggest move back to base plot---it is trickier, but infinitely more flexible.
 
 ---
+
 # You did it!
 
 The key now is to practise, and the key to practice is to have a task to work on. So next time you're thinking about some data and you mentally ask "I wonder if I could ..." then jump on R, find or simulate some data, and try to make your idea work.
