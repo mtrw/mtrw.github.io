@@ -1,0 +1,131 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Getting started with R for statistics and bioinformatics},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Getting started with R for statistics and bioinformatics}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Background}\label{background}
+
+\subsubsection{\texorpdfstring{What is
+\texttt{R}?}{What is R?}}\label{what-is-r}
+
+R is a \emph{programming language}--a way for a human to tell a computer
+to do things--designed specifically for analysing data, doing
+statistics, and creating graphics. It is extremely popular, and
+extremely useful. Users of R can create \emph{packages}, which add new
+functions to R, and thanks to the existence of several thousand
+publicly-available packages, R has an incredibly large range of
+applications. In the field of bioinformatics, R's only main competitor
+is the language Python, and knowing at least one of these is essential
+to working as a bioinformatician.
+
+\subsubsection{What makes this tutorial
+different}\label{what-makes-this-tutorial-different}
+
+There are plenty of R tutorials out there, and even some specific to
+bioinformatics. Subtly, each reflects the preferences and styles of the
+writer. You will eventually develop your own style, but your starting
+point will greatly affect how fast you converge on a style that is
+optimal for the work you're doing while reflecting your personality. And
+yes, coding is a very expressive, creative activity and (in my opinion)
+just as much a means of self-expression as painting or writing music.
+
+This tutorial favours a style that: - Is \textbf{best for
+bioinformatics}, where SPEED is hugely important. - Encourages
+understanding of all the code at a deep level. This: - \textbf{Promotes
+creativity}, by encouraging understanding of all the code at a deep
+level, meaning you are free to express any idea that comes into your
+head. `Black boxes' are avoided.
+
+Because it aims to give you a deeper understanding, it spends a while on
+the fundamentals. Much of what you learn in Part 1, you will not use in
+everyday code because there are simpler ways to do it using more
+sophisticated tools. BUT, as soon as you want to do something
+\emph{special}, or \emph{creative}, or exceptionally \emph{efficient},
+or \emph{new}, you will need to understand the fundamentals. Similarly,
+knowing your fundamentals means you become far better at using more
+advanced tools. Errors become less mysterious, results make more sense,
+customising the tools becomes possible. This tutorial assumes you want
+to truly learn the R language, not just use it to get one task done.
+
+That said, the tutorial does not waste your time forcing you to learn
+every single tiny feature and function in R. It focuses on examples to
+help you get the key \textbf{concepts}. The best way to find and
+understand specific features you want to use in your work is to find
+code written by more experienced people who have done a task similar to
+yours before, and learn from it---but once you've finished these
+tutorials, the code you read from other people and from internet
+searches will make much more sense and be much faster to absorb and
+modify.
+
+\end{document}

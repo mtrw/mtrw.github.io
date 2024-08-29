@@ -1240,10 +1240,9 @@ defaults are? There are two ways, and they are the next two topics …</p>
 <p>In R, you end up typing the same things a lot. The IDE (Rstudio) will
 guess the ending of a lot of half-typed things, when prompted by the
 <code>&lt;TAB&gt;</code> key. For example, we know the variable
-‘letters’ exists. Just type …</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>le</span></code></pre></div>
-<p>…, leave your cursor at the end and hit <code>&lt;TAB&gt;</code>. You
-will get a scrollable, clickable, list of possible autocompletes:</p>
+‘letters’ exists. Just type … <code>le</code> …, leave your cursor at
+the end and hit <code>&lt;TAB&gt;</code>. You will get a scrollable,
+clickable, list of possible autocompletes:</p>
 <p><img src="images/Rautocomplete.png" /></p>
 <p>These may even bring up more help info when you highlight them. If
 there is only one option, it will be filled automatically. Otherwise
@@ -1253,7 +1252,7 @@ select one with arrow keys or mouse and press
 <code>&lt;TAB&gt;</code> to list the arguments. To try it out type the
 function name and brackets, put the cursor <em>inside the brackets</em>,
 and <code>&lt;TAB&gt;</code> …</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">sort</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">sort</span>()</span></code></pre></div>
 <p><img src="images/Rautoargs.png" /></p>
 <p>And suddenly you have a list of valid arguments with (usually)
 descriptions, indicated by the purple symbol on the left.</p>
@@ -1267,7 +1266,7 @@ right panel:</p>
 <p><img src="images/Rsearchhelp.png" /></p>
 <p>Or you can run the function name preceded by a <code>?</code>
 symbol:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>?class</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>?class</span></code></pre></div>
 <p>… which will give you a help document containing (most importantly),
 descriptions of the arguments, and examples, which are usually very
 helpful.</p>
@@ -1279,21 +1278,21 @@ helpful.</p>
 <h2>Creating vectors</h2>
 <p>The function that creates vectors is simply called <code>c()</code>,
 short for “combine” (but I think of it as “create”). For example:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;this&quot;</span>,<span class="st">&quot;character&quot;</span>,<span class="st">&quot;vector&quot;</span>,<span class="st">&quot;has&quot;</span>,<span class="st">&quot;six&quot;</span>,<span class="st">&quot;entries&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>v</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;this&quot;</span>,<span class="st">&quot;character&quot;</span>,<span class="st">&quot;vector&quot;</span>,<span class="st">&quot;has&quot;</span>,<span class="st">&quot;six&quot;</span>,<span class="st">&quot;entries&quot;</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>v</span></code></pre></div>
 <pre><code>## [1] &quot;this&quot;      &quot;character&quot; &quot;vector&quot;    &quot;has&quot;       &quot;six&quot;       &quot;entries&quot;</code></pre>
 <p>These demonstrate the use of c to combine vectors, and how R will
 convert between classes to accommodate the input classes. Try guessing
 the classes of these before you run them …</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>a_integer <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>b_numeric <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>,<span class="sc">-</span><span class="fl">4.543</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>c_character <span class="ot">&lt;-</span> LETTERS</span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>(a_b <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric)) <span class="co"># Notice the extra set of brackets around the whole command? This is a cool trick that tells R to print the result fo the assignment</span></span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="fu">class</span>(a_b)</span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>(a_b_c <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric,c_character))</span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="fu">class</span>(a_b_c)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>a_integer <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>b_numeric <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>,<span class="sc">-</span><span class="fl">4.543</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>c_character <span class="ot">&lt;-</span> LETTERS</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>(a_b <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric)) <span class="co"># Notice the extra set of brackets around the whole command? This is a cool trick that tells R to print the result fo the assignment</span></span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="fu">class</span>(a_b)</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>(a_b_c <span class="ot">&lt;-</span> <span class="fu">c</span>(a_integer,b_numeric,c_character))</span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="fu">class</span>(a_b_c)</span></code></pre></div>
 <p><strong>Exercises (including some lessons about
 arguments):</strong></p>
 <ul>
@@ -1328,26 +1327,26 @@ argument names to one or more of the values help R to guess?</li>
 <strong>Answers:</strong>
 </summary>
 <details>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>thisIsMyVector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="co"># &quot;1&quot; would be interpreted as a character string, and as such a character vector would be produced, with all the other values would being converted to character strings. This is because it is simple to convert other classes to character strings, but not always the other way around. For example, the character representation of an integer like 64917 can be &quot;64917&quot;, but there is no obvious integer representation of the string &quot;beans!&quot;.</span></span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector)</span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="fu">summary</span>(thisIsMyVector)</span>
-<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="fu">range</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a></span>
-<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>)</span>
-<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>, <span class="at">base=</span><span class="fl">2.0</span>)</span>
-<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>,<span class="fl">2.0</span>) <span class="co"># Yes, that does work, it produces the same result as above.</span></span>
-<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># That&#39;s not what we wanted</span></span>
-<span id="cb33-18"><a href="#cb33-18" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That works</span></span>
-<span id="cb33-19"><a href="#cb33-19" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That also works</span></span>
-<span id="cb33-20"><a href="#cb33-20" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># And that works too.</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>thisIsMyVector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="sc">-</span><span class="fl">4.3623</span>, <span class="fl">3e6</span>, <span class="cn">Inf</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,  <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co"># &quot;1&quot; would be interpreted as a character string, and as such a character vector would be produced, with all the other values would being converted to character strings. This is because it is simple to convert other classes to character strings, but not always the other way around. For example, the character representation of an integer like 64917 can be &quot;64917&quot;, but there is no obvious integer representation of the string &quot;beans!&quot;.</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector)</span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="fu">min</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="fu">summary</span>(thisIsMyVector)</span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a><span class="fu">range</span>(thisIsMyVector,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>, <span class="at">base=</span><span class="fl">2.0</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">42.0</span>,<span class="fl">2.0</span>) <span class="co"># Yes, that does work, it produces the same result as above.</span></span>
+<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># That&#39;s not what we wanted</span></span>
+<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That works</span></span>
+<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>,<span class="at">x=</span><span class="dv">42</span>) <span class="co"># That also works</span></span>
+<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base=</span><span class="dv">2</span>,<span class="dv">42</span>) <span class="co"># And that works too.</span></span></code></pre></div>
 </details>
 <p>As you can see, R is good at connecting the correct values to the
 correct arguments. It basically follows the rule assign all named values
@@ -1359,22 +1358,22 @@ class="section level3">
 <p>In statistical analysis, you’ll often want to generate random
 numbers, and we’ll use these to demonstrate more of R. Here are a few
 functions to do it.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># 20 random integers between 1 and 10</span></span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="co"># 20 random real numbers between -1 and 1</span></span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>,<span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="co"># 20 normally-distributed numbers with mean 0 and standard deviation 0.5</span></span>
-<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="fl">0.0</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a><span class="co"># Similarly, these and others:</span></span>
-<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a><span class="co"># rbinom(...)</span></span>
-<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a><span class="co"># rpois(...)</span></span>
-<span id="cb34-13"><a href="#cb34-13" tabindex="-1"></a><span class="co"># rbeta(...)</span></span>
-<span id="cb34-14"><a href="#cb34-14" tabindex="-1"></a><span class="co"># rchisq(...)</span></span>
-<span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a><span class="co"># rweibull...()</span></span>
-<span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a><span class="co"># rcauchy(...)</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># 20 random integers between 1 and 10</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="co"># 20 random real numbers between -1 and 1</span></span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>,<span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="co"># 20 normally-distributed numbers with mean 0 and standard deviation 0.5</span></span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="fl">0.0</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="co"># Similarly, these and others:</span></span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="co"># rbinom(...)</span></span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a><span class="co"># rpois(...)</span></span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="co"># rbeta(...)</span></span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a><span class="co"># rchisq(...)</span></span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a><span class="co"># rweibull...()</span></span>
+<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a><span class="co"># rcauchy(...)</span></span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -1385,20 +1384,20 @@ functions to do it.</p>
 inside the brackets, then the numbers will be taken to represent the
 <em>indices</em> (singular: <em>index</em>) of the vector, i.e., 1 is
 the first element, and 2 is the 2nd, etc.:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>poem <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>  <span class="st">&quot;There&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;sky&quot;</span>, <span class="st">&quot;where&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;gets&quot;</span>, <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>  <span class="st">&quot;but&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;small&quot;</span>, <span class="st">&quot;that&#39;s&quot;</span>, <span class="st">&quot;why&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;thin&quot;</span></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>)</span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="co"># Notice I spread the command out over a few lines to make reading easier. If a line ends with a bracket still open or a command otherwise unfinished, it will assume you have a multi-line command.</span></span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>poem[<span class="dv">3</span>] <span class="co"># &quot;holes&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>poem <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>  <span class="st">&quot;There&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;sky&quot;</span>, <span class="st">&quot;where&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;gets&quot;</span>, <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>  <span class="st">&quot;but&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;holes&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;small&quot;</span>, <span class="st">&quot;that&#39;s&quot;</span>, <span class="st">&quot;why&quot;</span>, <span class="st">&quot;rain&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;thin&quot;</span></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>)</span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="co"># Notice I spread the command out over a few lines to make reading easier. If a line ends with a bracket still open or a command otherwise unfinished, it will assume you have a multi-line command.</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>poem[<span class="dv">3</span>] <span class="co"># &quot;holes&quot;</span></span></code></pre></div>
 <pre><code>## [1] &quot;holes&quot;</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>poem[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">12</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>poem[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">12</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;There&quot; &quot;gets&quot;  &quot;are&quot;   &quot;but&quot;</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>poem[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>] <span class="co"># &quot;There&quot; through to &quot;in&quot; </span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>poem[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>] <span class="co"># &quot;There&quot; through to &quot;in&quot; </span></span></code></pre></div>
 <pre><code>##  [1] &quot;There&quot; &quot;are&quot;   &quot;holes&quot; &quot;in&quot;    &quot;the&quot;   &quot;sky&quot;   &quot;where&quot; &quot;the&quot;   &quot;rain&quot; 
 ## [10] &quot;gets&quot;  &quot;in&quot;</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>poem[<span class="dv">12</span><span class="sc">:</span><span class="fu">length</span>(poem)] <span class="co"># From &quot;but&quot; to the end</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>poem[<span class="dv">12</span><span class="sc">:</span><span class="fu">length</span>(poem)] <span class="co"># From &quot;but&quot; to the end</span></span></code></pre></div>
 <pre><code>##  [1] &quot;but&quot;    &quot;the&quot;    &quot;holes&quot;  &quot;are&quot;    &quot;small&quot;  &quot;that&#39;s&quot; &quot;why&quot;    &quot;rain&quot;  
 ##  [9] &quot;is&quot;     &quot;thin&quot;</code></pre>
 <strong>Exercises:</strong> - With the vector ‘poem’ above, use indexing
@@ -1411,31 +1410,31 @@ conjunction with indexing to shuffle the words of the poem randomly.
 <summary>
 <strong>See answers:</strong>
 </summary>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>poem[<span class="fu">length</span>(poem)<span class="sc">:</span><span class="dv">1</span>]</span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>poem[<span class="fu">seq</span>(<span class="at">from=</span><span class="dv">2</span>,<span class="at">to=</span><span class="fu">length</span>(poem),<span class="at">by=</span><span class="dv">2</span>)]</span>
-<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a>poem[<span class="fu">sample</span>(<span class="fu">length</span>(poem),<span class="fu">length</span>(poem))] <span class="co"># FYI, sample is a flexible function, you could also just do this: `sample(poem)`</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>poem[<span class="fu">length</span>(poem)<span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>poem[<span class="fu">seq</span>(<span class="at">from=</span><span class="dv">2</span>,<span class="at">to=</span><span class="fu">length</span>(poem),<span class="at">by=</span><span class="dv">2</span>)]</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a>poem[<span class="fu">sample</span>(<span class="fu">length</span>(poem),<span class="fu">length</span>(poem))] <span class="co"># FYI, sample is a flexible function, you could also just do this: `sample(poem)`</span></span></code></pre></div>
 </details>
 <p>This poem is by Spike Milligan, incidentally.</p>
 <div id="logical-vectors-for-indexing" class="section level3">
 <h3>Logical vectors for indexing</h3>
 <p>Another way to index is with logical vectors. Consider the
 following:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">&quot;A&quot;</span> , <span class="st">&quot;B&quot;</span>  , <span class="st">&quot;C&quot;</span> , <span class="st">&quot;D&quot;</span> )</span>
-<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a>v[l] <span class="co"># &quot;A&quot;, &quot;C&quot;, &quot;D&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">&quot;A&quot;</span> , <span class="st">&quot;B&quot;</span>  , <span class="st">&quot;C&quot;</span> , <span class="st">&quot;D&quot;</span> )</span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a>v[l] <span class="co"># &quot;A&quot;, &quot;C&quot;, &quot;D&quot;</span></span></code></pre></div>
 <p>As we can see, the elements of ‘v’ corresponding to the TRUE elements
 of ‘l’ were selected.</p>
 <p>R has shortcuts for TRUE and FALSE: You can just use T and F. Use
 these cautiously as people often use these as variable names:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Produces TRUE, FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Produces TRUE, FALSE</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1234</span> </span>
-<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Produces 1234, 0 --- not what we wanted!</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1234</span> </span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># Produces 1234, 0 --- not what we wanted!</span></span></code></pre></div>
 <pre><code>## [1] 1234    0</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="fu">rm</span>(T) <span class="co"># This removes the variable T, so we are safe to use T and F as TRUE/FALSE again</span></span>
-<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># TRUE, FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="fu">rm</span>(T) <span class="co"># This removes the variable T, so we are safe to use T and F as TRUE/FALSE again</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="fu">c</span>(T,F) <span class="co"># TRUE, FALSE</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="co">#TRUE &lt;- 3 # This is not allowed, and will generate an error (try it!), so using TRUE is always safe</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co">#TRUE &lt;- 3 # This is not allowed, and will generate an error (try it!), so using TRUE is always safe</span></span></code></pre></div>
 <strong>Exercises:</strong> - Create a vector containing the letters
 C—J. Create it by using R’s pre-defined vector LETTERS, in conjunction
 with indexing. Name this vector ‘L’. - Use a logical vector and indexing
@@ -1448,11 +1447,11 @@ extract every second letter from the vector ‘L’.
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>L <span class="ot">&lt;-</span> LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)] <span class="co"># The indexing vector is RECYCLED, that is, it is repeated.</span></span>
-<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>L <span class="ot">&lt;-</span> LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)] <span class="co"># The indexing vector is RECYCLED, that is, it is repeated.</span></span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>L[<span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>)]</span></code></pre></div>
 </details>
 <hr />
 </div>
@@ -1463,13 +1462,13 @@ extract every second letter from the vector ‘L’.
 questions of vector elements. Some of the simplest are the ‘greater
 than’ (<code>&gt;</code>), ‘less than’ (<code>&lt;</code>), and ‘equal
 to’ (<code>==</code>) operators:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span> <span class="co"># -3 -2 -1 0 1 2 3</span></span>
-<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>v <span class="sc">&gt;</span> <span class="dv">0</span> <span class="co"># TRUE TRUE TRUE FALSE FALSE FALSE FALSE</span></span>
-<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">0</span> <span class="co"># FALSE FALSE FALSE FALSE TRUE TRUE TRUE</span></span>
-<span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a>v <span class="sc">==</span> <span class="dv">0</span> <span class="co"># FALSE FALSE FALSE TRUE FALSE FALSE FALSE </span></span>
-<span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="co"># Try it. != means &quot;is not equal to&quot;. Many programming languages associate `!` with &quot;not&quot;</span></span>
-<span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a>v_notEqual_zero <span class="ot">&lt;-</span> v <span class="sc">!=</span> <span class="dv">0</span> <span class="co"># We can save the results in a variable</span></span>
-<span id="cb53-7"><a href="#cb53-7" tabindex="-1"></a><span class="fu">print</span>(v_notEqual_zero) <span class="co"># TRUE TRUE TRUE FALSE TRUE TRUE TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span> <span class="co"># -3 -2 -1 0 1 2 3</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>v <span class="sc">&gt;</span> <span class="dv">0</span> <span class="co"># TRUE TRUE TRUE FALSE FALSE FALSE FALSE</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">0</span> <span class="co"># FALSE FALSE FALSE FALSE TRUE TRUE TRUE</span></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a>v <span class="sc">==</span> <span class="dv">0</span> <span class="co"># FALSE FALSE FALSE TRUE FALSE FALSE FALSE </span></span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="co"># Try it. != means &quot;is not equal to&quot;. Many programming languages associate `!` with &quot;not&quot;</span></span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a>v_notEqual_zero <span class="ot">&lt;-</span> v <span class="sc">!=</span> <span class="dv">0</span> <span class="co"># We can save the results in a variable</span></span>
+<span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="fu">print</span>(v_notEqual_zero) <span class="co"># TRUE TRUE TRUE FALSE TRUE TRUE TRUE</span></span></code></pre></div>
 <p>Notice the equality operator is a <em>double</em> equals sign, to
 distinguish it from the argument assignment operator.</p>
 <div id="and-or-not" class="section level3">
@@ -1478,46 +1477,46 @@ distinguish it from the argument assignment operator.</p>
 example asking whether elements are less than 3, <strong>AND</strong>
 greater than 1. For this we use the ‘and’ operator
 (<code>&amp;</code>).</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span> ) )</span>
-<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&gt;</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span> ) )</span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&gt;</span> <span class="dv">1</span></span></code></pre></div>
 <p>Other useful logical operators that correspond to everyday language
 concepts are ‘or’ represented by a pipe symbol (<code>|</code>) and
 ‘not’, represented by a bang symbol (<code>!</code>). In programming we
 refer to the exclamation mark as bang. If you (understandably) find that
 offensively abstruse, prepare yourself to eventually encounter the
 <code>?!</code> construct called an <strong>interrobang</strong>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> )</span>
-<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> v <span class="sc">==</span> <span class="dv">3</span></span>
-<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="sc">!</span> v <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> )</span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> v <span class="sc">==</span> <span class="dv">3</span></span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>v <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="sc">!</span> v <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <p>This can get very tricky. To avoid ambuiguity, brackets can be used.
 For example, imagine asking which entries are either: - Greater than
 three and less than six ~ <em>OR</em> ~ - Less than two and not equal to
 0</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>(v <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&lt;</span><span class="dv">6</span>) <span class="sc">|</span> (v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> <span class="sc">!</span>(v<span class="sc">==</span><span class="dv">0</span>) ) <span class="co"># v!=0 would also work</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a>(v <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">&amp;</span> v <span class="sc">&lt;</span><span class="dv">6</span>) <span class="sc">|</span> (v <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> <span class="sc">!</span>(v<span class="sc">==</span><span class="dv">0</span>) ) <span class="co"># v!=0 would also work</span></span></code></pre></div>
 <p>It is more common to leave out the middle step though, as in …</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span></code></pre></div>
-<pre><code>##  [1] 1.93640563 0.03436112 1.27181747 1.82017410 1.89428594 1.01034044
-##  [7] 0.43166367 0.72663645 0.21668908 0.35509322 1.35982538 0.03159864
-## [13] 1.59815244 0.20473654 0.41761661 0.87320634 0.38378735 0.82576933
-## [19] 0.12150214 1.74984111 1.18857802 0.26631923 0.52541606 0.32156784
-## [25] 0.37979905 0.01870846 1.00639692 0.26366786 0.42068165 0.46456179
-## [31] 0.25969251 0.80582758 0.71221703 0.19008603 1.43668171 0.72594790
-## [37] 1.50054887 1.36580010 0.02968984 0.75385167 0.60315595 1.34792766
-## [43] 0.36713938 0.28376715 0.21576572 0.37128780 0.85316464</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span></code></pre></div>
+<pre><code>##  [1] 0.24471417 2.10863058 1.12469827 1.17712658 0.47289718 0.07273613
+##  [7] 0.57075313 0.76884451 1.63190727 0.65703657 0.03614585 1.86702163
+## [13] 1.07193711 0.58982189 0.74562717 1.22106348 0.45066512 0.70954006
+## [19] 0.12246281 0.27157628 0.92098208 1.30183232 0.25579770 0.44544547
+## [25] 0.38911312 0.34419464 1.04333562 1.08929164 1.20472005 0.15604797
+## [31] 0.82936945 1.32114187 0.10571294 2.36805326 1.31674921 1.02117037
+## [37] 1.12450878 1.09417958 0.23461342 0.92538808 2.41262165 0.48503052
+## [43] 2.16688273 0.03993883 1.09323987</code></pre>
 <p>And one last thing, the very common function <code>which()</code>
 tells you <strong>which</strong> entries of a logical vector are TRUE.
 So <code>which(c(TRUE,FALSE,TRUE))</code> will return the vector ( 1 , 3
 ), because 1 and 3 are the indices of the TRUE entries. Based on this,
 explain to yourself why the two commands below produce the same
 result:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">5</span>] <span class="co"># a logical vector</span></span>
-<span id="cb59-4"><a href="#cb59-4" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">5</span>)] <span class="co"># the same logical vector ... why?</span></span>
-<span id="cb59-5"><a href="#cb59-5" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="#cb59-6" tabindex="-1"></a><span class="co"># Look, I know you are thinking &quot;actually ... `which` seems pointless&quot;. And yes, which() is often pointless. But it is extremely common, and so you need to know it to read other peoples&#39; code.</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">5</span>] <span class="co"># a logical vector</span></span>
+<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">5</span>)] <span class="co"># the same logical vector ... why?</span></span>
+<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" tabindex="-1"></a><span class="co"># Look, I know you are thinking &quot;actually ... `which` seems pointless&quot;. And yes, which() is often pointless. But it is extremely common, and so you need to know it to read other peoples&#39; code.</span></span></code></pre></div>
 <p><strong>Exercises:</strong></p>
 <ul>
 <li>Create a vector ‘v’ containing 20 numbers drawn from a normal
@@ -1535,18 +1534,18 @@ from ‘v’ that are within standard deviation of the mean.</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>) ) <span class="co"># Remember, surrounding the assignment command in brackets forces it to print</span></span>
-<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a></span>
-<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>( vPositive <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
-<span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>v[vPositive]</span>
-<span id="cb60-5"><a href="#cb60-5" tabindex="-1"></a></span>
-<span id="cb60-6"><a href="#cb60-6" tabindex="-1"></a>vGt1SD <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )</span>
-<span id="cb60-7"><a href="#cb60-7" tabindex="-1"></a>v[vGt1SD]</span>
-<span id="cb60-8"><a href="#cb60-8" tabindex="-1"></a></span>
-<span id="cb60-9"><a href="#cb60-9" tabindex="-1"></a>v[ (v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">-</span> <span class="fu">sd</span>(v) )) <span class="sc">&amp;</span> (v <span class="sc">&lt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )) ]</span>
-<span id="cb60-10"><a href="#cb60-10" tabindex="-1"></a>v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] <span class="co"># Or alternatively ...</span></span>
-<span id="cb60-11"><a href="#cb60-11" tabindex="-1"></a></span>
-<span id="cb60-12"><a href="#cb60-12" tabindex="-1"></a><span class="fu">range</span>( v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] )</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a>( v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>) ) <span class="co"># Remember, surrounding the assignment command in brackets forces it to print</span></span>
+<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a>( vPositive <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> <span class="dv">0</span> )</span>
+<span id="cb59-4"><a href="#cb59-4" tabindex="-1"></a>v[vPositive]</span>
+<span id="cb59-5"><a href="#cb59-5" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="#cb59-6" tabindex="-1"></a>vGt1SD <span class="ot">&lt;-</span> v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )</span>
+<span id="cb59-7"><a href="#cb59-7" tabindex="-1"></a>v[vGt1SD]</span>
+<span id="cb59-8"><a href="#cb59-8" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="#cb59-9" tabindex="-1"></a>v[ (v <span class="sc">&gt;</span> ( <span class="fu">mean</span>(v) <span class="sc">-</span> <span class="fu">sd</span>(v) )) <span class="sc">&amp;</span> (v <span class="sc">&lt;</span> ( <span class="fu">mean</span>(v) <span class="sc">+</span> <span class="fu">sd</span>(v) )) ]</span>
+<span id="cb59-10"><a href="#cb59-10" tabindex="-1"></a>v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] <span class="co"># Or alternatively ...</span></span>
+<span id="cb59-11"><a href="#cb59-11" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="#cb59-12" tabindex="-1"></a><span class="fu">range</span>( v[<span class="fu">abs</span>(v<span class="sc">-</span><span class="fu">mean</span>(v)) <span class="sc">&lt;</span> <span class="fu">sd</span>(v)] )</span></code></pre></div>
 </details>
 <p>Last thing! If you use <code>sum()</code> on a logical vector, it
 will count the ’TRUE’s. Very useful. In general, if you use logical
@@ -1563,26 +1562,26 @@ positive.</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="fu">sum</span>( <span class="fu">rnorm</span>(<span class="fl">1e4</span>,<span class="dv">0</span>,<span class="dv">10</span>) <span class="sc">&gt;</span> <span class="dv">0</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="fu">sum</span>( <span class="fu">rnorm</span>(<span class="fl">1e4</span>,<span class="dv">0</span>,<span class="dv">10</span>) <span class="sc">&gt;</span> <span class="dv">0</span> )</span></code></pre></div>
 </details>
 </div>
 <div id="indexing-with-assignment" class="section level3">
 <h3>Indexing with assignment</h3>
 <p>Indexing doesn’t just let you extract parts of vectors—it also lets
 you assign values to them. Consider:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> LETTERS[<span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>]</span>
-<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> LETTERS[<span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>]</span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;POITION 2 IS HERE&quot;</span></span>
-<span id="cb64-2"><a href="#cb64-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;POITION 2 IS HERE&quot;</span></span>
+<span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;D&quot;                 &quot;POITION 2 IS HERE&quot; &quot;F&quot;                
 ## [4] &quot;G&quot;                 &quot;H&quot;                 &quot;I&quot;</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a>a[<span class="fu">c</span>(T,F,T,F,F,F)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;POSITION 1 IS HERE&quot;</span>,<span class="st">&quot;POSITION 3 IS HERE&quot;</span>) <span class="co"># We selected two spots (two TRUE elements, and assigning them two new values)</span></span>
-<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a>a[<span class="fu">c</span>(T,F,T,F,F,F)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;POSITION 1 IS HERE&quot;</span>,<span class="st">&quot;POSITION 3 IS HERE&quot;</span>) <span class="co"># We selected two spots (two TRUE elements, and assigning them two new values)</span></span>
+<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;POSITION 1 IS HERE&quot; &quot;POITION 2 IS HERE&quot;  &quot;POSITION 3 IS HERE&quot;
 ## [4] &quot;G&quot;                  &quot;H&quot;                  &quot;I&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a>a[<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="st">&quot;XXX&quot;</span> <span class="co"># We are selecting three items, and assigning them one new value---all three will be set to this one value</span></span>
-<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a>a[<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="st">&quot;XXX&quot;</span> <span class="co"># We are selecting three items, and assigning them one new value---all three will be set to this one value</span></span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;POSITION 1 IS HERE&quot; &quot;POITION 2 IS HERE&quot;  &quot;POSITION 3 IS HERE&quot;
 ## [4] &quot;G&quot;                  &quot;H&quot;                  &quot;I&quot;                 
 ## [7] &quot;XXX&quot;                &quot;XXX&quot;                &quot;XXX&quot;</code></pre>
@@ -1609,10 +1608,10 @@ but it doesn’t matter.</p>
 <p>As we make and analyse toy data I will use some functions you have
 not seen before. They are very common. Use experimentation, the help
 docs, and web searches to work out what they do.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="co"># This is a toy dataset to practise on, so we are just using some random data. Make sure you understand how I&#39;ve generated it by breaking these commands down into pieces and using the help function where needed ...</span></span>
-<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a>sampleIds <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Sample&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="co"># paste() combines strings together</span></span>
-<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Fertiliser&quot;</span>,<span class="st">&quot;Control&quot;</span>), <span class="at">each=</span><span class="dv">10</span> ) <span class="co"># rep repeats vectors or items from vectors multiple times</span></span>
-<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a>nFruits   <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2400</span>,<span class="dv">50</span>) , <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2300</span>,<span class="dv">50</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="co"># This is a toy dataset to practise on, so we are just using some random data. Make sure you understand how I&#39;ve generated it by breaking these commands down into pieces and using the help function where needed ...</span></span>
+<span id="cb69-2"><a href="#cb69-2" tabindex="-1"></a>sampleIds <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Sample&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="co"># paste() combines strings together</span></span>
+<span id="cb69-3"><a href="#cb69-3" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Fertiliser&quot;</span>,<span class="st">&quot;Control&quot;</span>), <span class="at">each=</span><span class="dv">10</span> ) <span class="co"># rep repeats vectors or items from vectors multiple times</span></span>
+<span id="cb69-4"><a href="#cb69-4" tabindex="-1"></a>nFruits   <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2400</span>,<span class="dv">50</span>) , <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">2300</span>,<span class="dv">50</span>) )</span></code></pre></div>
 <p>Now, use what you know to answer these. There are several ways to do
 each (so your answer may differ from mine). If you’ve done some R before
 and you feel like loading a package–don’t! This is about using
@@ -1634,15 +1633,15 @@ of sample names in the order of highest fruit count to lowest.</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>])</span>
-<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a></span>
-<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>]) <span class="sc">/</span> <span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a></span>
-<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>ctrlSamps   <span class="ot">&lt;-</span> sampleIds[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
-<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a>ctrlNfruits <span class="ot">&lt;-</span>  nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
-<span id="cb71-7"><a href="#cb71-7" tabindex="-1"></a>ctrlSamps[ctrlNfruits<span class="sc">==</span><span class="fu">max</span>(ctrlNfruits)]</span>
-<span id="cb71-8"><a href="#cb71-8" tabindex="-1"></a></span>
-<span id="cb71-9"><a href="#cb71-9" tabindex="-1"></a>sampleIds[<span class="fu">order</span>(nFruits,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>])</span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a><span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>]) <span class="sc">/</span> <span class="fu">mean</span>(nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="#cb70-5" tabindex="-1"></a>ctrlSamps   <span class="ot">&lt;-</span> sampleIds[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
+<span id="cb70-6"><a href="#cb70-6" tabindex="-1"></a>ctrlNfruits <span class="ot">&lt;-</span>  nFruits[treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>]</span>
+<span id="cb70-7"><a href="#cb70-7" tabindex="-1"></a>ctrlSamps[ctrlNfruits<span class="sc">==</span><span class="fu">max</span>(ctrlNfruits)]</span>
+<span id="cb70-8"><a href="#cb70-8" tabindex="-1"></a></span>
+<span id="cb70-9"><a href="#cb70-9" tabindex="-1"></a>sampleIds[<span class="fu">order</span>(nFruits,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span></code></pre></div>
 </details>
 <p>Ok that’s the end of this section! The next section will learn some
 slightly more advanced ideas that are used to manipulate and analyse
@@ -1668,85 +1667,85 @@ have a way of ‘tying’ vectors toegether for just this purpose.</p>
 <p>The structure is called a data frame, and we traditionally view them
 with each vector of data stacked vertically, just like the columns of a
 spreadsheet. Let’s make one now …</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>  sampleIds,</span>
-<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a>  treatment,</span>
-<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a>  nFruits</span>
-<span id="cb72-5"><a href="#cb72-5" tabindex="-1"></a>)</span>
-<span id="cb72-6"><a href="#cb72-6" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a>  sampleIds,</span>
+<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a>  treatment,</span>
+<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a>  nFruits</span>
+<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>)</span>
+<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre><code>##    sampleIds  treatment  nFruits
-## 1   Sample 1 Fertiliser 2371.195
-## 2   Sample 2 Fertiliser 2374.052
-## 3   Sample 3 Fertiliser 2375.687
-## 4   Sample 4 Fertiliser 2340.822
-## 5   Sample 5 Fertiliser 2414.569
-## 6   Sample 6 Fertiliser 2444.425
-## 7   Sample 7 Fertiliser 2429.481
-## 8   Sample 8 Fertiliser 2431.257
-## 9   Sample 9 Fertiliser 2300.528
-## 10 Sample 10 Fertiliser 2366.587
-## 11 Sample 11    Control 2208.949
-## 12 Sample 12    Control 2289.073
-## 13 Sample 13    Control 2299.140
-## 14 Sample 14    Control 2277.046
-## 15 Sample 15    Control 2231.009
-## 16 Sample 16    Control 2338.286
-## 17 Sample 17    Control 2279.673
-## 18 Sample 18    Control 2317.196
-## 19 Sample 19    Control 2246.447
-## 20 Sample 20    Control 2342.736</code></pre>
+## 1   Sample 1 Fertiliser 2375.934
+## 2   Sample 2 Fertiliser 2411.526
+## 3   Sample 3 Fertiliser 2392.867
+## 4   Sample 4 Fertiliser 2395.598
+## 5   Sample 5 Fertiliser 2444.810
+## 6   Sample 6 Fertiliser 2409.780
+## 7   Sample 7 Fertiliser 2371.571
+## 8   Sample 8 Fertiliser 2444.741
+## 9   Sample 9 Fertiliser 2292.255
+## 10 Sample 10 Fertiliser 2428.687
+## 11 Sample 11    Control 2282.800
+## 12 Sample 12    Control 2312.898
+## 13 Sample 13    Control 2384.833
+## 14 Sample 14    Control 2311.308
+## 15 Sample 15    Control 2255.140
+## 16 Sample 16    Control 2252.311
+## 17 Sample 17    Control 2345.657
+## 18 Sample 18    Control 2301.360
+## 19 Sample 19    Control 2298.138
+## 20 Sample 20    Control 2301.369</code></pre>
 <p>Much neater! We can use indexing on data frames to get and set
 variables. With data frames we use two indexes (for rows and columns),
 separated by a comma. So the to see or set the third entry in the first
 column we do this:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 3&quot;</span></span>
-<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Sample 21&quot;</span></span>
-<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 21&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 3&quot;</span></span>
+<span id="cb73-2"><a href="#cb73-2" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Sample 21&quot;</span></span>
+<span id="cb73-3"><a href="#cb73-3" tabindex="-1"></a>df[<span class="dv">3</span>,<span class="dv">1</span>] <span class="co"># &quot;Sample 21&quot;</span></span></code></pre></div>
 <p>We can also use ranges and logical vectors, as we have seen before.
 These can be used to assign values—and this uses recycling rules! That
 is, the range being written to must be a multiple of the range being
 written:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># Select rows 1 to 8 of columns 2 and 3</span></span>
-<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a>df[<span class="fu">c</span>(T,F),<span class="fu">c</span>(T,T,F)] <span class="co"># Select every second row of columns 1 and 2. Note the use of recycling here!</span></span>
-<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a></span>
-<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>,<span class="st">&quot;Control&quot;</span>) <span class="co"># Replaces the first two entries of the treatment column, overwrites them both with &quot;Control&quot;.</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># Select rows 1 to 8 of columns 2 and 3</span></span>
+<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>df[<span class="fu">c</span>(T,F),<span class="fu">c</span>(T,T,F)] <span class="co"># Select every second row of columns 1 and 2. Note the use of recycling here!</span></span>
+<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>,<span class="st">&quot;Control&quot;</span>) <span class="co"># Replaces the first two entries of the treatment column, overwrites them both with &quot;Control&quot;.</span></span></code></pre></div>
 <p>And we can select whole rows or columns by leaving the field
 blank:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a>df[<span class="dv">4</span>,] <span class="co"># Fourth row only</span></span>
-<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>df[,<span class="dv">3</span>] <span class="co"># Third column only</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a>df[<span class="dv">4</span>,] <span class="co"># Fourth row only</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a>df[,<span class="dv">3</span>] <span class="co"># Third column only</span></span></code></pre></div>
 <p>We can also select columns by name using character vectors:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a>df[,<span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>,<span class="st">&quot;sampleIds&quot;</span>)][<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,] <span class="co"># First five rows of two selected columns. Note the use of indexing twice--the second one applies to the results first. You will use this a lot!</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a>df[,<span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>,<span class="st">&quot;sampleIds&quot;</span>)][<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,] <span class="co"># First five rows of two selected columns. Note the use of indexing twice--the second one applies to the results first. You will use this a lot!</span></span></code></pre></div>
 <p>The functions <code>nrow()</code> and <code>ncol()</code> give you
 the row and column counts of data frames, which is useful:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a>df[<span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span>,] <span class="co"># Reversing the order of the rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a>df[<span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span>,] <span class="co"># Reversing the order of the rows</span></span></code></pre></div>
 <p>For convenience, columns can be extracted with the dollar
 (<code>$</code>) operator. It also lets you autocomplete with
 <code>\&lt;TAB\&gt;</code>, remember that?</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>df<span class="sc">$</span>sampleIds</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a>df<span class="sc">$</span>sampleIds</span></code></pre></div>
 <p>We now have three ways to access columns, by number, name, and by
 name using the dollar sign. All three can be used to create new columns.
 Simply assign values to a column that does not exist yet!</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a>df[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">nrow</span>(df)) <span class="co"># A new fourth column of &#39;NA&#39;s will appear. It will be automatically named &#39;V4&#39;</span></span>
-<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a>df[,<span class="st">&quot;newCol2&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;These&quot;</span>,<span class="st">&quot;will&quot;</span>,<span class="st">&quot;recycle---&quot;</span>,<span class="st">&quot;now!&quot;</span>)</span>
-<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a></span>
-<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a>df<span class="sc">$</span>newCol3 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>df[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">nrow</span>(df)) <span class="co"># A new fourth column of &#39;NA&#39;s will appear. It will be automatically named &#39;V4&#39;</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" tabindex="-1"></a>df[,<span class="st">&quot;newCol2&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;These&quot;</span>,<span class="st">&quot;will&quot;</span>,<span class="st">&quot;recycle---&quot;</span>,<span class="st">&quot;now!&quot;</span>)</span>
+<span id="cb79-4"><a href="#cb79-4" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" tabindex="-1"></a>df<span class="sc">$</span>newCol3 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">:</span><span class="dv">1</span></span></code></pre></div>
 <p>Now with these tools, you have the power to simplify calculations,
 such as the maximum of the fruit counts in the control group:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,<span class="st">&quot;nFruits&quot;</span>])</span>
-<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a></span>
-<span id="cb81-3"><a href="#cb81-3" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]<span class="sc">$</span>nFruits) <span class="co"># Identical but using dollar sign operator after the indexing ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,<span class="st">&quot;nFruits&quot;</span>])</span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a><span class="fu">max</span>(df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]<span class="sc">$</span>nFruits) <span class="co"># Identical but using dollar sign operator after the indexing ...</span></span></code></pre></div>
 <p>Many calculations will involve adding new columns based on the
 current columns. For instance, what if we want to give fruit counts as a
 percentage of the maximum?</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a>df<span class="sc">$</span>nFruitsPercentMax <span class="ot">&lt;-</span> df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">max</span>(df<span class="sc">$</span>nFruits) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a>df<span class="sc">$</span>nFruitsPercentMax <span class="ot">&lt;-</span> df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">max</span>(df<span class="sc">$</span>nFruits) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <p><strong>Exercises:</strong></p>
 <p>Using the data frame ‘df’ as created above using:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a>  sampleIds,</span>
-<span id="cb83-3"><a href="#cb83-3" tabindex="-1"></a>  treatment,</span>
-<span id="cb83-4"><a href="#cb83-4" tabindex="-1"></a>  nFruits</span>
-<span id="cb83-5"><a href="#cb83-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>  sampleIds,</span>
+<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>  treatment,</span>
+<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a>  nFruits</span>
+<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li>Replace the first four entries in the ‘treatment’ column with the
 value “Heat”.</li>
@@ -1771,49 +1770,49 @@ row names to “Row_1”, “Row_2”, … , “Row_20”.</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;treatment&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Heat&quot;</span></span>
-<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>)</span>
-<span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a></span>
-<span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a>df_ctrl <span class="ot">&lt;-</span> df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]</span>
-<span id="cb84-6"><a href="#cb84-6" tabindex="-1"></a></span>
-<span id="cb84-7"><a href="#cb84-7" tabindex="-1"></a>df_ctrl[df_ctrl<span class="sc">$</span>nFruits <span class="sc">&lt;</span> ( <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits) <span class="sc">-</span> <span class="fu">sd</span>(df_ctrl<span class="sc">$</span>nFruits) ),]<span class="sc">$</span>nFruits <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb84-8"><a href="#cb84-8" tabindex="-1"></a></span>
-<span id="cb84-9"><a href="#cb84-9" tabindex="-1"></a>df<span class="sc">$</span>percentVsCtrl <span class="ot">&lt;-</span> ( df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) ) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb84-10"><a href="#cb84-10" tabindex="-1"></a></span>
-<span id="cb84-11"><a href="#cb84-11" tabindex="-1"></a><span class="fu">colnames</span>(df)</span>
-<span id="cb84-12"><a href="#cb84-12" tabindex="-1"></a><span class="fu">rownames</span>(df)</span>
-<span id="cb84-13"><a href="#cb84-13" tabindex="-1"></a><span class="fu">rownames</span>(df) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Row&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df),<span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;treatment&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Heat&quot;</span></span>
+<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Fertiliser&quot;</span>)</span>
+<span id="cb83-4"><a href="#cb83-4" tabindex="-1"></a></span>
+<span id="cb83-5"><a href="#cb83-5" tabindex="-1"></a>df_ctrl <span class="ot">&lt;-</span> df[df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;Control&quot;</span>,]</span>
+<span id="cb83-6"><a href="#cb83-6" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" tabindex="-1"></a>df_ctrl[df_ctrl<span class="sc">$</span>nFruits <span class="sc">&lt;</span> ( <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits) <span class="sc">-</span> <span class="fu">sd</span>(df_ctrl<span class="sc">$</span>nFruits) ),]<span class="sc">$</span>nFruits <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb83-8"><a href="#cb83-8" tabindex="-1"></a></span>
+<span id="cb83-9"><a href="#cb83-9" tabindex="-1"></a>df<span class="sc">$</span>percentVsCtrl <span class="ot">&lt;-</span> ( df<span class="sc">$</span>nFruits <span class="sc">/</span> <span class="fu">mean</span>(df_ctrl<span class="sc">$</span>nFruits,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) ) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb83-10"><a href="#cb83-10" tabindex="-1"></a></span>
+<span id="cb83-11"><a href="#cb83-11" tabindex="-1"></a><span class="fu">colnames</span>(df)</span>
+<span id="cb83-12"><a href="#cb83-12" tabindex="-1"></a><span class="fu">rownames</span>(df)</span>
+<span id="cb83-13"><a href="#cb83-13" tabindex="-1"></a><span class="fu">rownames</span>(df) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Row&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df),<span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span></code></pre></div>
 </details>
 <div id="creating-data-frames" class="section level4">
 <h4>Creating data frames</h4>
 <p>It is possible to create data frames from nothing, by giving column
 names as argument names, and the corresponding values as arguments:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a>  <span class="at">someIntegers      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb85-3"><a href="#cb85-3" tabindex="-1"></a>  <span class="at">someLetters       =</span> letters[<span class="dv">26</span><span class="sc">:</span><span class="dv">24</span>],</span>
-<span id="cb85-4"><a href="#cb85-4" tabindex="-1"></a>  <span class="at">someRandomNumbers =</span> <span class="fu">runif</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb85-5"><a href="#cb85-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a>  <span class="at">someIntegers      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a>  <span class="at">someLetters       =</span> letters[<span class="dv">26</span><span class="sc">:</span><span class="dv">24</span>],</span>
+<span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a>  <span class="at">someRandomNumbers =</span> <span class="fu">runif</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##   someIntegers someLetters someRandomNumbers
-## 1            1           z        -0.3789356
-## 2            2           y        -0.6968778
-## 3            3           x        -0.5512314</code></pre>
+## 1            1           z       -0.35545291
+## 2            2           y       -0.02788979
+## 3            3           x       -0.04846028</code></pre>
 </div>
 <div id="combining-data-frames-with-rbind" class="section level4">
 <h4>Combining data frames with rbind</h4>
 <p>If two data frames have identical columns, then the rows can be
 joined together using <code>rbind()</code>:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a>iris1 <span class="ot">&lt;-</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] <span class="co"># R always loads several datasets to experiment on. &#39;iris&#39; is a famous data set indeed--you can read about it by running `?iris`</span></span>
-<span id="cb87-2"><a href="#cb87-2" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> iris[<span class="fu">nrow</span>(iris)<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">0</span>,] <span class="co"># This selects the last two rows --- can you work out why it works?</span></span>
-<span id="cb87-3"><a href="#cb87-3" tabindex="-1"></a>iris1</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a>iris1 <span class="ot">&lt;-</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] <span class="co"># R always loads several datasets to experiment on. &#39;iris&#39; is a famous data set indeed--you can read about it by running `?iris`</span></span>
+<span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> iris[<span class="fu">nrow</span>(iris)<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">0</span>,] <span class="co"># This selects the last two rows --- can you work out why it works?</span></span>
+<span id="cb86-3"><a href="#cb86-3" tabindex="-1"></a>iris1</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a>iris2</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>iris2</span></code></pre></div>
 <pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 ## 149          6.2         3.4          5.4         2.3 virginica
 ## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="fu">rbind</span>(iris1,iris2)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="fu">rbind</span>(iris1,iris2)</span></code></pre></div>
 <pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 ## 1            5.1         3.5          1.4         0.2    setosa
 ## 2            4.9         3.0          1.4         0.2    setosa
@@ -1839,7 +1838,7 @@ tool for describing what is R objects contain. You can try it on
 basically any object. In the case of data frames, it describes the
 contents of each of the columns, the dimensions of the data frame, etc
 ….</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
 ##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 ##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
@@ -1905,12 +1904,12 @@ petal dimensions of iris flowers. The first step …</p>
 <li>Creates the axes, and</li>
 <li>Adds the first plot item (e.g. lines or points)</li>
 </ul>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
-<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
-<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
-<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="tutorial_R_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb95-3"><a href="#cb95-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb95-4"><a href="#cb95-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
+<span id="cb95-5"><a href="#cb95-5" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p>The “type = ‘p’” argument directs R to make points (a scatterplot),
 but it is the default anyway. Lines don’t make much sense here but if
 you want to try that, run the command with “type = ‘l’”.</p>
@@ -1932,19 +1931,19 @@ class="uri">https://rgbcolorpicker.com/</a></li>
 dashes</li>
 </ul>
 <p><img src="images/Rcolpick.PNG" /></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
-<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
-<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
-<span id="cb97-5"><a href="#cb97-5" tabindex="-1"></a>)</span>
-<span id="cb97-6"><a href="#cb97-6" tabindex="-1"></a></span>
-<span id="cb97-7"><a href="#cb97-7" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb97-8"><a href="#cb97-8" tabindex="-1"></a>  <span class="at">v   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,]<span class="sc">$</span>Petal.Length), <span class="co"># `range()` produces two numbers, so we will get one line for each</span></span>
-<span id="cb97-9"><a href="#cb97-9" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;#2a2fdb73&quot;</span>,<span class="st">&quot;#c73a3a73&quot;</span>), <span class="co"># Notice we are giving two colours--one colour per line</span></span>
-<span id="cb97-10"><a href="#cb97-10" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">5</span>, <span class="co"># Now we are giving just one value. This will recycle--so it will be applied to all lines!</span></span>
-<span id="cb97-11"><a href="#cb97-11" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span></span>
-<span id="cb97-12"><a href="#cb97-12" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="tutorial_R_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a>  <span class="at">y =</span> iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;p&#39;</span></span>
+<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a>)</span>
+<span id="cb96-6"><a href="#cb96-6" tabindex="-1"></a></span>
+<span id="cb96-7"><a href="#cb96-7" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a>  <span class="at">v   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,]<span class="sc">$</span>Petal.Length), <span class="co"># `range()` produces two numbers, so we will get one line for each</span></span>
+<span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;#2a2fdb73&quot;</span>,<span class="st">&quot;#c73a3a73&quot;</span>), <span class="co"># Notice we are giving two colours--one colour per line</span></span>
+<span id="cb96-10"><a href="#cb96-10" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">5</span>, <span class="co"># Now we are giving just one value. This will recycle--so it will be applied to all lines!</span></span>
+<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span></span>
+<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>You can look up parameters like line types here: <a
 href="https://r-graph-gallery.com/6-graph-parameters-reminder.html"
 class="uri">https://r-graph-gallery.com/6-graph-parameters-reminder.html</a></p>
@@ -1981,24 +1980,24 @@ the semi-transparency.</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
-<span id="cb98-3"><a href="#cb98-3" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;virginica&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb98-4"><a href="#cb98-4" tabindex="-1"></a></span>
-<span id="cb98-5"><a href="#cb98-5" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb98-6"><a href="#cb98-6" tabindex="-1"></a>  <span class="at">x   =</span> iris<span class="sc">$</span>Sepal.Length,</span>
-<span id="cb98-7"><a href="#cb98-7" tabindex="-1"></a>  <span class="at">y   =</span> iris<span class="sc">$</span>Sepal.Width,</span>
-<span id="cb98-8"><a href="#cb98-8" tabindex="-1"></a>  <span class="at">col =</span> iris<span class="sc">$</span>colour,</span>
-<span id="cb98-9"><a href="#cb98-9" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;Sepal Width&quot;</span>,</span>
-<span id="cb98-10"><a href="#cb98-10" tabindex="-1"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
-<span id="cb98-11"><a href="#cb98-11" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">20</span></span>
-<span id="cb98-12"><a href="#cb98-12" tabindex="-1"></a>)</span>
-<span id="cb98-13"><a href="#cb98-13" tabindex="-1"></a></span>
-<span id="cb98-14"><a href="#cb98-14" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb98-15"><a href="#cb98-15" tabindex="-1"></a>  <span class="at">h   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,]<span class="sc">$</span>Sepal.Width),</span>
-<span id="cb98-16"><a href="#cb98-16" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>),</span>
-<span id="cb98-17"><a href="#cb98-17" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;#4a8a43a0&quot;</span></span>
-<span id="cb98-18"><a href="#cb98-18" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
+<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;virginica&quot;</span>,<span class="st">&quot;colour&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="#cb97-5" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb97-6"><a href="#cb97-6" tabindex="-1"></a>  <span class="at">x   =</span> iris<span class="sc">$</span>Sepal.Length,</span>
+<span id="cb97-7"><a href="#cb97-7" tabindex="-1"></a>  <span class="at">y   =</span> iris<span class="sc">$</span>Sepal.Width,</span>
+<span id="cb97-8"><a href="#cb97-8" tabindex="-1"></a>  <span class="at">col =</span> iris<span class="sc">$</span>colour,</span>
+<span id="cb97-9"><a href="#cb97-9" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;Sepal Width&quot;</span>,</span>
+<span id="cb97-10"><a href="#cb97-10" tabindex="-1"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb97-11"><a href="#cb97-11" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">20</span></span>
+<span id="cb97-12"><a href="#cb97-12" tabindex="-1"></a>)</span>
+<span id="cb97-13"><a href="#cb97-13" tabindex="-1"></a></span>
+<span id="cb97-14"><a href="#cb97-14" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb97-15"><a href="#cb97-15" tabindex="-1"></a>  <span class="at">h   =</span> <span class="fu">range</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;versicolor&quot;</span>,]<span class="sc">$</span>Sepal.Width),</span>
+<span id="cb97-16"><a href="#cb97-16" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>),</span>
+<span id="cb97-17"><a href="#cb97-17" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;#4a8a43a0&quot;</span></span>
+<span id="cb97-18"><a href="#cb97-18" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <div id="layer-layer-layer" class="section level4">
 <h4>Layer, layer, layer</h4>
@@ -2044,7 +2043,7 @@ magnitudes in an intuitive plot like the below. There’s no package to do
 it—but it takes about 6 R commands to make from basics. Ask me if you
 want to see the code but the take-home point is, if you can imagine it,
 there’s a way to do it …</p>
-<p><img src="tutorial_R_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <hr />
 </div>
 </div>
@@ -2064,17 +2063,17 @@ operator.</li>
 <li>The difference between accessing list items with double and single
 square bracket operators.</li>
 </ul>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># Creating a list</span></span>
-<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb99-3"><a href="#cb99-3" tabindex="-1"></a>  <span class="at">a_vector =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb99-4"><a href="#cb99-4" tabindex="-1"></a>  <span class="at">another_vector =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">NA</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>),</span>
-<span id="cb99-5"><a href="#cb99-5" tabindex="-1"></a>  <span class="at">a_data_frame =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;Sepal.Width&quot;</span>)],</span>
-<span id="cb99-6"><a href="#cb99-6" tabindex="-1"></a>  <span class="at">a_list =</span> <span class="fu">list</span>( <span class="at">a =</span> <span class="st">&quot;A&quot;</span> , <span class="at">b =</span> <span class="st">&quot;B&quot;</span> ),</span>
-<span id="cb99-7"><a href="#cb99-7" tabindex="-1"></a>  <span class="st">&quot;an unnamed member&quot;</span></span>
-<span id="cb99-8"><a href="#cb99-8" tabindex="-1"></a>)</span>
-<span id="cb99-9"><a href="#cb99-9" tabindex="-1"></a></span>
-<span id="cb99-10"><a href="#cb99-10" tabindex="-1"></a><span class="co"># Explore contents</span></span>
-<span id="cb99-11"><a href="#cb99-11" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a><span class="co"># Creating a list</span></span>
+<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb98-3"><a href="#cb98-3" tabindex="-1"></a>  <span class="at">a_vector =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb98-4"><a href="#cb98-4" tabindex="-1"></a>  <span class="at">another_vector =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">NA</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb98-5"><a href="#cb98-5" tabindex="-1"></a>  <span class="at">a_data_frame =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;Sepal.Width&quot;</span>)],</span>
+<span id="cb98-6"><a href="#cb98-6" tabindex="-1"></a>  <span class="at">a_list =</span> <span class="fu">list</span>( <span class="at">a =</span> <span class="st">&quot;A&quot;</span> , <span class="at">b =</span> <span class="st">&quot;B&quot;</span> ),</span>
+<span id="cb98-7"><a href="#cb98-7" tabindex="-1"></a>  <span class="st">&quot;an unnamed member&quot;</span></span>
+<span id="cb98-8"><a href="#cb98-8" tabindex="-1"></a>)</span>
+<span id="cb98-9"><a href="#cb98-9" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="#cb98-10" tabindex="-1"></a><span class="co"># Explore contents</span></span>
+<span id="cb98-11"><a href="#cb98-11" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
 <pre><code>## List of 5
 ##  $ a_vector      : int [1:4] 1 2 3 4
 ##  $ another_vector: logi [1:4] TRUE NA FALSE TRUE
@@ -2085,30 +2084,30 @@ square bracket operators.</li>
 ##   ..$ a: chr &quot;A&quot;
 ##   ..$ b: chr &quot;B&quot;
 ##  $               : chr &quot;an unnamed member&quot;</code></pre>
-<div class="sourceCode" id="cb101"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="co"># Access (and edit) first item a few ways</span></span>
-<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># Access (and edit) first item a few ways</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb103"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb105"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a>l[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a>l[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a>l<span class="sc">$</span>a_vector</span></code></pre></div>
 <pre><code>## [1]  1 NA  3  4</code></pre>
-<div class="sourceCode" id="cb107"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a><span class="co"># A demonstation -- the double square brakets extract the actual items in the list...</span></span>
-<span id="cb107-2"><a href="#cb107-2" tabindex="-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="co"># A demonstation -- the double square brakets extract the actual items in the list...</span></span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>##   Species Sepal.Width
 ## 1  setosa         3.5
 ## 2  setosa         3.0
 ## 3  setosa         3.2</code></pre>
-<div class="sourceCode" id="cb109"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" tabindex="-1"></a><span class="fu">class</span>(l[[<span class="dv">3</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="fu">class</span>(l[[<span class="dv">3</span>]])</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb111"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" tabindex="-1"></a><span class="co"># The single square brackets extract subsets of the list, as a list. The example below produces a list of length 1.</span></span>
-<span id="cb111-2"><a href="#cb111-2" tabindex="-1"></a><span class="fu">class</span>(l[<span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="co"># The single square brackets extract subsets of the list, as a list. The example below produces a list of length 1.</span></span>
+<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a><span class="fu">class</span>(l[<span class="dv">3</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
 <hr />
 </div>
@@ -2124,11 +2123,11 @@ function follows this syntax:</p>
 them in standard deviations from the mean, that is, as Z-scores. We name
 the function ‘zScore’. It will need to take a vector, so let’s start it
 off with just one argument called ‘x’.</p>
-<div class="sourceCode" id="cb114"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a>zScore <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
-<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
-<span id="cb114-3"><a href="#cb114-3" tabindex="-1"></a>  <span class="co"># return(&lt;return value&gt;)</span></span>
-<span id="cb114-4"><a href="#cb114-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" tabindex="-1"></a>zScore <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
+<span id="cb113-2"><a href="#cb113-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb113-3"><a href="#cb113-3" tabindex="-1"></a>  <span class="co"># return(&lt;return value&gt;)</span></span>
+<span id="cb113-4"><a href="#cb113-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>Ok, as for the function body, that’s where we perform the relevant
 calculations. In this case, we need to follow the formula for Z-scores
 <span class="math inline">\(Z_x\)</span> of the vector <span
@@ -2140,21 +2139,21 @@ class="math inline">\(\sigma^2_x\)</span> is the standard deviation of
 x.</p>
 <p>And the return value is of course the result of these calculations,
 the Z-scores.</p>
-<div class="sourceCode" id="cb115"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
-<span id="cb115-2"><a href="#cb115-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
-<span id="cb115-3"><a href="#cb115-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb115-4"><a href="#cb115-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
-<span id="cb115-5"><a href="#cb115-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
-<span id="cb115-6"><a href="#cb115-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
-<span id="cb115-7"><a href="#cb115-7" tabindex="-1"></a>}</span>
-<span id="cb115-8"><a href="#cb115-8" tabindex="-1"></a></span>
-<span id="cb115-9"><a href="#cb115-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
-<span id="cb115-10"><a href="#cb115-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb115-11"><a href="#cb115-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">runif</span>(<span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x ){</span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb114-3"><a href="#cb114-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb114-4"><a href="#cb114-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb114-5"><a href="#cb114-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
+<span id="cb114-6"><a href="#cb114-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
+<span id="cb114-7"><a href="#cb114-7" tabindex="-1"></a>}</span>
+<span id="cb114-8"><a href="#cb114-8" tabindex="-1"></a></span>
+<span id="cb114-9"><a href="#cb114-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
+<span id="cb114-10"><a href="#cb114-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb114-11"><a href="#cb114-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">runif</span>(<span class="dv">10</span>))</span></code></pre></div>
 <p>Ok, what about when there are ‘NA’ values in the vectors though?</p>
-<div class="sourceCode" id="cb116"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Error</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Error</span></span></code></pre></div>
 <p>We could fix this in the function by adding <code>na.rm=TRUE</code>
 to both the <code>mean()</code> and <code>sd()</code> functions. But
 what if the user doesn’t <em>want</em> the function to ignore ‘NA’
@@ -2162,8 +2161,24 @@ values? Perhaps we can let the user choose? We can do this by adding
 another argument, for example called “removeNAs=…”, and <em>passing</em>
 its value on to the “na.rm=…” arguments of <code>mean()</code> and
 <code>sd()</code> inside the function body …</p>
+<div class="sourceCode" id="cb116"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , removeNAs ){</span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
+<span id="cb116-3"><a href="#cb116-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb116-4"><a href="#cb116-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
+<span id="cb116-5"><a href="#cb116-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
+<span id="cb116-6"><a href="#cb116-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
+<span id="cb116-7"><a href="#cb116-7" tabindex="-1"></a>}</span>
+<span id="cb116-8"><a href="#cb116-8" tabindex="-1"></a></span>
+<span id="cb116-9"><a href="#cb116-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
+<span id="cb116-10"><a href="#cb116-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),<span class="at">removeNAs =</span> <span class="cn">TRUE</span>) <span class="co"># Works</span></span>
+<span id="cb116-11"><a href="#cb116-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># ... fails --- missing argument!</span></span></code></pre></div>
+<p>Better, but it’s a bit annoying to specify “removeNAs=…” every time
+we use the function. Maybe we can put in a default value of ‘FALSE’,
+that way we only need the user to specify it when they want it to be
+TRUE:</p>
 <div class="sourceCode" id="cb117"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , removeNAs ){</span>
+class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , <span class="at">removeNAs=</span><span class="cn">FALSE</span> ){</span>
 <span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
 <span id="cb117-3"><a href="#cb117-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
 <span id="cb117-4"><a href="#cb117-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
@@ -2173,23 +2188,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb1
 <span id="cb117-8"><a href="#cb117-8" tabindex="-1"></a></span>
 <span id="cb117-9"><a href="#cb117-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
 <span id="cb117-10"><a href="#cb117-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),<span class="at">removeNAs =</span> <span class="cn">TRUE</span>) <span class="co"># Works</span></span>
-<span id="cb117-11"><a href="#cb117-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># ... fails --- missing argument!</span></span></code></pre></div>
-<p>Better, but it’s a bit annoying to specify “removeNAs=…” every time
-we use the function. Maybe we can put in a default value of ‘FALSE’,
-that way we only need the user to specify it when they want it to be
-TRUE:</p>
-<div class="sourceCode" id="cb118"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a>sdFromMean <span class="ot">&lt;-</span> <span class="cf">function</span>( x , <span class="at">removeNAs=</span><span class="cn">FALSE</span> ){</span>
-<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a>  <span class="co"># Function body</span></span>
-<span id="cb118-3"><a href="#cb118-3" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
-<span id="cb118-4"><a href="#cb118-4" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x,<span class="at">na.rm=</span>removeNAs)</span>
-<span id="cb118-5"><a href="#cb118-5" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> ( x <span class="sc">-</span> mu ) <span class="sc">/</span> sigma</span>
-<span id="cb118-6"><a href="#cb118-6" tabindex="-1"></a>  <span class="fu">return</span>(Z)</span>
-<span id="cb118-7"><a href="#cb118-7" tabindex="-1"></a>}</span>
-<span id="cb118-8"><a href="#cb118-8" tabindex="-1"></a></span>
-<span id="cb118-9"><a href="#cb118-9" tabindex="-1"></a><span class="co"># Running the function</span></span>
-<span id="cb118-10"><a href="#cb118-10" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),<span class="at">removeNAs =</span> <span class="cn">TRUE</span>) <span class="co"># Works</span></span>
-<span id="cb118-11"><a href="#cb118-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Works!</span></span></code></pre></div>
+<span id="cb117-11"><a href="#cb117-11" tabindex="-1"></a><span class="fu">sdFromMean</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="co"># Works!</span></span></code></pre></div>
 <p><strong>Exercises:</strong></p>
 <ul>
 <li>Create a function called ‘topRows’ that takes a data frame (like
@@ -2205,24 +2204,24 @@ data table</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb119"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
-<span id="cb119-2"><a href="#cb119-2" tabindex="-1"></a>  out <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
-<span id="cb119-3"><a href="#cb119-3" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
-<span id="cb119-4"><a href="#cb119-4" tabindex="-1"></a>}</span>
-<span id="cb119-5"><a href="#cb119-5" tabindex="-1"></a></span>
-<span id="cb119-6"><a href="#cb119-6" tabindex="-1"></a><span class="co"># Even more concise:</span></span>
-<span id="cb119-7"><a href="#cb119-7" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
-<span id="cb119-8"><a href="#cb119-8" tabindex="-1"></a>  <span class="fu">return</span> (df[<span class="dv">1</span><span class="sc">:</span>n,])</span>
-<span id="cb119-9"><a href="#cb119-9" tabindex="-1"></a>}</span>
-<span id="cb119-10"><a href="#cb119-10" tabindex="-1"></a></span>
-<span id="cb119-11"><a href="#cb119-11" tabindex="-1"></a><span class="co">#Even even more concise. If the function finishes without hitting a return statement, it returns the last line. Avoid this except in extremely simple functions.</span></span>
-<span id="cb119-12"><a href="#cb119-12" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
-<span id="cb119-13"><a href="#cb119-13" tabindex="-1"></a>  df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
-<span id="cb119-14"><a href="#cb119-14" tabindex="-1"></a>}</span>
-<span id="cb119-15"><a href="#cb119-15" tabindex="-1"></a></span>
-<span id="cb119-16"><a href="#cb119-16" tabindex="-1"></a><span class="co"># Try it!</span></span>
-<span id="cb119-17"><a href="#cb119-17" tabindex="-1"></a><span class="fu">topRows</span>(iris,<span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a>  out <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
+<span id="cb118-3"><a href="#cb118-3" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb118-4"><a href="#cb118-4" tabindex="-1"></a>}</span>
+<span id="cb118-5"><a href="#cb118-5" tabindex="-1"></a></span>
+<span id="cb118-6"><a href="#cb118-6" tabindex="-1"></a><span class="co"># Even more concise:</span></span>
+<span id="cb118-7"><a href="#cb118-7" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb118-8"><a href="#cb118-8" tabindex="-1"></a>  <span class="fu">return</span> (df[<span class="dv">1</span><span class="sc">:</span>n,])</span>
+<span id="cb118-9"><a href="#cb118-9" tabindex="-1"></a>}</span>
+<span id="cb118-10"><a href="#cb118-10" tabindex="-1"></a></span>
+<span id="cb118-11"><a href="#cb118-11" tabindex="-1"></a><span class="co">#Even even more concise. If the function finishes without hitting a return statement, it returns the last line. Avoid this except in extremely simple functions.</span></span>
+<span id="cb118-12"><a href="#cb118-12" tabindex="-1"></a>topRows <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">n=</span><span class="dv">1</span>){</span>
+<span id="cb118-13"><a href="#cb118-13" tabindex="-1"></a>  df[<span class="dv">1</span><span class="sc">:</span>n,]</span>
+<span id="cb118-14"><a href="#cb118-14" tabindex="-1"></a>}</span>
+<span id="cb118-15"><a href="#cb118-15" tabindex="-1"></a></span>
+<span id="cb118-16"><a href="#cb118-16" tabindex="-1"></a><span class="co"># Try it!</span></span>
+<span id="cb118-17"><a href="#cb118-17" tabindex="-1"></a><span class="fu">topRows</span>(iris,<span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
 </details>
 <hr />
 </div>
@@ -2244,32 +2243,32 @@ once for chromosome 1, again for chromosome 2, and again for chromosomes
 <p>We can automate these cases using <em>apply</em>-type functions.</p>
 <p>Create a toy data frame describing a collection of gene expression
 (“tpm”—transcript per million) values using this code:</p>
-<div class="sourceCode" id="cb120"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="co"># Don&#39;t try to understand this, we will learn it later.</span></span>
-<span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb120-4"><a href="#cb120-4" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
-<span id="cb120-5"><a href="#cb120-5" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
-<span id="cb120-6"><a href="#cb120-6" tabindex="-1"></a>)</span>
-<span id="cb120-7"><a href="#cb120-7" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a><span class="co"># Don&#39;t try to understand this, we will learn it later.</span></span>
+<span id="cb119-2"><a href="#cb119-2" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb119-3"><a href="#cb119-3" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb119-4"><a href="#cb119-4" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
+<span id="cb119-5"><a href="#cb119-5" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
+<span id="cb119-6"><a href="#cb119-6" tabindex="-1"></a>)</span>
+<span id="cb119-7"><a href="#cb119-7" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
 <p>Now, create a function that will take expression data like this, and
 return the tissue of the highest expressing gene:</p>
-<div class="sourceCode" id="cb121"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" tabindex="-1"></a>highestExpGeneID <span class="ot">&lt;-</span> <span class="cf">function</span>(edf){</span>
-<span id="cb121-2"><a href="#cb121-2" tabindex="-1"></a>  edf[edf<span class="sc">$</span>tpm<span class="sc">==</span><span class="fu">max</span>(edf<span class="sc">$</span>tpm),]<span class="sc">$</span>tissue</span>
-<span id="cb121-3"><a href="#cb121-3" tabindex="-1"></a>}</span>
-<span id="cb121-4"><a href="#cb121-4" tabindex="-1"></a></span>
-<span id="cb121-5"><a href="#cb121-5" tabindex="-1"></a><span class="co"># Test it ...</span></span>
-<span id="cb121-6"><a href="#cb121-6" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a>highestExpGeneID <span class="ot">&lt;-</span> <span class="cf">function</span>(edf){</span>
+<span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a>  edf[edf<span class="sc">$</span>tpm<span class="sc">==</span><span class="fu">max</span>(edf<span class="sc">$</span>tpm),]<span class="sc">$</span>tissue</span>
+<span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a>}</span>
+<span id="cb120-4"><a href="#cb120-4" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="#cb120-5" tabindex="-1"></a><span class="co"># Test it ...</span></span>
+<span id="cb120-6"><a href="#cb120-6" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e)</span></code></pre></div>
 <p>Now, use this function, along with data frame indexing, to find the
 highest expressing tissue of gene with ID “GeneID:3”</p>
-<div class="sourceCode" id="cb122"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span><span class="st">&quot;GeneID:3&quot;</span>,])</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" tabindex="-1"></a><span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span><span class="st">&quot;GeneID:3&quot;</span>,])</span></code></pre></div>
 <p>But what if you want a readout for <em>every</em> gene?</p>
 <p>Well the starting point might be to get a list of all the gene IDs,
 so for that we could use the function unique:</p>
-<div class="sourceCode" id="cb123"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" tabindex="-1"></a><span class="fu">unique</span>(e<span class="sc">$</span>geneID) <span class="co"># &quot;GeneID:1&quot; &quot;GeneID:2&quot; &quot;GeneID:3&quot; &quot;GeneID:4&quot; &quot;GeneID:5&quot; &quot;GeneID:6&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a><span class="fu">unique</span>(e<span class="sc">$</span>geneID) <span class="co"># &quot;GeneID:1&quot; &quot;GeneID:2&quot; &quot;GeneID:3&quot; &quot;GeneID:4&quot; &quot;GeneID:5&quot; &quot;GeneID:6&quot;</span></span></code></pre></div>
 <p>But how do we make the function <code>highestExpGeneID()</code> run
 once for every one of these?</p>
 <p>Here is where we use <code>lapply()</code>, which stands for “list
@@ -2293,24 +2292,24 @@ argument is named</em>. I call it ‘g’, in the example below.</p>
 <strong>If you’re confused, study these examples (if not, go
 on):</strong>
 </summary>
-<div class="sourceCode" id="cb125"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" tabindex="-1"></a><span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="cf">function</span>(x) { x <span class="sc">+</span> <span class="dv">100</span> } )</span>
-<span id="cb125-2"><a href="#cb125-2" tabindex="-1"></a></span>
-<span id="cb125-3"><a href="#cb125-3" tabindex="-1"></a><span class="fu">lapply</span>( letters , <span class="cf">function</span>(letter) { <span class="fu">paste0</span>(<span class="st">&quot;:&quot;</span>,letter,<span class="st">&quot;:&quot;</span>) } )</span>
-<span id="cb125-4"><a href="#cb125-4" tabindex="-1"></a></span>
-<span id="cb125-5"><a href="#cb125-5" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Fish&quot;</span>,<span class="st">&quot;Frog&quot;</span>,<span class="st">&quot;Pangolin&quot;</span>,<span class="st">&quot;Wallaby&quot;</span>,<span class="st">&quot;Turtle&quot;</span>) , <span class="at">mammal =</span> <span class="fu">c</span>(F,F,T,T,F) )</span>
-<span id="cb125-6"><a href="#cb125-6" tabindex="-1"></a><span class="co"># Which animals are mammals? Which are not?</span></span>
-<span id="cb125-7"><a href="#cb125-7" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) , <span class="cf">function</span>(tf) {</span>
-<span id="cb125-8"><a href="#cb125-8" tabindex="-1"></a>  animals[animals<span class="sc">$</span>mammal<span class="sc">==</span>tf,]<span class="sc">$</span>name</span>
-<span id="cb125-9"><a href="#cb125-9" tabindex="-1"></a>} )</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a><span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="cf">function</span>(x) { x <span class="sc">+</span> <span class="dv">100</span> } )</span>
+<span id="cb124-2"><a href="#cb124-2" tabindex="-1"></a></span>
+<span id="cb124-3"><a href="#cb124-3" tabindex="-1"></a><span class="fu">lapply</span>( letters , <span class="cf">function</span>(letter) { <span class="fu">paste0</span>(<span class="st">&quot;:&quot;</span>,letter,<span class="st">&quot;:&quot;</span>) } )</span>
+<span id="cb124-4"><a href="#cb124-4" tabindex="-1"></a></span>
+<span id="cb124-5"><a href="#cb124-5" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Fish&quot;</span>,<span class="st">&quot;Frog&quot;</span>,<span class="st">&quot;Pangolin&quot;</span>,<span class="st">&quot;Wallaby&quot;</span>,<span class="st">&quot;Turtle&quot;</span>) , <span class="at">mammal =</span> <span class="fu">c</span>(F,F,T,T,F) )</span>
+<span id="cb124-6"><a href="#cb124-6" tabindex="-1"></a><span class="co"># Which animals are mammals? Which are not?</span></span>
+<span id="cb124-7"><a href="#cb124-7" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) , <span class="cf">function</span>(tf) {</span>
+<span id="cb124-8"><a href="#cb124-8" tabindex="-1"></a>  animals[animals<span class="sc">$</span>mammal<span class="sc">==</span>tf,]<span class="sc">$</span>name</span>
+<span id="cb124-9"><a href="#cb124-9" tabindex="-1"></a>} )</span></code></pre></div>
 </details>
 <p>Ok, so here’s our command to find the highest expressing tissue for
 each gene:</p>
-<div class="sourceCode" id="cb126"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a>highestExpressionEachGene <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){</span>
-<span id="cb126-2"><a href="#cb126-2" tabindex="-1"></a>  <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,])</span>
-<span id="cb126-3"><a href="#cb126-3" tabindex="-1"></a>} )</span>
-<span id="cb126-4"><a href="#cb126-4" tabindex="-1"></a>highestExpressionEachGene</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" tabindex="-1"></a>highestExpressionEachGene <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){</span>
+<span id="cb125-2"><a href="#cb125-2" tabindex="-1"></a>  <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,])</span>
+<span id="cb125-3"><a href="#cb125-3" tabindex="-1"></a>} )</span>
+<span id="cb125-4"><a href="#cb125-4" tabindex="-1"></a>highestExpressionEachGene</span></code></pre></div>
 <div id="sapply" class="section level4">
 <h4>sapply</h4>
 <p>It is natural to wonder whether a list is really the most useful
@@ -2319,26 +2318,26 @@ vector back? Well, yes. But this will only work well then the thing you
 get back is a single-item vector—what if it returned a data frame?</p>
 <p>The answer is to replace <code>lapply()</code> with
 <code>sapply()</code> (“simplified apply”). Or …</p>
-<div class="sourceCode" id="cb127"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a><span class="fu">unlist</span>(highestExpressionEachGene)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a><span class="fu">unlist</span>(highestExpressionEachGene)</span></code></pre></div>
 <p>With this in hand, you could even create a nice little data frame of
 results:</p>
-<div class="sourceCode" id="cb128"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a>maxExp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a>  <span class="at">geneID       =</span> <span class="fu">unique</span>(e<span class="sc">$</span>geneID),</span>
-<span id="cb128-3"><a href="#cb128-3" tabindex="-1"></a>  <span class="at">maxExpTissue =</span> <span class="fu">sapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){ <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,]) } )</span>
-<span id="cb128-4"><a href="#cb128-4" tabindex="-1"></a>)</span>
-<span id="cb128-5"><a href="#cb128-5" tabindex="-1"></a>maxExp</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a>maxExp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb127-2"><a href="#cb127-2" tabindex="-1"></a>  <span class="at">geneID       =</span> <span class="fu">unique</span>(e<span class="sc">$</span>geneID),</span>
+<span id="cb127-3"><a href="#cb127-3" tabindex="-1"></a>  <span class="at">maxExpTissue =</span> <span class="fu">sapply</span>( <span class="fu">unique</span>(e<span class="sc">$</span>geneID) , <span class="cf">function</span>(g){ <span class="fu">highestExpGeneID</span>(e[e<span class="sc">$</span>geneID<span class="sc">==</span>g,]) } )</span>
+<span id="cb127-4"><a href="#cb127-4" tabindex="-1"></a>)</span>
+<span id="cb127-5"><a href="#cb127-5" tabindex="-1"></a>maxExp</span></code></pre></div>
 <p>Great! Your turn.</p>
 <p><strong>Exercises:</strong></p>
 <p>Use the expression data as generated by:</p>
-<div class="sourceCode" id="cb129"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb129-2"><a href="#cb129-2" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb129-3"><a href="#cb129-3" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
-<span id="cb129-4"><a href="#cb129-4" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
-<span id="cb129-5"><a href="#cb129-5" tabindex="-1"></a>)</span>
-<span id="cb129-6"><a href="#cb129-6" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a>  <span class="at">geneID =</span> <span class="fu">paste0</span>(<span class="st">&quot;GeneID:&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb128-3"><a href="#cb128-3" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="fu">c</span>(<span class="st">&quot;Stem&quot;</span>,<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Root&quot;</span>,<span class="st">&quot;Influorescence&quot;</span>),</span>
+<span id="cb128-4"><a href="#cb128-4" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
+<span id="cb128-5"><a href="#cb128-5" tabindex="-1"></a>)</span>
+<span id="cb128-6"><a href="#cb128-6" tabindex="-1"></a>e<span class="sc">$</span>tpm <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">6</span><span class="sc">*</span><span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">**</span> <span class="dv">3</span></span></code></pre></div>
 <ul>
 <li>Using lapply/sapply and other tricks from this section, create a
 data frame that contains a row each for the “Stem” and “Leaf” tissues ,
@@ -2350,36 +2349,36 @@ for that tissue.</li>
 <summary>
 <strong>See clues (and answer):</strong>
 </summary>
-<div class="sourceCode" id="cb130"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co">#I will build this up in several steps</span></span>
-<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="#cb130-3" tabindex="-1"></a><span class="co"># the syntax is `lapply(X,FUN)`</span></span>
-<span id="cb130-4"><a href="#cb130-4" tabindex="-1"></a><span class="co"># We need to apply to two tissues so we list them in X. For FUN, let&#39;s just create a simple function that returns exactly what is given ...</span></span>
-<span id="cb130-5"><a href="#cb130-5" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t){ t } )</span>
-<span id="cb130-6"><a href="#cb130-6" tabindex="-1"></a><span class="co"># So, t is set to &quot;Leaf&quot; first, then &quot;Stem&quot;</span></span>
-<span id="cb130-7"><a href="#cb130-7" tabindex="-1"></a><span class="co"># We need to be selecting rows of e there e$tissue is &quot;Leaf&quot; and then &quot;Stem&quot;, so let&#39;s try returning versions of e with just those selected ...</span></span>
-<span id="cb130-8"><a href="#cb130-8" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,] } )</span>
-<span id="cb130-9"><a href="#cb130-9" tabindex="-1"></a><span class="co"># Ok, and but what we want to work with is the tpm, so let&#39;s use what we know about data frames to extract just that column ...</span></span>
-<span id="cb130-10"><a href="#cb130-10" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm } )</span>
-<span id="cb130-11"><a href="#cb130-11" tabindex="-1"></a><span class="co"># Good, and what do we want with tpm? The median, so we use the function median() to calcualte it on those results ...</span></span>
-<span id="cb130-12"><a href="#cb130-12" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
-<span id="cb130-13"><a href="#cb130-13" tabindex="-1"></a><span class="co"># So close! We just prefer this as a vector not a list, so we use `sapply()`</span></span>
-<span id="cb130-14"><a href="#cb130-14" tabindex="-1"></a><span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
-<span id="cb130-15"><a href="#cb130-15" tabindex="-1"></a></span>
-<span id="cb130-16"><a href="#cb130-16" tabindex="-1"></a></span>
-<span id="cb130-17"><a href="#cb130-17" tabindex="-1"></a><span class="co"># That&#39;s great -- we have the tissues we need ( c(&quot;Leaf&quot;,&quot;Stem&quot;) ) and their median expression values ( the long sapply command above ).</span></span>
-<span id="cb130-18"><a href="#cb130-18" tabindex="-1"></a><span class="co"># To make a data frame, we just use the regular syntax for making one ...</span></span>
-<span id="cb130-19"><a href="#cb130-19" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb130-20"><a href="#cb130-20" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb130-21"><a href="#cb130-21" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</span>
-<span id="cb130-22"><a href="#cb130-22" tabindex="-1"></a>)</span>
-<span id="cb130-23"><a href="#cb130-23" tabindex="-1"></a><span class="co"># ... except we enter the tissue and median tpm values using the calculations we worked out:</span></span>
-<span id="cb130-24"><a href="#cb130-24" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb130-25"><a href="#cb130-25" tabindex="-1"></a>  <span class="at">tissue    =</span> <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>),</span>
-<span id="cb130-26"><a href="#cb130-26" tabindex="-1"></a>  <span class="at">medianExp =</span> <span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
-<span id="cb130-27"><a href="#cb130-27" tabindex="-1"></a>)</span>
-<span id="cb130-28"><a href="#cb130-28" tabindex="-1"></a></span>
-<span id="cb130-29"><a href="#cb130-29" tabindex="-1"></a><span class="co"># That&#39;s the answer!</span></span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a><span class="co">#I will build this up in several steps</span></span>
+<span id="cb129-2"><a href="#cb129-2" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="#cb129-3" tabindex="-1"></a><span class="co"># the syntax is `lapply(X,FUN)`</span></span>
+<span id="cb129-4"><a href="#cb129-4" tabindex="-1"></a><span class="co"># We need to apply to two tissues so we list them in X. For FUN, let&#39;s just create a simple function that returns exactly what is given ...</span></span>
+<span id="cb129-5"><a href="#cb129-5" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t){ t } )</span>
+<span id="cb129-6"><a href="#cb129-6" tabindex="-1"></a><span class="co"># So, t is set to &quot;Leaf&quot; first, then &quot;Stem&quot;</span></span>
+<span id="cb129-7"><a href="#cb129-7" tabindex="-1"></a><span class="co"># We need to be selecting rows of e there e$tissue is &quot;Leaf&quot; and then &quot;Stem&quot;, so let&#39;s try returning versions of e with just those selected ...</span></span>
+<span id="cb129-8"><a href="#cb129-8" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,] } )</span>
+<span id="cb129-9"><a href="#cb129-9" tabindex="-1"></a><span class="co"># Ok, and but what we want to work with is the tpm, so let&#39;s use what we know about data frames to extract just that column ...</span></span>
+<span id="cb129-10"><a href="#cb129-10" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm } )</span>
+<span id="cb129-11"><a href="#cb129-11" tabindex="-1"></a><span class="co"># Good, and what do we want with tpm? The median, so we use the function median() to calcualte it on those results ...</span></span>
+<span id="cb129-12"><a href="#cb129-12" tabindex="-1"></a><span class="fu">lapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb129-13"><a href="#cb129-13" tabindex="-1"></a><span class="co"># So close! We just prefer this as a vector not a list, so we use `sapply()`</span></span>
+<span id="cb129-14"><a href="#cb129-14" tabindex="-1"></a><span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb129-15"><a href="#cb129-15" tabindex="-1"></a></span>
+<span id="cb129-16"><a href="#cb129-16" tabindex="-1"></a></span>
+<span id="cb129-17"><a href="#cb129-17" tabindex="-1"></a><span class="co"># That&#39;s great -- we have the tissues we need ( c(&quot;Leaf&quot;,&quot;Stem&quot;) ) and their median expression values ( the long sapply command above ).</span></span>
+<span id="cb129-18"><a href="#cb129-18" tabindex="-1"></a><span class="co"># To make a data frame, we just use the regular syntax for making one ...</span></span>
+<span id="cb129-19"><a href="#cb129-19" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb129-20"><a href="#cb129-20" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb129-21"><a href="#cb129-21" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</span>
+<span id="cb129-22"><a href="#cb129-22" tabindex="-1"></a>)</span>
+<span id="cb129-23"><a href="#cb129-23" tabindex="-1"></a><span class="co"># ... except we enter the tissue and median tpm values using the calculations we worked out:</span></span>
+<span id="cb129-24"><a href="#cb129-24" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb129-25"><a href="#cb129-25" tabindex="-1"></a>  <span class="at">tissue    =</span> <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>),</span>
+<span id="cb129-26"><a href="#cb129-26" tabindex="-1"></a>  <span class="at">medianExp =</span> <span class="fu">sapply</span>( <span class="fu">c</span>(<span class="st">&quot;Leaf&quot;</span>,<span class="st">&quot;Stem&quot;</span>) , <span class="cf">function</span>(t) { <span class="fu">median</span>( e[e<span class="sc">$</span>tissue<span class="sc">==</span>t,]<span class="sc">$</span>tpm ) } )</span>
+<span id="cb129-27"><a href="#cb129-27" tabindex="-1"></a>)</span>
+<span id="cb129-28"><a href="#cb129-28" tabindex="-1"></a></span>
+<span id="cb129-29"><a href="#cb129-29" tabindex="-1"></a><span class="co"># That&#39;s the answer!</span></span></code></pre></div>
 </details>
 <blockquote>
 <p>Well done!!!</p>
@@ -2403,36 +2402,36 @@ certain operations become very, very fast. They work much like vectors
 and lists and things you are already good at. We will just demonstrate
 the basics here for you to run so you are not surprised when you run
 into them:</p>
-<div class="sourceCode" id="cb131"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" tabindex="-1"></a><span class="co"># Define a matrix</span></span>
-<span id="cb131-2"><a href="#cb131-2" tabindex="-1"></a>( m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>,<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>) )</span>
-<span id="cb131-3"><a href="#cb131-3" tabindex="-1"></a></span>
-<span id="cb131-4"><a href="#cb131-4" tabindex="-1"></a><span class="co"># Index using row/column ranges or blank; nrow/ncol:</span></span>
-<span id="cb131-5"><a href="#cb131-5" tabindex="-1"></a>m1[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(m1),] <span class="co"># Can also be assigned with `&lt;-`</span></span>
-<span id="cb131-6"><a href="#cb131-6" tabindex="-1"></a></span>
-<span id="cb131-7"><a href="#cb131-7" tabindex="-1"></a><span class="co"># Perform element-wise operations</span></span>
-<span id="cb131-8"><a href="#cb131-8" tabindex="-1"></a>m1 <span class="sc">+</span> m1</span>
-<span id="cb131-9"><a href="#cb131-9" tabindex="-1"></a>m1[<span class="dv">1</span>,] <span class="sc">-</span> m1[,<span class="dv">3</span>]</span>
-<span id="cb131-10"><a href="#cb131-10" tabindex="-1"></a>m1 <span class="sc">*</span> <span class="fl">3.2</span></span>
-<span id="cb131-11"><a href="#cb131-11" tabindex="-1"></a></span>
-<span id="cb131-12"><a href="#cb131-12" tabindex="-1"></a><span class="co"># Logical operations and assignment</span></span>
-<span id="cb131-13"><a href="#cb131-13" tabindex="-1"></a>m1[m1<span class="sc">&lt;</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>m1[m1<span class="sc">&lt;</span><span class="dv">6</span>] <span class="co"># make negative</span></span>
-<span id="cb131-14"><a href="#cb131-14" tabindex="-1"></a></span>
-<span id="cb131-15"><a href="#cb131-15" tabindex="-1"></a><span class="co"># Define another, with one column</span></span>
-<span id="cb131-16"><a href="#cb131-16" tabindex="-1"></a>( m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">100</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">4</span>) )</span>
-<span id="cb131-17"><a href="#cb131-17" tabindex="-1"></a></span>
-<span id="cb131-18"><a href="#cb131-18" tabindex="-1"></a><span class="co"># Perform matrix multiplication</span></span>
-<span id="cb131-19"><a href="#cb131-19" tabindex="-1"></a>m1 <span class="sc">%*%</span> m2</span>
-<span id="cb131-20"><a href="#cb131-20" tabindex="-1"></a></span>
-<span id="cb131-21"><a href="#cb131-21" tabindex="-1"></a><span class="co"># Matrix-specific functions, e.g. ...</span></span>
-<span id="cb131-22"><a href="#cb131-22" tabindex="-1"></a><span class="fu">colMeans</span>(m1)</span>
-<span id="cb131-23"><a href="#cb131-23" tabindex="-1"></a><span class="fu">rowSums</span>(m1)</span>
-<span id="cb131-24"><a href="#cb131-24" tabindex="-1"></a></span>
-<span id="cb131-25"><a href="#cb131-25" tabindex="-1"></a><span class="co"># Transpose</span></span>
-<span id="cb131-26"><a href="#cb131-26" tabindex="-1"></a><span class="fu">t</span>(m2)</span>
-<span id="cb131-27"><a href="#cb131-27" tabindex="-1"></a></span>
-<span id="cb131-28"><a href="#cb131-28" tabindex="-1"></a><span class="co"># The `apply()` function is designed for matrices.</span></span>
-<span id="cb131-29"><a href="#cb131-29" tabindex="-1"></a><span class="fu">apply</span>( m1 , <span class="dv">2</span> , <span class="cf">function</span>(col) {col<span class="sc">/</span><span class="fu">mean</span>(col)} ) <span class="co"># The `2` refers to the function operating on columns; 1=rows, 2=columns. See ?apply</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co"># Define a matrix</span></span>
+<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a>( m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>,<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>) )</span>
+<span id="cb130-3"><a href="#cb130-3" tabindex="-1"></a></span>
+<span id="cb130-4"><a href="#cb130-4" tabindex="-1"></a><span class="co"># Index using row/column ranges or blank; nrow/ncol:</span></span>
+<span id="cb130-5"><a href="#cb130-5" tabindex="-1"></a>m1[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(m1),] <span class="co"># Can also be assigned with `&lt;-`</span></span>
+<span id="cb130-6"><a href="#cb130-6" tabindex="-1"></a></span>
+<span id="cb130-7"><a href="#cb130-7" tabindex="-1"></a><span class="co"># Perform element-wise operations</span></span>
+<span id="cb130-8"><a href="#cb130-8" tabindex="-1"></a>m1 <span class="sc">+</span> m1</span>
+<span id="cb130-9"><a href="#cb130-9" tabindex="-1"></a>m1[<span class="dv">1</span>,] <span class="sc">-</span> m1[,<span class="dv">3</span>]</span>
+<span id="cb130-10"><a href="#cb130-10" tabindex="-1"></a>m1 <span class="sc">*</span> <span class="fl">3.2</span></span>
+<span id="cb130-11"><a href="#cb130-11" tabindex="-1"></a></span>
+<span id="cb130-12"><a href="#cb130-12" tabindex="-1"></a><span class="co"># Logical operations and assignment</span></span>
+<span id="cb130-13"><a href="#cb130-13" tabindex="-1"></a>m1[m1<span class="sc">&lt;</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>m1[m1<span class="sc">&lt;</span><span class="dv">6</span>] <span class="co"># make negative</span></span>
+<span id="cb130-14"><a href="#cb130-14" tabindex="-1"></a></span>
+<span id="cb130-15"><a href="#cb130-15" tabindex="-1"></a><span class="co"># Define another, with one column</span></span>
+<span id="cb130-16"><a href="#cb130-16" tabindex="-1"></a>( m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">100</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">4</span>) )</span>
+<span id="cb130-17"><a href="#cb130-17" tabindex="-1"></a></span>
+<span id="cb130-18"><a href="#cb130-18" tabindex="-1"></a><span class="co"># Perform matrix multiplication</span></span>
+<span id="cb130-19"><a href="#cb130-19" tabindex="-1"></a>m1 <span class="sc">%*%</span> m2</span>
+<span id="cb130-20"><a href="#cb130-20" tabindex="-1"></a></span>
+<span id="cb130-21"><a href="#cb130-21" tabindex="-1"></a><span class="co"># Matrix-specific functions, e.g. ...</span></span>
+<span id="cb130-22"><a href="#cb130-22" tabindex="-1"></a><span class="fu">colMeans</span>(m1)</span>
+<span id="cb130-23"><a href="#cb130-23" tabindex="-1"></a><span class="fu">rowSums</span>(m1)</span>
+<span id="cb130-24"><a href="#cb130-24" tabindex="-1"></a></span>
+<span id="cb130-25"><a href="#cb130-25" tabindex="-1"></a><span class="co"># Transpose</span></span>
+<span id="cb130-26"><a href="#cb130-26" tabindex="-1"></a><span class="fu">t</span>(m2)</span>
+<span id="cb130-27"><a href="#cb130-27" tabindex="-1"></a></span>
+<span id="cb130-28"><a href="#cb130-28" tabindex="-1"></a><span class="co"># The `apply()` function is designed for matrices.</span></span>
+<span id="cb130-29"><a href="#cb130-29" tabindex="-1"></a><span class="fu">apply</span>( m1 , <span class="dv">2</span> , <span class="cf">function</span>(col) {col<span class="sc">/</span><span class="fu">mean</span>(col)} ) <span class="co"># The `2` refers to the function operating on columns; 1=rows, 2=columns. See ?apply</span></span></code></pre></div>
 <hr />
 </div>
 <div id="if-and-if-else-type-conditional-statements"
@@ -2447,35 +2446,35 @@ needs to make a decision that can be worded like:</p>
   # Code to run if true
 }</code></pre>
 <p>So a simple example would be:</p>
-<div class="sourceCode" id="cb133"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb133-2"><a href="#cb133-2" tabindex="-1"></a><span class="cf">if</span>(a <span class="sc">&gt;</span> <span class="dv">3</span>){</span>
-<span id="cb133-3"><a href="#cb133-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is more than 3!&quot;</span>)</span>
-<span id="cb133-4"><a href="#cb133-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb132-2"><a href="#cb132-2" tabindex="-1"></a><span class="cf">if</span>(a <span class="sc">&gt;</span> <span class="dv">3</span>){</span>
+<span id="cb132-3"><a href="#cb132-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is more than 3!&quot;</span>)</span>
+<span id="cb132-4"><a href="#cb132-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>Other statements might come in the form:</p>
 <p><strong>… If X is true, do thing A. Otherwise, do thing
 B</strong></p>
+<p>Corresponding to …</p>
+<div class="sourceCode" id="cb133"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb133-2"><a href="#cb133-2" tabindex="-1"></a><span class="cf">if</span>(a <span class="sc">&gt;</span> <span class="dv">3</span>){</span>
+<span id="cb133-3"><a href="#cb133-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is more than 3! Doing thing A&quot;</span>)</span>
+<span id="cb133-4"><a href="#cb133-4" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb133-5"><a href="#cb133-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is not more than 3! Doing thing B&quot;</span>)</span>
+<span id="cb133-6"><a href="#cb133-6" tabindex="-1"></a>}</span></code></pre></div>
+<p>And finally:</p>
+<p><strong>… If X is true, do thing A. Otherwise if Y is true, do thing
+B. Otherwise, do thing C.</strong></p>
 <p>Corresponding to …</p>
 <div class="sourceCode" id="cb134"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb134-2"><a href="#cb134-2" tabindex="-1"></a><span class="cf">if</span>(a <span class="sc">&gt;</span> <span class="dv">3</span>){</span>
 <span id="cb134-3"><a href="#cb134-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is more than 3! Doing thing A&quot;</span>)</span>
-<span id="cb134-4"><a href="#cb134-4" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb134-5"><a href="#cb134-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is not more than 3! Doing thing B&quot;</span>)</span>
-<span id="cb134-6"><a href="#cb134-6" tabindex="-1"></a>}</span></code></pre></div>
-<p>And finally:</p>
-<p><strong>… If X is true, do thing A. Otherwise if Y is true, do thing
-B. Otherwise, do thing C.</strong></p>
-<p>Corresponding to …</p>
-<div class="sourceCode" id="cb135"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb135-2"><a href="#cb135-2" tabindex="-1"></a><span class="cf">if</span>(a <span class="sc">&gt;</span> <span class="dv">3</span>){</span>
-<span id="cb135-3"><a href="#cb135-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is more than 3! Doing thing A&quot;</span>)</span>
-<span id="cb135-4"><a href="#cb135-4" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (a<span class="sc">==</span><span class="dv">1</span>) {</span>
-<span id="cb135-5"><a href="#cb135-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is 1! Doing thing B&quot;</span>)</span>
-<span id="cb135-6"><a href="#cb135-6" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb135-7"><a href="#cb135-7" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;None of those things were true! Doing thing C&quot;</span>)</span>
-<span id="cb135-8"><a href="#cb135-8" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb134-4"><a href="#cb134-4" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (a<span class="sc">==</span><span class="dv">1</span>) {</span>
+<span id="cb134-5"><a href="#cb134-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;a is 1! Doing thing B&quot;</span>)</span>
+<span id="cb134-6"><a href="#cb134-6" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb134-7"><a href="#cb134-7" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;None of those things were true! Doing thing C&quot;</span>)</span>
+<span id="cb134-8"><a href="#cb134-8" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Exercises:</strong></p>
 <p>Genotypes of biallelic variants are sometimes expressed as the
 numbers 0—2, where 0 means homozygous for the reference genotype, 1
@@ -2499,29 +2498,29 @@ way?</li>
 <summary>
 <strong>See answer:</strong>
 </summary>
-<div class="sourceCode" id="cb136"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a>GTs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">15</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a><span class="fu">sapply</span>( GTs , <span class="cf">function</span>(gt){</span>
-<span id="cb136-3"><a href="#cb136-3" tabindex="-1"></a>  <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">0</span>){</span>
-<span id="cb136-4"><a href="#cb136-4" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Ref&quot;</span>)</span>
-<span id="cb136-5"><a href="#cb136-5" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">1</span>){</span>
-<span id="cb136-6"><a href="#cb136-6" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Het&quot;</span>)</span>
-<span id="cb136-7"><a href="#cb136-7" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">2</span>){</span>
-<span id="cb136-8"><a href="#cb136-8" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Alt&quot;</span>)</span>
-<span id="cb136-9"><a href="#cb136-9" tabindex="-1"></a>  }</span>
-<span id="cb136-10"><a href="#cb136-10" tabindex="-1"></a>})</span>
-<span id="cb136-11"><a href="#cb136-11" tabindex="-1"></a></span>
-<span id="cb136-12"><a href="#cb136-12" tabindex="-1"></a></span>
-<span id="cb136-13"><a href="#cb136-13" tabindex="-1"></a><span class="co"># Examples of other ways:</span></span>
-<span id="cb136-14"><a href="#cb136-14" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(GTs))</span>
-<span id="cb136-15"><a href="#cb136-15" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Ref&quot;</span></span>
-<span id="cb136-16"><a href="#cb136-16" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Het&quot;</span></span>
-<span id="cb136-17"><a href="#cb136-17" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Alt&quot;</span></span>
-<span id="cb136-18"><a href="#cb136-18" tabindex="-1"></a>out</span>
-<span id="cb136-19"><a href="#cb136-19" tabindex="-1"></a></span>
-<span id="cb136-20"><a href="#cb136-20" tabindex="-1"></a><span class="co"># ~ or ~</span></span>
-<span id="cb136-21"><a href="#cb136-21" tabindex="-1"></a></span>
-<span id="cb136-22"><a href="#cb136-22" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Ref&quot;</span>,<span class="st">&quot;Het&quot;</span>,<span class="st">&quot;Alt&quot;</span>)[GTs<span class="sc">+</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" tabindex="-1"></a>GTs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">15</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" tabindex="-1"></a><span class="fu">sapply</span>( GTs , <span class="cf">function</span>(gt){</span>
+<span id="cb135-3"><a href="#cb135-3" tabindex="-1"></a>  <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb135-4"><a href="#cb135-4" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Ref&quot;</span>)</span>
+<span id="cb135-5"><a href="#cb135-5" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">1</span>){</span>
+<span id="cb135-6"><a href="#cb135-6" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Het&quot;</span>)</span>
+<span id="cb135-7"><a href="#cb135-7" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(gt<span class="sc">==</span><span class="dv">2</span>){</span>
+<span id="cb135-8"><a href="#cb135-8" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Alt&quot;</span>)</span>
+<span id="cb135-9"><a href="#cb135-9" tabindex="-1"></a>  }</span>
+<span id="cb135-10"><a href="#cb135-10" tabindex="-1"></a>})</span>
+<span id="cb135-11"><a href="#cb135-11" tabindex="-1"></a></span>
+<span id="cb135-12"><a href="#cb135-12" tabindex="-1"></a></span>
+<span id="cb135-13"><a href="#cb135-13" tabindex="-1"></a><span class="co"># Examples of other ways:</span></span>
+<span id="cb135-14"><a href="#cb135-14" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(GTs))</span>
+<span id="cb135-15"><a href="#cb135-15" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Ref&quot;</span></span>
+<span id="cb135-16"><a href="#cb135-16" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Het&quot;</span></span>
+<span id="cb135-17"><a href="#cb135-17" tabindex="-1"></a>out[GTs<span class="sc">==</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Alt&quot;</span></span>
+<span id="cb135-18"><a href="#cb135-18" tabindex="-1"></a>out</span>
+<span id="cb135-19"><a href="#cb135-19" tabindex="-1"></a></span>
+<span id="cb135-20"><a href="#cb135-20" tabindex="-1"></a><span class="co"># ~ or ~</span></span>
+<span id="cb135-21"><a href="#cb135-21" tabindex="-1"></a></span>
+<span id="cb135-22"><a href="#cb135-22" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Ref&quot;</span>,<span class="st">&quot;Het&quot;</span>,<span class="st">&quot;Alt&quot;</span>)[GTs<span class="sc">+</span><span class="dv">1</span>]</span></code></pre></div>
 </details>
 <hr />
 </div>
@@ -2532,20 +2531,20 @@ a site called <a href="https://cran.r-project.org/">CRAN</a>, and are
 expected to meet some kind of standards for reliability and
 compatibility.</p>
 <p>To get a package from CRAN, it’s as simple as:</p>
-<div class="sourceCode" id="cb137"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;magrittr&quot;</span>) <span class="co"># Magrittr is the package name</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;magrittr&quot;</span>) <span class="co"># Magrittr is the package name</span></span></code></pre></div>
 <p>If everything goes well with the install, we can access functions
 from the package with the package name followed by two colons
 (<code>::</code>) and then the function name …</p>
-<div class="sourceCode" id="cb138"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a>magrittr<span class="sc">::</span><span class="fu">raise_to_power</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" tabindex="-1"></a>magrittr<span class="sc">::</span><span class="fu">raise_to_power</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span></code></pre></div>
 <p>Or more commonly, you’ll just want to be able to access all a
 package’s functions all the time without the trouble of writing its name
 all the time, in which case you can run <code>require()</code> to load
 all the functions:</p>
-<div class="sourceCode" id="cb139"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" tabindex="-1"></a><span class="fu">require</span>(magrittr) <span class="co"># You may also come across `library()` which does the same but re-loads the package each time, no matter if the package is already loaded or not.</span></span>
-<span id="cb139-2"><a href="#cb139-2" tabindex="-1"></a><span class="fu">raise_to_power</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="fu">require</span>(magrittr) <span class="co"># You may also come across `library()` which does the same but re-loads the package each time, no matter if the package is already loaded or not.</span></span>
+<span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a><span class="fu">raise_to_power</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span></code></pre></div>
 <p>You have to be careful with this, because often packages use the same
 function names, in which case it can get ambiguous which one is
 intended.</p>
@@ -2553,18 +2552,18 @@ intended.</p>
 <h4>Magrittr</h4>
 <p>What does the magrittr package do? Well, it enables a special type of
 syntax, similar to pipes in linux. Consider:</p>
-<div class="sourceCode" id="cb140"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">range</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">+</span><span class="dv">4</span>))<span class="sc">**</span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">range</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">+</span><span class="dv">4</span>))<span class="sc">**</span><span class="dv">3</span></span></code></pre></div>
 <p>I.e., we take the object 1:10, <em>then</em> add 4, <em>then</em>
 take the range, <em>then</em> take the mean, <em>then</em> raise to the
 power of 3. All very simple, but the command isn’t easy to write or
 follow. The magrittr pipe, <code>%&gt;%</code> basically places the
 object to the left of it as the first argument to the function on the
 right of it. As a result, it can be used like the word “then” …</p>
-<div class="sourceCode" id="cb141"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">range</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">+</span><span class="dv">4</span>))<span class="sc">**</span><span class="dv">3</span></span>
-<span id="cb141-2"><a href="#cb141-2" tabindex="-1"></a></span>
-<span id="cb141-3"><a href="#cb141-3" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%&gt;%</span> <span class="fu">add</span>(<span class="dv">4</span>) <span class="sc">%&gt;%</span> range <span class="sc">%&gt;%</span> mean <span class="sc">%&gt;%</span> <span class="fu">raise_to_power</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">range</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">+</span><span class="dv">4</span>))<span class="sc">**</span><span class="dv">3</span></span>
+<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a></span>
+<span id="cb140-3"><a href="#cb140-3" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%&gt;%</span> <span class="fu">add</span>(<span class="dv">4</span>) <span class="sc">%&gt;%</span> range <span class="sc">%&gt;%</span> mean <span class="sc">%&gt;%</span> <span class="fu">raise_to_power</span>(<span class="dv">3</span>)</span></code></pre></div>
 <p>And yep it is magrittr that introduces these helper functions like
 <code>add()</code> and <code>raise_to_power()</code> to help it all
 along.</p>
@@ -2572,31 +2571,31 @@ along.</p>
 <div id="data.table" class="section level4">
 <h4>data.table</h4>
 <p>The most important package in all bioinformatics is data.table.</p>
-<div class="sourceCode" id="cb142"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="fu">require</span>(data.table)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" tabindex="-1"></a><span class="fu">require</span>(data.table)</span></code></pre></div>
 <p>There is a full data.table tutorial you should do, but to give you a
 taste of how much easier data.table and magrittr can make things,
 consider how you would calculate the mean petal length from the iris
 dataset normally:</p>
-<div class="sourceCode" id="cb143"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" tabindex="-1"></a><span class="fu">mean</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;Petal.Length&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="fu">mean</span>(iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;Petal.Length&quot;</span>])</span></code></pre></div>
 <p>Ok, so magrittr could help avoid that awkward <code>mean()</code>
 function needing to be wrapped around a big inner command:</p>
-<div class="sourceCode" id="cb144"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;Petal.Length&quot;</span>] <span class="sc">%&gt;%</span> mean</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;Petal.Length&quot;</span>] <span class="sc">%&gt;%</span> mean</span></code></pre></div>
 <p>Still, why do we have to write iris twice? Wouldn’t it be great if
 inside the indexing fields, we could just access the columns by name
 like normal vectors? We can, if we convert it to a data.table, which
 allows this usage:</p>
-<div class="sourceCode" id="cb145"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" tabindex="-1"></a>iris <span class="sc">%&lt;&gt;%</span> as.data.table <span class="co"># A magrittr trick, see ?magrittr::`%&lt;&gt;%`</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a>iris <span class="sc">%&lt;&gt;%</span> as.data.table <span class="co"># A magrittr trick, see ?magrittr::`%&lt;&gt;%`</span></span></code></pre></div>
 <p>Then we could write:</p>
-<div class="sourceCode" id="cb146"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a>iris[Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,Petal.Length] <span class="sc">%&gt;%</span> mean</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" tabindex="-1"></a>iris[Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,Petal.Length] <span class="sc">%&gt;%</span> mean</span></code></pre></div>
 <p>But since we are allowed to use raw column names as vectors inside
 the indexing … couldn’t we also just run functions on them there?</p>
-<div class="sourceCode" id="cb147"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" tabindex="-1"></a>iris[Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="fu">mean</span>(Petal.Length)]</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a>iris[Species<span class="sc">==</span><span class="st">&quot;setosa&quot;</span>,<span class="fu">mean</span>(Petal.Length)]</span></code></pre></div>
 <p>Easy! Head over to the <a href="docs/tutorial_data_table.html">full
 data.table tutorial</a> once you’re done here …</p>
 <hr />
@@ -2608,14 +2607,14 @@ data.table tutorial</a> once you’re done here …</p>
 don’t be afraid to learn it, there are plenty of good resources
 online.</p>
 <p>An example:</p>
-<div class="sourceCode" id="cb148"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a><span class="fu">ggplot</span>( iris , <span class="fu">aes</span>( <span class="at">x =</span> Petal.Width , <span class="at">y =</span> Petal.Length ,  <span class="at">group =</span> <span class="fu">as.factor</span>(Species) ) ) <span class="sc">+</span></span>
-<span id="cb148-3"><a href="#cb148-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb148-4"><a href="#cb148-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb148-5"><a href="#cb148-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Species<span class="sc">~</span>.,<span class="at">scales=</span><span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb147-2"><a href="#cb147-2" tabindex="-1"></a><span class="fu">ggplot</span>( iris , <span class="fu">aes</span>( <span class="at">x =</span> Petal.Width , <span class="at">y =</span> Petal.Length ,  <span class="at">group =</span> <span class="fu">as.factor</span>(Species) ) ) <span class="sc">+</span></span>
+<span id="cb147-3"><a href="#cb147-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb147-4"><a href="#cb147-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb147-5"><a href="#cb147-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Species<span class="sc">~</span>.,<span class="at">scales=</span><span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="tutorial_R_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="tutorial_R_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 <p>As you can see, ggplot is excellent for quickly showing your data in
 ways that help you see the general picture and decide how to move on.
 <strong>However</strong>, the moment you find yourself using all kinds

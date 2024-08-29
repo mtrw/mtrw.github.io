@@ -508,13 +508,7 @@ How do you know what arguments a function needs, and what its defaults are? Ther
 
 ## Autocomplete and other IDE shortcuts
 
-In R, you end up typing the same things a lot. The IDE (Rstudio) will guess the ending of a lot of half-typed things, when prompted by the `<TAB>` key. For example, we know the variable 'letters' exists. Just type ...
-
-```{r,eval=F}
-le
-```
-
-..., leave your cursor at the end and hit `<TAB>`. You will get a scrollable, clickable, list of possible autocompletes:
+In R, you end up typing the same things a lot. The IDE (Rstudio) will guess the ending of a lot of half-typed things, when prompted by the `<TAB>` key. For example, we know the variable 'letters' exists. Just type ... `le` ..., leave your cursor at the end and hit `<TAB>`. You will get a scrollable, clickable, list of possible autocompletes:
 
 ![](images/Rautocomplete.png)
 
@@ -1759,6 +1753,7 @@ As you can see, ggplot is excellent for quickly showing your data in ways that h
 
 ---
 
+
 # You did it!
 
 The key now is to practise, and the key to practice is to have a task to work on. So next time you're thinking about some data and you mentally ask "I wonder if I could ..." then jump on R, find or simulate some data, and try to make your idea work.
@@ -1770,7 +1765,3 @@ But for now ...
 > CONGRATULATIONS!
 
 You deserve cake, or wine, or wine and cake. Go and do something you like that isn't R.
-
-
-
-
