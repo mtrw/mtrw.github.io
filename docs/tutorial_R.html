@@ -1270,9 +1270,8 @@ symbol:</p>
 <p>… which will give you a help document containing (most importantly),
 descriptions of the arguments, and examples, which are usually very
 helpful.</p>
-</div>
-<div id="section" class="section level2">
-<h2><img src="images/Rhelp.png" /></h2>
+<p><img src="images/Rhelp.png" /></p>
+<hr />
 </div>
 <div id="creating-vectors" class="section level2">
 <h2>Creating vectors</h2>
@@ -1497,14 +1496,15 @@ three and less than six ~ <em>OR</em> ~ - Less than two and not equal to
 <p>It is more common to leave out the middle step though, as in …</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
 <span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.24471417 2.10863058 1.12469827 1.17712658 0.47289718 0.07273613
-##  [7] 0.57075313 0.76884451 1.63190727 0.65703657 0.03614585 1.86702163
-## [13] 1.07193711 0.58982189 0.74562717 1.22106348 0.45066512 0.70954006
-## [19] 0.12246281 0.27157628 0.92098208 1.30183232 0.25579770 0.44544547
-## [25] 0.38911312 0.34419464 1.04333562 1.08929164 1.20472005 0.15604797
-## [31] 0.82936945 1.32114187 0.10571294 2.36805326 1.31674921 1.02117037
-## [37] 1.12450878 1.09417958 0.23461342 0.92538808 2.41262165 0.48503052
-## [43] 2.16688273 0.03993883 1.09323987</code></pre>
+<pre><code>##  [1] 0.59452063 2.32642454 1.31409853 0.88520408 0.82789352 1.01911052
+##  [7] 0.96330063 0.56141272 0.51564972 1.00945071 1.26499104 2.12880952
+## [13] 0.11337833 0.55180487 0.28278806 0.22400565 0.97758651 0.41839286
+## [19] 1.00803307 0.93017578 2.42699038 0.65767580 0.07703717 0.81794020
+## [25] 0.32408597 0.85127579 0.21111628 0.74889803 0.25710887 0.46834127
+## [31] 2.34173372 0.22052616 0.95690322 1.43529418 0.96375058 0.15492595
+## [37] 0.38877044 0.31786971 1.92777791 0.41421282 1.32183663 0.08855599
+## [43] 0.30295364 0.37588754 0.41846582 1.93634006 0.48681411 0.34141424
+## [49] 0.59252668</code></pre>
 <p>And one last thing, the very common function <code>which()</code>
 tells you <strong>which</strong> entries of a logical vector are TRUE.
 So <code>which(c(TRUE,FALSE,TRUE))</code> will return the vector ( 1 , 3
@@ -1674,26 +1674,26 @@ spreadsheet. Let’s make one now …</p>
 <span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>)</span>
 <span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre><code>##    sampleIds  treatment  nFruits
-## 1   Sample 1 Fertiliser 2375.934
-## 2   Sample 2 Fertiliser 2411.526
-## 3   Sample 3 Fertiliser 2392.867
-## 4   Sample 4 Fertiliser 2395.598
-## 5   Sample 5 Fertiliser 2444.810
-## 6   Sample 6 Fertiliser 2409.780
-## 7   Sample 7 Fertiliser 2371.571
-## 8   Sample 8 Fertiliser 2444.741
-## 9   Sample 9 Fertiliser 2292.255
-## 10 Sample 10 Fertiliser 2428.687
-## 11 Sample 11    Control 2282.800
-## 12 Sample 12    Control 2312.898
-## 13 Sample 13    Control 2384.833
-## 14 Sample 14    Control 2311.308
-## 15 Sample 15    Control 2255.140
-## 16 Sample 16    Control 2252.311
-## 17 Sample 17    Control 2345.657
-## 18 Sample 18    Control 2301.360
-## 19 Sample 19    Control 2298.138
-## 20 Sample 20    Control 2301.369</code></pre>
+## 1   Sample 1 Fertiliser 2406.851
+## 2   Sample 2 Fertiliser 2362.430
+## 3   Sample 3 Fertiliser 2361.943
+## 4   Sample 4 Fertiliser 2411.078
+## 5   Sample 5 Fertiliser 2429.245
+## 6   Sample 6 Fertiliser 2400.940
+## 7   Sample 7 Fertiliser 2369.774
+## 8   Sample 8 Fertiliser 2392.466
+## 9   Sample 9 Fertiliser 2384.298
+## 10 Sample 10 Fertiliser 2411.702
+## 11 Sample 11    Control 2322.100
+## 12 Sample 12    Control 2238.587
+## 13 Sample 13    Control 2317.450
+## 14 Sample 14    Control 2298.973
+## 15 Sample 15    Control 2354.865
+## 16 Sample 16    Control 2345.375
+## 17 Sample 17    Control 2236.295
+## 18 Sample 18    Control 2434.740
+## 19 Sample 19    Control 2360.860
+## 20 Sample 20    Control 2264.838</code></pre>
 <p>Much neater! We can use indexing on data frames to get and set
 variables. With data frames we use two indexes (for rows and columns),
 separated by a comma. So the to see or set the third entry in the first
@@ -1794,9 +1794,9 @@ names as argument names, and the corresponding values as arguments:</p>
 <span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a>  <span class="at">someRandomNumbers =</span> <span class="fu">runif</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
 <span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##   someIntegers someLetters someRandomNumbers
-## 1            1           z       -0.35545291
-## 2            2           y       -0.02788979
-## 3            3           x       -0.04846028</code></pre>
+## 1            1           z        -0.5930077
+## 2            2           y        -0.3593238
+## 3            3           x        -0.3707120</code></pre>
 </div>
 <div id="combining-data-frames-with-rbind" class="section level4">
 <h4>Combining data frames with rbind</h4>

@@ -541,6 +541,7 @@ Or you can run the function name preceded by a `?` symbol:
 ... which will give you a help document containing (most importantly), descriptions of the arguments, and examples, which are usually very helpful.
 
 ![](images/Rhelp.png)
+
 ---
 
 ## Creating vectors
