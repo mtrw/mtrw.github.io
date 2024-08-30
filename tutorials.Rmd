@@ -6,19 +6,24 @@ output:
 
 Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to write a tutorial on it here!
 
-+   [Working in R on Spartan](./tutorial_Rstart.html)
-+   [Loading program modules on Spartan](./tutorial_module.html)
-+   [Running jobs on Spartan: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
-+   [Interactive sessions on Spartan](./tutorial_slurm_interactive.html)
-+   [Transferring Spartan data and opening files on your desktop with SFTP](./tutorial_sftp.html)
-+   [Transfer data to and from long-term storage (Mediaflux)](./tutorial_mediaflux.html)
-+   [Beginning R](./tutorial_R.html)
-+   [Level up your data skills with R::data.table](./tutorial_data_table.html)
-+   [Working in screen](./tutorial_screen.html)
+-   Spartan tutorials: 
+    +   [Loading program modules on Spartan](./tutorial_module.html)
+    +   [Running jobs on Spartan: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
+    +   [Interactive sessions on Spartan](./tutorial_slurm_interactive.html)
+    +   [Transferring Spartan data and opening files on your desktop with SFTP](./tutorial_sftp.html)
+    +   [Transfer data to and from long-term storage (Mediaflux)](./tutorial_mediaflux.html)
+-   R tutorials:
+    +   [Working in R on Spartan](./tutorial_Rstart.html)
+    +   [Beginning R](./tutorial_R.html)
+    +   [Level up your data skills with R::data.table](./tutorial_data_table.html)
+-   Linux tutorials:
 
 *TO DO*
 
++   Vim
++   GNU Screen
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal
-+   Basic Bionformatics: AWK
-+   Basic Bioinformatics: Mapping, Variant Calling, and the SAM/BAM format
-+   Basic Bioinformatics: Homology searches and BLAST
++   Bionformatics: AWK
++   Bioinformatics: BioDT
++   Bioinformatics: Mapping, Variant Calling, and the SAM/BAM format
++   Bioinformatics: Homology searches and BLAST

@@ -271,12 +271,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -513,7 +507,8 @@ div.tocify {
 href="mailto:%20tim.rabanuswallace@unimelb.edu.au">Tim</a> to write a
 tutorial on it here!</p>
 <ul>
-<li><a href="./tutorial_Rstart.html">Working in R on Spartan</a></li>
+<li>Spartan tutorials:
+<ul>
 <li><a href="./tutorial_module.html">Loading program modules on
 Spartan</a></li>
 <li><a href="./tutorial_slurm_shellscripts.html">Running jobs on
@@ -524,19 +519,27 @@ Spartan</a></li>
 files on your desktop with SFTP</a></li>
 <li><a href="./tutorial_mediaflux.html">Transfer data to and from
 long-term storage (Mediaflux)</a></li>
+</ul></li>
+<li>R tutorials:
+<ul>
+<li><a href="./tutorial_Rstart.html">Working in R on Spartan</a></li>
 <li><a href="./tutorial_R.html">Beginning R</a></li>
 <li><a href="./tutorial_data_table.html">Level up your data skills with
 R::data.table</a></li>
-<li><a href="./tutorial_screen.html">Working in screen</a></li>
+</ul></li>
+<li>Linux tutorials:</li>
 </ul>
 <p><em>TO DO</em></p>
 <ul>
+<li>Vim</li>
+<li>GNU Screen</li>
 <li>Getting a HPC windows desktop: Starting a Virtual Machine with the
 Research Computing Portal</li>
-<li>Basic Bionformatics: AWK</li>
-<li>Basic Bioinformatics: Mapping, Variant Calling, and the SAM/BAM
+<li>Bionformatics: AWK</li>
+<li>Bioinformatics: BioDT</li>
+<li>Bioinformatics: Mapping, Variant Calling, and the SAM/BAM
 format</li>
-<li>Basic Bioinformatics: Homology searches and BLAST</li>
+<li>Bioinformatics: Homology searches and BLAST</li>
 </ul>
 
 
@@ -597,7 +600,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
