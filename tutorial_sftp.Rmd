@@ -4,6 +4,8 @@ output:
   html_document
 ---
 
+If you are looking for the guide on mac go [here](./tutorial_sftp_mac.html).
+
 ## Background
 
 At some stage you will want to transfer data to or from Spartan, either from your desktop computer or from the internet or from another server. Perhaps ... :
@@ -37,11 +39,11 @@ As you can see I now have the file. `wget` gives it a name taken from the URL, s
 
 Mac users go [here](./tutorial_sftp_mac.html).
 
-This is where we use the program [SFTP Drive 2022](https://www.nsoftware.com/sftp/drive/download.aspx), Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
+This is where we use the free program [SFTP Drive 2024](https://www.callback.com/sftpdrive/download), Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
 
-First, install SFTP drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx).
+First, install SFTP drive from [here](https://www.callback.com/sftpdrive/download).
 
-Then open SFTP Drive 2022 and click <new>.
+Then open SFTP Drive 2024 and click <new>.
 
 ![](images/drive1.png)
 

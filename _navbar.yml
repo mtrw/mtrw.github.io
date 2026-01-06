@@ -100,6 +100,8 @@ left:
           href: https://zsh-manual.netlify.app/the-z-shell-manual
         - text: "Zsh -- introductory manual"
           href: https://zsh.sourceforge.io/Intro/intro_1.html
+  - text: "About Me"
+    href: ./professional.html
 right:
   - icon: fa-github
     href: https://github.com/mtrw

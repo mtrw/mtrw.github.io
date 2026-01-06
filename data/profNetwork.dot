@@ -1,0 +1,106 @@
+digraph{
+  
+  layout=circo;
+  root=CBA
+  K=1.8;
+  
+  
+  {UoM,IPK,JKI,JHI,WV,RBG,UofA,YukonGov,UAlaska,KWS,Millenium,Hok,SUAS,DEECA} -> CBA;
+  
+  
+    CBA [color="#00000000",fixedsize=true,fontsize=24,label=<<B><I>M.T.Rabanus-Wallace</I></B>>,tooltip="M. T. Rabanus-Wallace",style=filled,fillcolor="#fcd36c"];
+
+  
+  
+    UoM [color="#00000000",fixedsize=true,label=<<B>The University of Melbourne</B>>,tooltip="The University of Melbourne (Australia)",style=filled,fillcolor=lightblue];
+    cg [color="#00000000",fixedsize=true,label=<<B>CropGEM</B><BR/><I>Mohammad Pourkheirandish<BR/>Kelly Rodgers<BR/>Mahnaz Mandeh<BR/></I>>,tooltip="CropGEM\nMohammad Pourkheirandish\nKelly Rodgers\nMahnaz Mandeh\n"];
+    jg [color="#00000000",fixedsize=true,label=<<B>Golz Lab</B><BR/><I>John Golz<BR/>Maryam Zarean</I>>,tooltip="Golz Lab\nJohn Golz\nMaryam Zarean"];
+    as [color="#00000000",fixedsize=true,label=<<B>Forestry Genetics</B><BR/><I>Antanas Spokevicius<BR/>Kasuni Guntilake</I>>,tooltip="Forestry Genetics\nAntanas Spokevicius\nKasuni Guntilake"];
+    jh [color="#00000000",fixedsize=true,label=<<B>Hunt Lab</B><BR/><I>James Hunt<BR/>Dylan Male</I>>,tooltip="Hunt Lab\nJames Hunt\nDylan Male"];
+    sg [color="#00000000",fixedsize=true,label=<<B>Soils Group</B><BR/><I>Jade Wong<BR/>Zahra Islam</I>>,tooltip="Soils Group\nJade Wong\nZahra Islam"];
+    {cg,jg,as,jh,sg} -> UoM
+
+  
+  
+    IPK [color="#00000000",fixedsize=true,label=<<B>IPK Gatersleben (Germany)</B>>,tooltip="IPK Gatersleben (Germany)>",style=filled,fillcolor=lightblue];
+    dg [color="#00000000",fixedsize=true,label=<<B>Domestication Genomics</B><BR/><I>Martin Mascher</I>>,tooltip="Domestication Genomics\nMartin Mascher"];
+    gg [color="#00000000",fixedsize=true,label=<<B>Genebank Genomics</B><BR/><I>Nils Stein</I>>,tooltip="Genebank Genomics\nNils Stein"];
+    prb [color="#00000000",fixedsize=true,label=<<B>Plant Reproductive Biology</B><BR/><I>Jochen Kuhmlehn</I>>,tooltip="Plant Reproductive Biology\nJochen Kuhmlehn"];
+    cb [color="#00000000",fixedsize=true,label=<<B>Chromosome Biology</B><BR/><I>Andreas Houben</I>>,tooltip="Chromosome Biology\nAndreas Houben"];
+    gb [color="#00000000",fixedsize=true,label=<<B>Genebank</B><BR/><I>Andreas Börner</I>>,tooltip="Genebank\nAndreas Börner"];
+    {dg,gg,prb,cb,gb} -> IPK
+
+  
+  
+    JKI [color="#00000000",fixedsize=true,label=<<B>Julius-Kühn-Institüt (Germany)</B>>,tooltip="Julius-Kühn-Institüt (Germany)",style=filled,fillcolor=lightblue];
+    gvb [color="#00000000",fixedsize=true,label=<<B>Grapevine Breeding</B><BR/><I>Franco Röckel</I>>,tooltip="Grapevine Breeding\nFranco Röckel"];
+    gvb -> JKI
+
+  
+  
+    JHI [color="#00000000",fixedsize=true,label=<<B>James Hutton Institute (UK)</B>>,tooltip="James Hutton Institute (UK)",style=filled,fillcolor=lightblue];
+    cms [color="#00000000",fixedsize=true,label=<<B>Cell and Molecular Sciences</B><BR/><I>Robbie Waugh</I>>,tooltip="Cell and Molecular Sciences\nRobbie Waugh"];
+    ics [color="#00000000",fixedsize=true,label=<<B>Information and Computational Sciences</B><BR/><I>Micha Bayer</I>>,tooltip="Information and Computational Sciences\nMicha Bayer"];
+    {cms,ics} -> JHI
+
+  
+  
+    WV [color="#00000000",fixedsize=true,label=<<B>World Vegetable Centre (Vietnam)</B>>,tooltip="World Vegetable Centre (Vietnam)",style=filled,fillcolor=lightblue]
+    ypleo [color="#00000000",fixedsize=true,label=<<B>Omics Breeding</B><BR/><I>Ya-Ping Lin<BR/>Emmanuel Ormondi</I>>,tooltip="Omics Breeding\nYa-Ping Lin\nEmmanuel Ormondi"];
+    {ypleo}->WV
+
+  
+  
+    RBG [color="#00000000",fixedsize=true,label=<<B>Royal Botanic Gardens at Kew (UK)</B>>,tooltip="Royal Botanic Gardens at Kew (UK)",style=filled,fillcolor=lightblue]
+    il [color="#00000000",fixedsize=true,label=<<B>Trait Diversity and Function</B><BR/><I>Ilia Leitch</I>>,tooltip="Trait Diversity and Function\nIlia Leitch"];
+    {il} -> RBG
+
+  
+  
+    UofA [color="#00000000",fixedsize=true,label=<<B>The University of Adelaide (Australia)</B>>,tooltip="The University of Adelaide",style=filled,fillcolor=lightblue]
+    ACAD [color="#00000000",fixedsize=true,label=<<B>The Australian Centre for Ancient DNA </B><BR/><I>Bastien Llamas<BR/>Xavier Roca-Rada</I>>,tooltip="The Australian Centre for Ancient DNA\nBastien Llamas\nXavier Roca-Rada"]
+    ACAD->UofA
+
+  
+  
+    YukonGov [color="#00000000",fixedsize=true,label=<<B>Government of the Yukon (Canada)</B>>,tooltip="Government of the Yukon (Canada)",style=filled,fillcolor=lightblue]
+    tbc [color="#00000000",fixedsize=true,label=<<B>The Beringia Centre</B><BR/><I>Grant Zazula</I>>,tooltip="The Beringia Centre\nGrant Zazula"]
+    tbc->YukonGov
+
+  
+  
+    UAlaska [color="#00000000",fixedsize=true,label=<<B>The University of Alaska (USA)</B>>,tooltip="The University of Alaska (USA)",style=filled,fillcolor=lightblue]
+    mw [color="#00000000",fixedsize=true,label=<<B>Alaska Stable Isotope Facility</B><BR/><I>Matthew Wooller</I>>,tooltip="Alaska Stable Isotope Facility\nMatthew Wooller"]
+    mw->UAlaska
+
+  
+  
+    KWS [color="#00000000",fixedsize=true,label=<<B>KWS Seed Breeders (Germany)</B><BR/><I>Viktor Korzun<BR/>Andres Gordillo</I>>,tooltip="KWS Seed Breeders (Germany)\nViktor Korzun\nAndres Gordillo",style=filled,fillcolor=lightblue]
+    vk [color="#00000000",fixedsize=true,label=<<B>Scientific Affairs</B><BR/><I>Viktor Korzun</I>>,tooltip="Scientific Affairs\nViktor Korzun"]
+    ag [color="#00000000",fixedsize=true,label=<<B>Rye Breeding</B><BR/><I>Andres Gordillo</I>>,tooltip="Rye Breeding\nAndres Gordillo"]
+    {vk,ag}->KWS
+
+  
+  
+    Millenium [color="#00000000",fixedsize=true,label=<<B>Millenium BioSciences/AGRF (Australia)</B><BR/><I>Paul Gooding</I>>,tooltip="Millenium BioSciences/AGRF \nPaul Gooding",style=filled,fillcolor=lightblue]
+
+  
+  
+    Hok [color="#00000000",fixedsize=true,label=<<B>The Univeristy of Hokkaido (Japan)</B>>,tooltip="The Univeristy of Hokkaido",style=filled,fillcolor=lightblue]
+    yk [color="#00000000",fixedsize=true,label=<<B>Plant Breeding</B><BR/><I>Yohei Koide</I>>,tooltip="Plant Breeding\nYohei Koide"]
+    yk->Hok
+
+  
+  
+    SUAS [color="#00000000",fixedsize=true,label=<<B>Swedish University of Agricultural Sciences (Sweden)</B>>,tooltip="Swedish University of Agricultural Sciences",style=filled,fillcolor=lightblue];
+    pb [color="#00000000",fixedsize=true,label=<<B>Plant breeding</B><BR/><I>Ronja Wonneberger</I>>,tooltip="Plant breeding\nRonja Wonneberger"]
+    pb -> SUAS
+
+  
+  
+    DEECA [color="#00000000",fixedsize=true,label=<<B>Department of Energy, Environment and Climate Action (Australian Government)</B>>,tooltip="Department of Energy, Environment and Climate Action",style=filled,fillcolor=lightblue];
+    ari [color="#00000000",fixedsize=true,label=<<B>Arthur-Rylah Institute</B><BR/><I>Lauren White</I>>,tooltip="Arthur-Rylah Institute\nLauren White"]
+    ari -> DEECA
+
+  
+}

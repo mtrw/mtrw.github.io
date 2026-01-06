@@ -13,7 +13,7 @@
 
 <title>Getting started with R for statistics and bioinformatics</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -56,8 +56,9 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -582,6 +583,9 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li>
+  <a href="./professional.html">About Me</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -632,35 +636,32 @@ just as much a means of self-expression as painting or writing
 music.</p>
 <p>This tutorial favours a style that:</p>
 <ul>
-<li>Is <strong>best for bioinformatics</strong>, where SPEED is hugely
-important.</li>
-<li>Encourages understanding of all the code at a deep level. This:
-<ul>
-<li><strong>Promotes creativity</strong>, by encouraging understanding
-of all the code at a deep level, meaning you are free to express any
-idea that comes into your head. ‘Black boxes’ are avoided.</li>
-</ul></li>
+<li>Is <strong>best for bioinformatics</strong>, where <em>speed</em> is
+hugely important.</li>
+<li><strong>Promotes creative freedom</strong>, by encouraging
+understanding of all the code at a deep level. The aim is that you are
+able to express in code any idea that comes into your head. ‘Black
+boxes’ are avoided.</li>
 </ul>
-<p>Because it aims to give you a deeper understanding, it spends a while
-on the fundamentals. Much of what you learn in Part 1, you will not use
-in everyday code because there are simpler ways to do it using more
-sophisticated tools. BUT, as soon as you want to do something
+<p>To give you a deeper understanding, we spend a while on the
+fundamentals. Much of what you learn in Part 1, you will not use in
+everyday code because there are simpler ways to do it using more
+sophisticated tools. But, when you want to do something
 <em>special</em>, or <em>creative</em>, or exceptionally
-<em>efficient</em>, or <em>new</em>, you will need to understand the
+<em>efficient</em>, or <em>new</em>, you will need to understand these
 fundamentals. Similarly, knowing your fundamentals means you become far
 better at using more advanced tools. Errors become less mysterious,
 results make more sense, customising the tools becomes possible. This
 tutorial assumes you want to truly learn the R language, not just use it
 to get one task done.</p>
-<p>That said, the tutorial does not waste your time forcing you to learn
-every single tiny feature and function in R. It focuses on examples to
-help you get the key <strong>concepts</strong>. The best way to find and
-understand specific features you want to use in your work is to find
-code written by more experienced people who have done a task similar to
-yours before, and learn from it—but once you’ve finished these
-tutorials, the code you read from other people and from internet
-searches will make much more sense and be much faster to absorb and
-modify.</p>
+<p>Lastly, this tutorial focuses on <strong>concepts</strong>. It does
+not waste time forcing you to learn every single tiny feature and
+function in R. The best way to find and understand specific features you
+want to use in your work is to find code written by more experienced
+people who have done a task similar to yours before, and learn from
+it—but once you’ve finished these tutorials, the code you read from
+other people and from internet searches will make much more sense and be
+much faster to absorb and modify.</p>
 </div>
 <div
 id="dazzling-data.table-and-the-tidyverse-tyranny-do-decide-to-to-dump-dplyr."
@@ -676,13 +677,14 @@ use, and partly because the developers of R and Rstudio have a natural
 advantage in ‘influencing’ (or … monopolising?) the way people code.</p>
 <p>Unfortunately, the tidyverse way of coding is neither the optimal for
 bioinformatics, nor is it the best for creativity.</p>
-<p>The package <code>data.table</code> is a far better option. Compared
-to tidyverse methods, it is much faster, saves memory, and most
-importantly you can describe extremely creative and complex ideas in a
-very simple way. It takes a tiny bit longer to learn the basics–maybe
-two full days compared with one full day. But it is worth it. There is a
-special tutorial on data.table waiting for you once you finish this one,
-<a href="tutorial_data_table.Rmd">here</a>.</p>
+<p>The package <code>data.table</code> is a far better option for
+bioinformatics and in general (in my opinion). Compared to tidyverse
+methods, it is much faster, saves memory, and most importantly you can
+describe extremely creative and complex ideas in a very simple way. It
+takes a tiny bit longer to learn the basics–maybe two full days compared
+with one full day. But it is worth it. There is a special tutorial on
+<code>data.table</code> waiting for you once you finish this one, <a
+href="tutorial_data_table.Rmd">here</a>.</p>
 </div>
 <div id="how-to-do-this-tutorial" class="section level3">
 <h3>How to do this tutorial</h3>
@@ -701,9 +703,10 @@ things.</li>
 understanding, first try R’s inbuilt help functions (see below). Web
 searches can also be great, but be aware the answers vary a lot in
 quality. There is also …</li>
-<li>ChatGPT, which needs a short discussion …
+<li>ChatGPT (and other generative LLMs), which needs a short discussion
+…
 <ul>
-<li><strong>Don’t</strong> <em>use chatGPT to write code for you</em>,
+<li><strong>DON’T</strong> <em>use chatGPT to write code for you</em>,
 especially while you are learning. It generally produces awful code. In
 particular, it has been trained on code it finds on the internet, and it
 cannot distinguish good code from bad code. Since most code on the
@@ -713,7 +716,7 @@ done with standard functions, it wantonly and wastefully converts data
 between different formats, makes inefficient choices, and worst of all,
 it makes it very tempting to run code you don’t actually understand and
 couldn’t write yourself.</li>
-<li><strong>Do</strong> <em>use chatGPT to read the manual for you</em>.
+<li><strong>DO</strong> <em>use chatGPT to read the manual for you</em>.
 Once you already know some R, use chatGPT to remind yourself of bits you
 can’t remember or haven’t discovered yet. You will find yourself
 thinking “I’m sure there is a function to do this, but I don’t know what
@@ -723,7 +726,7 @@ it is!” That’s a great time to ask chatGPT for help. Ask it for example:
 a scatterplot in base R?”</li>
 <li>“How can I check whether a file exists in R?”</li>
 </ul></li>
-<li><strong>Do</strong> <em>use chatGPT to explain functions or code to
+<li><strong>DO</strong> <em>use chatGPT to explain functions or code to
 you</em>. Excellent uses of chatGPT are questions like
 <ul>
 <li>“Please break down this line of R code: ‘m %&lt;&gt;% apply( 1 ,
@@ -1490,15 +1493,14 @@ three and less than six ~ <em>OR</em> ~ - Less than two and not equal to
 <p>It is more common to leave out the middle step though, as in …</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
 <span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.13614941 0.40639552 1.18106717 0.88377591 2.00830062 2.58853124
-##  [7] 0.57557420 0.32028170 1.39276890 0.59626037 1.20458756 1.70783370
-## [13] 0.82354676 0.01411782 0.72759315 1.02192549 1.37762827 1.31331411
-## [19] 0.29307001 2.05880429 1.62877577 0.32740806 1.11437551 0.02883166
-## [25] 1.47171167 0.29185777 1.50112865 0.04960850 0.05089005 1.84213401
-## [31] 1.07395392 1.30861399 0.45299643 2.28160075 1.15435702 0.51082660
-## [37] 1.43583802 1.31007855 1.75449348 1.02750880 1.84220425 0.63694116
-## [43] 0.70428866 0.58676857 0.17936803 0.38698801 0.56915958 1.48179134
-## [49] 0.64355597</code></pre>
+<pre><code>##  [1] 1.99202949 1.37734078 0.43460549 1.26548776 0.33736427 0.12616610
+##  [7] 1.54656375 1.96277118 2.22106853 0.74241329 0.23317290 0.43577649
+## [13] 0.06373345 0.19442240 0.93149020 0.47665661 1.11034324 0.96656316
+## [19] 0.72083528 2.01587839 0.18093209 1.92434115 2.21856820 1.40020415
+## [25] 1.31245579 0.39626820 1.53610146 0.61956033 1.79317163 1.12982782
+## [31] 1.21481182 0.65450511 1.91594475 1.36151257 0.53234908 0.88217661
+## [37] 1.14578050 0.68044005 0.77070107 0.58211358 1.19445878 0.25653967
+## [43] 1.24209654 1.26589739</code></pre>
 <p>And one last thing, the very common function <code>which()</code>
 tells you <strong>which</strong> entries of a logical vector are TRUE.
 So <code>which(c(TRUE,FALSE,TRUE))</code> will return the vector ( 1 , 3
@@ -1668,26 +1670,26 @@ spreadsheet. Let’s make one now …</p>
 <span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>)</span>
 <span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre><code>##    sampleIds  treatment  nFruits
-## 1   Sample 1 Fertiliser 2411.828
-## 2   Sample 2 Fertiliser 2439.136
-## 3   Sample 3 Fertiliser 2360.053
-## 4   Sample 4 Fertiliser 2431.391
-## 5   Sample 5 Fertiliser 2426.257
-## 6   Sample 6 Fertiliser 2376.621
-## 7   Sample 7 Fertiliser 2465.292
-## 8   Sample 8 Fertiliser 2387.372
-## 9   Sample 9 Fertiliser 2353.561
-## 10 Sample 10 Fertiliser 2417.117
-## 11 Sample 11    Control 2313.678
-## 12 Sample 12    Control 2358.133
-## 13 Sample 13    Control 2303.723
-## 14 Sample 14    Control 2213.454
-## 15 Sample 15    Control 2273.826
-## 16 Sample 16    Control 2300.552
-## 17 Sample 17    Control 2290.945
-## 18 Sample 18    Control 2312.904
-## 19 Sample 19    Control 2276.122
-## 20 Sample 20    Control 2227.969</code></pre>
+## 1   Sample 1 Fertiliser 2434.442
+## 2   Sample 2 Fertiliser 2424.389
+## 3   Sample 3 Fertiliser 2352.919
+## 4   Sample 4 Fertiliser 2436.532
+## 5   Sample 5 Fertiliser 2434.448
+## 6   Sample 6 Fertiliser 2380.281
+## 7   Sample 7 Fertiliser 2351.060
+## 8   Sample 8 Fertiliser 2426.255
+## 9   Sample 9 Fertiliser 2364.776
+## 10 Sample 10 Fertiliser 2458.184
+## 11 Sample 11    Control 2316.217
+## 12 Sample 12    Control 2303.311
+## 13 Sample 13    Control 2238.088
+## 14 Sample 14    Control 2347.407
+## 15 Sample 15    Control 2192.125
+## 16 Sample 16    Control 2225.404
+## 17 Sample 17    Control 2306.534
+## 18 Sample 18    Control 2266.826
+## 19 Sample 19    Control 2406.374
+## 20 Sample 20    Control 2473.109</code></pre>
 <p>Much neater! We can use indexing on data frames to get and set
 variables. With data frames we use two indexes (for rows and columns),
 separated by a comma. So the to see or set the third entry in the first
@@ -1788,9 +1790,9 @@ names as argument names, and the corresponding values as arguments:</p>
 <span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a>  <span class="at">someRandomNumbers =</span> <span class="fu">runif</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
 <span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##   someIntegers someLetters someRandomNumbers
-## 1            1           z        -0.7858568
-## 2            2           y        -0.6497713
-## 3            3           x        -0.2205975</code></pre>
+## 1            1           z       -0.07633107
+## 2            2           y       -0.92791604
+## 3            3           x       -0.91925964</code></pre>
 </div>
 <div id="combining-data-frames-with-rbind" class="section level4">
 <h4>Combining data frames with rbind</h4>

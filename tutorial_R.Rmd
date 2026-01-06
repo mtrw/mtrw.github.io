@@ -27,13 +27,12 @@ There are plenty of R tutorials out there, and even some specific to bioinformat
 
 This tutorial favours a style that:
 
-- Is **best for bioinformatics**, where SPEED is hugely important.
-- Encourages understanding of all the code at a deep level. This:
-    - **Promotes creativity**, by encouraging understanding of all the code at a deep level, meaning you are free to express any idea that comes into your head. 'Black boxes' are avoided.
-        
-Because it aims to give you a deeper understanding, it spends a while on the fundamentals. Much of what you learn in Part 1, you will not use in everyday code because there are simpler ways to do it using more sophisticated tools. BUT, as soon as you want to do something *special*, or *creative*, or exceptionally *efficient*, or *new*, you will need to understand the fundamentals. Similarly, knowing your fundamentals means you become far better at using more advanced tools. Errors become less mysterious, results make more sense, customising the tools becomes possible. This tutorial assumes you want to truly learn the R language, not just use it to get one task done.
+- Is **best for bioinformatics**, where *speed* is hugely important.
+- **Promotes creative freedom**, by encouraging understanding of all the code at a deep level. The aim is that you are able to express in code any idea that comes into your head. 'Black boxes' are avoided.
 
-That said, the tutorial does not waste your time forcing you to learn every single tiny feature and function in R. It focuses on examples to help you get the key **concepts**. The best way to find and understand specific features you want to use in your work is to find code written by more experienced people who have done a task similar to yours before, and learn from it---but once you've finished these tutorials, the code you read from other people and from internet searches will make much more sense and be much faster to absorb and modify.
+To give you a deeper understanding, we spend a while on the fundamentals. Much of what you learn in Part 1, you will not use in everyday code because there are simpler ways to do it using more sophisticated tools. But, when you want to do something *special*, or *creative*, or exceptionally *efficient*, or *new*, you will need to understand these fundamentals. Similarly, knowing your fundamentals means you become far better at using more advanced tools. Errors become less mysterious, results make more sense, customising the tools becomes possible. This tutorial assumes you want to truly learn the R language, not just use it to get one task done.
+
+Lastly, this tutorial focuses on **concepts**. It does not waste time forcing you to learn every single tiny feature and function in R. The best way to find and understand specific features you want to use in your work is to find code written by more experienced people who have done a task similar to yours before, and learn from it---but once you've finished these tutorials, the code you read from other people and from internet searches will make much more sense and be much faster to absorb and modify.
 
 ### Dazzling data.table and the tidyverse tyranny (do decide to to dump dplyr).
 
@@ -41,19 +40,19 @@ R's basic functionality can be expanded using *packages*--think of plugins for b
 
 Unfortunately, the tidyverse way of coding is neither the optimal for bioinformatics, nor is it the best for creativity.
 
-The package `data.table` is a far better option. Compared to tidyverse methods, it is much faster, saves memory, and most importantly you can describe extremely creative and complex ideas in a very simple way. It takes a tiny bit longer to learn the basics--maybe two full days compared with one full day. But it is worth it. There is a special tutorial on data.table waiting for you once you finish this one, [here](tutorial_data_table.Rmd).
+The package `data.table` is a far better option for bioinformatics and in general (in my opinion). Compared to tidyverse methods, it is much faster, saves memory, and most importantly you can describe extremely creative and complex ideas in a very simple way. It takes a tiny bit longer to learn the basics--maybe two full days compared with one full day. But it is worth it. There is a special tutorial on `data.table` waiting for you once you finish this one, [here](tutorial_data_table.Rmd).
 
 ### How to do this tutorial
 
 1) Don't just read. Write and run all the commands yourself. If you miss one, others later may not run. Most importantly, *play with the commands*. Change things around, try new things, connect ideas together, try to break the commands, then figure out why ([searching the web](www.duckduckgo.com) might help).
 2) This is about learning the fundamentals. Don't load any packages. Do **NOT** under any circumstances load `dplyr`, do **NOT** use `select`, `filter`, `arrange`, `mutate`, or any of those silly things. 
 3) If you get stuck or you want to dig into a topic for greater understanding, first try R's inbuilt help functions (see below). Web searches can also be great, but be aware the answers vary a lot in quality. There is also ... 
-4) ChatGPT, which needs a short discussion ...
-    - **Don't** *use chatGPT to write code for you*, especially while you are learning. It generally produces awful code. In particular, it has been trained on code it finds on the internet, and it cannot distinguish good code from bad code. Since most code on the internet is bad, that is what it produces. It relies excessively on loading obscure packages to perform tasks that can easily and quickly be done with standard functions, it wantonly and wastefully converts data between different formats, makes inefficient choices, and worst of all, it makes it very tempting to run code you don't actually understand and couldn't write yourself.
-    - **Do** *use chatGPT to read the manual for you*. Once you already know some R, use chatGPT to remind yourself of bits you can't remember or haven't discovered yet. You will find yourself thinking "I'm sure there is a function to do this, but I don't know what it is!" That's a great time to ask chatGPT for help. Ask it for example:
+4) ChatGPT (and other generative LLMs), which needs a short discussion ...
+    - **DON'T** *use chatGPT to write code for you*, especially while you are learning. It generally produces awful code. In particular, it has been trained on code it finds on the internet, and it cannot distinguish good code from bad code. Since most code on the internet is bad, that is what it produces. It relies excessively on loading obscure packages to perform tasks that can easily and quickly be done with standard functions, it wantonly and wastefully converts data between different formats, makes inefficient choices, and worst of all, it makes it very tempting to run code you don't actually understand and couldn't write yourself.
+    - **DO** *use chatGPT to read the manual for you*. Once you already know some R, use chatGPT to remind yourself of bits you can't remember or haven't discovered yet. You will find yourself thinking "I'm sure there is a function to do this, but I don't know what it is!" That's a great time to ask chatGPT for help. Ask it for example:
         - "What are the parameters that control the size and type of points in a scatterplot in base R?"
         - "How can I check whether a file exists in R?"
-    - **Do** *use chatGPT to explain functions or code to you*. Excellent uses of chatGPT are questions like
+    - **DO** *use chatGPT to explain functions or code to you*. Excellent uses of chatGPT are questions like
         - "Please break down this line of R code: 'm %<>% apply( 1 , function(x){x/sum(x)} )'"
         - "In the R code 'frank(x,ties.method='dense')', what does the 'dense' argument mean?"
 

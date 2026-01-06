@@ -63,7 +63,7 @@ Other protocols you may have heard of are SCP (ways of transferring files), HTTP
 
 1. Get PuTTy from [here](https://www.putty.org/) and install it.
 
-2. Get SFTP Drive from [here](https://www.nsoftware.com/sftp/drive/download.aspx) and install it
+2. Get SFTP Drive (the free version) from [here](https://www.callback.com/sftpdrive/download) and install it.
 
 **MacOS users:**
 
@@ -202,7 +202,8 @@ The terminal can be a scary place for beginners. Don't worry. It becomes easy. F
     - This depends what you want to do, you could ...
         - [Learn more advanced features and shell scripting](https://www.youtube.com/watch?v=emhouufDnB4), or (a bit more gently) [here](https://www.youtube.com/playlist?list=PLT98CRl2KxKGj-VKtApD8-zCqSaN2mD4w)
         - [Gain familiarity with the convenient functions of Zsh](https://zsh.sourceforge.io/Intro/intro_1.html)
+    - Learn to [transfer data between Spartan and your own computer](./tutorial_sftp.html), including how to set up SFTP Drive.
     - Do you want to run bioinformatics programs on spartan? Then you should first learn to [run jobs on the Spartan cluster](./tutorial_slurm_shellscripts.html).
-    - Do you want to use R studio on spartan? Read about [how to get set up with R](./tutorial_Rstart.html), and how to become a fierce data analyst with [R::data.table](./tutorial_data_table.html).
+    - Do you want to use R studio on spartan? Read about [how to get set up with R](./tutorial_Rstart.html), [the basics of using R](./tutorial_R.html), and how to [become a fierce data analyst with data.table](./tutorial_data_table.html).
     - 
     

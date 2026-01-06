@@ -18,8 +18,9 @@ Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb
     +   [Level up your data skills with R::data.table](./tutorial_data_table.html)
 -   Linux tutorials:
 
-*TO DO*
+*Coming in future ... (ask Tim if you would benefit from any of these now)*
 
++   Basic Linux (including GNU parallel)
 +   Vim
 +   GNU Screen
 +   Getting a HPC windows desktop: Starting a Virtual Machine with the Research Computing Portal

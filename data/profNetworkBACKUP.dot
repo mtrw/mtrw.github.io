@@ -1,0 +1,104 @@
+digraph{
+  
+  layout=circo;
+  root=CBA;
+  
+  {UoM,IPK,JKI,JHI,WV,RBG,UofA,YukonGov,UAlaska,KWS,Millenium,Hok,SUAS,DEECA} -> CBA;
+  
+  subgraph CBA {
+    CBA [label=<<B>CREATIVE BIOINFORMATICS FOR AGRICULTURE</B><BR/>(UniMelb)<BR/><I>M.T.Rabanus-Wallace</I>>,tooltip="<<B>CREATIVE BIOINFORMATICS FOR AGRICULTURE</B><BR/>(UniMelb)<BR/><I>M.T.Rabanus-Wallace</I>>",tooltip="M.T.Rabanus-Wallace",style=filled,fillcolor="#fcd36c"];
+  }
+  
+  subgraph UoM {
+    UoM [label=<<B>The University of Melbourne</B>>,tooltip="<<B>The University of Melbourne</B>>",style=filled,fillcolor=lightblue];
+    cg [label=<<B>CropGEM</B><BR/><I>Mohammad Pourkheirandish<BR/>Kelly Rodgers<BR/>Mahnaz Mandeh<BR/></I>>,tooltip="<<B>CropGEM</B><BR/><I>Mohammad Pourkheirandish<BR/>Kelly Rodgers<BR/>Mahnaz Mandeh<BR/></I>>"];
+    jg [label=<<B>Golz Lab</B><BR/><I>John Golz<BR/>Maryam Zarean</I>>,tooltip="<<B>Golz Lab</B><BR/><I>John Golz<BR/>Maryam Zarean</I>>"];
+    as [label=<<B>Forestry Genetics</B><BR/><I>Antanas Spokevicius<BR/>Kasuni Guntilake</I>>,tooltip="<<B>Forestry Genetics</B><BR/><I>Antanas Spokevicius<BR/>Kasuni Guntilake</I>>"];
+    jh [label=<<B>Hunt Lab</B><BR/><I>James Hunt<BR/>Dylan Male</I>>,tooltip="<<B>Hunt Lab</B><BR/><I>James Hunt<BR/>Dylan Male</I>>"];
+    sg [label=<<B>Soils Group</B><BR/><I>Jade Wong<BR/>Zahra Islam</I>>,tooltip="<<B>Soils Group</B><BR/><I>Jade Wong<BR/>Zahra Islam</I>>"];
+    {cg,jg,as,jh,sg} -> UoM
+  }
+  
+  subgraph IPK {
+    IPK [label=<<B>IPK Gatersleben (Germany)</B>>,tooltip="<<B>IPK Gatersleben (Germany)</B>>",style=filled,fillcolor=lightblue];
+    dg [label=<<B>Domestication Genomics</B><BR/><I>Martin Mascher</I>>,tooltip="<<B>Domestication Genomics</B><BR/><I>Martin Mascher</I>>"];
+    gg [label=<<B>Genebank Genomics</B><BR/><I>Nils Stein</I>>,tooltip="<<B>Genebank Genomics</B><BR/><I>Nils Stein</I>>"];
+    prb [label=<<B>Plant Reproductive Biology</B><BR/><I>Jochen Kuhmlehn</I>>,tooltip="<<B>Plant Reproductive Biology</B><BR/><I>Jochen Kuhmlehn</I>>"];
+    cb [label=<<B>Chromosome Biology</B><BR/><I>Andreas Houben</I>>,tooltip="<<B>Chromosome Biology</B><BR/><I>Andreas Houben</I>>"];
+    gb [label=<<B>Genebank</B><BR/><I>Andreas Börner</I>>,tooltip="<<B>Genebank</B><BR/><I>Andreas Börner</I>>"];
+    {dg,gg,prb,cb,gb} -> IPK
+  }
+  
+  subgraph JKI {
+    JKI [label=<<B>Julius-Kühn-Institüt (Germany)</B>>,tooltip="<<B>Julius-Kühn-Institüt (Germany)</B>>",style=filled,fillcolor=lightblue];
+    gvb [label=<<B>Grapevine Breeding</B><BR/><I>Franco Röckel</I>>,tooltip="<<B>Grapevine Breeding</B><BR/><I>Franco Röckel</I>>"];
+    gvb -> JKI
+  }
+  
+  subgraph JHI {
+    JHI [label=<<B>James Hutton Institute (UK)</B>>,tooltip="<<B>James Hutton Institute (UK)</B>>",style=filled,fillcolor=lightblue];
+    cms [label=<<B>Cell and Molecular Sciences</B><BR/><I>Robbie Waugh</I>>,tooltip="<<B>Cell and Molecular Sciences</B><BR/><I>Robbie Waugh</I>>"];
+    ics [label=<<B>Information and Computational Sciences</B><BR/><I>Micha Bayer</I>>,tooltip="<<B>Information and Computational Sciences</B><BR/><I>Micha Bayer</I>>"];
+    {cms,ics} -> JHI
+  }
+  
+  subgraph WV {
+    WV [label=<<B>World Vegetable Centre (Vietnam)</B>>,tooltip="<<B>World Vegetable Centre (Vietnam)</B>>",style=filled,fillcolor=lightblue]
+    ypleo [label=<<B>Omics Breeding</B><BR/><I>Ya-Ping Lin<BR/>Emmanuel Ormondi</I>>,tooltip="Omics Breeding\nYa-Ping Lin\nEmmanuel Ormondi"];
+    {ypleo}->WV
+  }
+  
+  subgraph RBG {
+    RBG [label=<<B>Royal Botanic Gardens at Kew (UK)</B>>,tooltip="<<B>Royal Botanic Gardens at Kew (UK)</B>>",style=filled,fillcolor=lightblue]
+    il [label=<<B>Trait Diversity and Function</B><BR/><I>Ilia Leitch</I>>,tooltip="<<B>Trait Diversity and Function</B><BR/><I>Ilia Leitch</I>>"];
+    {il} -> RBG
+  }
+  
+  subgraph UofA {
+    UofA [label=<<B>The University of Adelaide (Australia)</B>>,tooltip="The University of Adelaide",style=filled,fillcolor=lightblue]
+    ACAD [label=<<B>The Australian Centre for Ancient DNA </B><BR/><I>Bastien Llamas<BR/>Xavier Roca-Rada</I>>,tooltip="The Australian Centre for Ancient DNA\nBastien Llamas\nXavier Roca-Rada"]
+    ACAD->UofA
+  }
+  
+  subgraph YukonGov {
+    YukonGov [label=<<B>Government of the Yukon (Canada)</B>>,tooltip="Government of the Yukon (Canada)",style=filled,fillcolor=lightblue]
+    tbc [label=<<B>The Beringia Centre</B><BR/><I>Grant Zazula</I>>,tooltip="The Beringia Centre\nGrant Zazula"]
+    tbc->YukonGov
+  }
+  
+  subgraph UAlaska {
+    UAlaska [label=<<B>The University of Alaska (USA)</B>>,tooltip="The University of Alaska (USA)",style=filled,fillcolor=lightblue]
+    mw [label=<<B>Alaska Stable Isotope Facility</B><BR/><I>Matthew Wooller</I>>,tooltip="Alaska Stable Isotope Facility\nMatthew Wooller"]
+    mw->UAlaska
+  }
+  
+  subgraph KWS {
+    KWS [label=<<B>KWS Seed Breeders (Germany)</B><BR/><I>Viktor Korzun<BR/>Andres Gordillo</I>>,tooltip="KWS Seed Breeders (Germany)\nViktor Korzun\nAndres Gordillo",style=filled,fillcolor=lightblue]
+    vk [label=<<B>Scientific Affairs</B><BR/><I>Viktor Korzun</I>>,tooltip="Scientific Affairs\nViktor Korzun"]
+    ag [label=<<B>Rye Breeding</B><BR/><I>Andres Gordillo</I>>,tooltip="Rye Breeding\nAndres Gordillo"]
+    {vk,ag}->KWS
+  }
+  
+  subgraph Millenium {
+    Millenium [label=<<B>Millenium BioSciences/AGRF</B><BR/><I>Paul Gooding</I>>,tooltip="Millenium BioSciences/AGRF \nPaul Gooding",style=filled,fillcolor=lightblue]
+  }
+  
+  subgraph Hok {
+    Hok [label=<<B>The Univeristy of Hokkaido</B>>,tooltip="<<B>The Univeristy of Hokkaido</B>>",style=filled,fillcolor=lightblue]
+    yk [label=<<B>Plant Breeding</B><BR/><I>Yohei Koide</I>>,tooltip="Plant Breeding\nYohei Koide",style=filled,fillcolor=lightblue]
+    yk->CBA
+  }
+  
+  subgraph SUAS {
+    SUAS [label=<<B>Swedish University of Agricultural Sciences</B>>,tooltip="<<B>Swedish University of Agricultural Sciences</B>>",style=filled,fillcolor=lightblue];
+    pb [label=<<B>Plant breeding</B><BR/><I>Ronja Wonneberger</I>>,tooltip="<<B>Plant breeding</B><BR/><I>Ronja Wonneberger</I>>"]
+    pb -> SUAS
+  }
+  
+  subgraph DEECA {
+    DEECA [label=<<B>Department of Energy, Environment and Climate Action</B>>,tooltip="<<B>Department of Energy, Environment and Climate Action</B>>",style=filled,fillcolor=lightblue];
+    ari [label=<<B>Arthur-Rylah Institute</B><BR/><I>Lauren White</I>>,tooltip="<<B>Arthur-Rylah Institute</B><BR/><I>Lauren White</I>>"]
+    ari -> DEECA
+  }
+  
+}

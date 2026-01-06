@@ -4,6 +4,8 @@ output:
   html_document
 ---
 
+If you are looking for the guide on PC go [here](./tutorial_sftp.html).
+
 To access files on Spartan on a Mac desktop, we can use the program [Cyberduck](https://cyberduck.io/download/), which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
 
 First, install Cyberduck for mac from [here](https://cyberduck.io/download/).
