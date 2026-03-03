@@ -9,6 +9,8 @@ output:
 
 Here you will find resources to help you get started with bioinformatics at CropGEM, useful links, resources, and tutorials.
 
+**NEW!** Check out Tim's [R course on YouTube](https://www.youtube.com/playlist?list=PLdeBGJwvZmlKeoV16Pih4gykXrnAyyO9P)!
+
 ---
 
 ![](images/barleyfield.jpg)
