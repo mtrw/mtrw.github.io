@@ -19,9 +19,11 @@ output:
 
 *Spartan* is the UoM's high-performance computing (HPC) cluster, and the main place to do primary data processing for bioinformatic tasks. Things like read mapping, homology searches (say, BLAST), phylogenetic inference, genome assembly etc. all need a lot of processors, memory (RAM), and storage (space for saving files). The Spartan HPC cluster provides hundreds of processors, gigabytes of RAM, and Terrabytes of storage.
 
-#### Operating systems and shells
+#### Operating systems and shells and things
 
-The server runs an **operating system** called *Linux*. An operating system does a lot of stuff. It needs to manage ways to create and access files and directories, run programs, keep track of users, interface with hard disks, communicate with other computers ... etc. It also has to provide you with a way to communicate with it, for example by using text on a screen. The text input and output functionality of the operating system is called a **shell**, because it the "outside" part that the user sees.
+There's a little terminology to learn here.
+
+The server runs an *operating system* called *Linux*. An operating system does a lot of stuff. It needs to manage ways to create and access files and directories, run programs, keep track of users, interface with hard disks, communicate with other computers ... etc. It also has to provide you with a way to communicate with it, for example by using text on a screen. The text input and output functionality of the operating system is called a *shell*, because it the "outside" part that the user sees.
 
 You don't need to know how to use Linux yet. During setup, just copy-and-paste the commands given.
 
@@ -29,7 +31,17 @@ The default Linux shell is not very easy to use, so many people have come up wit
 
 #### TTY
 
-A **teletypewriter** (or TTY) interface is a device that provides a screen and a keyboard so you can use this text interface.
+Linux is a text-based operating system, meaning you instruct it what to do by typing commands into a prompt, rather than the familiar visual way of doing things in Windows or MacOS. It sounds scary but it's actually incredibly advantageous for bioinformatics, because you can ask it to do much more complex and interesting things than you can easily do in Windows (especially when you are dealing with millions of very large files).
+
+For example, if I want to move every one of ten thousand files that begin with the letter "A" from `directory1` to `directory2`, this would be hard in Windows. In Linux we just type ...
+
+```
+mv directory1/A* directory2/
+```
+
+... and it is done instantly.
+
+Rather than  A *teletypewriter* (or *TTY*) interface is a device that provides a screen and a keyboard so you can use this text interface.
 
 ![Once upon a time they looked like this ...](images/TTY.jpg)
 
@@ -47,7 +59,7 @@ Your computer will communicate with the HPC server using a **protocol** (a kind 
 
 So, to tie it all together so far:
 
-*PuTTy* uses the *SSH* *protocol* to connect to a server and provide a *TTY* interface to a *shell* around the server's *operating system*, which is *Linux*.
+*PuTTy* uses the *SSH* *protocol* to connect to a *server* and provide a *TTY* interface to the Zsh *shell* around the server's *operating system* ... which is *Linux*.
 
 Other protocols you may have heard of are SCP (ways of transferring files), HTTP (how browsers talk to servers) and TCP/IP (how information is transferred over networks). Windows users will need to use a protocol called **Secure File Transfer Protocol** (or SFTP) to work with your files on the HPC cluster from your regular desktop environment (and to transfer files between them). The protocol is provided in the program *STFP Drive*. Mac users can use the program *CyberDuck* which does the same thing.
 
@@ -57,13 +69,13 @@ Other protocols you may have heard of are SCP (ways of transferring files), HTTP
 
 ***
 
-### Download the software
+### Download necessary software
 
 **Windows users:**
 
-1. Get PuTTy from [here](https://www.putty.org/) and install it.
+1. Get PuTTy from [here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) and install it.
 
-2. Get SFTP Drive (the free version) from [here](https://www.callback.com/sftpdrive/download) and install it.
+2. Get WinSCP from [here](https://winscp.net/download/WinSCP-6.5.6-Setup.exe/download) and install it.
 
 **MacOS users:**
 
@@ -71,9 +83,13 @@ Other protocols you may have heard of are SCP (ways of transferring files), HTTP
 
 ### Joining the CropGEM HPC project and getting a username
 
-To get access to the Spartan server, you need to join CropGEM's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member, and give you a username similar to your UoM login. The CropGEM project is called "punim1869".
+**Windows and MacOS users**
+
+To get access to the Spartan server, you need to join CropGEM's *project*. Ask Tim to send you a request, and you'll get an email at your unimelb address. Another email will arrive to confirm you are a member and give you a username, usually identical to your UoM login. The CropGEM project is called "punim1869".
 
 ### Setting your default login shell to zsh
+
+**Windows and MacOS users**
 
 Head over to [Karaage](https://dashboard.hpc.unimelb.edu.au/karaage/), where you can view and manage your accounts on the university's HPC cluster. Log in with your cluster account password, selecting **unimelb** as your institution.
 
@@ -114,6 +130,7 @@ Click **Accounts** an then your **username**, and on the next screen, **Edit Acc
 7. You have a terminal! It should look a bit like this (but with your choice of colours/fonts) ..
 ![](images/shell_firstlogin.png)
 
+Go on to step 8 just below under "*Both Windows and MacOS users*".
 
 **MacOS users**
 
@@ -128,6 +145,8 @@ Open the program *terminal*.
 4. If all goes well, you should connect successfully and see a message similar to the image above.
 
 5. The default terminal colour scheme and font are not very readable or cool. Consider going into the settings and making the terminal your own. A dark background is easier on the eyes.
+
+Go on to step 8 just below.
 
 **Both Windows and MacOS users**
 
@@ -185,13 +204,15 @@ The terminal can be a scary place for beginners. Don't worry. It becomes easy. F
         - ... and more, that will come up in other tutorials.
         
 3. Storage and your workspace
-    - The directory you land in is called your *home directory*. It is basically meant for things like profile files. It does not have much disk space. You should do your work somewhere with more storage space. We have a lot of allocated storage space, and you even have a working directory within it. It is located at `/data/gpfs/projects/punim1869/`.
+    - The directory you land in is called your *home directory*. It is basically meant for things like profile files. It does not have much disk space, so do NOT do project work in your home directory. Seriously. **DO NOT DO PROJECT WORK IN YOUR HOME DIRECTORY**.
+    
+    Instead, we have a lot of allocated storage space for project work. It is located in subdirectories under `/data/gpfs/projects/punim1869/`.
         - You can get there using the command `cd /data/gpfs/projects/punim1869/`, and list the contents using `tree -L 4`
         - Alternatively, there is an alias set up, `gs` ("[g]o to [s]torage") will take you there.
-        - *Alternatively* alternatively, there is a variable set up containing the address, so you can also use (e.g. `cd $STO`).
+        - *Alternatively* alternatively, there is a variable `$STO` set up containing the address, so you can also use (e.g. `cd $STO`).
     - A workspace has been set up for you here. It is in `users/YOUR_USERNAME`. By default, no one else can access it. Use it for ... everything.
-        - You can get there with the alias `gw` ("[g]o to [w]orkplace").
-        - The address is also automatically stored in the variable $WS.
+        - You can get there with the alias `gw` ("[g]o to my [w]orkspace").
+        - The address is also automatically stored in the variable `$WS`.
 
 4. Shared resources
     - Things like reference genomes, that take up a lot of space and which everyone uses, are kept in a shared storage area, located at [project storage dir]/shared_storage. If you need a large file like that, talk to [Tim](mailto: tim.rabanuswallace@unimelb.edu.au) to get it added to the shared storage.

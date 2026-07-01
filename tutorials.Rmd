@@ -10,7 +10,7 @@ Wondering how to achieve some task? Ask [Tim](mailto: tim.rabanuswallace@unimelb
     +   [Loading program modules on Spartan](./tutorial_module.html)
     +   [Running jobs on Spartan: Slurm and shell scripts](./tutorial_slurm_shellscripts.html)
     +   [Interactive sessions on Spartan](./tutorial_slurm_interactive.html)
-    +   [Transferring Spartan data and opening files on your desktop with SFTP](./tutorial_sftp.html)
+    +   [Transferring data between Spartan, your desktop, the internet, and other servers](./tutorial_sftp.html)
     +   [Transfer data to and from long-term storage (Mediaflux)](./tutorial_mediaflux.html)
 -   R tutorials:
     +   [Working in R on Spartan](./tutorial_Rstart.html)

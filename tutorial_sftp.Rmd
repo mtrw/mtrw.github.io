@@ -39,35 +39,29 @@ As you can see I now have the file. `wget` gives it a name taken from the URL, s
 
 Mac users go [here](./tutorial_sftp_mac.html).
 
-This is where we use the free program [SFTP Drive 2024](https://www.callback.com/sftpdrive/download), Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
+This is where we use the free program [WinSCP](https://winscp.net/download/WinSCP-6.5.6-Setup.exe/download), Which implements a [s]ecure [f]ile [t]ransfer [p]rotocol. STFP is basically a set of rules governing how computers can securely transfer data between them. There are command line programs that implement SFTP, but SFTP Drive applies some sexy wrapping to make it operate just like a regular directory on your own computer!
 
-First, install SFTP drive from [here](https://www.callback.com/sftpdrive/download).
+First, install WinSCP if you haven't already.
 
-Then open SFTP Drive 2024 and click <new>.
+Open WinSCP. If you have already set up PuTTy it may ask you if you would like to import login details from there. By all means do. Otherwise, click New Site, and enter your Spartan username and other settings similar to what you see below. The host name should be 'spartan.hpc.unimelb.edu.au'. You do have the option to enter and save a password, which is not really best practice for security reasons but ... you can.
 
-![](images/drive1.png)
+![](images/winscp1.png)
 
-Then set up a connection to Spartan. First, make a connection to your home directory. Just fill it out and check boxes as shown below where underlined, the rest will fill automatically. You can enter any drive name you want, and use your Spartan username and password.
+Then click Advanced, and navigate to the Environment/Directories pane, and set the remote directory (where you will land on the server). If you want to go to your own working directory, for instance, set it to '/data/gpfs/projects/punim1869/<your username>/'. You can also change the Local Directory to wherever you wish to land on your local system. Click Ok.
 
-![](images/drive2.png)
+![](images/winscp2.png)
 
-Click Ok. The system may ask permission to access the registry -- click yes.
+Then click the Save button and give the session a name under 'Site Name'. 'Spartan workspace', for example. Click Ok.
 
-Right click the drive and click enable if it is disabled. Then right click again and click connect.
+Now click 'Login' to connect. If it asks you about a host key, click Accept. If all is well you'll get something like this:
 
+![](images/winscp3.png)
 
-![](images/drive3.png)
+Excellent. On the left is your local computer, on the right is the Spartan cluster. You can now delete, create, move, copy, and open files from your desktop. But if you are learning, remember: if there is a task you *can* do in Linux, **make yourself do it in Linux**. Once you've developed comfort with it, almost everything will be faster.
 
-Assuming that's all fine, you will now have your Spartan home directory accessible as a drive, e.g. in Windows explorer:
+## Faster login
 
-
-![](images/drive4.png)
-
-To add a drive that directly takes you to storage, simply repeat the process and configure the drive like this, with the drive as (e.g.) /data/gpfs/projects/punim1869/users/\<YOUR_USERNAME\>:
-
-![](images/drive5.png)
-
-Excellent. You can now delete, create, move, copy, and open files from your desktop. But if you are learning, remember: if there is a task you *can* do in Linux, **make yourself do it in Linux**. Once you've developed comfort with it, almost everything will be faster in Linux.
+If you don't want to type your password in every time you connect, here's a homework challenge. Learn about SSH keys, and set one up with WinSCP. This will allow you to securely log in with a single click.
 
 ## Transferring from server to server
 
@@ -81,13 +75,16 @@ If you want to copy directories and all their subdirectories, add the -r flag:
 
                 sftp -r <login_name>@<other.server.address>:</path/on/other.server/to/directory>
 
-So, say I am on Spartan and I want to copy a directory **/home/tim/data/seqfiles** from the server at my old work (where my username is **wallace**, the server address is **ipk-gatersleben.de**, and my password is of course a secret) I would run:
+So, say I am on Spartan and I want to copy a directory **/home/tim/data/seqfiles** from the server at my old work, IPK (where my username is **wallace**, the server address is **ipk-gatersleben.de**, and my password is of course a secret) I would run:
 
 ![](images/sftp1.png)
 
 ... and enter my password, and the directory will be downloaded.
 
 Also, in reality most servers won't let you directly copy files from them, and Spartan is no exception. When you want to transfer between servers, the admins will set up a special *ftp server* for you, and you can transfer files to and from that exactly as above. If you need to set up an ftp server, talk to the mighty admins.
+
+
+
 
 
 
